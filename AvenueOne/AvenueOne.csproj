@@ -55,7 +55,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Converters\PasswordConverter.cs" />
+    <Compile Include="Interfaces\ILogin.cs" />
+    <Compile Include="Interfaces\ILoginViewModel.cs" />
+    <Compile Include="Interfaces\IViewModel.cs" />
+    <Compile Include="Models\PersonModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="ViewModels\Commands\LoginCommand.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
+    <Compile Include="Views\Pages\AdminPage.xaml.cs">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\BookingPage.xaml.cs">
+      <DependentUpon>BookingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\RegistrationWindow.xaml.cs">
+      <DependentUpon>RegistrationWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\Pages\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\BookingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,10 +91,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Windows\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\RegistrationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -95,9 +131,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="Assets\" />
+    <Folder Include="ViewModels\PagesViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

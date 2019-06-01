@@ -1,0 +1,60 @@
+﻿<Window x:Class="AvenueOne.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AvenueOne"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Viewbox>
+            <StackPanel Margin="10 5" Grid.Column="0" HorizontalAlignment="Center">
+                <StackPanel Margin="5">
+                    <Ellipse Height="50" Width="50">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="C:\Users\deleo\OneDrive\Pictures\VimiMagic\imm_2018_07_29_12_27_55_894.JPG"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <TextBlock Text="Username" HorizontalAlignment="Center"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Lastname,"/>
+                        <TextBlock Text="Firstname"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Margin="0 5">
+                    <Button Content="Bookings" Click="Button_BookingPage"/>
+                    <Button Content="Customers"/>
+                    <Button Content="Rooms"/>
+                    <Button Content="Billings"/>
+                    <Button Content="Cashflow"/>
+                    <Button Content="Admin" Click="Button_AdminPage"/>
+                    <Button Content="Settings"/>
+                    <Button Content="Logout" Click="Button_Logout"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 5">
+                    <TextBlock Text="Month 1, 2019" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Beg. balance:" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Total add:" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Total less:" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Curr. balance:" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+        </Viewbox>
+
+
+
+        <Frame x:Name="MainContent" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+    </Grid>
+    
+</Window>

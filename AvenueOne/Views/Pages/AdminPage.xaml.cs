@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvenueOne.Views.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AvenueOne
+namespace AvenueOne.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AdminPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AdminPage : Page
     {
-        public MainWindow()
+
+        public AdminPage()
         {
             InitializeComponent();
+        }
+
+        private void AddUser(object sender, RoutedEventArgs e)
+        {
+            RegistrationWindow registrationwindow = new RegistrationWindow();
+            registrationwindow.Owner = Window.GetWindow(this);
+            registrationwindow.Show();
         }
     }
 }
