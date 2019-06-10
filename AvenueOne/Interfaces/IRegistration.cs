@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace AvenueOne.Interfaces
 {
-    public interface IViewModel
+    public interface IRegistration
     {
-        bool AccountIsAdmin { get;}
-        void Close(Window sourceWindow); // do i really need to implement this?
+        //IUserModel AddUser(IUserModel userModel);
+        void AddUser(Window sourceWindow, IUserModel userModel, string passwordConfirm);
     }
 }

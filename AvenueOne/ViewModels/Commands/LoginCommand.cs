@@ -39,13 +39,13 @@ namespace AvenueOne.ViewModels.Commands
                 //get source window
                 Window sourceWindow = (Window)values[0];
                 //get username
-                TextBlock usernameTextBlock = (TextBlock)values[1];
+                TextBox usernameTextBlock = (TextBox)values[1];
                 string username = usernameTextBlock.Text;
                 //get password
                 PasswordBox passwordBox = (PasswordBox)values[2];
                 string password = passwordBox.Password;
 
-                //process password
+                //process password using viewmodel
                 _loginWindowViewModel.Login(sourceWindow, username, password);
             }
             catch (Exception)

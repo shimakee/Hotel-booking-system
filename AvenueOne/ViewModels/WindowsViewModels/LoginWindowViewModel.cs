@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Models;
+using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
@@ -13,25 +14,29 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 {
     public class LoginWindowViewModel: ILoginViewModel
     {
-        private UserModel _user;  // need to interface this
+        private IUserModel _userAccount;
+        private IUserModel _userModel; 
         public ICommand LoginCommand { get; private set; }
-
-        //user this for whatever features, but not login as username is passed as a parameter
-        public string Username
-        {
-            get { return _user.Username; }
-            set { _user.Username = value; }
-        }
+        private ILoginProcessor _loginProcessor;
+        private IUserModelValidator _userModelValidator;
 
         public LoginWindowViewModel()
         {
             LoginCommand = new LoginCommand(this); //  how to decouple?
         }
 
-        public LoginWindowViewModel(UserModel user)
+        public LoginWindowViewModel(IUserModel user, ILoginProcessor loginProcessor, IUserModelValidator userModelValidator)
             :this()
         {
-            this._user = user;
+            this._userModel = user;
+            this._loginProcessor = loginProcessor;
+            this._userModelValidator = userModelValidator;
+        }
+
+        //must be implemented by all view models, not necessary here becuse it is still not logged in yet.
+        public bool AccountIsAdmin
+        {
+            get { return _userAccount.IsAdmin; }
         }
 
         public void Close(Window sourceWindow)
@@ -39,23 +44,50 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             sourceWindow.Close();
         }
 
+        //user this for whatever features, but not login as username is passed as a parameter
+        public string Username
+        {
+            get { return _userModel.Username; }
+            set { _userModel.Username = value; }
+        }
+
         public void Login(Window sourceWindow, string username, string password)
         {
-            MessageBox.Show($"username:{username}, password:{password}");
-
-            //validate Input here? or at the command level?
-
-            //process Login here
-            bool isValidPassword = (String.IsNullOrEmpty(password) || String.IsNullOrWhiteSpace(password)) ? false : true;
-
-            if (isValidPassword)
+            //validate Input here
+            bool isValidUsername = _userModelValidator.ValidateUsername(username);
+            bool isValidPassword = _userModelValidator.ValidatePassword(password);
+            
+            if (!isValidPassword && !isValidUsername)
             {
-                //show main window
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+                MessageBox.Show("The username and password are using invalid characters.");
+            }
+            else if (!isValidUsername)
+            {
+                MessageBox.Show("The username is using invalid characters.");
+            }
+            else if(!isValidPassword)
+            {
+                MessageBox.Show("The password is using invalid characters.");
+            }
+            else //process login using login class
+            {
+                bool isValidLogin = _loginProcessor.IsValidLogin(username, password);
 
-                //close source window
-                sourceWindow.Close();
+                if (isValidLogin)
+                {
+                    MessageBox.Show($"Welcome {username}");
+
+                    //show main window
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+
+                    //close source window
+                    sourceWindow.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect username or password.");
+                }
             }
         }
 

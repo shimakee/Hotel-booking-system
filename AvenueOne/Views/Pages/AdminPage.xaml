@@ -195,6 +195,9 @@
 
                 <GroupBox Header="User list" Grid.Row="1">
                     <ScrollViewer>
+                        <!--<ListView ItemsSource="{Binding Something}">
+                            
+                        </ListView>-->
                         
                     </ScrollViewer>
                 </GroupBox>

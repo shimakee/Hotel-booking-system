@@ -31,7 +31,8 @@ namespace AvenueOne.Views.Pages
         {
             RegistrationWindow registrationwindow = new RegistrationWindow();
             registrationwindow.Owner = Window.GetWindow(this);
-            registrationwindow.Show();
+            //must be show dialog to avoid changing windows
+            registrationwindow.ShowDialog();
         }
     }
 }

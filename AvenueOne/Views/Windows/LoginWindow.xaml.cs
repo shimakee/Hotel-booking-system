@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Models;
+using AvenueOne.Utilities;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,10 @@ namespace AvenueOne.Views
         public LoginWindow()
         {
             InitializeComponent();
-            UserModel userModel = new UserModel();
-            ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(userModel);
+            IUserModel userModel = new UserModel();
+            ILoginProcessor loginProcessor = new LoginProcessor();
+            IUserModelValidator userModelValidator = new ValidatorUserModel();
+            ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(userModel, loginProcessor, userModelValidator);
             DataContext = loginWindowViewModel;
         }
 

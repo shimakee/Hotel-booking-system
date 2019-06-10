@@ -56,13 +56,28 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\PasswordConverter.cs" />
+    <Compile Include="Interfaces\IAddUserProcessor.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
+    <Compile Include="Interfaces\ILoginProcessor.cs" />
+    <Compile Include="Interfaces\IUserModelValidator.cs" />
     <Compile Include="Interfaces\ILoginViewModel.cs" />
+    <Compile Include="Interfaces\IPersonModel.cs" />
+    <Compile Include="Interfaces\IRegistration.cs" />
+    <Compile Include="Interfaces\IRegistrationViewModel.cs" />
+    <Compile Include="Interfaces\IUserModel.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Utilities\AddPersonProcessor.cs" />
+    <Compile Include="Utilities\LoginProcessor.cs" />
+    <Compile Include="Utilities\AddUserProcessor.cs" />
+    <Compile Include="Utilities\Tools\Generator.cs" />
+    <Compile Include="Utilities\ValidatorUserModel.cs" />
+    <Compile Include="Utilities\Tools\Validate.cs" />
+    <Compile Include="ViewModels\Commands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\RegistrationWindowViewModel.cs" />
     <Compile Include="Views\Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
@@ -132,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Interfaces\ModelInterfaces\" />
+    <Folder Include="Interfaces\ToolsInterfaces\" />
+    <Folder Include="Interfaces\ViewModelInterfaces\" />
     <Folder Include="ViewModels\PagesViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

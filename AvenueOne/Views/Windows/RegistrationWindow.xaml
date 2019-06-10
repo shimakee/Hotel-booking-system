@@ -1,183 +1,218 @@
 ﻿<Window x:Class="AvenueOne.Views.Windows.RegistrationWindow"
+        x:Name="RegistrationViewWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AvenueOne.Views.Windows"
+        xmlns:converters="clr-namespace:AvenueOne.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         WindowStyle="None"
+        AllowsTransparency="True"
         Title="RegistrationWindow" Height="250" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
 
-        <!--User Info - left box-->
-        <StackPanel Grid.Column="0" Margin="10">
-            <Grid Margin="0 0 0 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+    <Window.Resources>
+        <converters:PasswordConverter x:Key="PasswordConverter"/>
+    </Window.Resources>
+    
+    <!-- TODO: Bind to view model-->
+    <!--Apply style instead of writing it directly-->
+    <Border BorderThickness="3" BorderBrush="Gray" CornerRadius="10" Background="GhostWhite">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-                <CheckBox Content="isAdmin" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Username:" Grid.Column="0"/>
-                <TextBox x:Name="Username" Text="Username" Grid.Column="1" HorizontalAlignment="Stretch"/>
-            </Grid>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Password:" Grid.Column="0"/>
-                <TextBox x:Name="Password" Text="Password" Grid.Column="1" HorizontalAlignment="Stretch"/>
-            </Grid>
-
-            <Grid Margin="0 10 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Firstname:" Grid.Column="0"/>
-                <TextBox x:Name="Firstname" Text="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"/>
-            </Grid>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Middlename:" Grid.Column="0"/>
-                <TextBox x:Name="Middlename" Text="Middlename" Grid.Column="1" HorizontalAlignment="Stretch"/>
-            </Grid>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Lastname:" Grid.Column="0"/>
-                <TextBox x:Name="Lastname" Text="Lastname" Grid.Column="1" HorizontalAlignment="Stretch"/>
-            </Grid>
-
-            <ComboBox x:Name="Gender" SelectedIndex="0">
-                <ComboBoxItem>
-                    <TextBlock Text="Male"/>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock Text="Female"/>
-                </ComboBoxItem>
-            </ComboBox>
-
-            <ComboBox x:Name="CivilStatus" SelectedIndex="0">
-                <ComboBoxItem>
-                    <TextBlock Text="Single"/>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock Text="Married"/>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock Text="Widowed"/>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock Text="Divorced"/>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock Text="Annulled"/>
-                </ComboBoxItem>
-            </ComboBox>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Brithdate:" Grid.Column="0"/>
-                <DatePicker x:Name="Birthdate" Grid.Column="1"/>
-            </Grid>
-        </StackPanel>
-
-        <!--User info - right-->
-        <StackPanel Grid.Column="1" Margin="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Address:" Grid.Column="0"/>
-                <StackPanel Grid.Column="1">
-                    <TextBox x:Name="Street" Text="Street"/>
-
-
-                    <Grid Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <TextBox x:Name="City" Text="City" Grid.Column="0" Grid.Row="0"/>
-                        <TextBox x:Name="Zipcode" Text="Zipcode" Grid.Column="1" Grid.Row="0"/>
-                        <TextBox x:Name="Region" Text="Region" Grid.Column="0" Grid.Row="1"/>
-                        <TextBox x:Name="Country" Text="Country" Grid.Column="1" Grid.Row="1"/>
-                    </Grid>
-                </StackPanel>
-            </Grid>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Contact #:" Grid.Column="0"/>
-                <Grid Grid.Column="1">
+            <!--User Info - left box-->
+            <StackPanel Grid.Column="0" Margin="10">
+                <Grid Margin="0 0 0 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox x:Name="IsAdmin" Content="Is admin" IsChecked="{Binding IsAdmin}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox x:Name="CountryCode" Text="Country" Grid.Column="0"/>
-                    <TextBox x:Name="AreaCode" Text="Area" Grid.Column="1"/>
-                    <TextBox x:Name="Number" Text="Number" Grid.Column="2"/>
+                    <TextBlock Text="Username:" Grid.Column="0"/>
+                    <TextBox x:Name="Username" Text="{Binding Username}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                 </Grid>
-            </Grid>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Email:" Grid.Column="0"/>
-                <TextBox x:Name="Email" Text="Email address" Grid.Column="1"/>
-            </Grid>
+                    <TextBlock Text="Password:" Grid.Column="0"/>
+                    <PasswordBox x:Name="Password" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                </Grid>
 
-            <Button Content="Add user" Margin="0 10 0 0"/>
-            <Button Content="Cancel" Click="Button_Close"/>
-        </StackPanel>
-    </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Passwordconfirm:" Grid.Column="0"/>
+                    <PasswordBox x:Name="PasswordConfirm" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                </Grid>
+
+                <Grid Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Firstname:" Grid.Column="0"/>
+                    <TextBox x:Name="Firstname" Text="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Middlename:" Grid.Column="0"/>
+                    <TextBox x:Name="Middlename" Text="Middlename" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Lastname:" Grid.Column="0"/>
+                    <TextBox x:Name="Lastname" Text="Lastname" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                </Grid>
+
+                <ComboBox x:Name="Gender" SelectedIndex="0">
+                    <ComboBoxItem>
+                        <TextBlock Text="Male"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Female"/>
+                    </ComboBoxItem>
+                </ComboBox>
+
+                <ComboBox x:Name="CivilStatus" SelectedIndex="0">
+                    <ComboBoxItem>
+                        <TextBlock Text="Single"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Married"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Widowed"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Divorced"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Annulled"/>
+                    </ComboBoxItem>
+                </ComboBox>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Brithdate:" Grid.Column="0"/>
+                    <DatePicker x:Name="Birthdate" Grid.Column="1"/>
+                </Grid>
+            </StackPanel>
+
+            <!--User info - right-->
+            <StackPanel Grid.Column="1" Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Address:" Grid.Column="0"/>
+                    <StackPanel Grid.Column="1">
+                        <TextBox x:Name="Street" Text="Street"/>
+
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox x:Name="City" Text="City" Grid.Column="0" Grid.Row="0"/>
+                            <TextBox x:Name="Zipcode" Text="Zipcode" Grid.Column="1" Grid.Row="0"/>
+                            <TextBox x:Name="Region" Text="Region" Grid.Column="0" Grid.Row="1"/>
+                            <TextBox x:Name="Country" Text="Country" Grid.Column="1" Grid.Row="1"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Contact #:" Grid.Column="0"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="CountryCode" Text="Country" Grid.Column="0"/>
+                        <TextBox x:Name="AreaCode" Text="Area" Grid.Column="1"/>
+                        <TextBox x:Name="Number" Text="Number" Grid.Column="2"/>
+                    </Grid>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Email:" Grid.Column="0"/>
+                    <TextBox x:Name="Email" Text="Email address" Grid.Column="1"/>
+                </Grid>
+
+                <!--<Button Content="Add user" Margin="0 10 0 0" Command="{Binding AddUserCommand, Mode=OneWay}"/>-->
+                <Button Content="Add user" Margin="0 10 0 0" Command="{Binding AddUserCommand, Mode=OneWay}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource PasswordConverter}">
+                            <Binding ElementName="RegistrationViewWindow"/>
+                            <Binding ElementName="IsAdmin"/>
+                            <Binding ElementName="Username"/>
+                            <Binding ElementName="Password"/>
+                            <Binding ElementName="PasswordConfirm"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+
+                <Button Content="Cancel" Click="Button_Close"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+    
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvenueOne.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Models
 {
-    public class PersonModel //need to interface this
+    public class PersonModel : IPersonModel
     {
         public string Id { get; set; }
         public string FirstName { get; set; }
@@ -17,21 +18,6 @@ namespace AvenueOne.Models
         public CivilStatusType CivilStatus { get; set; }
         public string Nationality { get; set; }
         public DateTime BirthDate { get; set; }
-
-        public enum GenderType
-        {
-            Male = 1,
-            Female = 2
-        }
-
-        public enum CivilStatusType
-        {
-            Single = 1,
-            Married = 2,
-            Widowed = 3,
-            Annuled = 4,
-            Divorced = 5
-        }
 
         public string FullName
         {
