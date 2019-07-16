@@ -8,7 +8,7 @@ namespace AvenueOne.Interfaces
 {
     public interface ILoginProcessor
     {
-        IUserModel GetValidatedDetails(string username, string password);
+        IUser GetValidatedDetails(string username, string password);
         bool IsValidLogin(string username, string password);
         bool DoesUsernameExist(string username);
     }

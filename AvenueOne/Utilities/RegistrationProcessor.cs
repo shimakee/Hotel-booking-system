@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Utilities
 {
-    public class AddPersonProcessor
+    public class RegistrationProcessor
     {
     }
 }

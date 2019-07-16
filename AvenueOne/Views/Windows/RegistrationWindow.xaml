@@ -34,7 +34,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox x:Name="IsAdmin" Content="Is admin" IsChecked="{Binding IsAdmin}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="IsAdmin" Content="Is admin" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
 
                 <Grid>
@@ -44,7 +44,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Username:" Grid.Column="0"/>
-                    <TextBox x:Name="Username" Text="{Binding Username}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <TextBox x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"/>
                 </Grid>
 
                 <Grid>

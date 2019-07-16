@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,14 @@ namespace AvenueOne.Utilities
 {
     public class LoginProcessor : ILoginProcessor
     {
+        private IUnitOfWork _unitOfWork;
+        //TODO change to using dbcontext or plutocontext or repository or unitofwork
+        public LoginProcessor(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
-        
-        public IUserModel GetValidatedDetails(string username, string password)
+        public IUser GetValidatedDetails(string username, string password)
         {
             //validate args
             if (String.IsNullOrEmpty(username) || String.IsNullOrWhiteSpace(username))
@@ -24,19 +30,27 @@ namespace AvenueOne.Utilities
             //connect to databse
 
             //query details here
-            bool doesExist = true;
+            IUser userToFind = new UserModel(username, password);
+            IUser doesExist = _unitOfWork.Users.Find(user => user.Equals(userToFind));
 
             //check that password matches
-            bool isValidPassword = true;
+            //TODO -  just have amethod in unit of work user repository or something
+            if  (doesExist != null && password == doesExist.Password)
+                return doesExist;
 
-            if (doesExist && isValidPassword)
-                return new UserModel("shimakee", "secret", true);
             return null;
         }
 
         public bool IsValidLogin(string username, string password)
         {
-            IUserModel user = GetValidatedDetails(username, password);
+            //validate args
+            if (String.IsNullOrEmpty(username) || String.IsNullOrWhiteSpace(username))
+                throw new ArgumentNullException("The argument username cannot be null, empty, or whitespace.");
+
+            if (String.IsNullOrEmpty(password) || String.IsNullOrWhiteSpace(password))
+                throw new ArgumentNullException("The argument password cannot be null, empty, or whitespace.");
+
+            IUser user = GetValidatedDetails(username, password);
 
             if (user == null)
                 return false;
@@ -51,10 +65,12 @@ namespace AvenueOne.Utilities
 
             //connect to databse
 
-            //query for username
-            bool doesExist = true;
 
-            if (doesExist)
+            //query for username
+            IUser userToFind = new UserModel(username);
+            IUser doesExist = _unitOfWork.Users.Find(user => user.Equals(userToFind));
+
+            if (doesExist != null)
                 return true;
             return false;
         }

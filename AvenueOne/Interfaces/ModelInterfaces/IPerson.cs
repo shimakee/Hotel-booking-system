@@ -21,7 +21,7 @@ namespace AvenueOne.Interfaces
         Divorced = 5
     }
 
-    public interface IPersonModel
+    public interface IPerson
     {
         string Id { get; set; }
         string FirstName { get; set; }

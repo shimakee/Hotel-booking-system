@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Utilities
 {
-    public class ValidatorUserModel : IUserModelValidator
+    public class ValidatorUserModel : IUserValidator
     {
         public bool HasContent(string word)
         {
@@ -16,7 +16,7 @@ namespace AvenueOne.Utilities
             return true;
         }
 
-        public bool ValidateUserModel(IUserModel userModel)
+        public bool Validate(IUser userModel)
         {
             bool hasValidId = ValidateId(userModel.Id);
             bool hasValidUsername = ValidateUsername(userModel.Username);

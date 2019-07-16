@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Models
 {
-    public class UserModel : IUserModel
+    public class UserModel : IUser
     {
         public string Id { get; set; }
         public string Username { get; set; }
@@ -20,10 +20,15 @@ namespace AvenueOne.Models
             this.Id = GenerateId();
         }
 
-        public UserModel(string username, string password)
+        public UserModel(string username)
             :this()
         {
             this.Username = username;
+        }
+
+        public UserModel(string username, string password)
+            :this(username)
+        {
             this.Password = password;
         }
 
@@ -44,8 +49,7 @@ namespace AvenueOne.Models
         {
             this.Id = GenerateId();
         }
-
-
+        
         private string GenerateId()
         {
             return GenerateId(32);
@@ -67,6 +71,22 @@ namespace AvenueOne.Models
                 }
 
             return Id.ToString(0, length);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (!(obj is UserModel))
+                return false;
+
+            return this.Username == ((UserModel)obj).Username;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Username.GetHashCode();
         }
     }
 }

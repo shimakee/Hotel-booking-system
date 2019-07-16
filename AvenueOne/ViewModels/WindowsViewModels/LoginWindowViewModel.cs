@@ -14,18 +14,18 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 {
     public class LoginWindowViewModel: ILoginViewModel
     {
-        private IUserModel _userAccount;
-        private IUserModel _userModel; 
+        private IUser _userAccount; //TODO should be on settongs or app resource
+        private IUser _userModel; 
         public ICommand LoginCommand { get; private set; }
         private ILoginProcessor _loginProcessor;
-        private IUserModelValidator _userModelValidator;
+        private IUserValidator _userModelValidator;
 
         public LoginWindowViewModel()
         {
             LoginCommand = new LoginCommand(this); //  how to decouple?
         }
 
-        public LoginWindowViewModel(IUserModel user, ILoginProcessor loginProcessor, IUserModelValidator userModelValidator)
+        public LoginWindowViewModel(IUser user, ILoginProcessor loginProcessor, IUserValidator userModelValidator)
             :this()
         {
             this._userModel = user;
@@ -86,7 +86,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Incorrect username or password.");
+                    MessageBox.Show("Incorrect username or password or account does not exist");
                 }
             }
         }

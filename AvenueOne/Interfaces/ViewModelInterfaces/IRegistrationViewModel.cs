@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace AvenueOne.Interfaces
 {
-    public interface IRegistration
+    public interface IRegistrationViewModel : IViewModel
     {
         //IUserModel AddUser(IUserModel userModel);
-        void AddUser(Window sourceWindow, IUserModel userModel, string passwordConfirm);
+        void AddUser(Window sourceWindow, IUser user, string passwordConfirm);
     }
 }

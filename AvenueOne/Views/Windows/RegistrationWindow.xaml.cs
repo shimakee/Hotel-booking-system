@@ -1,6 +1,8 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Utilities;
+using AvenueOne.Utilities.Tools;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,15 +29,21 @@ namespace AvenueOne.Views.Windows
         {
             InitializeComponent();
             //IUserModel userModel = new UserModel();
-            IPersonModel personModel = new PersonModel();
-            IUserModelValidator userModelValidator = new ValidatorUserModel();
+            IPerson personModel = new PersonModel();
+            IUserValidator userModelValidator = new ValidatorUserModel();
             //IViewModel registrationWindowViewModel = new RegistrationWindowViewModel(userModel, personModel, userModelValidator);
-            IAddUserProcessor addUserProcessor = new AddUserProcessor();
-            IViewModel registrationWindowViewModel = new RegistrationWindowViewModel(userModelValidator, addUserProcessor);
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            unitOfWork.Users.AddRange(SampleData.GetUsersList());
+            IRegistrationViewModel registrationWindowViewModel = new RegistrationWindowViewModel(userModelValidator, unitOfWork);
             DataContext = registrationWindowViewModel;
         }
 
         private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        public void CloseWindow()
         {
             this.Close();
         }

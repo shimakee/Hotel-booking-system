@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvenueOne.Interfaces
+namespace AvenueOne.Interfaces.RepositoryInterfaces
 {
-    public interface IAddUserProcessor
+    public interface IUserRepository: IUnitOfWork<IUser>
     {
-        IUserModel AddUser(IUserModel userModel);
+
     }
 }
