@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:AvenueOne.Views"
         xmlns:converters="clr-namespace:AvenueOne.Converters"
         mc:Ignorable="d"
-        Title="Login" Height="150" Width="800">
+        Title="Login" Height="150" Width="800"
+        FocusManager.FocusedElement="{x:Reference Username}">
 
     <Window.Resources>
         <converters:PasswordConverter x:Key="PasswordConverter"/>
@@ -21,7 +22,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Username" Grid.Column="0"/>
-            <TextBox x:Name="Username" Grid.Column="1" Text="{Binding Username, Mode=TwoWay}"/>
+            <TextBox x:Name="Username" Grid.Column="1"
+                     Text="{Binding Username, Mode=TwoWay}"/>
         </Grid>
 
         <Grid>
@@ -33,7 +35,19 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Password" Grid.Column="0"/>
-            <PasswordBox x:Name="Password" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <PasswordBox x:Name="Password" Grid.Column="1" Grid.ColumnSpan="3">
+                <PasswordBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding LoginCommand, Mode=OneWay}">
+                        <KeyBinding.CommandParameter>
+                            <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                <Binding ElementName="LoginViewWindow"/>
+                                <Binding ElementName="Username"/>
+                                <Binding ElementName="Password"/>
+                            </MultiBinding>
+                        </KeyBinding.CommandParameter>
+                    </KeyBinding>
+                </PasswordBox.InputBindings>
+            </PasswordBox>
         </Grid>
 
         <!--<Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=LoginViewWindow}">-->
