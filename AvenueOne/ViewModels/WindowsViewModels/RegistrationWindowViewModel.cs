@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Diagnostics;
+using AvenueOne.Properties;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
     class RegistrationWindowViewModel : IRegistrationViewModel
     {
-        private IUser _userAccount;
+        public IUser UserAccount { get; private set; }
         public ICommand AddUserCommand { get; private set; }
         private IUserValidator _userModelValidator;
         private IUnitOfWork _unitOfWork; 
@@ -24,9 +25,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public RegistrationWindowViewModel()
         {
             this.AddUserCommand = new AddUserCommand(this);
-            //TODO: userAccount info should be gotten somewhere else, application resources perhaps or in settings
-            //this is to access if account is admin or not to be able to execute addusercommand
-            this._userAccount = new UserModel("sample user", "sample password", true);
+            this.UserAccount = Settings.Default["UserAccount"] as IUser;
         }
 
         public RegistrationWindowViewModel(IUserValidator userModelValidator, IUnitOfWork unitOfWork)
@@ -39,11 +38,6 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public void Close(Window sourceWindow)
         {
             sourceWindow.Close();
-        }
-
-        public bool AccountIsAdmin
-        {
-            get { return _userAccount.IsAdmin; }
         }
 
         public void AddUser(Window sourceWindow, IUser userModel, string passwordConfirm)

@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Properties;
 using AvenueOne.Utilities.Tools;
 using AvenueOne.ViewModels.PagesViewModels;
 using AvenueOne.Views.Windows;
@@ -34,10 +35,18 @@ namespace AvenueOne.Views.Pages
 
         private void AddUser(object sender, RoutedEventArgs e)
         {
-            RegistrationWindow registrationwindow = new RegistrationWindow();
-            registrationwindow.Owner = Window.GetWindow(this);
-            //must be show dialog to avoid changing windows
-            registrationwindow.ShowDialog();
+            IUser userAccount = Settings.Default["UserAccount"] as IUser;
+            if (userAccount.IsAdmin)
+            {
+                RegistrationWindow registrationwindow = new RegistrationWindow();
+                registrationwindow.Owner = Window.GetWindow(this);
+                //must be show dialog to avoid changing windows
+                registrationwindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("User is not allowed, only accounts with admin access are able to execute command. ");
+            }
         }
     }
 }

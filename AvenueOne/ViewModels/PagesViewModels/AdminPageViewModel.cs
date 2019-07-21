@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,23 @@ namespace AvenueOne.ViewModels.PagesViewModels
 {
     public class AdminPageViewModel : IViewModel
     {
+        public IUser UserAccount { get; private set; }
         public IEnumerable<IUser> UsersList { get; private set; }
 
+        public AdminPageViewModel()
+        {
+            UserAccount = Settings.Default["UserAccount"] as IUser;
+        }
+
         public AdminPageViewModel(IEnumerable<IUser> users)
+            : this()
         {
             UsersList = users;
         }
 
-        public bool AccountIsAdmin => throw new NotImplementedException();
-
         public void Close(Window sourceWindow)
         {
-            throw new NotImplementedException();
+            sourceWindow.Close();
         }
     }
 }

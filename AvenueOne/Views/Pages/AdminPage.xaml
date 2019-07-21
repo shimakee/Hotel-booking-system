@@ -33,7 +33,9 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Content="+ Add new User +" Grid.Column="0" Click="AddUser"/>
+                                <Button Content="+ Add new User +" Grid.Column="0" 
+                                        IsEnabled="{Binding UserAccount.IsAdmin}"
+                                        Click="AddUser"/>
                                 <CheckBox Content="isAdmin" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Grid>
                             

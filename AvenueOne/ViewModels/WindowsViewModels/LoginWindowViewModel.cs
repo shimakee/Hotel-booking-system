@@ -15,8 +15,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 {
     public class LoginWindowViewModel: ILoginViewModel
     {
-        private IUser _userAccount; //TODO should be on settongs or app resource
-        private IUser _userModel; 
+        public IUser UserAccount { get; private set; } //TODO should be on settongs or app resource
+        //private IUser _userModel; 
         public ICommand LoginCommand { get; private set; }
         private ILoginProcessor _loginProcessor;
         private IUserValidator _userModelValidator;
@@ -29,15 +29,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public LoginWindowViewModel(IUser user, ILoginProcessor loginProcessor, IUserValidator userModelValidator)
             :this()
         {
-            this._userModel = user;
+            this.UserAccount = user;
             this._loginProcessor = loginProcessor;
             this._userModelValidator = userModelValidator;
-        }
-
-        //must be implemented by all view models, not necessary here becuse it is still not logged in yet.
-        public bool AccountIsAdmin
-        {
-            get { return _userAccount.IsAdmin; }
         }
 
         public void Close(Window sourceWindow)
@@ -48,8 +42,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         //user this for whatever features, but not login as username is passed as a parameter
         public string Username
         {
-            get { return _userModel.Username; }
-            set { _userModel.Username = value; }
+            get { return UserAccount.Username; }
+            set { UserAccount.Username = value; }
         }
 
         public void Login(Window sourceWindow, string username, string password)

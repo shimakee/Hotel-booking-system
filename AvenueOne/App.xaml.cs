@@ -17,25 +17,36 @@ namespace AvenueOne
     {
         void OnStartup( object sender, StartupEventArgs args)
         {
+            //event handler for easy navigation
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.KeyDownEvent, new KeyEventHandler(TextBox_KeyDown));
             EventManager.RegisterClassHandler(typeof(CheckBox), CheckBox.KeyDownEvent, new KeyEventHandler(CheckBox_KeyDown));
+            //event handler for hotkeys
+            EventManager.RegisterClassHandler(typeof(Window), Window.KeyDownEvent, new KeyEventHandler(Window_KeyDown));
+        }
+
+        //hotkeys
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+            {
+                MessageBox.Show("it works");
+                e.Handled = true;
+            }
         }
 
         private void CheckBox_KeyDown(object sender, KeyEventArgs e)
         {
-            MoveToNextUIelement(e);
-
-            if(e.Handled == true)
-            {
-                CheckBox checkbox = (CheckBox)sender;
-                checkbox.IsChecked = !checkbox.IsChecked;
-            }
+            if (e.Key == Key.Enter)
+                MoveToNextUIelement(e);
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.OemTilde)
+                MoveToPreviousUIelement(e);
+
             if (e.Key == Key.Enter & (sender as TextBox).AcceptsReturn == false)
-                MoveToNextUIelement(e);
+                        MoveToNextUIelement(e);
         }
 
         private void MoveToNextUIelement(KeyEventArgs e)
@@ -52,5 +63,19 @@ namespace AvenueOne
                     e.Handled = true;
             }
         }
+
+        private void MoveToPreviousUIelement(KeyEventArgs e)
+        {
+            UIElement focusedElement = Keyboard.FocusedElement as UIElement;
+
+            if(focusedElement != null)
+            {
+                TraversalRequest request = new TraversalRequest(FocusNavigationDirection.Previous);
+                if (focusedElement.MoveFocus(request))
+                    e.Handled = true;
+
+            }
+        }
+
     }
 }

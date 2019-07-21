@@ -9,7 +9,7 @@ namespace AvenueOne.Interfaces
 {
     public interface IViewModel
     {
-        bool AccountIsAdmin { get;}
+        IUser UserAccount { get; }
         void Close(Window sourceWindow); // do i really need to implement this?
     }
 }

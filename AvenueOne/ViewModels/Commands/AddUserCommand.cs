@@ -24,8 +24,8 @@ namespace AvenueOne.ViewModels.Commands
         public bool CanExecute(object parameter)
         {
             //get user access, if admin allow, if not deny
-            if(_viewModel.AccountIsAdmin)
-                return _viewModel.AccountIsAdmin;
+            if(_viewModel.UserAccount.IsAdmin)
+                return _viewModel.UserAccount.IsAdmin;
 
             MessageBox.Show("User is not allowed, only accounts with admin access are able to execute command. ");
             return false;
