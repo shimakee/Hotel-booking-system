@@ -1,4 +1,7 @@
-﻿using AvenueOne.Views.Windows;
+﻿using AvenueOne.Interfaces;
+using AvenueOne.Utilities.Tools;
+using AvenueOne.ViewModels.PagesViewModels;
+using AvenueOne.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +28,8 @@ namespace AvenueOne.Views.Pages
         public AdminPage()
         {
             InitializeComponent();
+            IViewModel adminViewModel = new AdminPageViewModel(SampleData.GetUsersList());
+            DataContext = adminViewModel;
         }
 
         private void AddUser(object sender, RoutedEventArgs e)

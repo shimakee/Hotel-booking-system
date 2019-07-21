@@ -14,9 +14,9 @@ namespace AvenueOne.Utilities.Tools
         {
             IList<IUser> users = new List<IUser>()
             {
-                new UserModel("shimakee", "shimakee"),
+                new UserModel("shimakee", "shimakee", true),
                 new UserModel("ken", "ken"),
-                new UserModel("dinah", "dinah"),
+                new UserModel("dinah", "dinah", true),
                 new UserModel("kristof", "kristof"),
                 new UserModel("kenndi", "kenndi"),
                 new UserModel("kenneth", "kenneth")

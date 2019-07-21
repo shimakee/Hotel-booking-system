@@ -1,0 +1,68 @@
+﻿<Page x:Class="AvenueOne.Views.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AvenueOne.Views.Pages"
+      mc:Ignorable="d" 
+      Loaded="SettingsPage_Loaded"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SettingsPage">
+
+    <TabControl>
+
+        <TabItem Header="User">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+                <GroupBox Header="Account Info" Grid.Column="0">
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel  Grid.Column="0">
+                            <TextBlock x:Name="IsAdminDisplay" Text="Administrator"/>
+                            <TextBlock x:Name="IdDisplay" Text="Id"/>
+                            <TextBlock x:Name="UsernameDisplay" Text="Username"/>
+                            <TextBlock x:Name="PasswordDisplay" Text="Password"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" IsEnabled="False">
+                            <CheckBox x:Name="IsAdmin" IsChecked="{x:Null}"/>
+                            <TextBox x:Name="Id" Text=""/>
+                            <TextBox x:Name="Username" Text=""/>
+                            <TextBox x:Name="Password" Text=""/>
+                        </StackPanel>
+
+                    </Grid>
+                </GroupBox>
+                
+                <StackPanel Grid.Row="1" Grid.Column="1"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="Load"
+                            Padding="20 5 20 5"
+                            Click="Button_LoadSettings"/>
+                    <Button Content="Save"
+                            Padding="20 5 20 5"
+                            Click="Button_SaveSettings"
+                            IsEnabled="False"/>
+                </StackPanel>
+            </Grid>
+
+        </TabItem>
+
+        <TabItem Header="Application">
+
+        </TabItem>
+    </TabControl>
+</Page>

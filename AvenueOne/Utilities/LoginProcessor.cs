@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
+using AvenueOne.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,19 @@ namespace AvenueOne.Utilities
         public LoginProcessor(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public bool Login(string username, string password)
+        {
+            IUser user = GetValidatedDetails(username, password);
+
+            if (user == null)
+                return false;
+
+                user.Password = null;
+                Settings.Default["UserAccount"] = user;
+                Settings.Default.Save();
+            return true;
         }
 
         public IUser GetValidatedDetails(string username, string password)

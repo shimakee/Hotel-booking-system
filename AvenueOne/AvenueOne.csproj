@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\PasswordConverter.cs" />
+    <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\ToolsInterfaces\IModelValidator.cs" />
     <Compile Include="Interfaces\ILoginProcessor.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Utilities\Tools\Validate.cs" />
     <Compile Include="ViewModels\Commands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
+    <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\RegistrationWindowViewModel.cs" />
     <Compile Include="Views\Pages\AdminPage.xaml.cs">
@@ -87,6 +89,9 @@
     </Compile>
     <Compile Include="Views\Pages\BookingPage.xaml.cs">
       <DependentUpon>BookingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -99,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\BookingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,11 +156,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="ViewModels\PagesViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

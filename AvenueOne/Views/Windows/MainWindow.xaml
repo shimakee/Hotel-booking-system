@@ -38,7 +38,7 @@
                     <Button Content="Billings"/>
                     <Button Content="Cashflow"/>
                     <Button Content="Admin" Click="Button_AdminPage"/>
-                    <Button Content="Settings"/>
+                    <Button Content="Settings" Click="Button_SettingsPage"/>
                     <Button Content="Logout" Click="Button_Logout"/>
                 </StackPanel>
 

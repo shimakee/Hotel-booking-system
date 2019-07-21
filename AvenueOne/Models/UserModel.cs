@@ -1,12 +1,17 @@
-﻿using AvenueOne.Interfaces;
+﻿using AvenueOne.Converters;
+using AvenueOne.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AvenueOne.Models
 {
+    //[TypeConverter(typeof(UserConverter))]
+    [SettingsSerializeAs(SettingsSerializeAs.Xml)]
     public class UserModel : IUser
     {
         public string Id { get; set; }
@@ -26,6 +31,19 @@ namespace AvenueOne.Models
             this.Username = username;
         }
 
+        public UserModel(string username, bool isAdmin)
+            :this(username)
+        {
+            this.IsAdmin = isAdmin;
+        }
+
+        public UserModel(bool isAdmin, string id)
+            : this()
+        {
+            this.IsAdmin = isAdmin;
+            this.Id = id;
+        }
+
         public UserModel(string username, string password)
             :this(username)
         {
@@ -38,16 +56,22 @@ namespace AvenueOne.Models
             this.IsAdmin = isAdmin;
         }
 
-        public UserModel(string username, string password, string Id)
+        public UserModel(string username, string password, string id)
             :this(username, password)
         {
-            this.Id = GenerateId();
+            this.Id = id;
         }
 
-        public UserModel(string username, string password, bool isAdmin, string Id)
+        public UserModel(string username, bool isAdmin, string id)
+            :this(username,isAdmin)
+        {
+            this.Id = id;
+        }
+
+        public UserModel(string username, string password, bool isAdmin, string id)
             :this(username, password, isAdmin)
         {
-            this.Id = GenerateId();
+            this.Id =id;
         }
         
         private string GenerateId()

@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Models;
+using AvenueOne.Properties;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
 using System;
@@ -71,7 +72,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             }
             else //process login using login class
             {
-                bool isValidLogin = _loginProcessor.IsValidLogin(username, password);
+                bool isValidLogin = _loginProcessor.Login(username, password);
 
                 if (isValidLogin)
                 {

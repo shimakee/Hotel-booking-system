@@ -194,12 +194,13 @@
                 </GroupBox>
 
                 <GroupBox Header="User list" Grid.Row="1">
-                    <ScrollViewer>
-                        <!--<ListView ItemsSource="{Binding Something}">
-                            
-                        </ListView>-->
-                        
-                    </ScrollViewer>
+                    <DataGrid  ItemsSource="{Binding UsersList}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>
+                            <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </GroupBox>
             </Grid>
         </TabItem>

@@ -22,22 +22,29 @@ namespace AvenueOne
     /// </summary>
     public partial class MainWindow : Window
     {
-        AdminPage adminpage = new AdminPage();
+        AdminPage adminPage = new AdminPage();
+        BookingPage bookingPage = new BookingPage();
+        SettingsPage settingsPage = new SettingsPage();
 
         public MainWindow()
         {
             InitializeComponent();
-            MainContent.Content = adminpage;
+            MainContent.Content = adminPage;
         }
 
         private void Button_BookingPage(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new BookingPage();
+            MainContent.Content = bookingPage;
         }
 
         private void Button_AdminPage(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = adminpage;
+            MainContent.Content = adminPage;
+        }
+
+        private void Button_SettingsPage(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = settingsPage;
         }
 
         private void Button_Logout(object sender, RoutedEventArgs e)
