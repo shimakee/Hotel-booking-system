@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Diagnostics;
 using AvenueOne.Properties;
+using System.ComponentModel;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
@@ -19,8 +20,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public IUser UserAccount { get; private set; }
         public ICommand AddUserCommand { get; private set; }
         private IUserValidator _userModelValidator;
-        private IUnitOfWork _unitOfWork; 
-
+        private IUnitOfWork _unitOfWork;
 
         public RegistrationWindowViewModel()
         {
@@ -88,11 +88,30 @@ namespace AvenueOne.ViewModels.WindowsViewModels
                 message .Append($"user {userModel.Username} with password {userModel.Password}");
                 MessageBox.Show(message.ToString());
 
+                //notify parent window
+                OnUserAdded(userModel);
+
                 //close source window
                 sourceWindow.Close();
             }
-
-
         }
+
+        public event EventHandler<UserEventArgs> UserAdded;
+
+        public  void OnUserAdded(IUser user)
+        {
+            if (UserAdded != null)
+                UserAdded(this, new UserEventArgs(user));
+        }
+    }
+
+    public class UserEventArgs : EventArgs
+    {
+        public UserEventArgs(IUser user)
+        {
+            User = user;
+        }
+
+        public IUser User { get; set; }
     }
 }

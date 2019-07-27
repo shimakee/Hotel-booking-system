@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces
 {
-    public interface IUnitOfWork<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class
     {
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);

@@ -2,6 +2,7 @@
 using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,13 @@ namespace AvenueOne.Utilities.Tools
 {
     class SampleData
     {
-        public static IEnumerable<IUser> GetUsersList()
+        private static SampleData _instance = null;
+
+        private List<IUser> _usersList;
+
+        private SampleData()
         {
-            IList<IUser> users = new List<IUser>()
+            _usersList = new List<IUser>()
             {
                 new UserModel("shimakee", "shimakee", true),
                 new UserModel("ken", "ken"),
@@ -21,8 +26,29 @@ namespace AvenueOne.Utilities.Tools
                 new UserModel("kenndi", "kenndi"),
                 new UserModel("kenneth", "kenneth")
             };
-
-            return users;
+            
         }
+
+        public static SampleData SingeInstance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new SampleData();
+
+                return _instance;
+            }
+
+
+        }
+
+        public List<IUser> Users
+        {
+            get
+            {
+                return _usersList;
+            }
+        }
+
     }
 }

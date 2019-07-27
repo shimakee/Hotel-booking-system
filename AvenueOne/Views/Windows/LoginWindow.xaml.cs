@@ -30,7 +30,6 @@ namespace AvenueOne.Views
             InitializeComponent();
             IUser userModel = new UserModel();
             IUnitOfWork unitOfWork= new UnitOfWork();
-            unitOfWork.Users.AddRange(SampleData.GetUsersList());
             ILoginProcessor loginProcessor = new LoginProcessor(unitOfWork);
             IUserValidator userModelValidator = new ValidatorUserModel();
             ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(userModel, loginProcessor, userModelValidator);

@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces.RepositoryInterfaces;
+using AvenueOne.Utilities.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace AvenueOne.Utilities
 
         public UnitOfWork()
         {
-            Users = new UserRepository();
+            Users = new UserRepository(SampleData.SingeInstance.Users);
         }
 
         public IUserRepository Users { get; private set; }

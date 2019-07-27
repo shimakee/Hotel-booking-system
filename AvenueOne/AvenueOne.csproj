@@ -64,6 +64,7 @@
     <Compile Include="Interfaces\ToolsInterfaces\IUserValidatpr.cs" />
     <Compile Include="Interfaces\ViewModelInterfaces\ILoginViewModel.cs" />
     <Compile Include="Interfaces\ModelInterfaces\IPerson.cs" />
+    <Compile Include="Interfaces\ViewModelInterfaces\IRegistrationParentViewModel.cs" />
     <Compile Include="Interfaces\ViewModelInterfaces\IRegistrationViewModel.cs" />
     <Compile Include="Interfaces\ModelInterfaces\IUser.cs" />
     <Compile Include="Interfaces\ViewModelInterfaces\IViewModel.cs" />

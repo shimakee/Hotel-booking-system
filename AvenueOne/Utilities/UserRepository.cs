@@ -12,5 +12,8 @@ namespace AvenueOne.Utilities
     public class UserRepository : Repository<IUser>, IUserRepository
     {
         //context TODO;
+        public UserRepository(List<IUser> entities) : base(entities)
+        {
+        }
     }
 }

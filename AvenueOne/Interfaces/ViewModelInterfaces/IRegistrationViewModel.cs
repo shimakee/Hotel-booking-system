@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvenueOne.ViewModels.WindowsViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace AvenueOne.Interfaces
     {
         //IUserModel AddUser(IUserModel userModel);
         void AddUser(Window sourceWindow, IUser user, string passwordConfirm);
+        event EventHandler<UserEventArgs> UserAdded;
     }
 }

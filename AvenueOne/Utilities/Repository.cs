@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -8,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Utilities
 {
-    public class Repository<TEntity> : IUnitOfWork<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         //context TODO; 
 
         //temporary
-        private List<TEntity> entities;
+        private List<TEntity> context;
 
-        public Repository()
+        public Repository(List<TEntity> entities)
         {
-            entities = new List<TEntity>();
+            context = entities;
         }
 
         public void Add(TEntity entity)
@@ -28,14 +29,14 @@ namespace AvenueOne.Utilities
             //connect to database
 
             //check if user exist
-            TEntity e = entities.Find(ent => ent.Equals(entity));
+            TEntity e = context.Find(ent => ent.Equals(entity));
             bool doesExist = e != null;
 
             if (doesExist)
                 throw new ArgumentException("Cannot add a user that already exists.");
 
             //add user
-            entities.Add(entity);
+            context.Add(entity);
             bool hasAddedUser = true;
 
             //successfully added user
@@ -47,7 +48,7 @@ namespace AvenueOne.Utilities
         {
             foreach (TEntity item in collection)
             {
-                entities.Add(item);
+                context.Add(item);
             }
         }
 
@@ -57,7 +58,7 @@ namespace AvenueOne.Utilities
             if (predicate == null)
                 throw new ArgumentNullException("Predicate cannot be null");
 
-            return entities.Find(predicate);
+            return context.Find(predicate);
 
         }
 
@@ -73,12 +74,12 @@ namespace AvenueOne.Utilities
 
         public IEnumerable<TEntity> GetAll()
         {
-            return entities;
+            return context;
         }
 
         public void Remove(TEntity entity)
         {
-            entities.Remove(entity);
+            context.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces.RepositoryInterfaces
 {
-    public interface IUserRepository: IUnitOfWork<IUser>
+    public interface IUserRepository: IRepository<IUser>
     {
 
     }
