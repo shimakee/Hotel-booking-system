@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace AvenueOne.Interfaces
 {
-    public interface IViewModel
+    public interface IWindowViewModel
     {
         IUser UserAccount { get; }
         void Close(Window sourceWindow); // do i really need to implement this?

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces.ViewModelInterfaces
 {
-    public interface IRegistrationParentViewModel : IViewModel
+    public interface IRegistrationParentViewModel : IWindowViewModel
     {
         void UserAdded(object sender, UserEventArgs e);
     }

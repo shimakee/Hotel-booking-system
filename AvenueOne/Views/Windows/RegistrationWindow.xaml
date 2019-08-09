@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AvenueOne.Views.Windows"
         xmlns:converters="clr-namespace:AvenueOne.Converters"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
@@ -15,8 +16,9 @@
 
     <Window.Resources>
         <converters:PasswordConverter x:Key="PasswordConverter"/>
+        <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
     </Window.Resources>
-    
+
     <!-- TODO: Bind to view model-->
     <!--Apply style instead of writing it directly-->
     <Border BorderThickness="3" BorderBrush="Gray" CornerRadius="10" Background="GhostWhite">
@@ -34,7 +36,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox x:Name="IsAdmin" Content="Is admin" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="IsAdmin" IsChecked="{Binding User.IsAdmin}" Content="Is admin" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
 
                 <Grid>
@@ -44,7 +46,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Username:" Grid.Column="0"/>
-                    <TextBox x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <TextBox x:Name="Username" Text="{Binding User.Username}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                 </Grid>
 
                 <Grid>
@@ -73,8 +75,8 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Firstname:" Grid.Column="0"/>
-                    <TextBox x:Name="Firstname" Text="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="First name:" Grid.Column="0"/>
+                    <TextBox x:Name="Firstname" Text="{Binding Person.FirstName}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                 </Grid>
 
                 <Grid>
@@ -83,8 +85,8 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Middlename:" Grid.Column="0"/>
-                    <TextBox x:Name="Middlename" Text="Middlename" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="Middle name:" Grid.Column="0"/>
+                    <TextBox x:Name="Middlename" Text="{Binding Person.MiddleName}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                 </Grid>
 
                 <Grid>
@@ -93,36 +95,24 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Lastname:" Grid.Column="0"/>
-                    <TextBox x:Name="Lastname" Text="Lastname" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="Last name:" Grid.Column="0"/>
+                    <TextBox x:Name="Lastname" Text="{Binding Person.LastName}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                 </Grid>
 
-                <ComboBox x:Name="Gender" SelectedIndex="0">
-                    <ComboBoxItem>
-                        <TextBlock Text="Male"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Female"/>
-                    </ComboBoxItem>
-                </ComboBox>
+                <ComboBox x:Name="Gender" SelectedIndex="0" SelectedValue="{Binding Person.Gender}" ItemsSource="{Binding Person.GenderValues}" />
 
-                <ComboBox x:Name="CivilStatus" SelectedIndex="0">
-                    <ComboBoxItem>
-                        <TextBlock Text="Single"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Married"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Widowed"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Divorced"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Annulled"/>
-                    </ComboBoxItem>
-                </ComboBox>
+                <ComboBox x:Name="CivilStatus" SelectedIndex="0" SelectedValue="{Binding Person.CivilStatus}" ItemsSource="{Binding Person.CivilStatusValues}"/>
+
+                <Grid IsEnabled="{Binding Person.IsMaiden}" Visibility="{Binding Person.IsMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="94*"/>
+                        <ColumnDefinition Width="173*"/>
+                        <ColumnDefinition Width="110*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Maiden name:" Grid.Column="0"/>
+                    <TextBox x:Name="MaidenName" Text="{Binding Person.MaidenName}" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
+                </Grid>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -131,13 +121,13 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Brithdate:" Grid.Column="0"/>
-                    <DatePicker x:Name="Birthdate" Grid.Column="1"/>
+                    <DatePicker x:Name="Birthdate" Grid.Column="1" SelectedDate="{Binding Person.BirthDate, TargetNullValue={x:Static system:DateTime.Now}}"/>
                 </Grid>
             </StackPanel>
 
             <!--User info - right-->
             <StackPanel Grid.Column="1" Margin="10">
-                <Grid>
+                <Grid IsEnabled="False">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="3*"/>
@@ -167,7 +157,7 @@
                     </StackPanel>
                 </Grid>
 
-                <Grid>
+                <Grid IsEnabled="False">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="3*"/>
@@ -187,7 +177,7 @@
                     </Grid>
                 </Grid>
 
-                <Grid>
+                <Grid IsEnabled="False">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="3*"/>
@@ -202,8 +192,8 @@
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource PasswordConverter}">
                             <Binding ElementName="RegistrationViewWindow"/>
-                            <Binding ElementName="IsAdmin"/>
-                            <Binding ElementName="Username"/>
+                            <!--<Binding ElementName="IsAdmin"/>
+                            <Binding ElementName="Username"/>-->
                             <Binding ElementName="Password"/>
                             <Binding ElementName="PasswordConfirm"/>
                         </MultiBinding>
@@ -214,5 +204,5 @@
             </StackPanel>
         </Grid>
     </Border>
-    
+
 </Window>

@@ -19,9 +19,30 @@ namespace AvenueOne.Models
         public string Nationality { get; set; }
         public DateTime BirthDate { get; set; }
 
+        private bool HasContent(string content)
+        {
+            return !string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content);
+        }
+
         public string FullName
         {
-            get { return $"{FirstName} {LastName}"; }
+            get
+            {
+                StringBuilder fullname = new StringBuilder();
+                if (HasContent(FirstName))
+                    fullname.Append(FirstName);
+
+                if (HasContent(MiddleName))
+                    fullname.Append($" {MiddleName}");
+
+                if (HasContent(MaidenName) && Gender == GenderType.Female)
+                    fullname.Append($" {MaidenName}");
+
+                if (HasContent(LastName))
+                    fullname.Append($" {LastName}");
+
+                return fullname.ToString();
+            }
             set
             {
                 if (FullName != value)

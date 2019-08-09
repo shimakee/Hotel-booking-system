@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BooleanVisibilityConverter.cs" />
     <Compile Include="Converters\PasswordConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IUnitOfWork.cs" />
@@ -67,7 +68,7 @@
     <Compile Include="Interfaces\ViewModelInterfaces\IRegistrationParentViewModel.cs" />
     <Compile Include="Interfaces\ViewModelInterfaces\IRegistrationViewModel.cs" />
     <Compile Include="Interfaces\ModelInterfaces\IUser.cs" />
-    <Compile Include="Interfaces\ViewModelInterfaces\IViewModel.cs" />
+    <Compile Include="Interfaces\ViewModelInterfaces\IWindowViewModel.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IUserRepository.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -82,6 +83,8 @@
     <Compile Include="Utilities\Tools\Validate.cs" />
     <Compile Include="ViewModels\Commands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
+    <Compile Include="ViewModels\ModelViewModel\PersonViewModel.cs" />
+    <Compile Include="ViewModels\ModelViewModel\UserViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\RegistrationWindowViewModel.cs" />

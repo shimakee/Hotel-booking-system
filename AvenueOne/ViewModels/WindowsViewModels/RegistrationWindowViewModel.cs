@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Diagnostics;
 using AvenueOne.Properties;
 using System.ComponentModel;
+using AvenueOne.ViewModels.ModelViewModel;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
@@ -21,11 +22,15 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public ICommand AddUserCommand { get; private set; }
         private IUserValidator _userModelValidator;
         private IUnitOfWork _unitOfWork;
+        public UserViewModel User { get; private set; }
+        public PersonViewModel Person { get; private set; }
 
         public RegistrationWindowViewModel()
         {
             this.AddUserCommand = new AddUserCommand(this);
             this.UserAccount = Settings.Default["UserAccount"] as IUser;
+            this.User = new UserViewModel(new UserModel());
+            this.Person = new PersonViewModel(new PersonModel());
         }
 
         public RegistrationWindowViewModel(IUserValidator userModelValidator, IUnitOfWork unitOfWork)
@@ -40,60 +45,66 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             sourceWindow.Close();
         }
 
-        public void AddUser(Window sourceWindow, IUser userModel, string passwordConfirm)
+        public void AddUser(Window sourceWindow, string password, string passwordConfirm)
         {
-            if (userModel == null)
-                throw new ArgumentNullException("User cannot be null.");
+            if (password == null)
+                throw new ArgumentNullException("Password cannot be null.");
             if (sourceWindow == null)
                 throw new ArgumentNullException("SourceWindow cannot be null.");
             if (passwordConfirm == null)
                 throw new ArgumentNullException("PasswordConfirm cannot be null.");
 
-            //validate user
-           bool isValidUserModel = _userModelValidator.Validate(userModel);
-            if (!isValidUserModel)
-            {
-                MessageBox.Show("Invalid input on Username or Password.");
-                return;
-            }
+            MessageBox.Show($"Username: {User.Username} is a {Person.CivilStatus} {Person.Gender} with Fullname {Person.FullName} born on {Person.BirthDate}");
 
-            //validate password confirmation
-            bool isValidPassword = _userModelValidator.ValidatePassword(passwordConfirm);
-            if(!isValidPassword || passwordConfirm != userModel.Password)
-            {
-;                MessageBox.Show("Invalid input on Password confirmation.");
-                return;
-            }
+//            //validate username
+//           bool isValidUsername = _userModelValidator.ValidateUsername(User.Username);
+//            if (!isValidUsername)
+//            {
+//                MessageBox.Show("Invalid input on username.");
+//                return;
+//            }
 
-            //does user exist
-            IUser userExist = _unitOfWork.Users.Find(user => user.Equals(userModel));// TODO: should be registrationProcessor with method add account?...
+//            //validate password & password confirmation
+//            bool isValidPassword = _userModelValidator.ValidatePassword(password) && _userModelValidator.ValidatePassword(passwordConfirm);
+//            if(!isValidPassword || passwordConfirm != password)
+//            {
+//;                MessageBox.Show("Invalid input or missmatched password  or password confirmation.");
+//                return;
+//            }
+//            else
+//            {
+//                User.Password = password;
+//            }
+
+//            //does user exist
+//            IUser userExist = _unitOfWork.Users.Find(user => user.Equals(User));// TODO: should be registrationProcessor with method add account?...
             
-            //failed message
-            if(userExist != null)
-            {
-                MessageBox.Show($"Failed to register {userModel.Username}, username already exist");
-            }
-            else
-            {
-                //add user
-                if (userExist == null)
-                    _unitOfWork.Users.Add(userModel);
+//            //failed message
+//            if(userExist != null)
+//            {
+//                MessageBox.Show($"Failed to register {User.Username}, username already exist");
+//            }
+//            else
+//            {
+//                //add user
+//                if (userExist == null)
+//                    _unitOfWork.Users.Add(User.User);
 
-                //success message
-                StringBuilder message = new StringBuilder();
-                message.Append("Registered ");
+//                //success message
+//                StringBuilder message = new StringBuilder();
+//                message.Append("Registered ");
 
-                if (userModel.IsAdmin)
-                    message.Append("admin ");
-                message .Append($"user {userModel.Username} with password {userModel.Password}");
-                MessageBox.Show(message.ToString());
+//                if (User.IsAdmin)
+//                    message.Append("admin ");
+//                message .Append($"user {User.Username} with password {User.Password}");
+//                MessageBox.Show(message.ToString());
 
-                //notify parent window
-                OnUserAdded(userModel);
+//                //notify parent window
+//                OnUserAdded(User.User);
 
-                //close source window
-                sourceWindow.Close();
-            }
+//                //close source window
+//                sourceWindow.Close();
+//            }
         }
 
         public event EventHandler<UserEventArgs> UserAdded;

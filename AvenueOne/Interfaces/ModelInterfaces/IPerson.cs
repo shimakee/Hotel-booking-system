@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces
 {
-    public enum GenderType
+    public enum GenderType : byte
     {
-        Male = 1,
-        Female = 2
+        Male,
+        Female
     }
 
-    public enum CivilStatusType
+    public enum CivilStatusType : byte
     {
-        Single = 1,
-        Married = 2,
-        Widowed = 3,
-        Annuled = 4,
-        Divorced = 5
+        Single,
+        Married,
+        Widowed,
+        Annuled,
+        Divorced
     }
 
     public interface IPerson

@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace AvenueOne.Interfaces
 {
-    public interface ILoginViewModel: IViewModel
+    public interface ILoginViewModel: IWindowViewModel
     {
         void Login(Window sourceWindow, string username, string password);
     }
