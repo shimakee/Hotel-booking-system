@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.ModelViewModel
 {
-    public class PersonViewModel : INotifyPropertyChanged
+    public class PersonViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         public IPerson Person { get; private set; }
         public byte[] GenderValues { get { return (byte[])Enum.GetValues(typeof(GenderType));  } }
@@ -21,6 +21,12 @@ namespace AvenueOne.ViewModels.ModelViewModel
             this.Person = person;
         }
 
+        public bool IsMaiden
+        {
+            get { return Person.Gender == GenderType.Female && Person.CivilStatus != CivilStatusType.Single; }
+        }
+
+        #region Properties
         public string Id
         {
             get { return Person.Id; }
@@ -28,7 +34,7 @@ namespace AvenueOne.ViewModels.ModelViewModel
                 OnPropertyChanged();
             }
         }
-
+        
         public string FirstName
         {
             get { return Person.FirstName; }
@@ -55,8 +61,6 @@ namespace AvenueOne.ViewModels.ModelViewModel
                 OnPropertyChanged("FullName");
             }
         }
-
-        
 
         public string MaidenName
         {
@@ -87,11 +91,6 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
-        public bool IsMaiden
-        {
-            get { return Person.Gender == GenderType.Female && Person.CivilStatus != CivilStatusType.Single; }
-        }
-
         public CivilStatusType CivilStatus
         {
             get { return Person.CivilStatus; }
@@ -116,12 +115,54 @@ namespace AvenueOne.ViewModels.ModelViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion
 
+
+        #region IDataErrorInfo
+        string IDataErrorInfo.Error
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        string IDataErrorInfo.this[string property]
+        {
+            get
+            {
+                return ValidateProperty(property);
+            }
+        }
+        #endregion
+
+        #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] String property = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
+
+        #region Validation
+        private string ValidateProperty(string property)
+        {
+            string error = null;
+
+            switch (property)
+            {
+                case "FirstName":
+                    if (String.IsNullOrWhiteSpace(FirstName))
+                        error = "Invalid first name.";
+                    break;
+
+                default:
+                    break;
+            }
+
+            return error;
+        }
+        #endregion
     }
 }

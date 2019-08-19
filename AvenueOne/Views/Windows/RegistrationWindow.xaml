@@ -74,9 +74,16 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
                     <TextBlock Text="First name:" Grid.Column="0"/>
-                    <TextBox x:Name="Firstname" Text="{Binding Person.FirstName}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
+                             Text="{Binding Person.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Grid.Row="1"
+                               Text="{Binding ElementName=Firstname, Path=(Validation.Errors).CurrentItem.ErrorContent}"/>
                 </Grid>
 
                 <Grid>
