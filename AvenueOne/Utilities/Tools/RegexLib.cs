@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Utilities
 {
-    public class Validate
+    public class RegexLib
     {
         //length(min max)
         //A-z alphabet

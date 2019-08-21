@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,7 +81,7 @@
     <Compile Include="Utilities\UnitOfWork.cs" />
     <Compile Include="Utilities\UserRepository.cs" />
     <Compile Include="Utilities\ValidatorUserModel.cs" />
-    <Compile Include="Utilities\Tools\Validate.cs" />
+    <Compile Include="Utilities\Tools\RegexLib.cs" />
     <Compile Include="ViewModels\Commands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\ModelViewModel\PersonViewModel.cs" />

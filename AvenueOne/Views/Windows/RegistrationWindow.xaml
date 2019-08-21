@@ -46,7 +46,9 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Username:" Grid.Column="0"/>
-                    <TextBox x:Name="Username" Text="{Binding User.Username}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <TextBox x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"
+                              Text="{Binding User.Username, UpdateSourceTrigger=PropertyChanged,  ValidatesOnExceptions=True, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
 
                 <Grid>
@@ -74,16 +76,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
 
                     <TextBlock Text="First name:" Grid.Column="0"/>
                     <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding Person.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Grid.Row="1"
-                               Text="{Binding ElementName=Firstname, Path=(Validation.Errors).CurrentItem.ErrorContent}"/>
+                             Text="{Binding Person.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
 
                 <Grid>

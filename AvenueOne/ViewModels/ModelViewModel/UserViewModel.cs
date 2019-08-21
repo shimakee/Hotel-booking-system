@@ -7,6 +7,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace AvenueOne.ViewModels.ModelViewModel
 {
@@ -19,6 +21,7 @@ namespace AvenueOne.ViewModels.ModelViewModel
             User = user;
         }
 
+        [Required]
         public string Id
         {
             get { return User.Id; }
@@ -27,10 +30,15 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
+        [Required(ErrorMessage = "must not be empty.")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "must be between 5 to 30 characters in length.")]
+        [RegularExpression(@"^\w{4}\d{6,7}$", ErrorMessage ="invalid username format.")]
         public string Username
         {
             get { return User.Username; }
-            set { User.Username = value;
+            set {
+                ValidateProperty(value, "Username");
+                User.Username = value;
                 OnPropertyChanged();
             }
         }
@@ -61,6 +69,11 @@ namespace AvenueOne.ViewModels.ModelViewModel
         private void OnPropertyChanged([CallerMemberName] String property = "")
         {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        private void ValidateProperty<T>(T value, string property)
+        {
+            Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = property });
         }
     }
 }

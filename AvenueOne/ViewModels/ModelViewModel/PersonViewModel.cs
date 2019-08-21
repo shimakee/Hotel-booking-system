@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.ModelViewModel
@@ -34,11 +36,12 @@ namespace AvenueOne.ViewModels.ModelViewModel
                 OnPropertyChanged();
             }
         }
-        
+
         public string FirstName
         {
             get { return Person.FirstName; }
-            set { Person.FirstName = value;
+            set {
+                Person.FirstName = value;
                 OnPropertyChanged();
                 OnPropertyChanged("FullName");
             }
@@ -153,8 +156,16 @@ namespace AvenueOne.ViewModels.ModelViewModel
             switch (property)
             {
                 case "FirstName":
-                    if (String.IsNullOrWhiteSpace(FirstName))
+                    if (!String.IsNullOrWhiteSpace(FirstName))
+                    {
+                        Match match = Regex.Match(FirstName, @"^\w{4}\d{6,7}$");
+                        if (!match.Success)
+                            error = "invalid first name format";
+                    }
+                    else
+                    {
                         error = "Invalid first name.";
+                    }
                     break;
 
                 default:
