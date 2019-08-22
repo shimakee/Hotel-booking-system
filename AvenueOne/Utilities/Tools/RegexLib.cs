@@ -3,13 +3,45 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AvenueOne.Utilities
 {
     public class RegexLib
     {
-        //length(min max)
+        private const string V = @"([A-z])*$";
+        private const string X = @"^([A-z ])*$";
+
+        public static string AlphaCaseInsensitive
+        {
+            get { return V; }
+        }
+        public static Regex AlphaUpperOnly
+        {
+            get { return new Regex(@"^([A-Z])*$"); }
+        }
+        public static Regex AlphaLowerOnly
+        {
+            get { return new Regex(@"^([a-z])*$"); }
+        }
+        public static string AlphaSpace
+        {
+            get
+            {
+                return X;
+            }
+        }
+        public static Regex AlphaNumeric
+        {
+            get { return new Regex(@"^([A-z0-9])*$"); }
+        }
+        public static Regex AlphaNumericSpace
+        {
+            get { return new Regex(@"^([A-z0-9 ])*$"); }
+        }
+
+
         //A-z alphabet
         //no alphabet(lower upper or both)
         //all alphabets are uppercase

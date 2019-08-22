@@ -31,7 +31,7 @@ namespace AvenueOne.Interfaces
         GenderType Gender { get; set; }
         CivilStatusType CivilStatus { get; set; }
         string Nationality { get; set; }
-        DateTime BirthDate { get; set; }
+        DateTime? BirthDate { get; set; }
 
         string FullName { get; set; }
     }

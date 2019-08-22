@@ -12,15 +12,16 @@ using System.Diagnostics;
 
 namespace AvenueOne.ViewModels.ModelViewModel
 {
-    public class UserViewModel : INotifyPropertyChanged
+    public class UserViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         public IUser User { get; private set; }
+        private string _passwordConfirm;
 
         public UserViewModel(IUser user)
         {
             User = user;
         }
-
+        
         [Required]
         public string Id
         {
@@ -30,27 +31,46 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
-        [Required(ErrorMessage = "must not be empty.")]
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "must be between 5 to 30 characters in length.")]
-        [RegularExpression(@"^\w{4}\d{6,7}$", ErrorMessage ="invalid username format.")]
+        [Required(ErrorMessage = "required.")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "min 5, max 30 chars.")]
+        [RegularExpression(@"^([A-z0-9])*$", ErrorMessage ="invalid format.")]
         public string Username
         {
             get { return User.Username; }
             set {
-                ValidateProperty(value, "Username");
+                //ValidateProperty(value, "Username");
                 User.Username = value;
                 OnPropertyChanged();
             }
         }
-
+        
+        [Required(ErrorMessage = "required.")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "min 5, max 30 chars.")]
+        [RegularExpression(@"^([A-z0-9!@#$%^&*,.?])*$", ErrorMessage = "invalid format.")]
         public string Password
         {
             get { return User.Password; }
             set { User.Password = value;
                 OnPropertyChanged();
+                OnPropertyChanged("PasswordConfirm");
             }
         }
-
+        
+        [Compare("Password", ErrorMessage ="must match with password")]
+        public string PasswordConfirm
+        {
+            get
+            {
+                return _passwordConfirm;
+            }
+            set
+            {
+                _passwordConfirm = value;
+                OnPropertyChanged();
+                OnPropertyChanged("Password");
+            }
+        }
+        
         public bool IsAdmin
         {
             get { return User.IsAdmin; }
@@ -64,16 +84,47 @@ namespace AvenueOne.ViewModels.ModelViewModel
             throw new NotImplementedException("There is no save method yet.");
         }
 
+        #region PropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] String property = "")
         {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
 
-        private void ValidateProperty<T>(T value, string property)
+        #region IDataErrorInfo
+        string IDataErrorInfo.Error
         {
-            Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = property });
+            get
+            {
+                return null;
+            }
         }
+
+        string IDataErrorInfo.this[string property]
+        {
+            get
+            {
+                return ValidateProperty(property);
+            }
+        }
+        #endregion
+
+        #region Validation
+        private string ValidateProperty(string property)
+        {
+            var context = new ValidationContext(this, null, null) { MemberName = property };
+            var result = new List<ValidationResult>();
+            var value = this.GetType().GetProperty(property).GetValue(this);
+
+            bool isValid = Validator.TryValidateProperty(value, context, result);
+
+            if (!isValid)
+                return result.First().ErrorMessage;
+            return null;
+        }
+        #endregion
     }
 }

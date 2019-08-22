@@ -18,7 +18,12 @@ namespace AvenueOne.Models
         public GenderType Gender { get; set; }
         public CivilStatusType CivilStatus { get; set; }
         public string Nationality { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
+
+        //public PersonModel()
+        //{
+        //    BirthDate = null;
+        //}
 
         private bool HasContent(string content)
         {
