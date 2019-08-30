@@ -20,19 +20,15 @@ namespace AvenueOne.ViewModels.ModelViewModel
         public IPerson Person { get; private set; }
         public byte[] GenderValues { get { return (byte[])Enum.GetValues(typeof(GenderType)); } }
         public byte[] CivilStatusValues { get { return (byte[])Enum.GetValues(typeof(CivilStatusType)); } }
+        public Dictionary<string, string> ErrorCollection { get; private set; }
 
         public PersonViewModel(IPerson person)
         {
-            this.Person = person;
-        }
-
-        public bool IsMaiden
-        {
-            get { return Person.Gender == GenderType.Female && Person.CivilStatus != CivilStatusType.Single; }
+            Person = person;
+            ErrorCollection = new Dictionary<string, string>();
         }
 
         #region Properties
-        [Required]
         public string Id
         {
             get { return Person.Id; }
@@ -87,6 +83,8 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
+        //Person.CivilStatus != CivilStatusType.Single && Person.Gender == GenderType.Female; 
+        [RequiredIf("IsNotMaiden", ErrorMessage ="requireds.")]
         [StringLength(30, ErrorMessage = "30 chars max.")]
         [RegularExpression(@"^([A-z ])*$", ErrorMessage = "invalid format.")]
         public string MaidenName
@@ -97,6 +95,14 @@ namespace AvenueOne.ViewModels.ModelViewModel
                 Person.MaidenName = value;
                 OnPropertyChanged();
                 OnPropertyChanged("FullName");
+            }
+        }
+
+        public bool IsNotMaiden
+        {
+            get
+            {
+                return Person.CivilStatus != CivilStatusType.Single && Person.Gender == GenderType.Female;
             }
         }
         
@@ -119,7 +125,7 @@ namespace AvenueOne.ViewModels.ModelViewModel
             {
                 Person.Gender = value;
                 OnPropertyChanged();
-                OnPropertyChanged("IsMaiden");
+                OnPropertyChanged("IsNotMaiden");
                 OnPropertyChanged("MaidenName");
             }
         }
@@ -133,7 +139,7 @@ namespace AvenueOne.ViewModels.ModelViewModel
             {
                 Person.CivilStatus = value;
                 OnPropertyChanged();
-                OnPropertyChanged("IsMaiden");
+                OnPropertyChanged("IsNotMaiden");
                 OnPropertyChanged("MaidenName");
             }
         }
@@ -149,9 +155,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
                 OnPropertyChanged();
             }
         }
-
-
-        [DataType(DataType.Date)]
+        
+        [BeforeToday(ErrorMessage ="before today.")]
+        [DataType(DataType.Date, ErrorMessage ="must be date.")]
+        [Required(ErrorMessage ="required.")]
         public DateTime? BirthDate
         {
             get { return Person.BirthDate; }
@@ -192,26 +199,57 @@ namespace AvenueOne.ViewModels.ModelViewModel
         #endregion
 
         #region Validation
+        public bool IsValid
+        {
+            get
+            {
+                foreach (KeyValuePair<string, string> error in ErrorCollection)
+                {
+                    if(error.Value != null)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
         private string ValidateProperty(string property)
         {
             var context = new ValidationContext(this, null, null) { MemberName = property };
             var result = new List<ValidationResult>();
             var value = this.GetType().GetProperty(property).GetValue(this);
+            string errorMessage = null;
 
             bool isValid = Validator.TryValidateProperty(value, context, result);
+            if (!isValid)
+                errorMessage = result.First().ErrorMessage;
 
             //special case for maiden name as it needs to be both female, and not single before it is required.
-            if (CivilStatus != CivilStatusType.Single && Gender == GenderType.Female && property == "MaidenName")
+            //if (CivilStatus != CivilStatusType.Single && Gender == GenderType.Female && property == "MaidenName")
+            //{
+            //    if (String.IsNullOrWhiteSpace(MaidenName))
+            //    {
+            //        //errorMessage = "requireds.";
+            //    }
+            //    else if (MaidenName.Length < 2 || MaidenName.Length > 20)
+            //    {
+            //        errorMessage = "must be less than 20 chars.";
+            //    }
+            //}
+
+            
+
+            if (ErrorCollection.ContainsKey(property))
             {
-                if(String.IsNullOrWhiteSpace(MaidenName))
-                    return "required";
-                if (MaidenName.Length < 2 || MaidenName.Length > 20)
-                    return "must be less that 20 chars.";
+                ErrorCollection[property] = errorMessage;
+            }else if(errorMessage != null)
+            {
+                ErrorCollection.Add(property, errorMessage);
             }
 
-            if (!isValid)
-                return result.First().ErrorMessage;
-            return null;
+            OnPropertyChanged("ErrorCollection");
+            return errorMessage;
+            
         }
         #endregion
     }

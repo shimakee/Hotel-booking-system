@@ -39,25 +39,24 @@ namespace AvenueOne.ViewModels.Commands
 
             try
             {
-                //get parameters
-                object[] values = (object[])parameter;
-                Window sourceWindow = (Window)values[0];
+                    //get parameters
+                    object[] values = (object[])parameter;
+                    Window sourceWindow = (Window)values[0];
 
-                //CheckBox isAdminCheckBox = (CheckBox)values[1];
-                //bool isAdmin = (bool)isAdminCheckBox.IsChecked;
+                    //CheckBox isAdminCheckBox = (CheckBox)values[1];
+                    //bool isAdmin = (bool)isAdminCheckBox.IsChecked;
 
-                //TextBox usernameTextBox = (TextBox)values[2];
-                //string username = usernameTextBox.Text;
+                    //TextBox usernameTextBox = (TextBox)values[2];
+                    //string username = usernameTextBox.Text;
 
-                PasswordBox passwordPasswordBox = (PasswordBox)values[1];
-                string password = passwordPasswordBox.Password;
+                    PasswordBox passwordPasswordBox = (PasswordBox)values[1];
+                    string password = passwordPasswordBox.Password;
 
-                PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[2];
-                string passwordConfirm = passwordConfirmPasswordBox.Password;
+                    PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[2];
+                    string passwordConfirm = passwordConfirmPasswordBox.Password;
 
-                //IUser user = new UserModel(username, password, isAdmin);
+                    this._viewModel.AddUser(sourceWindow, password, passwordConfirm);
 
-                this._viewModel.AddUser(sourceWindow, password, passwordConfirm);
             }
             catch (Exception)
             {

@@ -76,8 +76,10 @@
     <Compile Include="Utilities\LoginProcessor.cs" />
     <Compile Include="Utilities\RegistrationProcessor.cs" />
     <Compile Include="Utilities\Repository.cs" />
+    <Compile Include="Utilities\Tools\BeforeToday.cs" />
     <Compile Include="Utilities\Tools\Generator.cs" />
     <Compile Include="Utilities\Tools\RequiredEnum.cs" />
+    <Compile Include="Utilities\Tools\RequiredIf.cs" />
     <Compile Include="Utilities\Tools\SampleData.cs" />
     <Compile Include="Utilities\UnitOfWork.cs" />
     <Compile Include="Utilities\UserRepository.cs" />

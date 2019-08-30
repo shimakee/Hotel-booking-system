@@ -16,10 +16,12 @@ namespace AvenueOne.ViewModels.ModelViewModel
     {
         public IUser User { get; private set; }
         private string _passwordConfirm;
+        public Dictionary<string, string> ErrorCollection { get; private set; }
 
         public UserViewModel(IUser user)
         {
             User = user;
+            ErrorCollection = new Dictionary<string, string>();
         }
         
         [Required]
@@ -113,6 +115,19 @@ namespace AvenueOne.ViewModels.ModelViewModel
         #endregion
 
         #region Validation
+        public bool IsValid
+        {
+            get
+            {
+                foreach(KeyValuePair<string, string> error in ErrorCollection)
+                {
+                    if (error.Value != null)
+                        return false;
+                }
+                return true;
+            }
+        }
+
         private string ValidateProperty(string property)
         {
             var context = new ValidationContext(this, null, null) { MemberName = property };
