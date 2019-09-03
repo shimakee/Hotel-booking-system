@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Properties;
 using AvenueOne.Utilities;
@@ -16,22 +17,21 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     public class LoginWindowViewModel: ILoginViewModel
     {
         public IUser UserAccount { get; private set; } //TODO should be on settongs or app resource
-        //private IUser _userModel; 
+        public IUserViewModel User { get;  private set; }
         public ICommand LoginCommand { get; private set; }
         private ILoginProcessor _loginProcessor;
-        private IUserValidator _userModelValidator;
 
-        public LoginWindowViewModel()
+        LoginWindowViewModel()
         {
             LoginCommand = new LoginCommand(this); //  how to decouple?
         }
-
-        public LoginWindowViewModel(IUser user, ILoginProcessor loginProcessor, IUserValidator userModelValidator)
-            :this()
+        
+        public LoginWindowViewModel(IUser user, ILoginProcessor loginProcessor, IUserViewModel userViewModel)
+            : this()
         {
             this.UserAccount = user;
             this._loginProcessor = loginProcessor;
-            this._userModelValidator = userModelValidator;
+            this.User = userViewModel;
         }
 
         public void Close(Window sourceWindow)
@@ -39,32 +39,23 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             sourceWindow.Close();
         }
 
-        //user this for whatever features, but not login as username is passed as a parameter
-        public string Username
-        {
-            get { return UserAccount.Username; }
-            set { UserAccount.Username = value; }
-        }
-
         public void Login(Window sourceWindow, string username, string password)
         {
-            //validate Input here
-            bool isValidUsername = _userModelValidator.ValidateUsername(username);
-            bool isValidPassword = _userModelValidator.ValidatePassword(password);
-            
-            if (!isValidPassword && !isValidUsername)
-            {
-                MessageBox.Show("The username and password are using invalid characters.");
-            }
-            else if (!isValidUsername)
-            {
-                MessageBox.Show("The username is using invalid characters.");
-            }
-            else if(!isValidPassword)
-            {
-                MessageBox.Show("The password is using invalid characters.");
-            }
-            else //process login using login class
+            if (sourceWindow == null)
+                throw new ArgumentNullException("Source window cannot be null.");
+            //if (String.IsNullOrWhiteSpace(username))
+            if (username == null)
+                    throw new ArgumentNullException("Username cannot be null.");
+            //if (String.IsNullOrWhiteSpace(password))
+            if (password == null)
+                    throw new ArgumentNullException("Password cannot be null.");
+
+            User.Username = username;//no need to assign since using binding, but just to be sure.
+            User.Password = password;
+            bool isValidUsername = User.IsValidProperty("Username"); //just redundancy.
+            bool isValidPassword = User.IsValidProperty("Password");
+
+            if (User.IsValid && isValidPassword && isValidUsername)
             {
                 bool isValidLogin = _loginProcessor.Login(username, password);
 
@@ -83,6 +74,10 @@ namespace AvenueOne.ViewModels.WindowsViewModels
                 {
                     MessageBox.Show("Incorrect username or password or account does not exist");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Invalid Input on username or password.");
             }
         }
 

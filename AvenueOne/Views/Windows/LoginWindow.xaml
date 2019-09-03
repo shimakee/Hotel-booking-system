@@ -23,19 +23,25 @@
 
             <TextBlock Text="Username" Grid.Column="0"/>
             <TextBox x:Name="Username" Grid.Column="1"
-                     Text="{Binding Username, Mode=TwoWay}"/>
+                             Text="{Binding User.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             ToolTip="{Binding Person.ErrorCollection[Username]}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
         </Grid>
 
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
-                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="76*"/>
                 <ColumnDefinition Width="59*"/>
                 <ColumnDefinition Width="420*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Password" Grid.Column="0"/>
-            <PasswordBox x:Name="Password" Grid.Column="1" Grid.ColumnSpan="3">
+            <PasswordBox x:Name="Password" Grid.Column="1" Grid.ColumnSpan="7">
                 <PasswordBox.InputBindings>
                     <KeyBinding Key="Return" Command="{Binding LoginCommand, Mode=OneWay}">
                         <KeyBinding.CommandParameter>
@@ -51,8 +57,8 @@
         </Grid>
 
         <!--<Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=LoginViewWindow}">-->
-            <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
-                <Button.CommandParameter>
+        <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
+            <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource PasswordConverter}">
                     <Binding ElementName="LoginViewWindow"/>
                     <Binding ElementName="Username"/>
@@ -60,7 +66,7 @@
                 </MultiBinding>
             </Button.CommandParameter>
         </Button>
-        
+
         <Button Content="Cancel" Click="Button_Close"/>
     </StackPanel>
 </Window>

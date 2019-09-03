@@ -11,6 +11,7 @@ namespace AvenueOne.Interfaces.ViewModelInterfaces
     {
         Dictionary<string, string> ErrorCollection { get; }
         bool IsValid { get; }
+        bool IsValidProperty (string property);
 
     }
 }

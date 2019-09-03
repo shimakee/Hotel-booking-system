@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,11 +62,38 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
+        //public void ValidateAllProperties()
+        //{
+        //    ValidationContext context = new ValidationContext(this);
+        //    PropertyInfo[] properties = this.GetType().GetProperties();
+
+        //    foreach (PropertyInfo property in properties)
+        //    {
+        //        ValidateProperty(property.ToString());
+        //    }
+
+        //}
+
+
+
+        public bool IsValidProperty(string property)
+        {
+            string result = ValidateProperty(property);
+            if (result == null)
+                return true;
+            return false;
+        }
+
         private string ValidateProperty(string property)
         {
             var context = new ValidationContext(this, null, null) { MemberName = property };
             var result = new List<ValidationResult>();
-            var value = this.GetType().GetProperty(property).GetValue(this);
+            var instanceProperty = this.GetType().GetProperty(property);
+
+            if (instanceProperty == null)
+                throw new NullReferenceException("Property referenced cannot be null.");
+
+            var value =instanceProperty.GetValue(this);
             string errorMessage = null;
 
             bool isValid = Validator.TryValidateProperty(value, context, result);
