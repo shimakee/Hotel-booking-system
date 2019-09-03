@@ -14,6 +14,7 @@ using AvenueOne.Properties;
 using System.ComponentModel;
 using AvenueOne.ViewModels.ModelViewModel;
 using System.Windows.Controls;
+using AvenueOne.Interfaces.ViewModelInterfaces;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
@@ -23,8 +24,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public ICommand AddUserCommand { get; private set; }
         private IUserValidator _userModelValidator;
         private IUnitOfWork _unitOfWork;
-        public UserViewModel User { get; private set; }
-        public PersonViewModel Person { get; private set; }
+        public IUserViewModel User { get; private set; }
+        public IPersonViewModel Person { get; private set; }
 
         public RegistrationWindowViewModel()
         {

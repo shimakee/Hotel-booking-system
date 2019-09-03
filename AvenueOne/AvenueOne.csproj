@@ -66,9 +66,12 @@
     <Compile Include="Interfaces\ToolsInterfaces\IUserValidatpr.cs" />
     <Compile Include="Interfaces\ViewModelInterfaces\ILoginViewModel.cs" />
     <Compile Include="Interfaces\ModelInterfaces\IPerson.cs" />
+    <Compile Include="Interfaces\ViewModelInterfaces\IModelViewModel.cs" />
+    <Compile Include="Interfaces\ViewModelInterfaces\IPersonViewModel.cs" />
     <Compile Include="Interfaces\ViewModelInterfaces\IRegistrationParentViewModel.cs" />
     <Compile Include="Interfaces\ViewModelInterfaces\IRegistrationViewModel.cs" />
     <Compile Include="Interfaces\ModelInterfaces\IUser.cs" />
+    <Compile Include="Interfaces\ViewModelInterfaces\IUserViewModel.cs" />
     <Compile Include="Interfaces\ViewModelInterfaces\IWindowViewModel.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IUserRepository.cs" />
     <Compile Include="Models\PersonModel.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="Utilities\Tools\RegexLib.cs" />
     <Compile Include="ViewModels\Commands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
+    <Compile Include="ViewModels\ModelViewModel\ModelViewModel.cs" />
     <Compile Include="ViewModels\ModelViewModel\PersonViewModel.cs" />
     <Compile Include="ViewModels\ModelViewModel\UserViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />

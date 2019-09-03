@@ -9,19 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using AvenueOne.Interfaces.ViewModelInterfaces;
 
 namespace AvenueOne.ViewModels.ModelViewModel
 {
-    public class UserViewModel : INotifyPropertyChanged, IDataErrorInfo
+    public class UserViewModel : ModelViewModel, IUserViewModel
     {
         public IUser User { get; private set; }
         private string _passwordConfirm;
-        public Dictionary<string, string> ErrorCollection { get; private set; }
 
         public UserViewModel(IUser user)
         {
             User = user;
-            ErrorCollection = new Dictionary<string, string>();
         }
         
         [Required]
@@ -81,65 +80,60 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
-        public void Save()
-        {
-            throw new NotImplementedException("There is no save method yet.");
-        }
+        //#region PropertyChanged
 
-        #region PropertyChanged
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //private void OnPropertyChanged([CallerMemberName] String property = "")
+        //{
+        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        //}
+        //#endregion
 
-        private void OnPropertyChanged([CallerMemberName] String property = "")
-        {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-        #endregion
+        //#region IDataErrorInfo
+        //string IDataErrorInfo.Error
+        //{
+        //    get
+        //    {
+        //        return null;
+        //    }
+        //}
 
-        #region IDataErrorInfo
-        string IDataErrorInfo.Error
-        {
-            get
-            {
-                return null;
-            }
-        }
+        //string IDataErrorInfo.this[string property]
+        //{
+        //    get
+        //    {
+        //        return ValidateProperty(property);
+        //    }
+        //}
+        //#endregion
 
-        string IDataErrorInfo.this[string property]
-        {
-            get
-            {
-                return ValidateProperty(property);
-            }
-        }
-        #endregion
+        //#region Validation
+        //public bool IsValid
+        //{
+        //    get
+        //    {
+        //        foreach(KeyValuePair<string, string> error in ErrorCollection)
+        //        {
+        //            if (error.Value != null)
+        //                return false;
+        //        }
+        //        return true;
+        //    }
+        //}
 
-        #region Validation
-        public bool IsValid
-        {
-            get
-            {
-                foreach(KeyValuePair<string, string> error in ErrorCollection)
-                {
-                    if (error.Value != null)
-                        return false;
-                }
-                return true;
-            }
-        }
+        //private string ValidateProperty(string property)
+        //{
+        //    var context = new ValidationContext(this, null, null) { MemberName = property };
+        //    var result = new List<ValidationResult>();
+        //    var value = this.GetType().GetProperty(property).GetValue(this);
 
-        private string ValidateProperty(string property)
-        {
-            var context = new ValidationContext(this, null, null) { MemberName = property };
-            var result = new List<ValidationResult>();
-            var value = this.GetType().GetProperty(property).GetValue(this);
+        //    bool isValid = Validator.TryValidateProperty(value, context, result);
 
-            bool isValid = Validator.TryValidateProperty(value, context, result);
-
-            if (!isValid)
-                return result.First().ErrorMessage;
-            return null;
-        }
-        #endregion
+        //    if (!isValid)
+        //        return result.First().ErrorMessage;
+        //    return null;
+        //}
+        //#endregion
     }
 }

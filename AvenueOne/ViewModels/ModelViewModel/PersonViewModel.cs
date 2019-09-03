@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
 using System;
@@ -15,17 +16,15 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.ModelViewModel
 {
-    public class PersonViewModel : INotifyPropertyChanged, IDataErrorInfo
+    public class PersonViewModel : ModelViewModel, IPersonViewModel
     {
         public IPerson Person { get; private set; }
         public byte[] GenderValues { get { return (byte[])Enum.GetValues(typeof(GenderType)); } }
         public byte[] CivilStatusValues { get { return (byte[])Enum.GetValues(typeof(CivilStatusType)); } }
-        public Dictionary<string, string> ErrorCollection { get; private set; }
 
         public PersonViewModel(IPerson person)
         {
             Person = person;
-            ErrorCollection = new Dictionary<string, string>();
         }
 
         #region Properties
@@ -171,86 +170,86 @@ namespace AvenueOne.ViewModels.ModelViewModel
         #endregion
 
 
-        #region IDataErrorInfo
-        string IDataErrorInfo.Error
-        {
-            get
-            {
-                return null;
-            }
-        }
+        //#region IDataErrorInfo
+        //string IDataErrorInfo.Error
+        //{
+        //    get
+        //    {
+        //        return null;
+        //    }
+        //}
 
-        string IDataErrorInfo.this[string property]
-        {
-            get
-            {
-                return ValidateProperty(property);
-            }
-        }
-        #endregion
+        //string IDataErrorInfo.this[string property]
+        //{
+        //    get
+        //    {
+        //        return ValidateProperty(property);
+        //    }
+        //}
+        //#endregion
 
-        #region Property Changed
-        public event PropertyChangedEventHandler PropertyChanged;
+        //#region Property Changed
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged([CallerMemberName] String property = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-        #endregion
+        //public void OnPropertyChanged([CallerMemberName] String property = "")
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        //}
+        //#endregion
 
-        #region Validation
-        public bool IsValid
-        {
-            get
-            {
-                foreach (KeyValuePair<string, string> error in ErrorCollection)
-                {
-                    if(error.Value != null)
-                        return false;
-                }
+        //#region Validation
+        //public bool IsValid
+        //{
+        //    get
+        //    {
+        //        foreach (KeyValuePair<string, string> error in ErrorCollection)
+        //        {
+        //            if(error.Value != null)
+        //                return false;
+        //        }
 
-                return true;
-            }
-        }
+        //        return true;
+        //    }
+        //}
 
-        private string ValidateProperty(string property)
-        {
-            var context = new ValidationContext(this, null, null) { MemberName = property };
-            var result = new List<ValidationResult>();
-            var value = this.GetType().GetProperty(property).GetValue(this);
-            string errorMessage = null;
+        //private string ValidateProperty(string property)
+        //{
+        //    var context = new ValidationContext(this, null, null) { MemberName = property };
+        //    var result = new List<ValidationResult>();
+        //    var value = this.GetType().GetProperty(property).GetValue(this);
+        //    string errorMessage = null;
 
-            bool isValid = Validator.TryValidateProperty(value, context, result);
-            if (!isValid)
-                errorMessage = result.First().ErrorMessage;
+        //    bool isValid = Validator.TryValidateProperty(value, context, result);
+        //    if (!isValid)
+        //        errorMessage = result.First().ErrorMessage;
 
-            //special case for maiden name as it needs to be both female, and not single before it is required.
-            //if (CivilStatus != CivilStatusType.Single && Gender == GenderType.Female && property == "MaidenName")
-            //{
-            //    if (String.IsNullOrWhiteSpace(MaidenName))
-            //    {
-            //        //errorMessage = "requireds.";
-            //    }
-            //    else if (MaidenName.Length < 2 || MaidenName.Length > 20)
-            //    {
-            //        errorMessage = "must be less than 20 chars.";
-            //    }
-            //}
+        //    //special case for maiden name as it needs to be both female, and not single before it is required.
+        //    //if (CivilStatus != CivilStatusType.Single && Gender == GenderType.Female && property == "MaidenName")
+        //    //{
+        //    //    if (String.IsNullOrWhiteSpace(MaidenName))
+        //    //    {
+        //    //        //errorMessage = "requireds.";
+        //    //    }
+        //    //    else if (MaidenName.Length < 2 || MaidenName.Length > 20)
+        //    //    {
+        //    //        errorMessage = "must be less than 20 chars.";
+        //    //    }
+        //    //}
 
             
 
-            if (ErrorCollection.ContainsKey(property))
-            {
-                ErrorCollection[property] = errorMessage;
-            }else if(errorMessage != null)
-            {
-                ErrorCollection.Add(property, errorMessage);
-            }
+        //    if (ErrorCollection.ContainsKey(property))
+        //    {
+        //        ErrorCollection[property] = errorMessage;
+        //    }else if(errorMessage != null)
+        //    {
+        //        ErrorCollection.Add(property, errorMessage);
+        //    }
 
-            OnPropertyChanged("ErrorCollection");
-            return errorMessage;
+        //    OnPropertyChanged("ErrorCollection");
+        //    return errorMessage;
             
-        }
-        #endregion
+        //}
+        //#endregion
     }
 }
