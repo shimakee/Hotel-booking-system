@@ -14,17 +14,30 @@ namespace AvenueOne.Utilities.Tools
         private static SampleData _instance = null;
 
         private List<IUser> _usersList;
+        private List<IPerson> _personList;
 
         private SampleData()
         {
+            IPerson Ken = new PersonModel() { FirstName = "Kenneth", LastName = "De Leon", CivilStatus = CivilStatusType.Married, Gender = GenderType.Male};
+            IPerson Dinah = new PersonModel() { FirstName = "Dinah Joy", LastName = "De Leon", MaidenName = "Hong", CivilStatus = CivilStatusType.Married, Gender = GenderType.Female };
+            IPerson Tof = new PersonModel() { FirstName = "Kenneth", LastName = "De Leon", CivilStatus = CivilStatusType.Single, Gender = GenderType.Male};
+            IUser ken = new UserModel("shimakee", "shimakee", true);
+            ken.PersonId = Ken.Id;
+            IUser dinah = new UserModel("dinah", "dinah", true);
+            dinah.PersonId = Dinah.Id;
+            IUser tof = new UserModel("kristof", "kristof");
+            tof.PersonId = Tof.Id;
+
             _usersList = new List<IUser>()
             {
-                new UserModel("shimakee", "shimakee", true),
-                new UserModel("ken", "ken"),
-                new UserModel("dinah", "dinah", true),
-                new UserModel("kristof", "kristof"),
+                ken, dinah, tof,
                 new UserModel("kenndi", "kenndi"),
                 new UserModel("kenneth", "kenneth")
+            };
+
+            _personList = new List<IPerson>()
+            {
+                Ken, Dinah, Tof
             };
             
         }
@@ -47,6 +60,14 @@ namespace AvenueOne.Utilities.Tools
             get
             {
                 return _usersList;
+            }
+        }
+
+        public List<IPerson> Persons
+        {
+            get
+            {
+                return _personList;
             }
         }
 

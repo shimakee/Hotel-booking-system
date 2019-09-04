@@ -1,9 +1,11 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
+using AvenueOne.Models;
 using AvenueOne.Properties;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
+using AvenueOne.ViewModels.ModelViewModel;
 using AvenueOne.ViewModels.PagesViewModels;
 using AvenueOne.Views.Windows;
 using System;
@@ -33,7 +35,9 @@ namespace AvenueOne.Views.Pages
         public AdminPage()
         {
             InitializeComponent();
-            _adminViewModel = new AdminPageViewModel();
+            IUser User = new UserModel();
+            IPerson Person = new PersonModel();
+            _adminViewModel = new AdminPageViewModel(new UserViewModel(User), new PersonViewModel(Person));
             DataContext = _adminViewModel;
         }
 

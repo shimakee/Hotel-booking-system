@@ -8,6 +8,8 @@ namespace AvenueOne.Interfaces.ViewModelInterfaces
 {
     public interface IUserViewModel : IUser, IModelViewModel
     {
+
+        IUser User { get; set; }
         string PasswordConfirm { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace AvenueOne.Interfaces.ViewModelInterfaces
     public interface IPersonViewModel : IPerson, IModelViewModel
     {
         #region Properties
-        IPerson Person { get; }
+        IPerson Person { get; set; }
         byte[] GenderValues { get; }
         byte[] CivilStatusValues { get; }
         bool IsNotMaiden { get; }

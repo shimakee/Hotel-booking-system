@@ -20,10 +20,10 @@ namespace AvenueOne.Models
         public string Nationality { get; set; }
         public DateTime? BirthDate { get; set; }
 
-        //public PersonModel()
-        //{
-        //    BirthDate = null;
-        //}
+        public PersonModel()
+        {
+            this.Id = GenerateId();
+        }
 
         private bool HasContent(string content)
         {
@@ -56,6 +56,29 @@ namespace AvenueOne.Models
             }
         }
 
+        private string GenerateId()
+        {
+            return GenerateId(32);
+        }
+
+        private string GenerateId(int length)
+        {
+            if (length <= 0)
+                throw new ArgumentOutOfRangeException("Id length cannot be less than 1 in length.");
+
+            decimal d = length / 32;
+            int repeat = (int)Math.Floor(d);
+            StringBuilder Id = new StringBuilder();
+
+            if (repeat > 0)
+                for (int i = 0; i < repeat; i++)
+                {
+                    Id.Append(Guid.NewGuid().ToString("N"));
+                }
+
+            return Id.ToString(0, length);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -78,14 +101,17 @@ namespace AvenueOne.Models
 
         public override int GetHashCode()
         {
-            return this.FirstName.GetHashCode() ^
-                this.MiddleName.GetHashCode() ^
-                this.LastName.GetHashCode() ^
-                this.MaidenName.GetHashCode() ^
+            return
+                //this.FirstName.GetHashCode() ^
+                //this.MiddleName.GetHashCode() ^
+                this.FullName.GetHashCode() ^
+                //this.LastName.GetHashCode() ^
+                //this.MaidenName.GetHashCode() ^
                 this.Gender.GetHashCode() ^
-                this.CivilStatus.GetHashCode() ^
-                this.Nationality.GetHashCode() ^
-                this.BirthDate.GetHashCode();
+                this.CivilStatus.GetHashCode();
+                //this.CivilStatus.GetHashCode() ^
+                //this.Nationality.GetHashCode() ^
+                //this.BirthDate.GetHashCode();
         }
     }
 }

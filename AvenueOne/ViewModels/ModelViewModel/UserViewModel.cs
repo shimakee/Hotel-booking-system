@@ -15,19 +15,44 @@ namespace AvenueOne.ViewModels.ModelViewModel
 {
     public class UserViewModel : ModelViewModel, IUserViewModel
     {
-        public IUser User { get; private set; }
+        private IUser _user;
         private string _passwordConfirm;
 
         public UserViewModel(IUser user)
         {
-            User = user;
+            _user = user;
+        }
+
+        public IUser User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+
+                OnPropertyChanged();
+                OnPropertyChanged("Username");
+                OnPropertyChanged("Id");
+                OnPropertyChanged("IsAdmin");
+
+            }
         }
         
+        public string PersonId
+        {
+            get { return _user.PersonId; }
+            set
+            {
+                _user.PersonId = value;
+                OnPropertyChanged();
+            }
+        }
+
         [Required]
         public string Id
         {
-            get { return User.Id; }
-            set { User.Id = value;
+            get { return _user.Id; }
+            set { _user.Id = value;
                 OnPropertyChanged();
             }
         }
@@ -37,10 +62,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [RegularExpression(@"^([A-z0-9])*$", ErrorMessage ="invalid format.")]
         public string Username
         {
-            get { return User.Username; }
+            get { return _user.Username; }
             set {
                 //ValidateProperty(value, "Username");
-                User.Username = value;
+                _user.Username = value;
                 OnPropertyChanged();
             }
         }
@@ -50,8 +75,8 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [RegularExpression(@"^([A-z0-9!@#$%^&*,.?])*$", ErrorMessage = "invalid format.")]
         public string Password
         {
-            get { return User.Password; }
-            set { User.Password = value;
+            get { return _user.Password; }
+            set { _user.Password = value;
                 OnPropertyChanged();
                 OnPropertyChanged("PasswordConfirm");
             }
@@ -74,66 +99,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
         
         public bool IsAdmin
         {
-            get { return User.IsAdmin; }
-            set { User.IsAdmin = value;
+            get { return _user.IsAdmin; }
+            set { _user.IsAdmin = value;
                 OnPropertyChanged();
             }
         }
-
-        //#region PropertyChanged
-
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //private void OnPropertyChanged([CallerMemberName] String property = "")
-        //{
-        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        //}
-        //#endregion
-
-        //#region IDataErrorInfo
-        //string IDataErrorInfo.Error
-        //{
-        //    get
-        //    {
-        //        return null;
-        //    }
-        //}
-
-        //string IDataErrorInfo.this[string property]
-        //{
-        //    get
-        //    {
-        //        return ValidateProperty(property);
-        //    }
-        //}
-        //#endregion
-
-        //#region Validation
-        //public bool IsValid
-        //{
-        //    get
-        //    {
-        //        foreach(KeyValuePair<string, string> error in ErrorCollection)
-        //        {
-        //            if (error.Value != null)
-        //                return false;
-        //        }
-        //        return true;
-        //    }
-        //}
-
-        //private string ValidateProperty(string property)
-        //{
-        //    var context = new ValidationContext(this, null, null) { MemberName = property };
-        //    var result = new List<ValidationResult>();
-        //    var value = this.GetType().GetProperty(property).GetValue(this);
-
-        //    bool isValid = Validator.TryValidateProperty(value, context, result);
-
-        //    if (!isValid)
-        //        return result.First().ErrorMessage;
-        //    return null;
-        //}
-        //#endregion
     }
 }

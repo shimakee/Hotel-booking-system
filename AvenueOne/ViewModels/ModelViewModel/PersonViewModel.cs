@@ -18,22 +18,44 @@ namespace AvenueOne.ViewModels.ModelViewModel
 {
     public class PersonViewModel : ModelViewModel, IPersonViewModel
     {
-        public IPerson Person { get; private set; }
+        private IPerson _person;
         public byte[] GenderValues { get { return (byte[])Enum.GetValues(typeof(GenderType)); } }
         public byte[] CivilStatusValues { get { return (byte[])Enum.GetValues(typeof(CivilStatusType)); } }
 
         public PersonViewModel(IPerson person)
         {
-            Person = person;
+            _person = person;
         }
 
         #region Properties
-        public string Id
+        public IPerson Person
         {
-            get { return Person.Id; }
+            get { return _person; }
             set
             {
-                Person.Id = value;
+                _person = value;
+
+                OnPropertyChanged();
+                OnPropertyChanged("Id");
+                OnPropertyChanged("FirstName");
+                OnPropertyChanged("MiddleName");
+                OnPropertyChanged("LastName");
+                OnPropertyChanged("MaidenName");
+                OnPropertyChanged("IsNotMaiden");
+                OnPropertyChanged("Fullname");
+                OnPropertyChanged("Gender");
+                OnPropertyChanged("CivilStatus");
+                OnPropertyChanged("Nationality");
+                OnPropertyChanged("BirthDate");
+            }
+        }
+
+        public string Id
+        {
+            get { return _person.Id; }
+            set
+            {
+                _person.Id = value;
                 OnPropertyChanged();
             }
         }
@@ -43,11 +65,11 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [RegularExpression(@"^([A-z ])*$", ErrorMessage = "alphanumeric only.")]
         public string FirstName
         {
-            get { return Person.FirstName; }
+            get { return _person.FirstName; }
             set
             {
                 //ValidateProperty(value, "FirstName");
-                Person.FirstName = value;
+                _person.FirstName = value;
                 OnPropertyChanged();
                 OnPropertyChanged("FullName");
             }
@@ -58,10 +80,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [RegularExpression(@"^([A-z ])*$", ErrorMessage = "invalid format.")]
         public string MiddleName
         {
-            get { return Person.MiddleName; }
+            get { return _person.MiddleName; }
             set
             {
-                Person.MiddleName = value;
+                _person.MiddleName = value;
                 OnPropertyChanged();
                 OnPropertyChanged("FullName");
             }
@@ -73,10 +95,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [RegularExpression(@"^([A-z ])*$", ErrorMessage = "invalid format.")]
         public string LastName
         {
-            get { return Person.LastName; }
+            get { return _person.LastName; }
             set
             {
-                Person.LastName = value;
+                _person.LastName = value;
                 OnPropertyChanged();
                 OnPropertyChanged("FullName");
             }
@@ -88,10 +110,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [RegularExpression(@"^([A-z ])*$", ErrorMessage = "invalid format.")]
         public string MaidenName
         {
-            get { return Person.MaidenName; }
+            get { return _person.MaidenName; }
             set
             {
-                Person.MaidenName = value;
+                _person.MaidenName = value;
                 OnPropertyChanged();
                 OnPropertyChanged("FullName");
             }
@@ -101,16 +123,16 @@ namespace AvenueOne.ViewModels.ModelViewModel
         {
             get
             {
-                return Person.CivilStatus != CivilStatusType.Single && Person.Gender == GenderType.Female;
+                return _person.CivilStatus != CivilStatusType.Single && _person.Gender == GenderType.Female;
             }
         }
         
         public string FullName
         {
-            get { return Person.FullName; }
+            get { return _person.FullName; }
             set
             {
-                if (value != Person.FullName)
+                if (value != _person.FullName)
                     OnPropertyChanged();
             }
         }
@@ -119,10 +141,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [EnumDataType(typeof(GenderType))]
         public GenderType Gender
         {
-            get { return Person.Gender; }
+            get { return _person.Gender; }
             set
             {
-                Person.Gender = value;
+                _person.Gender = value;
                 OnPropertyChanged();
                 OnPropertyChanged("IsNotMaiden");
                 OnPropertyChanged("MaidenName");
@@ -133,10 +155,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [EnumDataType(typeof(CivilStatusType))]
         public CivilStatusType CivilStatus
         {
-            get { return Person.CivilStatus; }
+            get { return _person.CivilStatus; }
             set
             {
-                Person.CivilStatus = value;
+                _person.CivilStatus = value;
                 OnPropertyChanged();
                 OnPropertyChanged("IsNotMaiden");
                 OnPropertyChanged("MaidenName");
@@ -147,10 +169,10 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [RegularExpression(@"^([A-z ])*$", ErrorMessage = "invalid username format.")]
         public string Nationality
         {
-            get { return Person.Nationality; }
+            get { return _person.Nationality; }
             set
             {
-                Person.Nationality = value;
+                _person.Nationality = value;
                 OnPropertyChanged();
             }
         }
@@ -160,96 +182,14 @@ namespace AvenueOne.ViewModels.ModelViewModel
         [Required(ErrorMessage ="required.")]
         public DateTime? BirthDate
         {
-            get { return Person.BirthDate; }
+            get { return _person.BirthDate; }
             set
             {
-                Person.BirthDate = value;
+                _person.BirthDate = value;
                 OnPropertyChanged();
             }
         }
         #endregion
 
-
-        //#region IDataErrorInfo
-        //string IDataErrorInfo.Error
-        //{
-        //    get
-        //    {
-        //        return null;
-        //    }
-        //}
-
-        //string IDataErrorInfo.this[string property]
-        //{
-        //    get
-        //    {
-        //        return ValidateProperty(property);
-        //    }
-        //}
-        //#endregion
-
-        //#region Property Changed
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //public void OnPropertyChanged([CallerMemberName] String property = "")
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        //}
-        //#endregion
-
-        //#region Validation
-        //public bool IsValid
-        //{
-        //    get
-        //    {
-        //        foreach (KeyValuePair<string, string> error in ErrorCollection)
-        //        {
-        //            if(error.Value != null)
-        //                return false;
-        //        }
-
-        //        return true;
-        //    }
-        //}
-
-        //private string ValidateProperty(string property)
-        //{
-        //    var context = new ValidationContext(this, null, null) { MemberName = property };
-        //    var result = new List<ValidationResult>();
-        //    var value = this.GetType().GetProperty(property).GetValue(this);
-        //    string errorMessage = null;
-
-        //    bool isValid = Validator.TryValidateProperty(value, context, result);
-        //    if (!isValid)
-        //        errorMessage = result.First().ErrorMessage;
-
-        //    //special case for maiden name as it needs to be both female, and not single before it is required.
-        //    //if (CivilStatus != CivilStatusType.Single && Gender == GenderType.Female && property == "MaidenName")
-        //    //{
-        //    //    if (String.IsNullOrWhiteSpace(MaidenName))
-        //    //    {
-        //    //        //errorMessage = "requireds.";
-        //    //    }
-        //    //    else if (MaidenName.Length < 2 || MaidenName.Length > 20)
-        //    //    {
-        //    //        errorMessage = "must be less than 20 chars.";
-        //    //    }
-        //    //}
-
-            
-
-        //    if (ErrorCollection.ContainsKey(property))
-        //    {
-        //        ErrorCollection[property] = errorMessage;
-        //    }else if(errorMessage != null)
-        //    {
-        //        ErrorCollection.Add(property, errorMessage);
-        //    }
-
-        //    OnPropertyChanged("ErrorCollection");
-        //    return errorMessage;
-            
-        //}
-        //#endregion
     }
 }
