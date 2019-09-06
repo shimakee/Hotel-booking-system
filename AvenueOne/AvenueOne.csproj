@@ -76,18 +76,18 @@
     <Compile Include="Interfaces\RepositoryInterfaces\IUserRepository.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Utilities\LoginProcessor.cs" />
-    <Compile Include="Utilities\RegistrationProcessor.cs" />
-    <Compile Include="Utilities\Repository.cs" />
-    <Compile Include="Utilities\Tools\BeforeToday.cs" />
-    <Compile Include="Utilities\Tools\Generator.cs" />
-    <Compile Include="Utilities\Tools\RequiredEnum.cs" />
-    <Compile Include="Utilities\Tools\RequiredIf.cs" />
-    <Compile Include="Utilities\Tools\SampleData.cs" />
-    <Compile Include="Utilities\UnitOfWork.cs" />
-    <Compile Include="Utilities\UserRepository.cs" />
-    <Compile Include="Utilities\ValidatorUserModel.cs" />
-    <Compile Include="Utilities\Tools\RegexLib.cs" />
+    <Compile Include="Services\LoginProcessor.cs" />
+    <Compile Include="Services\RegistrationProcessor.cs" />
+    <Compile Include="Services\Repository.cs" />
+    <Compile Include="Services\Tools\BeforeToday.cs" />
+    <Compile Include="Services\Tools\Generator.cs" />
+    <Compile Include="Services\Tools\RequiredEnum.cs" />
+    <Compile Include="Services\Tools\RequiredIf.cs" />
+    <Compile Include="Services\Tools\SampleData.cs" />
+    <Compile Include="Services\UnitOfWork.cs" />
+    <Compile Include="Services\UserRepository.cs" />
+    <Compile Include="Services\ValidatorUserModel.cs" />
+    <Compile Include="Services\Tools\RegexLib.cs" />
     <Compile Include="ViewModels\Commands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\ModelViewModel\ModelViewModel.cs" />
@@ -174,6 +174,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Core\Domain\" />
+    <Folder Include="Core\IRepositories\" />
+    <Folder Include="Models\CustomDataAnnotations\" />
+    <Folder Include="Persistence\EntityConfigurations\" />
+    <Folder Include="Persistence\Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
