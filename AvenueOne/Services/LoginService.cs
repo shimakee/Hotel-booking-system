@@ -44,7 +44,7 @@ namespace AvenueOne.Utilities
             //connect to databse
 
             //query details here
-            IUser userToFind = new UserModel(username, password);
+            IUser userToFind = new User(username, password);
             IUser doesExist = _unitOfWork.Users.Find(user => user.Equals(userToFind));
 
             //check that password matches
@@ -81,7 +81,7 @@ namespace AvenueOne.Utilities
 
 
             //query for username
-            IUser userToFind = new UserModel(username);
+            IUser userToFind = new User(username);
             IUser doesExist = _unitOfWork.Users.Find(user => user.Equals(userToFind));
 
             if (doesExist != null)

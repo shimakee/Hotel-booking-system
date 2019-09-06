@@ -32,8 +32,8 @@ namespace AvenueOne.Views
             InitializeComponent();
             IUnitOfWork unitOfWork= new UnitOfWork();
             ILoginService loginProcessor = new LoginProcessor(unitOfWork);
-            IUserViewModel userViewModel = new UserViewModel(new UserModel());
-            ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(new UserModel(), loginProcessor, userViewModel);
+            IUserViewModel userViewModel = new UserViewModel(new User());
+            ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(new User(), loginProcessor, userViewModel);
             DataContext = loginWindowViewModel;
         }
 

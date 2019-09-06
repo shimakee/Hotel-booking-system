@@ -35,8 +35,8 @@ namespace AvenueOne.Views.Pages
         public AdminPage()
         {
             InitializeComponent();
-            IUser User = new UserModel();
-            IPerson Person = new PersonModel();
+            IUser User = new User();
+            IPerson Person = new Person();
             _adminViewModel = new AdminPageViewModel(new UserViewModel(User), new PersonViewModel(Person));
             DataContext = _adminViewModel;
         }

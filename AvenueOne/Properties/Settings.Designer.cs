@@ -27,9 +27,9 @@ namespace AvenueOne.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<UserModel><Id></Id><Username></Username><Password></Password><IsAdmin></IsAdmin>" +
             "</UserModel>")]
-        public global::AvenueOne.Models.UserModel UserAccount {
+        public global::AvenueOne.Models.User UserAccount {
             get {
-                return ((global::AvenueOne.Models.UserModel)(this["UserAccount"]));
+                return ((global::AvenueOne.Models.User)(this["UserAccount"]));
             }
             set {
                 this["UserAccount"] = value;

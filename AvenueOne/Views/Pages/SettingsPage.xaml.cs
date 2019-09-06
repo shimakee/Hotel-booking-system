@@ -35,7 +35,7 @@ namespace AvenueOne.Views.Pages
 
         private void Button_SaveSettings(object sender, RoutedEventArgs e)
         {
-            IUser user = new UserModel(Username.Text,Password.Text, IsAdmin.IsChecked ?? false,  Id.Text);
+            IUser user = new User(Username.Text,Password.Text, IsAdmin.IsChecked ?? false,  Id.Text);
             Settings.Default["UserAccount"] = user;
             Settings.Default.Save();
         }
@@ -47,7 +47,7 @@ namespace AvenueOne.Views.Pages
 
         private void LoadSettings()
          {
-            IUser user = (UserModel)Settings.Default["UserAccount"];
+            IUser user = (User)Settings.Default["UserAccount"];
             Id.Text = user.Id?.ToString() ?? "";
             Username.Text = user.Username?.ToString() ?? "";
             Password.Text = user.Password?.ToString() ?? "";

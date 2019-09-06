@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AvenueOne.Models
 {
-    public class PersonModel : IPerson
+    public class Person : IPerson
     {
         public string Id { get; set; }
         public string FirstName { get; set; }
@@ -20,7 +20,7 @@ namespace AvenueOne.Models
         public string Nationality { get; set; }
         public DateTime? BirthDate { get; set; }
 
-        public PersonModel()
+        public Person()
         {
             this.Id = GenerateId();
         }
@@ -84,10 +84,10 @@ namespace AvenueOne.Models
             if (obj == null)
                 return false;
 
-            if (!(obj is PersonModel))
+            if (!(obj is Person))
                 return false;
 
-            PersonModel person = (PersonModel)obj;
+            Person person = (Person)obj;
 
             return this.FirstName == person.FirstName &&
                 this.MiddleName == person.MiddleName &&

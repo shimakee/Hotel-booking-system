@@ -22,7 +22,7 @@ namespace AvenueOne.Converters
             if(value is string)
             {
                 string[] parts = ( (string)value).Split(new char[] { ',' });
-                IUser user = new UserModel();
+                IUser user = new User();
                 user.Id = parts[0].Length > 0 ? parts[0]: null;
                 user.Username = parts[1].Length > 0 ? parts[1] : null;
                 user.Password = parts[2].Length > 0 ? parts[2] : null;
@@ -36,7 +36,7 @@ namespace AvenueOne.Converters
         {
             if(destinationType == typeof(string))
             {
-                IUser user = value as UserModel;
+                IUser user = value as User;
                 return string.Format($"{user.Id},{user.Username},{user.Password},{user.IsAdmin}");
             }
 

@@ -12,7 +12,7 @@ namespace AvenueOne.Models
 {
     //[TypeConverter(typeof(UserConverter))]
     [SettingsSerializeAs(SettingsSerializeAs.Xml)]
-    public class UserModel : IUser
+    public class User : IUser
     {
         public string Id { get; set; }
         public string Username { get; set; }
@@ -20,56 +20,56 @@ namespace AvenueOne.Models
         public bool IsAdmin { get; set; }
         public string PersonId { get; set; }
 
-        public UserModel()
+        public User()
         {
             this.IsAdmin = false;
             this.Id = GenerateId();
         }
 
-        public UserModel(string username)
+        public User(string username)
             :this()
         {
             this.Username = username;
         }
 
-        public UserModel(string username, bool isAdmin)
+        public User(string username, bool isAdmin)
             :this(username)
         {
             this.IsAdmin = isAdmin;
         }
 
-        public UserModel(bool isAdmin, string id)
+        public User(bool isAdmin, string id)
             : this()
         {
             this.IsAdmin = isAdmin;
             this.Id = id;
         }
 
-        public UserModel(string username, string password)
+        public User(string username, string password)
             :this(username)
         {
             this.Password = password;
         }
 
-        public UserModel(string username, string password, bool isAdmin)
+        public User(string username, string password, bool isAdmin)
             :this(username, password)
         {
             this.IsAdmin = isAdmin;
         }
 
-        public UserModel(string username, string password, string id)
+        public User(string username, string password, string id)
             :this(username, password)
         {
             this.Id = id;
         }
 
-        public UserModel(string username, bool isAdmin, string id)
+        public User(string username, bool isAdmin, string id)
             :this(username,isAdmin)
         {
             this.Id = id;
         }
 
-        public UserModel(string username, string password, bool isAdmin, string id)
+        public User(string username, string password, bool isAdmin, string id)
             :this(username, password, isAdmin)
         {
             this.Id =id;
@@ -103,10 +103,10 @@ namespace AvenueOne.Models
             if (obj == null)
                 return false;
 
-            if (!(obj is UserModel))
+            if (!(obj is User))
                 return false;
 
-            return this.Username == ((UserModel)obj).Username;
+            return this.Username == ((User)obj).Username;
         }
 
         public override int GetHashCode()

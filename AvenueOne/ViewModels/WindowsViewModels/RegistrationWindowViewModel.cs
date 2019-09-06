@@ -30,8 +30,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         {
             this.AddUserCommand = new AddUserCommand(this);
             this.UserAccount = Settings.Default["UserAccount"] as IUser;
-            this.User = new UserViewModel(new UserModel());
-            this.Person = new PersonViewModel(new PersonModel());
+            this.User = new UserViewModel(new User());
+            this.Person = new PersonViewModel(new Person());
         }
 
         public RegistrationWindowViewModel(IUnitOfWork unitOfWork)

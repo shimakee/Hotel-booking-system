@@ -18,21 +18,21 @@ namespace AvenueOne.Utilities.Tools
 
         private SampleData()
         {
-            IPerson Ken = new PersonModel() { FirstName = "Kenneth", LastName = "De Leon", CivilStatus = CivilStatusType.Married, Gender = GenderType.Male};
-            IPerson Dinah = new PersonModel() { FirstName = "Dinah Joy", LastName = "De Leon", MaidenName = "Hong", CivilStatus = CivilStatusType.Married, Gender = GenderType.Female };
-            IPerson Tof = new PersonModel() { FirstName = "Kenneth", LastName = "De Leon", CivilStatus = CivilStatusType.Single, Gender = GenderType.Male};
-            IUser ken = new UserModel("shimakee", "shimakee", true);
+            IPerson Ken = new Person() { FirstName = "Kenneth", LastName = "De Leon", CivilStatus = CivilStatusType.Married, Gender = GenderType.Male};
+            IPerson Dinah = new Person() { FirstName = "Dinah Joy", LastName = "De Leon", MaidenName = "Hong", CivilStatus = CivilStatusType.Married, Gender = GenderType.Female };
+            IPerson Tof = new Person() { FirstName = "Kenneth", LastName = "De Leon", CivilStatus = CivilStatusType.Single, Gender = GenderType.Male};
+            IUser ken = new User("shimakee", "shimakee", true);
             ken.PersonId = Ken.Id;
-            IUser dinah = new UserModel("dinah", "dinah", true);
+            IUser dinah = new User("dinah", "dinah", true);
             dinah.PersonId = Dinah.Id;
-            IUser tof = new UserModel("kristof", "kristof");
+            IUser tof = new User("kristof", "kristof");
             tof.PersonId = Tof.Id;
 
             _usersList = new List<IUser>()
             {
                 ken, dinah, tof,
-                new UserModel("kenndi", "kenndi"),
-                new UserModel("kenneth", "kenneth")
+                new User("kenndi", "kenndi"),
+                new User("kenneth", "kenneth")
             };
 
             _personList = new List<IPerson>()

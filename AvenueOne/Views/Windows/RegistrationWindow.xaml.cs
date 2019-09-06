@@ -31,7 +31,7 @@ namespace AvenueOne.Views.Windows
         public RegistrationWindow()
         {
             InitializeComponent();
-            IPerson personModel = new PersonModel();
+            IPerson personModel = new Person();
             IUnitOfWork unitOfWork = new UnitOfWork();
             _registrationWindowViewModel = new RegistrationWindowViewModel(unitOfWork);
             DataContext = _registrationWindowViewModel;
