@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Utilities
 {
-    public class LoginProcessor : ILoginProcessor
+    public class LoginProcessor : ILoginService
     {
         private IUnitOfWork _unitOfWork;
         //TODO change to using dbcontext or plutocontext or repository or unitofwork

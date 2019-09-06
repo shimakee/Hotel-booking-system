@@ -32,9 +32,8 @@ namespace AvenueOne.Views.Windows
         {
             InitializeComponent();
             IPerson personModel = new PersonModel();
-            IUserValidator userModelValidator = new ValidatorUserModel();
             IUnitOfWork unitOfWork = new UnitOfWork();
-            _registrationWindowViewModel = new RegistrationWindowViewModel(userModelValidator, unitOfWork);
+            _registrationWindowViewModel = new RegistrationWindowViewModel(unitOfWork);
             DataContext = _registrationWindowViewModel;
         }
 

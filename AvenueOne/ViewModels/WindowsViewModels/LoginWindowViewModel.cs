@@ -19,14 +19,14 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public IUser UserAccount { get; private set; } //TODO should be on settongs or app resource
         public IUserViewModel User { get;  private set; }
         public ICommand LoginCommand { get; private set; }
-        private ILoginProcessor _loginProcessor;
+        private ILoginService _loginProcessor;
 
         LoginWindowViewModel()
         {
             LoginCommand = new LoginCommand(this); //  how to decouple?
         }
         
-        public LoginWindowViewModel(IUser user, ILoginProcessor loginProcessor, IUserViewModel userViewModel)
+        public LoginWindowViewModel(IUser user, ILoginService loginProcessor, IUserViewModel userViewModel)
             : this()
         {
             this.UserAccount = user;

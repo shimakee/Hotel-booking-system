@@ -22,7 +22,6 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     {
         public IUser UserAccount { get; private set; }
         public ICommand AddUserCommand { get; private set; }
-        private IUserValidator _userModelValidator;
         private IUnitOfWork _unitOfWork;
         public IUserViewModel User { get; private set; }
         public IPersonViewModel Person { get; private set; }
@@ -35,10 +34,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             this.Person = new PersonViewModel(new PersonModel());
         }
 
-        public RegistrationWindowViewModel(IUserValidator userModelValidator, IUnitOfWork unitOfWork)
+        public RegistrationWindowViewModel(IUnitOfWork unitOfWork)
             : this()
         {
-            this._userModelValidator = userModelValidator;
             this._unitOfWork = unitOfWork;
         }
 
