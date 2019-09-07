@@ -13,7 +13,7 @@ namespace AvenueOne.Utilities
     public class LoginService : ILoginService
     {
         private IUnitOfWork _unitOfWork;
-        //TODO change to using dbcontext or plutocontext or repository or unitofwork
+
         public LoginService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -21,11 +21,22 @@ namespace AvenueOne.Utilities
 
         public bool Login(string username, string password)
         {
-            IUser user = new User(username, password, true);
+            if (String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(password))
+                throw new ArgumentNullException("The argument username and password cannot be null, empty, or whitespace.");
 
-                user.Password = null;
-                Settings.Default["UserAccount"] = user;
-                Settings.Default.Save();
+            //IUser user = _unitOfWork.Users.Find(u => u.Username == username).Single;
+            IUser user = _unitOfWork.Users.Find(u => u.Username == username).FirstOrDefault<User>();
+
+            if (user == null)
+                return false;
+
+            if (user.Password != password)
+                return false;
+
+            user.Password = null;
+            Settings.Default["UserAccount"] = user;
+            Settings.Default.Save();
+
             return true;
         }
 

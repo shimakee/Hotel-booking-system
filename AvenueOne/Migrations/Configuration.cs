@@ -2,6 +2,7 @@ namespace AvenueOne.Migrations
 {
     using AvenueOne.Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -16,9 +17,12 @@ namespace AvenueOne.Migrations
         protected override void Seed(AvenueOne.Persistence.Repositories.PlutoContext context)
         {
             Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
+            Person person2 = new Person() { FirstName = "Dinah", LastName = "Hong" };
             User user = new User("shimakee", "shimakee", true);
+            User user2 = new User("dinah", "dinah", false);
             user.Person = person;
-            context.Users.Add(user);
+            user2.Person = person2;
+            context.Users.AddRange(new List<User>() { user, user2 });
 
             //  This method will be called after migrating to the latest version.
 

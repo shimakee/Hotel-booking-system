@@ -45,7 +45,6 @@ namespace AvenueOne.ViewModels.Commands
                 string password = passwordBox.Password;
 
                 _viewModel.Login(username, password);
-               
             }
             catch (Exception)
             {

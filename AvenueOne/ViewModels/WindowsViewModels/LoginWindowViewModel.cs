@@ -26,11 +26,11 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         {
             LoginCommand = new LoginCommand(this); //how to decouple? - also pass as depndency injection?
         }
-        
+
         public LoginWindowViewModel(Window loginWindow, ILoginService loginService, IUserViewModel userViewModel)
             : this(loginWindow)
         {
-            this._loginService = loginService; 
+            this._loginService = loginService;
             this.User = userViewModel;
         }
         #endregion
@@ -38,18 +38,15 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         #region methods
         public void Login(string username, string password)
         {
-            if (username == null)
-                throw new ArgumentNullException("Username cannot be null.");
-            if (password == null)
-                throw new ArgumentNullException("Password cannot be null.");
+            if (username == null || password == null)
+                throw new ArgumentNullException("Username or password cannot be null.");
 
             User.Username = username;
             User.Password = password;
 
-            bool isValidUsername = User.IsValidProperty("Username");
-            bool isValidPassword = User.IsValidProperty("Password");
+            bool isValidInput = User.IsValidProperty("Username") && User.IsValidProperty("Password");
 
-            if (!isValidPassword || !isValidUsername)
+            if (!isValidInput)
             {
                 MessageBox.Show("Invalid Input on username or password.");
             }
@@ -58,7 +55,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 
                 if (!isValidLogin)
                 {
-                    MessageBox.Show("Invalid Input on username or password.");
+                    MessageBox.Show("Account does not exist.");
                 }
                 else {
                     MessageBox.Show($"Welcome {username}");

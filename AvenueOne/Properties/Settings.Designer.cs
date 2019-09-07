@@ -25,26 +25,19 @@ namespace AvenueOne.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<UserModel><Id></Id><Username></Username><Password></Password><IsAdmin></IsAdmin>" +
-            "</UserModel>")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<User xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <Id />
+  <Username>Shimakee</Username>
+  <Password>Shimakee</Password>
+  <IsAdmin>false</IsAdmin>
+</User>")]
         public global::AvenueOne.Models.User UserAccount {
             get {
                 return ((global::AvenueOne.Models.User)(this["UserAccount"]));
             }
             set {
                 this["UserAccount"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Uniqueword {
-            get {
-                return ((string)(this["Uniqueword"]));
-            }
-            set {
-                this["Uniqueword"] = value;
             }
         }
     }

@@ -2,11 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AvenueOne.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="UserAccount" Type="AvenueOne.Models.UserModel" Scope="User">
-      <Value Profile="(Default)">&lt;UserModel&gt;&lt;Id&gt;&lt;/Id&gt;&lt;Username&gt;&lt;/Username&gt;&lt;Password&gt;&lt;/Password&gt;&lt;IsAdmin&gt;&lt;/IsAdmin&gt;&lt;/UserModel&gt;</Value>
-    </Setting>
-    <Setting Name="Uniqueword" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="UserAccount" Type="AvenueOne.Models.User" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;User xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;Id /&gt;
+  &lt;Username&gt;Shimakee&lt;/Username&gt;
+  &lt;Password&gt;Shimakee&lt;/Password&gt;
+  &lt;IsAdmin&gt;false&lt;/IsAdmin&gt;
+&lt;/User&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

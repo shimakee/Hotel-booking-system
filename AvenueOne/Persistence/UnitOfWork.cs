@@ -17,6 +17,7 @@ namespace AvenueOne.Utilities
         public UnitOfWork(PlutoContext context)
         {
             _context = context;
+            Users = new UserRepository(_context);
         }
 
 
