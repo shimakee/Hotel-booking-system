@@ -10,15 +10,17 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Models
 {
-    //[TypeConverter(typeof(UserConverter))]
-    [SettingsSerializeAs(SettingsSerializeAs.Xml)]
+    //[TypeConverter(typeof(UserConverter))] // for settings
+    [SettingsSerializeAs(SettingsSerializeAs.Xml)] //for settings
     public class User : IUser
     {
         public string Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
-        public string PersonId { get; set; }
+
+        //reference
+        public virtual Person Person { get; set; }
 
         public User()
         {

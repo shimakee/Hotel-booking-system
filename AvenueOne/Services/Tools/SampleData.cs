@@ -22,11 +22,8 @@ namespace AvenueOne.Utilities.Tools
             IPerson Dinah = new Person() { FirstName = "Dinah Joy", LastName = "De Leon", MaidenName = "Hong", CivilStatus = CivilStatusType.Married, Gender = GenderType.Female };
             IPerson Tof = new Person() { FirstName = "Kenneth", LastName = "De Leon", CivilStatus = CivilStatusType.Single, Gender = GenderType.Male};
             IUser ken = new User("shimakee", "shimakee", true);
-            ken.PersonId = Ken.Id;
             IUser dinah = new User("dinah", "dinah", true);
-            dinah.PersonId = Dinah.Id;
             IUser tof = new User("kristof", "kristof");
-            tof.PersonId = Tof.Id;
 
             _usersList = new List<IUser>()
             {

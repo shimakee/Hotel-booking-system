@@ -38,15 +38,15 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
         
-        public string PersonId
-        {
-            get { return _user.PersonId; }
-            set
-            {
-                _user.PersonId = value;
-                OnPropertyChanged();
-            }
-        }
+        //public string PersonId
+        //{
+        //    get { return _user.PersonId; }
+        //    set
+        //    {
+        //        _user.PersonId = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         [Required]
         public string Id

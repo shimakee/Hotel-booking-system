@@ -1,5 +1,6 @@
 namespace AvenueOne.Migrations
 {
+    using AvenueOne.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,6 +15,11 @@ namespace AvenueOne.Migrations
 
         protected override void Seed(AvenueOne.Persistence.Repositories.PlutoContext context)
         {
+            Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
+            User user = new User("shimakee", "shimakee", true);
+            user.Person = person;
+            context.Users.Add(user);
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

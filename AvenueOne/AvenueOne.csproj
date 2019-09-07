@@ -66,6 +66,12 @@
     <Compile Include="Converters\PasswordConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
+    <Compile Include="EntityConfiguration\UserConfiguration.cs" />
+    <Compile Include="Migrations\201909070930092_InitialModel.cs" />
+    <Compile Include="Migrations\201909070930092_InitialModel.Designer.cs">
+      <DependentUpon>201909070930092_InitialModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />
@@ -163,6 +169,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201909070930092_InitialModel.resx">
+      <DependentUpon>201909070930092_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

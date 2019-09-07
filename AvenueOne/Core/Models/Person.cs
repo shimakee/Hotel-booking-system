@@ -19,15 +19,11 @@ namespace AvenueOne.Models
         public CivilStatusType CivilStatus { get; set; }
         public string Nationality { get; set; }
         public DateTime? BirthDate { get; set; }
+        public virtual User User { get; set; }
 
         public Person()
         {
             this.Id = GenerateId();
-        }
-
-        private bool HasContent(string content)
-        {
-            return !string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content);
         }
 
         public string FullName
@@ -51,9 +47,28 @@ namespace AvenueOne.Models
             }
             set
             {
+                StringBuilder fullname = new StringBuilder();
+                if (HasContent(FirstName))
+                    fullname.Append(FirstName);
+
+                if (HasContent(MiddleName))
+                    fullname.Append($" {MiddleName}");
+
+                if (HasContent(MaidenName) && Gender == GenderType.Female)
+                    fullname.Append($" {MaidenName}");
+
+                if (HasContent(LastName))
+                    fullname.Append($" {LastName}");
+
+                //assign
                 if (FullName != value)
-                    FullName = $"{FirstName} {LastName}";
+                    FullName = fullname.ToString();
             }
+        }
+
+        private bool HasContent(string content)
+        {
+            return !string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content);
         }
 
         private string GenerateId()
@@ -86,32 +101,24 @@ namespace AvenueOne.Models
 
             if (!(obj is Person))
                 return false;
-
+            
             Person person = (Person)obj;
-
-            return this.FirstName == person.FirstName &&
-                this.MiddleName == person.MiddleName &&
-                this.LastName == person.LastName &&
-                this.MaidenName == person.MaidenName &&
+            
+            return this.FullName == person.FullName &&
                 this.Gender == person.Gender &&
-                this.CivilStatus == person.CivilStatus &&
-                this.Nationality == person.Nationality &&
-                this.BirthDate == person.BirthDate;
+                this.BirthDate.GetValueOrDefault().Year == person.BirthDate.GetValueOrDefault().Year &&
+                this.BirthDate.GetValueOrDefault().Month == person.BirthDate.GetValueOrDefault().Month &&
+                this.BirthDate.GetValueOrDefault().Day == person.BirthDate.GetValueOrDefault().Day;
         }
 
         public override int GetHashCode()
         {
             return
-                //this.FirstName.GetHashCode() ^
-                //this.MiddleName.GetHashCode() ^
                 this.FullName.GetHashCode() ^
-                //this.LastName.GetHashCode() ^
-                //this.MaidenName.GetHashCode() ^
                 this.Gender.GetHashCode() ^
-                this.CivilStatus.GetHashCode();
-                //this.CivilStatus.GetHashCode() ^
-                //this.Nationality.GetHashCode() ^
-                //this.BirthDate.GetHashCode();
+                this.CivilStatus.GetHashCode()^
+                (this.Nationality == null ? 0 : this.Nationality.GetHashCode()) ^
+                (this.BirthDate == null ? 0 : this.BirthDate.GetHashCode());
         }
     }
 }
