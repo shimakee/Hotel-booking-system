@@ -12,7 +12,6 @@ namespace AvenueOne.Interfaces
 {
     public interface IRegistrationViewModel : IWindowViewModel
     {
-        //IUserModel AddUser(IUserModel userModel);
         void AddUser(Window sourceWindow, string password, string passwordConfirm);
         IUserViewModel User { get; }
         IPersonViewModel Person { get;  }

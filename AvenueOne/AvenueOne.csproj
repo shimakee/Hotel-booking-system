@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\RegistrationWindowViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>

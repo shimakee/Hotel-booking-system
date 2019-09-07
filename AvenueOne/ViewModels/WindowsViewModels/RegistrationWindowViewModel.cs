@@ -18,31 +18,25 @@ using AvenueOne.Interfaces.ViewModelInterfaces;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
-    class RegistrationWindowViewModel : IRegistrationViewModel
+    public class RegistrationWindowViewModel : WindowViewModel, IRegistrationViewModel
     {
-        public IUser UserAccount { get; private set; }
-        public ICommand AddUserCommand { get; private set; }
         private IUnitOfWork _unitOfWork;
+        public ICommand AddUserCommand { get; private set; }
         public IUserViewModel User { get; private set; }
         public IPersonViewModel Person { get; private set; }
 
-        public RegistrationWindowViewModel()
+        RegistrationWindowViewModel(Window window)
+            :base (window)
         {
             this.AddUserCommand = new AddUserCommand(this);
-            this.UserAccount = Settings.Default["UserAccount"] as IUser;
-            this.User = new UserViewModel(new User());
-            this.Person = new PersonViewModel(new Person());
         }
 
-        public RegistrationWindowViewModel(IUnitOfWork unitOfWork)
-            : this()
+        public RegistrationWindowViewModel(Window registrationWindow, IUnitOfWork unitOfWork, IUserViewModel userViewModel, IPersonViewModel personViewModel)
+            : this(registrationWindow)
         {
             this._unitOfWork = unitOfWork;
-        }
-
-        public void Close(Window sourceWindow)
-        {
-            sourceWindow.Close();
+            this.User = userViewModel;
+            this.Person = personViewModel;
         }
 
         public void AddUser(Window sourceWindow, string password, string passwordConfirm)
@@ -60,58 +54,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             }
             else
             {
+                // add user here
                 MessageBox.Show($"Username: {User.Username} is a {Person.CivilStatus} {Person.Gender} with Fullname {Person.FullName} born on {Person.BirthDate}");
             }
-
-            //            //validate username
-            //           bool isValidUsername = _userModelValidator.ValidateUsername(User.Username);
-            //            if (!isValidUsername)
-            //            {
-            //                MessageBox.Show("Invalid input on username.");
-            //                return;
-            //            }
-
-            //            //validate password & password confirmation
-            //            bool isValidPassword = _userModelValidator.ValidatePassword(password) && _userModelValidator.ValidatePassword(passwordConfirm);
-            //            if(!isValidPassword || passwordConfirm != password)
-            //            {
-            //;                MessageBox.Show("Invalid input or missmatched password  or password confirmation.");
-            //                return;
-            //            }
-            //            else
-            //            {
-            //                User.Password = password;
-            //            }
-
-            //            //does user exist
-            //            IUser userExist = _unitOfWork.Users.Find(user => user.Equals(User));// TODO: should be registrationProcessor with method add account?...
-
-            //            //failed message
-            //            if(userExist != null)
-            //            {
-            //                MessageBox.Show($"Failed to register {User.Username}, username already exist");
-            //            }
-            //            else
-            //            {
-            //                //add user
-            //                if (userExist == null)
-            //                    _unitOfWork.Users.Add(User.User);
-
-            //                //success message
-            //                StringBuilder message = new StringBuilder();
-            //                message.Append("Registered ");
-
-            //                if (User.IsAdmin)
-            //                    message.Append("admin ");
-            //                message .Append($"user {User.Username} with password {User.Password}");
-            //                MessageBox.Show(message.ToString());
-
-            //                //notify parent window
-            //                OnUserAdded(User.User);
-
-            //                //close source window
-            //                sourceWindow.Close();
-            //            }
         }
 
         public event EventHandler<UserEventArgs> UserAdded;

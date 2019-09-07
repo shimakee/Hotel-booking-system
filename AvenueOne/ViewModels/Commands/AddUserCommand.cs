@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Models;
+using AvenueOne.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +25,7 @@ namespace AvenueOne.ViewModels.Commands
         public bool CanExecute(object parameter)
         {
             //get user access, if admin allow, if not deny
-            if(_viewModel.UserAccount.IsAdmin)
+            if (_viewModel.UserAccount.IsAdmin)
                 return _viewModel.UserAccount.IsAdmin;
 
             MessageBox.Show("User is not allowed, only accounts with admin access are able to execute command. ");

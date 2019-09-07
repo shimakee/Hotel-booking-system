@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Utilities;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Collections.Generic;
@@ -30,23 +31,21 @@ namespace AvenueOne.ViewModels.Commands
         public void Execute(object parameter)
         {
             if (parameter == null)
-                throw new ArgumentNullException("Need Window object as parameter.");
+                throw new ArgumentNullException("Need object as parameter with values username and password.");
             try
             {
                 //get parameters
                 object[] values = (object[])parameter;
-
-                //get source window
-                Window sourceWindow = (Window)values[0];
+                
                 //get username
-                TextBox usernameTextBlock = (TextBox)values[1];
+                TextBox usernameTextBlock = (TextBox)values[0];
                 string username = usernameTextBlock.Text;
                 //get password
-                PasswordBox passwordBox = (PasswordBox)values[2];
+                PasswordBox passwordBox = (PasswordBox)values[1];
                 string password = passwordBox.Password;
 
-                //process password using viewmodel
-                _loginWindowViewModel.Login(sourceWindow, username, password);
+                _loginWindowViewModel.Login(username, password);
+               
             }
             catch (Exception)
             {

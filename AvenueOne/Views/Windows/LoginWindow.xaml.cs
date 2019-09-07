@@ -4,6 +4,7 @@ using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
+using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.ModelViewModel;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
@@ -31,9 +32,9 @@ namespace AvenueOne.Views
         {
             InitializeComponent();
             IUnitOfWork unitOfWork= new UnitOfWork();
-            ILoginService loginProcessor = new LoginProcessor(unitOfWork);
+            ILoginService loginService = new LoginService(unitOfWork);
             IUserViewModel userViewModel = new UserViewModel(new User());
-            ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(new User(), loginProcessor, userViewModel);
+            ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(this, loginService, userViewModel);
             DataContext = loginWindowViewModel;
         }
 

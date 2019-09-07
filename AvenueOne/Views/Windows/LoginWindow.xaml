@@ -60,7 +60,7 @@
         <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource PasswordConverter}">
-                    <Binding ElementName="LoginViewWindow"/>
+                    <!--<Binding ElementName="LoginViewWindow"/>-->
                     <Binding ElementName="Username"/>
                     <Binding ElementName="Password"/>
                 </MultiBinding>

@@ -9,7 +9,7 @@ namespace AvenueOne.Interfaces
 {
     public interface IWindowViewModel
     {
-        IUser UserAccount { get; }
-        void Close(Window sourceWindow); // do i really need to implement this?
+        IUser UserAccount { get; } // so you can reference the logged in account
+        Window Window { get; }
     }
 }

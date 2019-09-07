@@ -14,53 +14,50 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
-    public class LoginWindowViewModel: ILoginViewModel
+    public class LoginWindowViewModel: WindowViewModel, ILoginViewModel
     {
-        public IUser UserAccount { get; private set; } //TODO should be on settongs or app resource
-        public IUserViewModel User { get;  private set; }
         public ICommand LoginCommand { get; private set; }
-        private ILoginService _loginProcessor;
+        public IUserViewModel User { get;  private set; }
+        private ILoginService _loginService;
 
-        LoginWindowViewModel()
+        LoginWindowViewModel(Window window)
+            :base(window)
         {
-            LoginCommand = new LoginCommand(this); //  how to decouple?
+            LoginCommand = new LoginCommand(this); //how to decouple? - also pass as depndency injection?
         }
         
-        public LoginWindowViewModel(IUser user, ILoginService loginProcessor, IUserViewModel userViewModel)
-            : this()
+        public LoginWindowViewModel(Window loginWindow, ILoginService loginService, IUserViewModel userViewModel)
+            : this(loginWindow)
         {
-            this.UserAccount = user;
-            this._loginProcessor = loginProcessor;
+            this._loginService = loginService; 
             this.User = userViewModel;
         }
 
-        public void Close(Window sourceWindow)
+        public void Login(string username, string password)
         {
-            sourceWindow.Close();
-        }
-
-        public void Login(Window sourceWindow, string username, string password)
-        {
-            if (sourceWindow == null)
-                throw new ArgumentNullException("Source window cannot be null.");
-            //if (String.IsNullOrWhiteSpace(username))
             if (username == null)
-                    throw new ArgumentNullException("Username cannot be null.");
-            //if (String.IsNullOrWhiteSpace(password))
+                throw new ArgumentNullException("Username cannot be null.");
             if (password == null)
-                    throw new ArgumentNullException("Password cannot be null.");
+                throw new ArgumentNullException("Password cannot be null.");
 
-            User.Username = username;//no need to assign since using binding, but just to be sure.
+            User.Username = username;
             User.Password = password;
-            bool isValidUsername = User.IsValidProperty("Username"); //just redundancy.
+
+            bool isValidUsername = User.IsValidProperty("Username");
             bool isValidPassword = User.IsValidProperty("Password");
 
-            if (User.IsValid && isValidPassword && isValidUsername)
+            if (!isValidPassword || !isValidUsername)
             {
-                bool isValidLogin = _loginProcessor.Login(username, password);
+                MessageBox.Show("Invalid Input on username or password.");
+            }
+            else {
+                bool isValidLogin = _loginService.Login(username, password);
 
-                if (isValidLogin)
+                if (!isValidLogin)
                 {
+                    MessageBox.Show("Invalid Input on username or password.");
+                }
+                else {
                     MessageBox.Show($"Welcome {username}");
 
                     //show main window
@@ -68,18 +65,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels
                     mainWindow.Show();
 
                     //close source window
-                    sourceWindow.Close();
+                    this.Window.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Incorrect username or password or account does not exist");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Invalid Input on username or password.");
             }
         }
-
     }
 }

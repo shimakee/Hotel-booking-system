@@ -4,6 +4,7 @@ using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
+using AvenueOne.ViewModels.ModelViewModel;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,10 @@ namespace AvenueOne.Views.Windows
         public RegistrationWindow()
         {
             InitializeComponent();
-            IPerson personModel = new Person();
+            IUserViewModel userViewModel = new UserViewModel(new User());
+            IPersonViewModel personViewModel = new PersonViewModel(new Person());
             IUnitOfWork unitOfWork = new UnitOfWork();
-            _registrationWindowViewModel = new RegistrationWindowViewModel(unitOfWork);
+            _registrationWindowViewModel = new RegistrationWindowViewModel(this, unitOfWork, userViewModel, personViewModel);
             DataContext = _registrationWindowViewModel;
         }
 
