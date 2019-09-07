@@ -3,6 +3,7 @@ using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Properties;
 using AvenueOne.Utilities.Tools;
+using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,43 +19,26 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class AdminPageViewModel : IRegistrationParentViewModel
+    public class AdminPageViewModel : WindowViewModel
     {
-        public IUser UserAccount { get; private set; }
         public ObservableCollection<IUser> UsersList { get; private set; }
         public IPersonViewModel Person { get;  set; }
         public IUserViewModel User { get; set; }
+        public ICommand RegisterUserCommand { get; private set; }
 
-        AdminPageViewModel()
+        AdminPageViewModel(Window window)
+            :base(window)
         {
-            UserAccount = Settings.Default["UserAccount"] as IUser;
+            RegisterUserCommand = new RegisterUserCommand(this);
             UsersList = new ObservableCollection<IUser>(SampleData.SingeInstance.Users);
         }
 
-        public AdminPageViewModel(IUserViewModel userViewModel, IPersonViewModel personViewModel)
-            : this()
+        public AdminPageViewModel(Window window, IUserViewModel userViewModel, IPersonViewModel personViewModel)
+            : this(window)
         {
             User = userViewModel;
             Person = personViewModel;
+            //RegistrationViewModel = registrationViewModel;
         }
-
-        public void Close(Window sourceWindow)
-        {
-            sourceWindow.Close();
-        }
-
-        public void UserAdded(object sender, UserEventArgs e)
-        {
-            UsersList.Add(e.User);
-        }
-
-        //#region Property Changed
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //public void OnPropertyChanged([CallerMemberName] String property = "")
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        //}
-        //#endregion
     }
 }

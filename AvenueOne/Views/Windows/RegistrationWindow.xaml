@@ -215,7 +215,7 @@
                 <Button Content="Add user" Margin="0 10 0 0" Command="{Binding AddUserCommand, Mode=OneWay}" IsDefault="True">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource PasswordConverter}">
-                            <Binding ElementName="RegistrationViewWindow"/>
+                            <!--<Binding ElementName="RegistrationViewWindow"/>-->
                             <!--<Binding ElementName="IsAdmin"/>
                             <Binding ElementName="Username"/>-->
                             <Binding ElementName="Password"/>

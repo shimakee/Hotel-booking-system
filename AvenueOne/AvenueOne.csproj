@@ -62,11 +62,12 @@
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />
     <Compile Include="Core\IRepositories\IRepository.cs" />
+    <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IPerson.cs" />
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IModelViewModel.cs" />
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IPersonViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationParentViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IUser.cs" />
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IUserViewModel.cs" />
@@ -172,6 +173,7 @@
     <Folder Include="Assets\" />
     <Folder Include="Core\Domain\" />
     <Folder Include="Persistence\EntityConfigurations\" />
+    <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

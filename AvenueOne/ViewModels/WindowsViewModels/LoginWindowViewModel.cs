@@ -20,6 +20,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public IUserViewModel User { get;  private set; }
         private ILoginService _loginService;
 
+        #region Ctor
         LoginWindowViewModel(Window window)
             :base(window)
         {
@@ -32,7 +33,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             this._loginService = loginService; 
             this.User = userViewModel;
         }
+        #endregion
 
+        #region methods
         public void Login(string username, string password)
         {
             if (username == null)
@@ -60,14 +63,13 @@ namespace AvenueOne.ViewModels.WindowsViewModels
                 else {
                     MessageBox.Show($"Welcome {username}");
 
-                    //show main window
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
 
-                    //close source window
                     this.Window.Close();
                 }
             }
         }
+        #endregion
     }
 }

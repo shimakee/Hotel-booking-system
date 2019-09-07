@@ -46,7 +46,6 @@
                     <KeyBinding Key="Return" Command="{Binding LoginCommand, Mode=OneWay}">
                         <KeyBinding.CommandParameter>
                             <MultiBinding Converter="{StaticResource PasswordConverter}">
-                                <Binding ElementName="LoginViewWindow"/>
                                 <Binding ElementName="Username"/>
                                 <Binding ElementName="Password"/>
                             </MultiBinding>
@@ -56,11 +55,9 @@
             </PasswordBox>
         </Grid>
 
-        <!--<Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=LoginViewWindow}">-->
         <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource PasswordConverter}">
-                    <!--<Binding ElementName="LoginViewWindow"/>-->
                     <Binding ElementName="Username"/>
                     <Binding ElementName="Password"/>
                 </MultiBinding>

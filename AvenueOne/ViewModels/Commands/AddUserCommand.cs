@@ -16,6 +16,7 @@ namespace AvenueOne.ViewModels.Commands
     public class AddUserCommand : ICommand
     {
         private IRegistrationViewModel _viewModel;
+
         public AddUserCommand(IRegistrationViewModel viewModel)
         {
             this._viewModel = viewModel;
@@ -24,13 +25,10 @@ namespace AvenueOne.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            //get user access, if admin allow, if not deny
-            if (_viewModel.UserAccount.IsAdmin)
-                return _viewModel.UserAccount.IsAdmin;
-
-            MessageBox.Show("User is not allowed, only accounts with admin access are able to execute command. ");
-            return false;
-
+            //get user access based on account
+            if (!_viewModel.UserAccount.IsAdmin)
+                MessageBox.Show("User is not allowed, only accounts with admin access are able to execute command.");
+            return _viewModel.UserAccount.IsAdmin;
         }
 
         public void Execute(object parameter)
@@ -42,21 +40,14 @@ namespace AvenueOne.ViewModels.Commands
             {
                     //get parameters
                     object[] values = (object[])parameter;
-                    Window sourceWindow = (Window)values[0];
 
-                    //CheckBox isAdminCheckBox = (CheckBox)values[1];
-                    //bool isAdmin = (bool)isAdminCheckBox.IsChecked;
-
-                    //TextBox usernameTextBox = (TextBox)values[2];
-                    //string username = usernameTextBox.Text;
-
-                    PasswordBox passwordPasswordBox = (PasswordBox)values[1];
+                    PasswordBox passwordPasswordBox = (PasswordBox)values[0];
                     string password = passwordPasswordBox.Password;
 
-                    PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[2];
+                    PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[1];
                     string passwordConfirm = passwordConfirmPasswordBox.Password;
 
-                    this._viewModel.AddUser(sourceWindow, password, passwordConfirm);
+                    this._viewModel.AddUser(password, passwordConfirm);
 
             }
             catch (Exception)

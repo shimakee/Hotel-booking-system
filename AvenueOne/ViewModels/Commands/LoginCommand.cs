@@ -14,11 +14,11 @@ namespace AvenueOne.ViewModels.Commands
 {
     public class LoginCommand : ICommand
     {
-        private ILoginViewModel _loginWindowViewModel;
+        private ILoginViewModel _viewModel;
 
         public LoginCommand(ILoginViewModel loginWindowViewModel)
         {
-            _loginWindowViewModel = loginWindowViewModel;
+            _viewModel = loginWindowViewModel;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -36,7 +36,7 @@ namespace AvenueOne.ViewModels.Commands
             {
                 //get parameters
                 object[] values = (object[])parameter;
-                
+
                 //get username
                 TextBox usernameTextBlock = (TextBox)values[0];
                 string username = usernameTextBlock.Text;
@@ -44,7 +44,7 @@ namespace AvenueOne.ViewModels.Commands
                 PasswordBox passwordBox = (PasswordBox)values[1];
                 string password = passwordBox.Password;
 
-                _loginWindowViewModel.Login(username, password);
+                _viewModel.Login(username, password);
                
             }
             catch (Exception)

@@ -39,11 +39,11 @@ namespace AvenueOne.Views.Windows
             DataContext = _registrationWindowViewModel;
         }
 
-        public RegistrationWindow(IRegistrationParentViewModel parentViewModel)
-            :this()
-        {
-            _registrationWindowViewModel.UserAdded += parentViewModel.UserAdded;
-        }
+        //public RegistrationWindow(IRegistrationParentViewModel parentViewModel)
+        //    :this()
+        //{
+        //    _registrationWindowViewModel.UserAdded += parentViewModel.UserAdded;
+        //}
 
         private void Button_Close(object sender, RoutedEventArgs e)
         {

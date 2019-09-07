@@ -39,12 +39,10 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             this.Person = personViewModel;
         }
 
-        public void AddUser(Window sourceWindow, string password, string passwordConfirm)
+        public void AddUser(string password, string passwordConfirm)
         {
             if (password == null)
                 throw new ArgumentNullException("Password cannot be null.");
-            if (sourceWindow == null)
-                throw new ArgumentNullException("SourceWindow cannot be null.");
             if (passwordConfirm == null)
                 throw new ArgumentNullException("PasswordConfirm cannot be null.");
 
@@ -56,25 +54,27 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             {
                 // add user here
                 MessageBox.Show($"Username: {User.Username} is a {Person.CivilStatus} {Person.Gender} with Fullname {Person.FullName} born on {Person.BirthDate}");
+
+                Window.Close();
             }
         }
 
-        public event EventHandler<UserEventArgs> UserAdded;
+        //public event EventHandler<UserEventArgs> UserAdded;
 
-        public  void OnUserAdded(IUser user)
-        {
-            if (UserAdded != null)
-                UserAdded(this, new UserEventArgs(user));
-        }
+        //public  void OnUserAdded(IUser user)
+        //{
+        //    if (UserAdded != null)
+        //        UserAdded(this, new UserEventArgs(user));
+        //}
     }
 
-    public class UserEventArgs : EventArgs
-    {
-        public IUser User { get; set; }
+    //public class UserEventArgs : EventArgs
+    //{
+    //    public IUser User { get; set; }
 
-        public UserEventArgs(IUser user)
-        {
-            User = user;
-        }
-    }
+    //    public UserEventArgs(IUser user)
+    //    {
+    //        User = user;
+    //    }
+    //}
 }
