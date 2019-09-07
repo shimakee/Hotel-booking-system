@@ -21,10 +21,7 @@ namespace AvenueOne.Utilities
 
         public bool Login(string username, string password)
         {
-            IUser user = GetValidatedDetails(username, password);
-
-            if (user == null)
-                return false;
+            IUser user = new User(username, password, true);
 
                 user.Password = null;
                 Settings.Default["UserAccount"] = user;
@@ -41,18 +38,18 @@ namespace AvenueOne.Utilities
             if (String.IsNullOrEmpty(password) || String.IsNullOrWhiteSpace(password))
                 throw new ArgumentNullException("The argument password cannot be null, empty, or whitespace.");
 
-            //connect to databse
+            ////connect to databse
 
-            //query details here
-            IUser userToFind = new User(username, password);
-            IUser doesExist = _unitOfWork.Users.Find(user => user.Equals(userToFind));
+            ////query details here
+            //IUser userToFind = new User(username, password);
+            //IUser doesExist = _unitOfWork.Users.Find(u => u.Equals(userToFind)).Single();
 
-            //check that password matches
-            //TODO -  just have amethod in unit of work user repository or something
-            if  (doesExist != null && password == doesExist.Password)
-                return doesExist;
+            ////check that password matches
+            ////TODO -  just have amethod in unit of work user repository or something
+            //if  (doesExist != null && password == doesExist.Password)
+            //    return doesExist;
 
-            return null;
+            return new User(username, password, true);
         }
 
         public bool IsValidLogin(string username, string password)
@@ -77,16 +74,17 @@ namespace AvenueOne.Utilities
             if (String.IsNullOrEmpty(username) || String.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException("The argument username cannot be null, empty, or whitespace.");
 
+            return true;
             //connect to databse
 
 
             //query for username
-            IUser userToFind = new User(username);
-            IUser doesExist = _unitOfWork.Users.Find(user => user.Equals(userToFind));
+            //IUser userToFind = new User(username);
+            //IUser doesExist = _unitOfWork.Users.Find(user => user.Equals(userToFind));
 
-            if (doesExist != null)
-                return true;
-            return false;
+            //if (doesExist != null)
+            //    return true;
+            //return false;
         }
     }
 }

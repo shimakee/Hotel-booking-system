@@ -2,6 +2,7 @@
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
+using AvenueOne.Persistence.Repositories;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
 using AvenueOne.ViewModels.ModelViewModel;
@@ -34,7 +35,7 @@ namespace AvenueOne.Views.Windows
             InitializeComponent();
             IUserViewModel userViewModel = new UserViewModel(new User());
             IPersonViewModel personViewModel = new PersonViewModel(new Person());
-            IUnitOfWork unitOfWork = new UnitOfWork();
+            IUnitOfWork unitOfWork = new UnitOfWork(new PlutoContext());
             _registrationWindowViewModel = new RegistrationWindowViewModel(this, unitOfWork, userViewModel, personViewModel);
             DataContext = _registrationWindowViewModel;
         }

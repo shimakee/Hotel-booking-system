@@ -17,7 +17,6 @@ namespace AvenueOne.Interfaces
 
         TEntity Get(string id);
         IEnumerable<TEntity> GetAll();
-        //IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
-        TEntity Find(Predicate<TEntity> predicate);
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
     }
 }

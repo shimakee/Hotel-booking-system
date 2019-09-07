@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces.RepositoryInterfaces;
+using AvenueOne.Persistence.Repositories;
 using AvenueOne.Utilities.Tools;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,23 @@ namespace AvenueOne.Utilities
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private readonly PlutoContext _context;
+        public IUserRepository Users { get; private set; }
 
-        //context here : TODO;
-
-        public UnitOfWork()
+        public UnitOfWork(PlutoContext context)
         {
-            Users = new UserRepository(SampleData.SingeInstance.Users);
+            _context = context;
         }
 
-        public IUserRepository Users { get; private set; }
 
         public int Complete()
         {
-            throw new NotImplementedException();
+            return _context.SaveChanges();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _context.Dispose();
         }
     }
 }

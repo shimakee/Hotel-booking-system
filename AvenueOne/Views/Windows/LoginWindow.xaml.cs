@@ -2,6 +2,7 @@
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
+using AvenueOne.Persistence.Repositories;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
 using AvenueOne.ViewModels.Commands;
@@ -31,7 +32,7 @@ namespace AvenueOne.Views
         public LoginWindow()
         {
             InitializeComponent();
-            IUnitOfWork unitOfWork= new UnitOfWork();
+            IUnitOfWork unitOfWork= new UnitOfWork(new PlutoContext());
             ILoginService loginService = new LoginService(unitOfWork);
             IUserViewModel userViewModel = new UserViewModel(new User());
             ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(this, loginService, userViewModel);
