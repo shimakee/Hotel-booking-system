@@ -104,6 +104,19 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
+        [StringLength(30, ErrorMessage = "30 chars max.")]
+        [RegularExpression(@"^([A-z ])*$", ErrorMessage = "invalid format.")]
+        public string Suffix
+        {
+            get { return _person.Suffix; }
+            set
+            {
+                _person.Suffix = value;
+                OnPropertyChanged();
+                OnPropertyChanged("FullName");
+            }
+        }
+
         //Person.CivilStatus != CivilStatusType.Single && Person.Gender == GenderType.Female; 
         [RequiredIf("IsNotMaiden", ErrorMessage ="requireds.")]
         [StringLength(30, ErrorMessage = "30 chars max.")]

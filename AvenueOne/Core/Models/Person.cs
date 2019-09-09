@@ -15,6 +15,7 @@ namespace AvenueOne.Models
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string MaidenName { get; set; }
+        public string Suffix { get; set; }
         public GenderType Gender { get; set; }
         public CivilStatusType CivilStatus { get; set; }
         public string Nationality { get; set; }
@@ -43,6 +44,9 @@ namespace AvenueOne.Models
                 if (HasContent(LastName))
                     fullname.Append($" {LastName}");
 
+                if (HasContent(Suffix))
+                    fullname.Append($" {Suffix}");
+
                 return fullname.ToString();
             }
             set
@@ -59,6 +63,9 @@ namespace AvenueOne.Models
 
                 if (HasContent(LastName))
                     fullname.Append($" {LastName}");
+
+                if (HasContent(Suffix))
+                    fullname.Append($" {Suffix}");
 
                 //assign
                 if (FullName != value)

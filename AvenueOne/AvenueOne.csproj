@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201909090449288_IsUniqueForFullnameAndUsername.Designer.cs">
       <DependentUpon>201909090449288_IsUniqueForFullnameAndUsername.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909090840518_AddedSuffixToPersonModel.cs" />
+    <Compile Include="Migrations\201909090840518_AddedSuffixToPersonModel.Designer.cs">
+      <DependentUpon>201909090840518_AddedSuffixToPersonModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />
@@ -185,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909090449288_IsUniqueForFullnameAndUsername.resx">
       <DependentUpon>201909090449288_IsUniqueForFullnameAndUsername.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909090840518_AddedSuffixToPersonModel.resx">
+      <DependentUpon>201909090840518_AddedSuffixToPersonModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

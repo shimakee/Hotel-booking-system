@@ -27,6 +27,7 @@ namespace AvenueOne.Interfaces
         string FirstName { get; set; }
         string MiddleName { get; set; }
         string LastName { get; set; }
+        string Suffix { get; set; }
         string MaidenName { get; set; }
         GenderType Gender { get; set; }
         CivilStatusType CivilStatus { get; set; }

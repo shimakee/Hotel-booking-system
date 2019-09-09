@@ -114,6 +114,18 @@
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Suffix:" Grid.Column="0"/>
+                    <TextBox x:Name="Suffix" Grid.Column="1" HorizontalAlignment="Stretch"
+                             Text="{Binding Person.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                </Grid>
+
                 <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding Person.GenderValues}" 
                           SelectedValue="{Binding Person.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
