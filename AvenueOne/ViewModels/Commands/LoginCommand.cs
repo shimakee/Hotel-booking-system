@@ -1,4 +1,7 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Interfaces.ViewModelInterfaces;
+using AvenueOne.Models;
+using AvenueOne.Properties;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
@@ -14,11 +17,16 @@ namespace AvenueOne.ViewModels.Commands
 {
     public class LoginCommand : ICommand
     {
-        private ILoginViewModel _viewModel;
+        public ILoginViewModel ViewModel { get; set; }
+        public IUserViewModel User { get; set; }
+        private ILoginService _loginService;
 
-        public LoginCommand(ILoginViewModel loginWindowViewModel)
+        //public LoginCommand(ILoginViewModel loginWindowViewModel)
+        public LoginCommand(ILoginService loginService)
         {
-            _viewModel = loginWindowViewModel;
+            //_viewModel = loginWindowViewModel;
+            //_user = user;
+            _loginService = loginService;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -44,7 +52,38 @@ namespace AvenueOne.ViewModels.Commands
                 PasswordBox passwordBox = (PasswordBox)values[1];
                 string password = passwordBox.Password;
 
-                _viewModel.Login(username, password);
+                //_viewModel.Login(username, password);
+                if (User == null)
+                    throw new NullReferenceException("User cannot be null");
+
+                User.Username = username;
+                User.Password = password;
+
+                if(!User.IsValidProperty("Password") || !User.IsValidProperty("Username"))
+                {
+                    MessageBox.Show("Invalid input.");
+                }
+                else
+                {
+                    bool isValidLogin = _loginService.Login(User);
+
+                    if (!isValidLogin)
+                    {
+                        MessageBox.Show("Invalid Login.");
+                    }
+                    else
+                    {
+                        User user = Settings.Default["UserAccount"] as User;
+                        MessageBox.Show($"Welcome {user.Username} {user.Person.FullName}.");
+
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
+
+                        if(ViewModel != null)
+                            ViewModel.Window.Close();
+                    }
+                }
+
             }
             catch (Exception)
             {

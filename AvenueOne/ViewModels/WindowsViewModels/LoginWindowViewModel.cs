@@ -18,55 +18,23 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     {
         public ICommand LoginCommand { get; private set; }
         public IUserViewModel User { get;  private set; }
-        private ILoginService _loginService;
 
         #region Ctor
         LoginWindowViewModel(Window window)
             :base(window)
         {
-            LoginCommand = new LoginCommand(this); //how to decouple? - also pass as depndency injection?
+            //LoginCommand = new LoginCommand(this); //how to decouple? - also pass as depndency injection?
         }
 
-        public LoginWindowViewModel(Window loginWindow, ILoginService loginService, IUserViewModel userViewModel)
+        //public LoginWindowViewModel(Window loginWindow, ILoginService loginService, IUserViewModel userViewModel)
+        public LoginWindowViewModel(Window loginWindow, LoginCommand loginCommand, IUserViewModel userViewModel)
             : this(loginWindow)
         {
-            this._loginService = loginService;
+            //this._loginService = loginService;
             this.User = userViewModel;
-        }
-        #endregion
-
-        #region methods
-        public void Login(string username, string password)
-        {
-            if (username == null || password == null)
-                throw new ArgumentNullException("Username or password cannot be null.");
-
-            User.Username = username;
-            User.Password = password;
-
-            bool isValidInput = User.IsValidProperty("Username") && User.IsValidProperty("Password");
-
-            if (!isValidInput)
-            {
-                MessageBox.Show("Invalid Input on username or password.");
-            }
-            else {
-                bool isValidLogin = _loginService.Login(username, password);
-
-                if (!isValidLogin)
-                {
-                    MessageBox.Show("Account does not exist.");
-                }
-                else {
-                    User user = Settings.Default["UserAccount"] as User;
-                    MessageBox.Show($"Welcome {user.Username} {user.Person.FullName}.");
-
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
-
-                    this.Window.Close();
-                }
-            }
+            this.LoginCommand = loginCommand;
+            loginCommand.ViewModel = this;
+            loginCommand.User = User;
         }
         #endregion
     }

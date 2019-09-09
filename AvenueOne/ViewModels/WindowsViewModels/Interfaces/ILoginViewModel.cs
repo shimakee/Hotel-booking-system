@@ -11,6 +11,6 @@ namespace AvenueOne.Interfaces
     public interface ILoginViewModel : IWindowViewModel
     {
         IUserViewModel User { get; }
-        void Login(string username, string password);
+        //void Login(string username, string password);
     }
 }

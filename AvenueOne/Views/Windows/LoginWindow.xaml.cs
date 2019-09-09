@@ -35,7 +35,7 @@ namespace AvenueOne.Views
             IUnitOfWork unitOfWork= new UnitOfWork(new PlutoContext());
             ILoginService loginService = new LoginService(unitOfWork);
             IUserViewModel userViewModel = new UserViewModel(new User());
-            ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(this, loginService, userViewModel);
+            ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(this, new LoginCommand(loginService), userViewModel);
             DataContext = loginWindowViewModel;
         }
 

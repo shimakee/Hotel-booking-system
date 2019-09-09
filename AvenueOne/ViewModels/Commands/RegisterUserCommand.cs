@@ -23,8 +23,8 @@ namespace AvenueOne.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            if (!_viewModel.UserAccount.IsAdmin)
-                MessageBox.Show("User is not allowed, only accounts with admin access are able to execute command.");
+            //if (!_viewModel.UserAccount.IsAdmin)
+            //    MessageBox.Show("Info: User is not an admin, not allowed to create account;");
             return _viewModel.UserAccount.IsAdmin;
         }
 
