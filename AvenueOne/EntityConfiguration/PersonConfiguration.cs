@@ -1,6 +1,8 @@
 ﻿using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -18,10 +20,27 @@ namespace AvenueOne.EntityConfiguration
             HasKey(p => p.Id);
 
             //property
+            int nameLength = 100;
             Property(p => p.FirstName)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(nameLength);
+
             Property(p => p.LastName)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(nameLength);
+
+            Property(p=> p.FullName)
+                .IsRequired()
+                .HasMaxLength(nameLength)
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName, 
+                                                                                                new IndexAnnotation(new IndexAttribute("FullName") { IsUnique = true }));
+
+            Property(p => p.MaidenName)
+                .HasMaxLength(nameLength);
+
+            Property(p => p.MiddleName)
+                .HasMaxLength(nameLength);
+
             //relatioships
             HasRequired(p => p.User)
                 .WithRequiredDependent(u => u.Person);

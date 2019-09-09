@@ -9,7 +9,17 @@
   &lt;Username&gt;Shimakee&lt;/Username&gt;
   &lt;Password&gt;Shimakee&lt;/Password&gt;
   &lt;IsAdmin&gt;false&lt;/IsAdmin&gt;
+  &lt;Person&gt;
+    &lt;Id&gt;0be814c0a2664d12aac33996f6be56ff&lt;/Id&gt;
+    &lt;Gender&gt;Male&lt;/Gender&gt;
+    &lt;CivilStatus&gt;Single&lt;/CivilStatus&gt;
+    &lt;BirthDate xsi:nil="true" /&gt;
+    &lt;FullName /&gt;
+  &lt;/Person&gt;
 &lt;/User&gt;</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

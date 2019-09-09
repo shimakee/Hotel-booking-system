@@ -22,6 +22,12 @@ namespace AvenueOne.Migrations
             User user2 = new User("dinah", "dinah", false);
             user.Person = person;
             user2.Person = person2;
+
+            //clean database
+            context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
+            context.Database.ExecuteSqlCommand("DELETE FROM USERS");
+
+            //insert
             context.Users.AddRange(new List<User>() { user, user2 });
 
             //  This method will be called after migrating to the latest version.

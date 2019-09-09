@@ -58,7 +58,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
                     MessageBox.Show("Account does not exist.");
                 }
                 else {
-                    MessageBox.Show($"Welcome {username}");
+                    User user = Settings.Default["UserAccount"] as User;
+                    MessageBox.Show($"Welcome {user.Username} {user.Person.FullName}.");
 
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();

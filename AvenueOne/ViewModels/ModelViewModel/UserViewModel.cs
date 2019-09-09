@@ -13,7 +13,7 @@ using AvenueOne.Interfaces.ViewModelInterfaces;
 
 namespace AvenueOne.ViewModels.ModelViewModel
 {
-    public class UserViewModel : ModelViewModel, IUserViewModel
+    public class UserViewModel : ModelViewModel, IUserViewModel //TODO: Add Person property - also in settings
     {
         private IUser _user;
         private string _passwordConfirm;

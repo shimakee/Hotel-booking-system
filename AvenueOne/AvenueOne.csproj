@@ -72,6 +72,14 @@
     <Compile Include="Migrations\201909070930092_InitialModel.Designer.cs">
       <DependentUpon>201909070930092_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909090431374_CleanState.cs" />
+    <Compile Include="Migrations\201909090431374_CleanState.Designer.cs">
+      <DependentUpon>201909090431374_CleanState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909090449288_IsUniqueForFullnameAndUsername.cs" />
+    <Compile Include="Migrations\201909090449288_IsUniqueForFullnameAndUsername.Designer.cs">
+      <DependentUpon>201909090449288_IsUniqueForFullnameAndUsername.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />
@@ -171,6 +179,12 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201909070930092_InitialModel.resx">
       <DependentUpon>201909070930092_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909090431374_CleanState.resx">
+      <DependentUpon>201909090431374_CleanState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909090449288_IsUniqueForFullnameAndUsername.resx">
+      <DependentUpon>201909090449288_IsUniqueForFullnameAndUsername.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

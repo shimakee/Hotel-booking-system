@@ -14,9 +14,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace AvenueOne.ViewModels.ModelViewModel
+namespace AvenueOne.ViewModels.ModelViewModel 
 {
-    public class PersonViewModel : ModelViewModel, IPersonViewModel
+    public class PersonViewModel : ModelViewModel, IPersonViewModel //TODO : ADd User property; - also in settings
     {
         private IPerson _person;
         public byte[] GenderValues { get { return (byte[])Enum.GetValues(typeof(GenderType)); } }
