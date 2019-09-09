@@ -42,8 +42,8 @@ namespace AvenueOne.EntityConfiguration
                 .HasMaxLength(nameLength);
 
             //relatioships
-            HasRequired(p => p.User)
-                .WithRequiredDependent(u => u.Person);
+            HasOptional(p => p.User)
+            .WithOptionalPrincipal(u => u.Person);
         }
     }
 }
