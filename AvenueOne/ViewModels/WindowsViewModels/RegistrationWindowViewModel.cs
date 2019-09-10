@@ -41,19 +41,29 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 
         public void AddUser(string password, string passwordConfirm)
         {
-            if (password == null)
-                throw new ArgumentNullException("Password cannot be null.");
-            if (passwordConfirm == null)
-                throw new ArgumentNullException("PasswordConfirm cannot be null.");
+            if (password == null || passwordConfirm == null)
+                throw new ArgumentNullException("Password and PasswordConfirm cannot be null.");
 
-            if (!Person.IsValid)
+            User.Password = password;
+            User.PasswordConfirm = passwordConfirm;
+
+            if (!Person.IsValid || !User.IsValid || !User.IsValidProperty("Password") || !User.IsValidProperty("PasswordConfirm"))
             {
-                MessageBox.Show("Invalid Please try again.");
+                MessageBox.Show("Invalid entry please try again.");
             }
             else
             {
+                User user = User.User as User;
+                Person person = Person.Person as Person;
+                user.Person = person;
+                _unitOfWork.Users.Add(user);
+                int n = _unitOfWork.Complete();
+
                 // add user here
-                MessageBox.Show($"Username: {User.Username} is a {Person.CivilStatus} {Person.Gender} with Fullname {Person.FullName} born on {Person.BirthDate}");
+                MessageBox.Show($"Added {n} Account with Username: {user.Username} belonging to {person.FullName}.",
+                                                "User added.", 
+                                                MessageBoxButton.OK, 
+                                                MessageBoxImage.Information);
 
                 Window.Close();
             }

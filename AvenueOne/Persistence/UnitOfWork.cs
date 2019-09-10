@@ -1,4 +1,5 @@
-﻿using AvenueOne.Interfaces.RepositoryInterfaces;
+﻿using AvenueOne.Core.IRepositories;
+using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Utilities.Tools;
 using System;
@@ -13,11 +14,13 @@ namespace AvenueOne.Utilities
     {
         private readonly PlutoContext _context;
         public IUserRepository Users { get; private set; }
+        public IPersonRepository People { get; private set; }
 
         public UnitOfWork(PlutoContext context)
         {
             _context = context;
             Users = new UserRepository(_context);
+            People = new PersonRepository(_context);
         }
 
 

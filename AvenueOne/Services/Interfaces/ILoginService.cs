@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvenueOne.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace AvenueOne.Interfaces
 {
     public interface ILoginService
     {
-        IUser Login(string username, string password);
-        IUser Login(IUser user);
+        User Login(string username, string password);
+        User Login(IUser user);
         bool IsValidLogin(string username, string password);
     }
 }

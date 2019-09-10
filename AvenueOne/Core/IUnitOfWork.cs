@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvenueOne.Core.IRepositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace AvenueOne.Interfaces.RepositoryInterfaces
     public interface IUnitOfWork : IDisposable
     {
         IUserRepository Users { get; }
+        IPersonRepository People { get; }
         int Complete();
     }
 }

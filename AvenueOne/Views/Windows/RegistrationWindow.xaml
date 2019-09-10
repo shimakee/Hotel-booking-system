@@ -12,7 +12,7 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         AllowsTransparency="True"
-        Title="RegistrationWindow" Height="250" Width="800">
+        Title="RegistrationWindow" Height="350" Width="800">
 
     <Window.Resources>
         <converters:PasswordConverter x:Key="PasswordConverter"/>
@@ -134,8 +134,8 @@
                           SelectedValue="{Binding Person.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-                <!--<Grid IsEnabled="{Binding Person.IsNotMaiden}" Visibility="{Binding Person.IsNotMaiden, Converter={StaticResource BooleanVisibilityConverter}}">-->
-                    <Grid>
+                <Grid IsEnabled="{Binding Person.IsNotMaiden}" Visibility="{Binding Person.IsNotMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                    <!--<Grid>-->
                         <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="94*"/>
                         <ColumnDefinition Width="173*"/>

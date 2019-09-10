@@ -33,11 +33,11 @@ namespace AvenueOne.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter == null)
-            throw new NullReferenceException("The object to add cannot be null. Need source window, is admin, username, password, and password confirm as argument.");
-
             try
             {
+                if (parameter == null)
+                throw new NullReferenceException("The object to add cannot be null. Need source window, is admin, username, password, and password confirm as argument.");
+
                     //get parameters
                     object[] values = (object[])parameter;
 
@@ -50,9 +50,11 @@ namespace AvenueOne.ViewModels.Commands
                     this._viewModel.AddUser(password, passwordConfirm);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                //throw;
+                //logg
+                MessageBox.Show(ex.Message, "Something went wrong",MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

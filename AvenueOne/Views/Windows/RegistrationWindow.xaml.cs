@@ -28,15 +28,16 @@ namespace AvenueOne.Views.Windows
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        public IRegistrationViewModel _registrationWindowViewModel {get; private set;}
+        private PlutoContext PlutoContext = new PlutoContext();
+        //public IRegistrationViewModel _registrationWindowViewModel {get; private set;}
 
         public RegistrationWindow()
         {
             InitializeComponent();
             IUserViewModel userViewModel = new UserViewModel(new User());
             IPersonViewModel personViewModel = new PersonViewModel(new Person());
-            IUnitOfWork unitOfWork = new UnitOfWork(new PlutoContext());
-            _registrationWindowViewModel = new RegistrationWindowViewModel(this, unitOfWork, userViewModel, personViewModel);
+            IUnitOfWork unitOfWork = new UnitOfWork(PlutoContext);
+            IRegistrationViewModel _registrationWindowViewModel = new RegistrationWindowViewModel(this, unitOfWork, userViewModel, personViewModel);
             DataContext = _registrationWindowViewModel;
         }
 
@@ -51,9 +52,11 @@ namespace AvenueOne.Views.Windows
             this.Close();
         }
 
-        public void CloseWindow()
+        protected override void OnClosed(EventArgs e)
         {
-            this.Close();
+            base.OnClosed(e);
+
+            PlutoContext.Dispose();
         }
     }
 }

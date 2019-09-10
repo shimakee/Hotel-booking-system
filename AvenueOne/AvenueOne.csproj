@@ -65,6 +65,7 @@
     <Compile Include="Converters\BooleanVisibilityConverter.cs" />
     <Compile Include="Converters\PasswordConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
+    <Compile Include="Core\IRepositories\IPersonRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
     <Compile Include="EntityConfiguration\UserConfiguration.cs" />
@@ -89,6 +90,7 @@
       <DependentUpon>201909090930346_PersonUserRelationshipOptional.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistence\Repositories\PersonRepository.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
     <Compile Include="Services\WpfDisplayService.cs" />
     <Compile Include="Services\Interfaces\IDisplayService.cs" />

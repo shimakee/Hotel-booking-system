@@ -10,7 +10,7 @@ namespace AvenueOne.Interfaces.RepositoryInterfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        PlutoContext PlutoContext { get; }
+        //PlutoContext PlutoContext { get; }
         //IEnumerable<User> GetTopUsers(int count);
         //IEnumerable<User> GetUsersWithPerson(int pageIndex, int pageSize);
     }

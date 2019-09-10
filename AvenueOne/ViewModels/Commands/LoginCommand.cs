@@ -68,7 +68,7 @@ namespace AvenueOne.ViewModels.Commands
                 }
                 else
                 {
-                    IUser userLogin = _loginService.Login(User);
+                    User userLogin = _loginService.Login(User);
 
                     if (userLogin == null)
                     {
@@ -78,9 +78,10 @@ namespace AvenueOne.ViewModels.Commands
                     {
 
                         userLogin.Password = null;
-                        Settings.Default["UserAccount"] = userLogin;
+                        Settings.Default.UserAccount = userLogin;
+                        Settings.Default.UserProfile = userLogin.Person;
                         Settings.Default.Save();
-                        _displayService.DisplayMessage($"Welcome {userLogin.Username}.");
+                        _displayService.DisplayMessage($"Welcome {userLogin.Person.FullName} using account {userLogin.Username}.");
 
                         Window mainWindow = _displayService.CreateMainWindow();
                         mainWindow.Show();

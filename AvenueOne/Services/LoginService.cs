@@ -19,19 +19,19 @@ namespace AvenueOne.Utilities
             _unitOfWork = unitOfWork;
         }
 
-        public IUser Login(IUser user)
+        public User Login(IUser user)
         {
             if (user == null)
                 throw new ArgumentNullException("User object cannot be null.");
 
             return Login(user.Username, user.Password);
         }
-        public IUser Login(string username, string password)
+        public User Login(string username, string password)
         {
             if (String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(password))
                 throw new ArgumentNullException("The argument username and password cannot be null, empty, or whitespace.");
 
-            IUser user = _unitOfWork.Users.Find(u => u.Username == username).FirstOrDefault<IUser>();
+            User user = _unitOfWork.Users.Find(u => u.Username == username).FirstOrDefault<User>();
 
             ////check that password matches
             if (user == null)
