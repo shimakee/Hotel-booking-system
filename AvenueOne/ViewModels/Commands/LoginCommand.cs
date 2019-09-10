@@ -2,6 +2,7 @@
 using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Properties;
+using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
@@ -20,13 +21,15 @@ namespace AvenueOne.ViewModels.Commands
         public ILoginViewModel ViewModel { get; set; }
         public IUserViewModel User { get; set; }
         private ILoginService _loginService;
+        private IDisplayService _displayService;
 
         //public LoginCommand(ILoginViewModel loginWindowViewModel)
-        public LoginCommand(ILoginService loginService)
+        public LoginCommand(ILoginService loginService, IDisplayService displayService)
         {
             //_viewModel = loginWindowViewModel;
             //_user = user;
             _loginService = loginService;
+            _displayService = displayService;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -61,22 +64,26 @@ namespace AvenueOne.ViewModels.Commands
 
                 if(!User.IsValidProperty("Password") || !User.IsValidProperty("Username"))
                 {
-                    MessageBox.Show("Invalid input.");
+                    _displayService.DisplayMessage("Invalid input");
                 }
                 else
                 {
-                    bool isValidLogin = _loginService.Login(User);
+                    IUser userLogin = _loginService.Login(User);
 
-                    if (!isValidLogin)
+                    if (userLogin == null)
                     {
-                        MessageBox.Show("Invalid Login.");
+                        _displayService.DisplayMessage("Invalid Login");
                     }
                     else
                     {
-                        User user = Settings.Default["UserAccount"] as User;
-                        MessageBox.Show($"Welcome {user.Username} {user.Person.FullName}.");
 
-                        MainWindow mainWindow = new MainWindow();
+                        userLogin.Password = null;
+                        Settings.Default["UserAccount"] = userLogin;
+                        Settings.Default.Save();
+                        //IPerson person = Settings.Default.UserProfile as IPerson;
+                        _displayService.DisplayMessage($"Welcome {userLogin.Username}.");
+
+                        Window mainWindow = _displayService.CreateMainWindow();
                         mainWindow.Show();
 
                         if(ViewModel != null)

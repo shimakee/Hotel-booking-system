@@ -1,7 +1,10 @@
-﻿using AvenueOne.Views;
+﻿using AvenueOne.Persistence.Repositories;
+using AvenueOne.Utilities;
+using AvenueOne.Views;
 using AvenueOne.Views.Pages;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +25,12 @@ namespace AvenueOne
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PlutoContext _plutoContext = new PlutoContext();
+
         AdminPage adminPage = new AdminPage();
         BookingPage bookingPage = new BookingPage();
         SettingsPage settingsPage = new SettingsPage();
+
 
         public MainWindow()
         {
@@ -52,6 +58,17 @@ namespace AvenueOne
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            _plutoContext.Dispose();
         }
     }
 }

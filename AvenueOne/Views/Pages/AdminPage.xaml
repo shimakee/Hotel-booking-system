@@ -196,7 +196,8 @@
                 </GroupBox>
 
                 <GroupBox Header="User list" Grid.Row="1">
-                    <DataGrid  ItemsSource="{Binding UsersList}" SelectedItem="{Binding User}"
+                    <DataGrid  Grid.Column="1"
+                            ItemsSource="{Binding User.UsersList}" SelectedItem="{Binding User}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                         <!--<DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
@@ -205,8 +206,15 @@
                         </DataGrid.Columns>-->
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>
+                            <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>-->
                             <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
+                            <DataGridTextColumn Header="Full name" Binding="{Binding Person.FullName}" Width="4*"/>
+                            <DataGridTextColumn Header="Gender" Binding="{Binding Person.Gender}" Width="*"/>
+                            <DataGridTextColumn>
+                                <DataGridTextColumn.Header>
+                                    <Button Content="Refresh" Command="{Binding GetUsersFromDbCommand}"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>

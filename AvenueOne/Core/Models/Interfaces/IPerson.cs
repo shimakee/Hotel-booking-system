@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AvenueOne.Models;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,7 @@ namespace AvenueOne.Interfaces
         Divorced
     }
 
+
     public interface IPerson
     {
         string Id { get; set; }
@@ -35,5 +38,6 @@ namespace AvenueOne.Interfaces
         DateTime? BirthDate { get; set; }
 
         string FullName { get; set; }
+
     }
 }

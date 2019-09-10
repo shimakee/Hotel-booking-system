@@ -1,7 +1,10 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
+using AvenueOne.Models;
+using AvenueOne.Persistence.Repositories;
 using AvenueOne.Properties;
+using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.WindowsViewModels;
@@ -21,16 +24,21 @@ namespace AvenueOne.ViewModels.PagesViewModels
 {
     public class AdminPageViewModel : WindowViewModel
     {
-        public ObservableCollection<IUser> UsersList { get; private set; }
+        //private IEnumerable<IUser> _usersList;
+        //public ObservableCollection<IUser> UsersList { get; set; }
         public IPersonViewModel Person { get;  set; }
         public IUserViewModel User { get; set; }
         public ICommand RegisterUserCommand { get; private set; }
+        //public ICommand GetUsersFromDbCommand { get; private set; }
 
         AdminPageViewModel(Window window)
             :base(window)
         {
             RegisterUserCommand = new RegisterUserCommand(this);
-            UsersList = new ObservableCollection<IUser>(SampleData.SingeInstance.Users);
+            //GetUsersFromDbCommand = new GetUsersFromDbCommand(this, new UnitOfWork(new PlutoContext()));
+            //_usersList = new UnitOfWork(new PlutoContext()).Users.GetAll();
+            //UsersList = new ObservableCollection<IUser>(_usersList);
+
         }
 
         public AdminPageViewModel(Window window, IUserViewModel userViewModel, IPersonViewModel personViewModel)
@@ -38,7 +46,9 @@ namespace AvenueOne.ViewModels.PagesViewModels
         {
             User = userViewModel;
             Person = personViewModel;
-            //RegistrationViewModel = registrationViewModel;
+            //GetUsersFromDbCommand = getUsersFromDbCommand;
         }
+
+
     }
 }

@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 
 namespace AvenueOne.Models
 {
+    //[SettingsSerializeAs(SettingsSerializeAs.Xml)]
     public class Person : IPerson
     {
         public string Id { get; set; }
@@ -21,6 +23,9 @@ namespace AvenueOne.Models
         public string Nationality { get; set; }
         public DateTime? BirthDate { get; set; }
         public virtual User User { get; set; }
+
+        //for XML
+        //<Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><MaidenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStatus><Nationality></Nationality><BirthDate></BirthDate>
 
         public Person()
         {

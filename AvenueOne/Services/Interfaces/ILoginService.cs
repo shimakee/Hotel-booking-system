@@ -8,9 +8,8 @@ namespace AvenueOne.Interfaces
 {
     public interface ILoginService
     {
-        bool Login(string username, string password);
-        bool Login(IUser user);
-        IUser GetValidatedDetails(string username, string password);
+        IUser Login(string username, string password);
+        IUser Login(IUser user);
         bool IsValidLogin(string username, string password);
     }
 }

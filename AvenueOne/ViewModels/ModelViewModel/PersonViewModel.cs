@@ -50,6 +50,16 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
+        //public IUser User
+        //{
+        //    get { return _person.User; }
+        //    set
+        //    {
+        //        _person.User = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
         public string Id
         {
             get { return _person.Id; }

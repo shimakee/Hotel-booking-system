@@ -22,6 +22,10 @@ namespace AvenueOne.Models
         //reference
         public virtual Person Person { get; set; }
 
+        //For Xml
+        //<User><Id></Id><Username></Username><Password></Password><IsAdmin></IsAdmin><Person></Person></User>
+        //<User><Id></Id><Username></Username><Password></Password><IsAdmin></IsAdmin><Person><Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><MaidenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStatus><Nationality></Nationality><BirthDate></BirthDate></Person></User>
+
         public User()
         {
             this.IsAdmin = false;

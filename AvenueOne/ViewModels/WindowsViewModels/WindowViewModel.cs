@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Models;
 using AvenueOne.Properties;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 
         public WindowViewModel(Window window)
         {
-            this.UserAccount = Settings.Default["UserAccount"] as IUser;
+            this.UserAccount = Settings.Default.UserAccount as IUser;
             this.Window = window;
         }
     }

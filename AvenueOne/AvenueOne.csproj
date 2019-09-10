@@ -90,8 +90,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
+    <Compile Include="Services\WpfDisplayService.cs" />
+    <Compile Include="Services\Interfaces\IDisplayService.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />
     <Compile Include="Core\IRepositories\IRepository.cs" />
+    <Compile Include="Services\Interfaces\IWindowGenerator.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ILoginViewModel.cs" />

@@ -10,17 +10,20 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using AvenueOne.Interfaces.ViewModelInterfaces;
+using System.Collections.ObjectModel;
 
 namespace AvenueOne.ViewModels.ModelViewModel
 {
     public class UserViewModel : ModelViewModel, IUserViewModel //TODO: Add Person property - also in settings
     {
         private IUser _user;
+        public ObservableCollection<IUser> UsersList;
         private string _passwordConfirm;
 
         public UserViewModel(IUser user)
         {
             _user = user;
+            UsersList = new ObservableCollection<IUser>();
         }
 
         public IUser User
@@ -37,6 +40,16 @@ namespace AvenueOne.ViewModels.ModelViewModel
 
             }
         }
+
+        //public IPerson Person
+        //{
+        //    get { return _user.Person; }
+        //    set
+        //    {
+        //        _user.Person = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         
         //public string PersonId
         //{
