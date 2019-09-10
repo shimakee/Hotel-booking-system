@@ -18,8 +18,8 @@
   &lt;/Person&gt;
 &lt;/User&gt;</Value>
     </Setting>
-    <Setting Name="Setting" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="UserProfile" Type="AvenueOne.Models.Person" Scope="User">
+      <Value Profile="(Default)">&lt;Id&gt;&lt;/Id&gt;&lt;FirstName&gt;&lt;/FirstName&gt;&lt;MiddleName&gt;&lt;/MiddleName&gt;&lt;LastName&gt;&lt;/LastName&gt;&lt;MaidenName&gt;&lt;/MaidenName&gt;&lt;Suffix&gt;&lt;/Suffix&gt;&lt;Gender&gt;&lt;/Gender&gt;&lt;CivilStatus&gt;&lt;/CivilStatus&gt;&lt;Nationality&gt;&lt;/Nationality&gt;&lt;BirthDate&gt;&lt;/BirthDate&gt;&lt;FullName&gt;&lt;/FullName&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

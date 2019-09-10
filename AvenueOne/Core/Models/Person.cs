@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace AvenueOne.Models
 {
-    //[SettingsSerializeAs(SettingsSerializeAs.Xml)]
+    [SettingsSerializeAs(SettingsSerializeAs.Xml)]
     public class Person : IPerson
     {
         public string Id { get; set; }

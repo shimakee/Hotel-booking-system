@@ -50,13 +50,15 @@ namespace AvenueOne.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
+        [global::System.Configuration.DefaultSettingValueAttribute("<Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><Ma" +
+            "idenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStat" +
+            "us><Nationality></Nationality><BirthDate></BirthDate><FullName></FullName>")]
+        public global::AvenueOne.Models.Person UserProfile {
             get {
-                return ((string)(this["Setting"]));
+                return ((global::AvenueOne.Models.Person)(this["UserProfile"]));
             }
             set {
-                this["Setting"] = value;
+                this["UserProfile"] = value;
             }
         }
     }

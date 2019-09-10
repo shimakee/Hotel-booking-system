@@ -80,7 +80,6 @@ namespace AvenueOne.ViewModels.Commands
                         userLogin.Password = null;
                         Settings.Default["UserAccount"] = userLogin;
                         Settings.Default.Save();
-                        //IPerson person = Settings.Default.UserProfile as IPerson;
                         _displayService.DisplayMessage($"Welcome {userLogin.Username}.");
 
                         Window mainWindow = _displayService.CreateMainWindow();
