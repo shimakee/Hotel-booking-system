@@ -12,7 +12,6 @@ namespace AvenueOne.Interfaces
 {
     public interface IRegistrationViewModel : IWindowViewModel
     {
-        Task AddUser(string password, string passwordConfirm);
         IUserViewModel User { get; }
         IPersonViewModel Person { get;  }
         //event EventHandler<UserEventArgs> UserAdded;

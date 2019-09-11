@@ -64,7 +64,7 @@ namespace AvenueOne.ViewModels.Commands
 
                 if(!User.IsValidProperty("Password") || !User.IsValidProperty("Username"))
                 {
-                    _displayService.DisplayMessage("Invalid input");
+                    _displayService.MessageDisplay("Invalid input");
                 }
                 else
                 {
@@ -72,7 +72,7 @@ namespace AvenueOne.ViewModels.Commands
 
                     if (userLogin == null)
                     {
-                        _displayService.DisplayMessage("Invalid Login");
+                        _displayService.MessageDisplay("Invalid Login");
                     }
                     else
                     {
@@ -81,7 +81,7 @@ namespace AvenueOne.ViewModels.Commands
                         Settings.Default.UserAccount = userLogin;
                         Settings.Default.UserProfile = userLogin.Person;
                         Settings.Default.Save();
-                        _displayService.DisplayMessage($"Welcome {userLogin.Person.FullName} using account {userLogin.Username}.");
+                        _displayService.MessageDisplay($"Welcome {userLogin.Person.FullName} using account {userLogin.Username}.");
 
                         Window mainWindow = _displayService.CreateMainWindow();
                         mainWindow.Show();

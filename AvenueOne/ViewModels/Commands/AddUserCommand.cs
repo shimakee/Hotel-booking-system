@@ -1,6 +1,9 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Interfaces.RepositoryInterfaces;
+using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Properties;
+using AvenueOne.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,23 +18,28 @@ namespace AvenueOne.ViewModels.Commands
 {
     public class AddUserCommand : ICommand
     {
-        private IRegistrationViewModel _viewModel;
+        private IDisplayService _displayService;
+        private IUnitOfWork _unitOfWork;
+        public IRegistrationViewModel ViewModel;
+        public IUserViewModel User { get; set; }
+        public IPersonViewModel Person { get; set; }
 
-        public AddUserCommand(IRegistrationViewModel viewModel)
+        public AddUserCommand(IDisplayService displayService, IUnitOfWork unitOfWork)
         {
-            this._viewModel = viewModel;
+            this._displayService = displayService;
+            this._unitOfWork = unitOfWork;
         }
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
             //get user access based on account
-            if (!_viewModel.UserAccount.IsAdmin)
-                MessageBox.Show("User is not allowed, only accounts with admin access are able to execute command.");
-            return _viewModel.UserAccount.IsAdmin;
+            if (!ViewModel.UserAccount.IsAdmin)
+                _displayService.ErrorDisplay("User is not allowed, only accounts with admin access are able to execute command.", "Access information");
+            return ViewModel.UserAccount.IsAdmin;
         }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
             try
             {
@@ -47,14 +55,69 @@ namespace AvenueOne.ViewModels.Commands
                     PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[1];
                     string passwordConfirm = passwordConfirmPasswordBox.Password;
 
-                    this._viewModel.AddUser(password, passwordConfirm);
+                //this._viewModel.AddUser(password, passwordConfirm);
+
+                if (password == null || passwordConfirm == null)
+                    throw new ArgumentNullException("Password and PasswordConfirm cannot be null.");
+                if (User == null || Person == null)
+                    throw new ArgumentNullException("User and person view model cannot be null, must assign valid view model to the properties.");
+
+                User.Password = password;
+                User.PasswordConfirm = passwordConfirm;
+
+                //int n = await Task.Run(() =>AddUserAsync(User, Person));
+                int n = await AddUser(User, Person);
+
+                if (n != 0)
+                {
+                    _displayService.MessageDisplay($"Added accoun:\n\nUsername: {User.Username}\nName:{Person.FullName}\n\nAffected rows:{n}.",
+                                                    "Account added.");
+                }
+                else
+                {
+                    _displayService.MessageDisplay($"Info: Could not add {User.Username} belongin to {Person.FullName}.",
+                                                    "Error on insert.");
+                }
+
+                if (ViewModel != null)
+                    ViewModel.Window.Close();
 
             }
             catch (Exception ex)
             {
                 //throw;
                 //logg
-                MessageBox.Show(ex.Message, "Something went wrong",MessageBoxButton.OK, MessageBoxImage.Warning);
+                _displayService.ErrorDisplay(ex.Message, "Error");
+            }
+        }
+
+        //private async Task<int> AddUserAccountAsync(IUser user, IPerson person)
+        //{
+        //    User User = user as User;
+        //    Person Person = person as Person;
+        //    User.Person = Person;
+        //    _unitOfWork.Users.Add(User);
+        //    //int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+        //    return await _unitOfWork.CompleteAsync();
+        //}
+
+        private async Task<int> AddUser(IUserViewModel User, IPersonViewModel Person)
+        {
+
+            if (!Person.IsValid || !User.IsValid || !User.IsValidProperty("Password") || !User.IsValidProperty("PasswordConfirm"))
+            {
+                throw new ArgumentException("Invalid entry please try again.");
+            }
+            else
+            {
+                User user = User.User as User;
+                Person person = Person.Person as Person;
+                user.Person = person;
+                _unitOfWork.Users.Add(user);
+                //int n = await _unitOfWork.CompleteAsync();
+                int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+                return n;
+                //return await _unitOfWork.CompleteAsync();
             }
         }
     }

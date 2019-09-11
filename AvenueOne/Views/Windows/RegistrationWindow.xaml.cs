@@ -3,8 +3,11 @@ using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Persistence.Repositories;
+using AvenueOne.Services;
+using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
+using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.ModelViewModel;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
@@ -37,7 +40,9 @@ namespace AvenueOne.Views.Windows
             IUserViewModel userViewModel = new UserViewModel(new User());
             IPersonViewModel personViewModel = new PersonViewModel(new Person());
             IUnitOfWork unitOfWork = new UnitOfWork(PlutoContext);
-            IRegistrationViewModel _registrationWindowViewModel = new RegistrationWindowViewModel(this, unitOfWork, userViewModel, personViewModel);
+            IDisplayService displayService = new WpfDisplayService();
+            AddUserCommand addUserCommand = new AddUserCommand(displayService, unitOfWork);
+            IRegistrationViewModel _registrationWindowViewModel = new RegistrationWindowViewModel(this, addUserCommand, userViewModel, personViewModel);
             DataContext = _registrationWindowViewModel;
         }
 

@@ -15,9 +15,39 @@ namespace AvenueOne.Services
             return new MainWindow();
         }
 
-        public void DisplayMessage(string message)
+        public void MessageDisplay(string message)
         {
             MessageBox.Show(message);
+        }
+
+        public void MessageDisplay(string message, string caption)
+        {
+            MessageBox.Show(message, caption);
+        }
+        
+        public void ErrorDisplay(string message, string caption)
+        {
+            MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        public bool MessagePrompt(string message, string caption)
+        {
+            MessageBoxResult result = MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (result == MessageBoxResult.Yes)
+                return true;
+            return false;
+        }
+
+        public bool? MessagePromt(string message, string caption)
+        {
+            MessageBoxResult result = MessageBox.Show(message, caption, MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+
+            if (result == MessageBoxResult.Yes)
+                return true;
+            if (result == MessageBoxResult.No)
+                return false;
+            return null;
         }
     }
 }

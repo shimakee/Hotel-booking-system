@@ -8,6 +8,11 @@ namespace AvenueOne.Services.Interfaces
 {
     public interface IDisplayService: IWindowGenerator
     {
-        void DisplayMessage(string message);
+        void MessageDisplay(string message);
+        void MessageDisplay(string message, string caption);
+        void ErrorDisplay(string message, string caption);
+        bool MessagePrompt(string message, string caption);
+        bool? MessagePromt(string message, string caption);
+
     }
 }

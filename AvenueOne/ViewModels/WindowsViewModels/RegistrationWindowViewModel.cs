@@ -20,7 +20,6 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 {
     public class RegistrationWindowViewModel : WindowViewModel, IRegistrationViewModel
     {
-        private IUnitOfWork _unitOfWork;
         public ICommand AddUserCommand { get; private set; }
         public IUserViewModel User { get; private set; }
         public IPersonViewModel Person { get; private set; }
@@ -28,74 +27,19 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         RegistrationWindowViewModel(Window window)
             :base (window)
         {
-            this.AddUserCommand = new AddUserCommand(this);
+            //this.AddUserCommand = new AddUserCommand(this);
         }
 
-        public RegistrationWindowViewModel(Window registrationWindow, IUnitOfWork unitOfWork, IUserViewModel userViewModel, IPersonViewModel personViewModel)
+        public RegistrationWindowViewModel(Window registrationWindow, AddUserCommand addUserCommand, IUserViewModel userViewModel, IPersonViewModel personViewModel)
             : this(registrationWindow)
         {
-            this._unitOfWork = unitOfWork;
+            //this._unitOfWork = unitOfWork;
             this.User = userViewModel;
             this.Person = personViewModel;
+            this.AddUserCommand = addUserCommand;
+            addUserCommand.ViewModel = this;
+            addUserCommand.User = User;
+            addUserCommand.Person = Person;
         }
-
-        //TODO add async to method name.
-        public async Task AddUser(string password, string passwordConfirm)
-        {
-            if (password == null || passwordConfirm == null)
-                throw new ArgumentNullException("Password and PasswordConfirm cannot be null.");
-
-            User.Password = password;
-            User.PasswordConfirm = passwordConfirm;
-
-            if (!Person.IsValid || !User.IsValid || !User.IsValidProperty("Password") || !User.IsValidProperty("PasswordConfirm"))
-            {
-                MessageBox.Show("Invalid entry please try again.");
-            }
-            else
-            {
-                User user = User.User as User;
-                Person person = Person.Person as Person;
-                user.Person = person;
-                _unitOfWork.Users.Add(user);
-                int n = await Task.Run(() => _unitOfWork.CompleteAsync());
-                
-                if(n != 0)
-                {
-                    MessageBox.Show($"Added {n} account with username: {user.Username} belonging to {person.FullName}.",
-                                                    "User added.", 
-                                                    MessageBoxButton.OK, 
-                                                    MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show($"Info: Could not add {user.Username} belongin to {person.FullName}.",
-                                                    "Error on insert.",
-                                                    MessageBoxButton.OK,
-                                                    MessageBoxImage.Information);
-                }
-
-
-                Window.Close();
-            }
-        }
-
-        //public event EventHandler<UserEventArgs> UserAdded;
-
-        //public  void OnUserAdded(IUser user)
-        //{
-        //    if (UserAdded != null)
-        //        UserAdded(this, new UserEventArgs(user));
-        //}
     }
-
-    //public class UserEventArgs : EventArgs
-    //{
-    //    public IUser User { get; set; }
-
-    //    public UserEventArgs(IUser user)
-    //    {
-    //        User = user;
-    //    }
-    //}
 }
