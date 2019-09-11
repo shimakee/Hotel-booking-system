@@ -1,5 +1,7 @@
 ﻿using AvenueOne.Persistence.Repositories;
 using AvenueOne.Utilities;
+using AvenueOne.ViewModels.WindowsViewModels;
+using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using AvenueOne.Views;
 using AvenueOne.Views.Pages;
 using System;
@@ -25,9 +27,9 @@ namespace AvenueOne
     /// </summary>
     public partial class MainWindow : Window
     {
-        private PlutoContext _plutoContext = new PlutoContext();
+        private PlutoContext _plutoContext;
 
-        AdminPage adminPage = new AdminPage();
+        private AdminPage _adminPage;
         BookingPage bookingPage = new BookingPage();
         SettingsPage settingsPage = new SettingsPage();
 
@@ -35,7 +37,11 @@ namespace AvenueOne
         public MainWindow()
         {
             InitializeComponent();
-            MainContent.Content = adminPage;
+            this._plutoContext = new PlutoContext();
+
+            IMainWindowViewModel mainWindowViewModel = new MainWindowViewModel(this, _plutoContext);
+            _adminPage = mainWindowViewModel.Pages["AdminPage"] as AdminPage;
+            MainContent.Content = _adminPage;
         }
 
         private void Button_BookingPage(object sender, RoutedEventArgs e)
@@ -45,7 +51,7 @@ namespace AvenueOne
 
         private void Button_AdminPage(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = adminPage;
+            MainContent.Content = _adminPage;
         }
 
         private void Button_SettingsPage(object sender, RoutedEventArgs e)

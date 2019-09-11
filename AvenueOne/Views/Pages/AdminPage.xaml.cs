@@ -6,6 +6,7 @@ using AvenueOne.Persistence.Repositories;
 using AvenueOne.Properties;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
+using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.ModelViewModel;
 using AvenueOne.ViewModels.PagesViewModels;
 using AvenueOne.ViewModels.WindowsViewModels;
@@ -32,12 +33,17 @@ namespace AvenueOne.Views.Pages
     /// </summary>
     public partial class AdminPage : Page
     {
-        public AdminPage()
+        public AdminPage(PlutoContext context)
         {
+            if (context == null)
+                throw new ArgumentNullException("Context cannot be null.");
+
             InitializeComponent();
+
             IUser User = new User();
             IPerson Person = new Person();
-            IWindowViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), new UserViewModel(User), new PersonViewModel(Person));
+            RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
+            IWindowViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), RegisterUserCommand, new UserViewModel(User), new PersonViewModel(Person));
             DataContext = _adminViewModel;
         }
     }

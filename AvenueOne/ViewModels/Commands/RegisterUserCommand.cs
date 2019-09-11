@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
+using AvenueOne.Persistence.Repositories;
 using AvenueOne.Views.Windows;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,16 @@ namespace AvenueOne.ViewModels.Commands
 {
     public class RegisterUserCommand : ICommand
     {
-        private IWindowViewModel _viewModel;
+        public IWindowViewModel ViewModel { get; set; }
+        private PlutoContext _plutoContext;
 
-        public RegisterUserCommand(IWindowViewModel viewModel)
+        public RegisterUserCommand(PlutoContext plutoContext)
         {
-            _viewModel = viewModel;
+            if (plutoContext == null)
+                throw new ArgumentNullException("Pluto context cannot be null.");
+
+            this._plutoContext = plutoContext;
+
         }
         public event EventHandler CanExecuteChanged;
 
@@ -25,13 +31,17 @@ namespace AvenueOne.ViewModels.Commands
         {
             //if (!_viewModel.UserAccount.IsAdmin)
             //    MessageBox.Show("Info: User is not an admin, not allowed to create account;");
-            return _viewModel.UserAccount.IsAdmin;
+            if(ViewModel != null)
+                return ViewModel.UserAccount.IsAdmin;
+            return false;
         }
 
         public void Execute(object parameter)
         {
-            Window registrationWindow = new RegistrationWindow();
-            registrationWindow.Owner = _viewModel.Window;
+            Window registrationWindow = new RegistrationWindow(_plutoContext);
+
+            if(ViewModel != null)
+                registrationWindow.Owner = ViewModel.Window;
             registrationWindow.ShowDialog();
         }
     }

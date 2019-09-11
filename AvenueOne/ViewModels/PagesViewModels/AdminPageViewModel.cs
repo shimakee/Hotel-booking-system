@@ -22,31 +22,28 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class AdminPageViewModel : WindowViewModel
+    public class AdminPageViewModel : WindowViewModel, IWindowViewModel
     {
-        //private IEnumerable<IUser> _usersList;
-        //public ObservableCollection<IUser> UsersList { get; set; }
         public IPersonViewModel Person { get;  set; }
         public IUserViewModel User { get; set; }
-        public ICommand RegisterUserCommand { get; private set; }
-        //public ICommand GetUsersFromDbCommand { get; private set; }
+        public RegisterUserCommand RegisterUserCommand { get; private set; }
 
         AdminPageViewModel(Window window)
             :base(window)
         {
-            RegisterUserCommand = new RegisterUserCommand(this);
             //GetUsersFromDbCommand = new GetUsersFromDbCommand(this, new UnitOfWork(new PlutoContext()));
             //_usersList = new UnitOfWork(new PlutoContext()).Users.GetAll();
             //UsersList = new ObservableCollection<IUser>(_usersList);
 
         }
 
-        public AdminPageViewModel(Window window, IUserViewModel userViewModel, IPersonViewModel personViewModel)
+        public AdminPageViewModel(Window window, RegisterUserCommand registerUserCommand, IUserViewModel userViewModel, IPersonViewModel personViewModel)
             : this(window)
         {
-            User = userViewModel;
-            Person = personViewModel;
-            //GetUsersFromDbCommand = getUsersFromDbCommand;
+            this.User = userViewModel;
+            this.Person = personViewModel;
+            registerUserCommand.ViewModel = this;
+            this.RegisterUserCommand = registerUserCommand;
         }
 
 

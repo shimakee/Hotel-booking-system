@@ -103,6 +103,7 @@
     <Compile Include="Core\Models\Interfaces\IPerson.cs" />
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IModelViewModel.cs" />
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IPersonViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IUser.cs" />
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IUserViewModel.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="ViewModels\ModelViewModel\UserViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\RegistrationWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Pages\AdminPage.xaml.cs">
@@ -225,6 +227,7 @@
     <Folder Include="Core\Domain\" />
     <Folder Include="Persistence\EntityConfigurations\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
+    <Folder Include="Views\Pages\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
