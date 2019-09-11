@@ -39,7 +39,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             this.Person = personViewModel;
         }
 
-        public void AddUser(string password, string passwordConfirm)
+        //TODO add async to method name.
+        public async Task AddUser(string password, string passwordConfirm)
         {
             if (password == null || passwordConfirm == null)
                 throw new ArgumentNullException("Password and PasswordConfirm cannot be null.");
@@ -57,13 +58,23 @@ namespace AvenueOne.ViewModels.WindowsViewModels
                 Person person = Person.Person as Person;
                 user.Person = person;
                 _unitOfWork.Users.Add(user);
-                int n = _unitOfWork.Complete();
+                int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+                
+                if(n != 0)
+                {
+                    MessageBox.Show($"Added {n} account with username: {user.Username} belonging to {person.FullName}.",
+                                                    "User added.", 
+                                                    MessageBoxButton.OK, 
+                                                    MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Info: Could not add {user.Username} belongin to {person.FullName}.",
+                                                    "Error on insert.",
+                                                    MessageBoxButton.OK,
+                                                    MessageBoxImage.Information);
+                }
 
-                // add user here
-                MessageBox.Show($"Added {n} Account with Username: {user.Username} belonging to {person.FullName}.",
-                                                "User added.", 
-                                                MessageBoxButton.OK, 
-                                                MessageBoxImage.Information);
 
                 Window.Close();
             }

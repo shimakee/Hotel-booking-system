@@ -8,6 +8,7 @@
         xmlns:converters="clr-namespace:AvenueOne.Converters"
         mc:Ignorable="d"
         Title="Login" Height="150" Width="800"
+        Loaded="On_Loaded"
         FocusManager.FocusedElement="{x:Reference Username}">
 
     <Window.Resources>

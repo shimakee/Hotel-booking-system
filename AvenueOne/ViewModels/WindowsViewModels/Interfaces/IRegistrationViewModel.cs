@@ -12,7 +12,7 @@ namespace AvenueOne.Interfaces
 {
     public interface IRegistrationViewModel : IWindowViewModel
     {
-        void AddUser(string password, string passwordConfirm);
+        Task AddUser(string password, string passwordConfirm);
         IUserViewModel User { get; }
         IPersonViewModel Person { get;  }
         //event EventHandler<UserEventArgs> UserAdded;

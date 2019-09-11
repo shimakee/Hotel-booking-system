@@ -15,8 +15,11 @@ namespace AvenueOne.Interfaces
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
 
+        Task<TEntity> GetAsync(string id);
         TEntity Get(string id);
+        Task<IEnumerable<TEntity>> GetAllAsync();
         IEnumerable<TEntity> GetAll();
+
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
     }
 }

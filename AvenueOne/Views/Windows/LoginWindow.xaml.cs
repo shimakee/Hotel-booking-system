@@ -50,6 +50,11 @@ namespace AvenueOne.Views
             this.Close();
         }
 
+        private void On_Loaded(object sender, RoutedEventArgs e)
+        {
+            _context.Users.ToList();
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);

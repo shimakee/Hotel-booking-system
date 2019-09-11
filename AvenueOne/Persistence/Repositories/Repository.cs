@@ -20,11 +20,19 @@ namespace AvenueOne.Utilities
             Context = context;
         }
 
+        public async Task<TEntity> GetAsync(string id)
+        {
+            return await Context.Set<TEntity>().FindAsync(id);
+        }
         public TEntity Get(string id)
         {
             return Context.Set<TEntity>().Find(id);
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await Context.Set<TEntity>().ToListAsync();
+        }
         public IEnumerable<TEntity> GetAll()
         {
             return Context.Set<TEntity>().ToList();
