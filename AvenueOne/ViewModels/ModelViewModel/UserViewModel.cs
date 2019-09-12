@@ -39,26 +39,6 @@ namespace AvenueOne.ViewModels.ModelViewModel
             }
         }
 
-        //public IPerson Person
-        //{
-        //    get { return _user.Person; }
-        //    set
-        //    {
-        //        _user.Person = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-        
-        //public string PersonId
-        //{
-        //    get { return _user.PersonId; }
-        //    set
-        //    {
-        //        _user.PersonId = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
         [Required]
         public string Id
         {

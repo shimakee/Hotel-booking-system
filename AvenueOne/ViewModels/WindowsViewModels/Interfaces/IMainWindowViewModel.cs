@@ -12,8 +12,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
     public interface IMainWindowViewModel : IWindowViewModel
     {
-        PlutoContext Context { get; }
+        //PlutoContext Context { get; }
         Dictionary<string, Page> Pages { get; }
+        Page CurrentPage { get; set; }
 
 
     }

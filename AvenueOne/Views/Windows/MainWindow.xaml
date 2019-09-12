@@ -33,13 +33,13 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 5">
-                    <Button Content="Bookings" Click="Button_BookingPage"/>
+                    <Button Content="Bookings" Command="{Binding ChangePageCommand}" CommandParameter="BookingPage"/>
                     <Button Content="Customers"/>
                     <Button Content="Rooms"/>
                     <Button Content="Billings"/>
                     <Button Content="Cashflow"/>
-                    <Button Content="Admin" Click="Button_AdminPage"/>
-                    <Button Content="Settings" Click="Button_SettingsPage"/>
+                    <Button Content="Admin" Command="{Binding ChangePageCommand}" CommandParameter="AdminPage"/>
+                    <Button Content="Settings" Command="{Binding ChangePageCommand}" CommandParameter="SettingsPage"/>
                     <Button Content="Logout" Click="Button_Logout"/>
                 </StackPanel>
 
@@ -55,7 +55,9 @@
 
 
 
-        <Frame x:Name="MainContent" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="MainContent" Grid.Column="1" NavigationUIVisibility="Hidden"
+               
+               Content="{Binding CurrentPage, Mode=TwoWay}"/>
     </Grid>
     
 </Window>

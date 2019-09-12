@@ -36,9 +36,9 @@ namespace AvenueOne.Views.Windows
 
         public RegistrationWindow(PlutoContext plutoContext)
         {
-            InitializeComponent();
             if (plutoContext == null)
                 throw new ArgumentNullException("Context cannot be null.");
+            InitializeComponent();
 
             this._plutoContext = plutoContext;
 

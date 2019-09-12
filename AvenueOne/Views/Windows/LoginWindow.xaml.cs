@@ -53,7 +53,8 @@ namespace AvenueOne.Views
 
         private void On_Loaded(object sender, RoutedEventArgs e)
         {
-            _context.Users.ToList();
+            //commented out eager loading since context will be disposed anyway after login.
+            //_context.Users.ToList();
         }
 
         protected override void OnClosed(EventArgs e)

@@ -23,10 +23,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         LoginWindowViewModel(Window window)
             :base(window)
         {
-            //LoginCommand = new LoginCommand(this); //how to decouple? - also pass as depndency injection?
         }
 
-        //public LoginWindowViewModel(Window loginWindow, ILoginService loginService, IUserViewModel userViewModel)
         public LoginWindowViewModel(Window loginWindow, LoginCommand loginCommand, IUserViewModel userViewModel)
             : this(loginWindow)
         {

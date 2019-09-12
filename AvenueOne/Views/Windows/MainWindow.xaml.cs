@@ -29,34 +29,13 @@ namespace AvenueOne
     {
         private PlutoContext _plutoContext;
 
-        private AdminPage _adminPage;
-        BookingPage bookingPage = new BookingPage();
-        SettingsPage settingsPage = new SettingsPage();
-
-
         public MainWindow()
         {
             InitializeComponent();
             this._plutoContext = new PlutoContext();
 
             IMainWindowViewModel mainWindowViewModel = new MainWindowViewModel(this, _plutoContext);
-            _adminPage = mainWindowViewModel.Pages["AdminPage"] as AdminPage;
-            MainContent.Content = _adminPage;
-        }
-
-        private void Button_BookingPage(object sender, RoutedEventArgs e)
-        {
-            MainContent.Content = bookingPage;
-        }
-
-        private void Button_AdminPage(object sender, RoutedEventArgs e)
-        {
-            MainContent.Content = _adminPage;
-        }
-
-        private void Button_SettingsPage(object sender, RoutedEventArgs e)
-        {
-            MainContent.Content = settingsPage;
+            DataContext = mainWindowViewModel;
         }
 
         private void Button_Logout(object sender, RoutedEventArgs e)
@@ -68,7 +47,9 @@ namespace AvenueOne
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            //eager loading data; - careful with this since it slows app loading time
+            _plutoContext.Users.ToList();
+            _plutoContext.People.ToList();
         }
         protected override void OnClosing(CancelEventArgs e)
         {

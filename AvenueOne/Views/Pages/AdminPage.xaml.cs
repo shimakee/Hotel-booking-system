@@ -60,8 +60,11 @@ namespace AvenueOne.Views.Pages
         //used a bit of code behind because its easier to implement
         private void Refresh_UsersList(object sender, RoutedEventArgs e)
         {
-            _context.Users.ToList();
-            this.ViewModel.UsersList = _context.Users.Local;
+            if(_context != null && ViewModel != null)
+            {
+                _context.Users.ToList();
+                this.ViewModel.UsersList = _context.Users.Local;
+            }
         }
     }
 }

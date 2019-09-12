@@ -72,7 +72,7 @@ namespace AvenueOne.ViewModels.Commands
 
                     if (userLogin == null)
                     {
-                        _displayService.MessageDisplay("Invalid Login");
+                        _displayService.MessageDisplay("Invalid login");
                     }
                     else
                     {
