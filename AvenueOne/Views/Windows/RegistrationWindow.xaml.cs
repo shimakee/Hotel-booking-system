@@ -31,10 +31,8 @@ namespace AvenueOne.Views.Windows
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        //private PlutoContext PlutoContext = new PlutoContext();
         private PlutoContext _plutoContext;
-
-        //public IRegistrationViewModel _registrationWindowViewModel {get; private set;}
+        public IRegistrationViewModel ViewModel { get; private set; }
 
         public RegistrationWindow(PlutoContext plutoContext)
         {
@@ -50,9 +48,10 @@ namespace AvenueOne.Views.Windows
 
             IUserViewModel userViewModel = new UserViewModel(new User());
             IPersonViewModel personViewModel = new PersonViewModel(new Person());
-            IRegistrationViewModel _registrationWindowViewModel = new RegistrationWindowViewModel(this, addUserCommand, userViewModel, personViewModel);
+            IRegistrationViewModel registrationWindowViewModel = new RegistrationWindowViewModel(this, addUserCommand, userViewModel, personViewModel);
 
-            DataContext = _registrationWindowViewModel;
+            this.ViewModel = registrationWindowViewModel;
+            DataContext = registrationWindowViewModel;
         }
 
         //public RegistrationWindow(IRegistrationParentViewModel parentViewModel)

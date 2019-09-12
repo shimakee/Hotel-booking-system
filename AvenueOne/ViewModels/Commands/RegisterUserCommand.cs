@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Persistence.Repositories;
+using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using AvenueOne.Views.Windows;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace AvenueOne.ViewModels.Commands
 {
     public class RegisterUserCommand : ICommand
     {
-        public IWindowViewModel ViewModel { get; set; }
+        public IRegistrationParent ViewModel { get; set; }
         private PlutoContext _plutoContext;
 
         public RegisterUserCommand(PlutoContext plutoContext)
@@ -38,10 +39,15 @@ namespace AvenueOne.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            Window registrationWindow = new RegistrationWindow(_plutoContext);
+            RegistrationWindow registrationWindow = new RegistrationWindow(_plutoContext);
+
 
             if(ViewModel != null)
+            {
+                registrationWindow.ViewModel.AddUserCommand.UserAdded += ViewModel.OnUserAdded;
                 registrationWindow.Owner = ViewModel.Window;
+            }
+
             registrationWindow.ShowDialog();
         }
     }

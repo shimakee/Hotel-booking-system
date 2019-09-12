@@ -1,4 +1,5 @@
-﻿using AvenueOne.Interfaces;
+﻿using AvenueOne.Core.Models;
+using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
@@ -91,16 +92,6 @@ namespace AvenueOne.ViewModels.Commands
             }
         }
 
-        //private async Task<int> AddUserAccountAsync(IUser user, IPerson person)
-        //{
-        //    User User = user as User;
-        //    Person Person = person as Person;
-        //    User.Person = Person;
-        //    _unitOfWork.Users.Add(User);
-        //    //int n = await Task.Run(() => _unitOfWork.CompleteAsync());
-        //    return await _unitOfWork.CompleteAsync();
-        //}
-
         private async Task<int> AddUser(IUserViewModel User, IPersonViewModel Person)
         {
 
@@ -116,9 +107,18 @@ namespace AvenueOne.ViewModels.Commands
                 _unitOfWork.Users.Add(user);
                 //int n = await _unitOfWork.CompleteAsync();
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+
+                if (n != 0)
+                    OnUserAdded(user);
                 return n;
                 //return await _unitOfWork.CompleteAsync();
             }
+        }
+
+        public event EventHandler<UserEventArgs> UserAdded;
+        protected virtual void OnUserAdded(User user)
+        {
+            UserAdded?.Invoke(this, new UserEventArgs(user));
         }
     }
 }

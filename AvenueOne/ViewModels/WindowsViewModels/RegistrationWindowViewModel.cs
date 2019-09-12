@@ -15,12 +15,13 @@ using System.ComponentModel;
 using AvenueOne.ViewModels.ModelViewModel;
 using System.Windows.Controls;
 using AvenueOne.Interfaces.ViewModelInterfaces;
+using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
-    public class RegistrationWindowViewModel : WindowViewModel, IRegistrationViewModel
+    public class RegistrationWindowViewModel : WindowViewModel, IRegistrationViewModel, IWindowViewModel
     {
-        public ICommand AddUserCommand { get; private set; }
+        public AddUserCommand AddUserCommand { get; private set; }
         public IUserViewModel User { get; private set; }
         public IPersonViewModel Person { get; private set; }
 
@@ -42,4 +43,6 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             addUserCommand.Person = Person;
         }
     }
+
+    
 }

@@ -17,13 +17,11 @@ namespace AvenueOne.ViewModels.ModelViewModel
     public class UserViewModel : ModelViewModel, IUserViewModel //TODO: Add Person property - also in settings
     {
         private IUser _user;
-        public ObservableCollection<IUser> UsersList;
         private string _passwordConfirm;
 
         public UserViewModel(IUser user)
         {
             _user = user;
-            UsersList = new ObservableCollection<IUser>();
         }
 
         public IUser User

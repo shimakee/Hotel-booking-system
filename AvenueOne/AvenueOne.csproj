@@ -67,6 +67,7 @@
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Core\IRepositories\IPersonRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Models\UserEventArgs.cs" />
     <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
     <Compile Include="EntityConfiguration\UserConfiguration.cs" />
     <Compile Include="Migrations\201909070930092_InitialModel.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IModelViewModel.cs" />
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IPersonViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IMainWindowViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationParent.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IUser.cs" />
     <Compile Include="ViewModels\ModelViewModel\Interfaces\IUserViewModel.cs" />

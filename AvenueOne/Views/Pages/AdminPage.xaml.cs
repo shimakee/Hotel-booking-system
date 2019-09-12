@@ -13,6 +13,7 @@ using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.Views.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,8 @@ namespace AvenueOne.Views.Pages
             IUser User = new User();
             IPerson Person = new Person();
             RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
-            IWindowViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), RegisterUserCommand, new UserViewModel(User), new PersonViewModel(Person));
+            AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), RegisterUserCommand, new UserViewModel(User), new PersonViewModel(Person));
+            _adminViewModel.UsersList = new ObservableCollection<IUser>(context.Users.ToList());
             DataContext = _adminViewModel;
         }
     }

@@ -197,7 +197,7 @@
 
                 <GroupBox Header="User list" Grid.Row="1">
                     <DataGrid  Grid.Column="1"
-                            ItemsSource="{Binding User.UsersList}" SelectedItem="{Binding User}"
+                            ItemsSource="{Binding UsersList}" SelectedItem="{Binding User}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                         <!--<DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
