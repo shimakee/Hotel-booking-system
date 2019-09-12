@@ -24,12 +24,11 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class AdminPageViewModel : WindowViewModel, IRegistrationParent
+    public class AdminPageViewModel : WindowViewModel, IRegistrationParent, INotifyPropertyChanged
     {
         public IPersonViewModel Person { get;  set; }
         public IUserViewModel User { get; set; }
 
-        public ObservableCollection<IUser> UsersList { get; set; }
         public RegisterUserCommand RegisterUserCommand { get; private set; }
 
         AdminPageViewModel(Window window)
@@ -48,6 +47,22 @@ namespace AvenueOne.ViewModels.PagesViewModels
             this.RegisterUserCommand = registerUserCommand;
         }
 
+        private ObservableCollection<IUser> _usersList;
+        public ObservableCollection<IUser> UsersList
+        {
+            get { return _usersList; }
+            set { _usersList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public void OnUserAdded(object source, UserEventArgs e)
         {
             if (e == null)
@@ -55,5 +70,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
 
             UsersList.Add(e.User);
         }
+
+
     }
 }

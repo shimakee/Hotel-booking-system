@@ -212,7 +212,7 @@
                             <DataGridTextColumn Header="Gender" Binding="{Binding Person.Gender}" Width="*"/>
                             <DataGridTextColumn>
                                 <DataGridTextColumn.Header>
-                                    <Button Content="Refresh" Command="{Binding GetUsersFromDbCommand}"/>
+                                    <Button Content="Refresh" Click="Refresh_UsersList"/>
                                 </DataGridTextColumn.Header>
                             </DataGridTextColumn>
                         </DataGrid.Columns>
