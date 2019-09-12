@@ -24,43 +24,28 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class AdminPageViewModel : WindowViewModel, IRegistrationParent, INotifyPropertyChanged
+    public class AdminPageViewModel : WindowViewModel, IRegistrationParent
     {
         public IPersonViewModel Person { get;  set; }
         public IUserViewModel User { get; set; }
+        public ObservableCollection<User> UsersList { get; set; }
 
         public RegisterUserCommand RegisterUserCommand { get; private set; }
 
         AdminPageViewModel(Window window)
             :base(window)
         {
-            UsersList = new ObservableCollection<IUser>();
-
         }
 
-        public AdminPageViewModel(Window window, RegisterUserCommand registerUserCommand, IUserViewModel userViewModel, IPersonViewModel personViewModel)
+        public AdminPageViewModel(Window window, RegisterUserCommand registerUserCommand, IUserViewModel userViewModel, IPersonViewModel personViewModel, ObservableCollection<User> usersList)
             : this(window)
         {
             this.User = userViewModel;
             this.Person = personViewModel;
             registerUserCommand.ViewModel = this;
             this.RegisterUserCommand = registerUserCommand;
-        }
+            this.UsersList = usersList;
 
-        private ObservableCollection<IUser> _usersList;
-        public ObservableCollection<IUser> UsersList
-        {
-            get { return _usersList; }
-            set { _usersList = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void OnUserAdded(object source, UserEventArgs e)
@@ -68,7 +53,8 @@ namespace AvenueOne.ViewModels.PagesViewModels
             if (e == null)
                 throw new ArgumentNullException("Event args must not be null.");
 
-            UsersList.Add(e.User);
+            if(UsersList != null)
+                UsersList.Add(e.User);
         }
 
 

@@ -30,8 +30,6 @@ namespace AvenueOne.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            //if (!_viewModel.UserAccount.IsAdmin)
-            //    MessageBox.Show("Info: User is not an admin, not allowed to create account;");
             if(ViewModel != null)
                 return ViewModel.UserAccount.IsAdmin;
             return false;
@@ -44,7 +42,8 @@ namespace AvenueOne.ViewModels.Commands
 
             if(ViewModel != null)
             {
-                registrationWindow.ViewModel.AddUserCommand.UserAdded += ViewModel.OnUserAdded;
+                //so parent viewmodel can subscribe and know when user is added onpopup registration window.
+                //registrationWindow.ViewModel.AddUserCommand.UserAdded += ViewModel.OnUserAdded; 
                 registrationWindow.Owner = ViewModel.Window;
             }
 

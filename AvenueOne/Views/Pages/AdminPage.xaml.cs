@@ -42,20 +42,26 @@ namespace AvenueOne.Views.Pages
                 throw new ArgumentNullException("Context cannot be null.");
 
             InitializeComponent();
-            this._context = context;
 
+            this._context = context;
             IUser User = new User();
             IPerson Person = new Person();
             RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
-            AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), RegisterUserCommand, new UserViewModel(User), new PersonViewModel(Person));
-            _adminViewModel.UsersList = new ObservableCollection<IUser>(context.Users.ToList());
+            AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
+                                                                                                                                RegisterUserCommand, 
+                                                                                                                                new UserViewModel(User), 
+                                                                                                                                new PersonViewModel(Person),
+                                                                                                                                _context.Users.Local);
+
             this.ViewModel = _adminViewModel;
             DataContext = _adminViewModel;
         }
 
+        //used a bit of code behind because its easier to implement
         private void Refresh_UsersList(object sender, RoutedEventArgs e)
         {
-            this.ViewModel.UsersList = new ObservableCollection<IUser>(_context.Users.ToList());
+            _context.Users.ToList();
+            this.ViewModel.UsersList = _context.Users.Local;
         }
     }
 }
