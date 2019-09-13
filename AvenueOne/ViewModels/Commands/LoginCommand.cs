@@ -77,7 +77,7 @@ namespace AvenueOne.ViewModels.Commands
                     else
                     {
 
-                        userLogin.Password = null;
+                        userLogin.Password = null; //TODO: redundancy, i think no longer necessary since it is already null in the loginService;
                         Settings.Default.UserAccount = userLogin;
                         Settings.Default.UserProfile = userLogin.Person;
                         Settings.Default.Save();

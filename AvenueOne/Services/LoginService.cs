@@ -2,6 +2,7 @@
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Properties;
+using AvenueOne.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,15 +34,27 @@ namespace AvenueOne.Utilities
 
             User user = _unitOfWork.Users.Find(u => u.Username == username).FirstOrDefault<User>();
 
-            ////check that password matches
+            //check that password matches
             if (user == null)
                 return null;
-            if (user.Password != password)
+            if (!HashService.Verify(password, user.Password))
                 return null;
 
+            user.Password = null; //remove password so that it wont be shown.
             return user;
         }
 
+        public bool IsValidLogin(IUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException("User cannot be null.");
+
+            IUser userToCheck = Login(user.Username, user.Password);
+            if (userToCheck == null)
+                return false;
+            return true;
+
+        }
         public bool IsValidLogin(string username, string password)
         {
             //validate args

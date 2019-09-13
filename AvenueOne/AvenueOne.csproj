@@ -93,6 +93,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\PersonRepository.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
+    <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\WpfDisplayService.cs" />
     <Compile Include="Services\Interfaces\IDisplayService.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />

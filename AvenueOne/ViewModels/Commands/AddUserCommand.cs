@@ -4,6 +4,7 @@ using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Properties;
+using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -101,6 +102,7 @@ namespace AvenueOne.ViewModels.Commands
 
                 User user = User.User as User;
                 Person person = Person.Person as Person;
+                user.Password = HashService.Hash(User.Password);
                 user.Person = person;
                 _unitOfWork.Users.Add(user);
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
