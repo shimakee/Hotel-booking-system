@@ -66,5 +66,12 @@ namespace AvenueOne.Views.Pages
                 this.ViewModel.UsersList = _context.Users.Local;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var person = this.ViewModel.Person;
+            var user = this.ViewModel.User;
+            MessageBox.Show($"Username:{user.Username}\nFull name:{person.FullName}.");
+        }
     }
 }

@@ -28,6 +28,20 @@ namespace AvenueOne.ViewModels.PagesViewModels
     {
         public IPersonViewModel Person { get;  set; }
         public IUserViewModel User { get; set; }
+        private User _account;
+        public User Account
+        {
+            get
+            {
+                return _account;
+            }
+            set {
+                _account = value;
+                //for editing purposes.
+                User.User = value;
+                Person.Person = value.Person;
+            }
+        }
         public ObservableCollection<User> UsersList { get; set; }
 
         public RegisterUserCommand RegisterUserCommand { get; private set; }

@@ -66,9 +66,11 @@ namespace AvenueOne.Services
 
         public static bool Verify(string text, string hashedText)
         {
-            //get original salt
             byte[] hashedBytes = Convert.FromBase64String(hashedText);
             byte[] salt = new byte[_defaultSaltSize];
+            if (hashedBytes.Length < _defaultSaltSize) // the string was not long enough to be a hashed password.
+                return false;
+            //get original salt
             Array.Copy(hashedBytes, 0, salt, 0, _defaultSaltSize);
             //hash password with same salt
             text = Hash(text, salt);
