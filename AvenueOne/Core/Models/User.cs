@@ -3,6 +3,7 @@ using AvenueOne.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,6 +17,14 @@ namespace AvenueOne.Models
     public class User : BaseObservableModel, IUser
     {
         private string _id;
+        private string _username;
+        private string _password;
+        private string _passwordConfirm;
+        private bool _isAdmin;
+        private Person _person;
+
+        #region Properties
+        [Required]
         public string Id
         {
             get { return _id; }
@@ -23,7 +32,10 @@ namespace AvenueOne.Models
                 OnPropertyChanged();
             }
         }
-        private string _username;
+
+        [Required(ErrorMessage = "required.")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "min 5, max 30 chars.")]
+        [RegularExpression(@"^([A-z0-9])*$", ErrorMessage = "invalid format.")]
         public string Username
         {
             get { return _username; }
@@ -31,15 +43,28 @@ namespace AvenueOne.Models
                 OnPropertyChanged();
             }
         }
-        private string _password;
+
+        [Required(ErrorMessage = "required.")]
+        [StringLength(100, MinimumLength = 5, ErrorMessage = "min 5, max 30 chars.")]
+        //[RegularExpression(@"^([A-z0-9!@#$%^&*,.?])*$", ErrorMessage = "invalid format.")]
         public string Password
         {
             get { return _password; }
             set { _password = value;
                 OnPropertyChanged();
+                OnPropertyChanged("PasswordConfirm");
             }
         }
-        private bool _isAdmin;
+
+        [Compare("Password", ErrorMessage = "must match with password")]
+        public string PasswordConfirm
+        {
+            get { return _passwordConfirm; }
+            set { _passwordConfirm = value;
+                OnPropertyChanged();
+                OnPropertyChanged("Password");
+            }
+        }
         public bool IsAdmin
         {
             get { return _isAdmin; }
@@ -49,7 +74,6 @@ namespace AvenueOne.Models
         }
 
         //reference
-        private Person _person;
         public virtual Person Person
         {
             get { return _person; }
@@ -57,11 +81,12 @@ namespace AvenueOne.Models
                 OnPropertyChanged();
             }
         }
+        #endregion
 
         //For Xml
         //<User><Id></Id><Username></Username><Password></Password><IsAdmin></IsAdmin><Person></Person></User>
-        //<User><Id></Id><Username></Username><Password></Password><IsAdmin></IsAdmin><Person><Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><MaidenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStatus><Nationality></Nationality><BirthDate></BirthDate></Person></User>
 
+        #region Constructor
         public User()
         {
             this.IsAdmin = false;
@@ -116,7 +141,9 @@ namespace AvenueOne.Models
         {
             this.Id =id;
         }
+        #endregion
 
+        #region MethodsAndOverrides
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -132,6 +159,7 @@ namespace AvenueOne.Models
         {
             return this.Username.GetHashCode();
         }
+        #endregion
     }
 }
 

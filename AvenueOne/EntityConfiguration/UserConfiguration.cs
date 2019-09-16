@@ -28,6 +28,8 @@ namespace AvenueOne.EntityConfiguration
             Property(u => u.Password).IsRequired()
                 .HasMaxLength(255);
 
+            Ignore(u => u.PasswordConfirm);
+
             //relationships
             HasOptional(u => u.Person)
                 .WithOptionalDependent(p => p.User)

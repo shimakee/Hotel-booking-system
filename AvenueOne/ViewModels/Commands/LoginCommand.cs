@@ -1,15 +1,8 @@
 ﻿using AvenueOne.Interfaces;
-using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Properties;
 using AvenueOne.Services.Interfaces;
-using AvenueOne.Utilities;
-using AvenueOne.ViewModels.WindowsViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,7 +12,7 @@ namespace AvenueOne.ViewModels.Commands
     public class LoginCommand : ICommand
     {
         public ILoginViewModel ViewModel { get; set; }
-        public IUserViewModel User { get; set; }
+        //public IUser User { get; set; }
         private ILoginService _loginService;
         private IDisplayService _displayService;
 
@@ -55,20 +48,21 @@ namespace AvenueOne.ViewModels.Commands
                 PasswordBox passwordBox = (PasswordBox)values[1];
                 string password = passwordBox.Password;
 
+                IUser user = ViewModel.User;
                 //_viewModel.Login(username, password);
-                if (User == null)
+                if (user == null)
                     throw new NullReferenceException("User cannot be null");
 
-                User.Username = username;
-                User.Password = password;
+                //User.Username = username;
+                user.Password = password;
 
-                if(!User.IsValidProperty("Password") || !User.IsValidProperty("Username"))
+                if (!user.IsValidProperty("Password") || !user.IsValidProperty("Username") || !user.IsValid)
                 {
                     _displayService.MessageDisplay("Invalid input");
                 }
                 else
                 {
-                    User userLogin = _loginService.Login(User);
+                    IUser userLogin = _loginService.Login(user);
 
                     if (userLogin == null)
                     {
@@ -78,7 +72,7 @@ namespace AvenueOne.ViewModels.Commands
                     {
 
                         userLogin.Password = null; //TODO: redundancy, i think no longer necessary since it is already null in the loginService;
-                        Settings.Default.UserAccount = userLogin;
+                        Settings.Default.UserAccount = userLogin as User;
                         Settings.Default.UserProfile = userLogin.Person;
                         Settings.Default.Save();
                         _displayService.MessageDisplay($"Welcome {userLogin.Person.FullName} using account {userLogin.Username}.");

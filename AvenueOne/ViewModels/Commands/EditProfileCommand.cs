@@ -47,17 +47,15 @@ namespace AvenueOne.ViewModels.Commands
             //User user = this.ViewModel.User.User as User;
             if (ViewModel != null)
             {
-                User user = await Task.Run(() => _unitOfWork.Users.GetAsync(ViewModel.Account.Id));
+                IUser user = await Task.Run(() => _unitOfWork.Users.GetAsync(ViewModel.User.Id));
                 //User user = await Task.Run(()=> _unitOfWork.Users.Find(u => u.Id == ViewModel.Account.Id).FirstOrDefault());
                 if (user == null)
                     throw new NullReferenceException("Account does not exist.");
 
                 string password = user.Password; //conserve password;
-                user = ViewModel.User.User as User;
+                user = ViewModel.User as User;
                 user.Password = password;
-                user.Person = ViewModel.Person.Person as Person;
-                //just to be sure that id is not changed - for redundancy,
-                user.Id = ViewModel.Account.Id;
+                user.PasswordConfirm = password;
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 
                 if (n == 0)

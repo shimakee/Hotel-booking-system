@@ -12,6 +12,7 @@ namespace AvenueOne.Interfaces
         string Id { get; set; }
         string Username { get; set; }
         string Password { get; set; }
+        string PasswordConfirm { get; set; }
         bool IsAdmin { get; set; }
         Person Person { get; set; }
     }

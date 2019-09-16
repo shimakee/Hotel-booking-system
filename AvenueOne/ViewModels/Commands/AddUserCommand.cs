@@ -1,18 +1,11 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
-using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
-using AvenueOne.Properties;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -23,8 +16,7 @@ namespace AvenueOne.ViewModels.Commands
         private IDisplayService _displayService;
         private IUnitOfWork _unitOfWork;
         public IRegistrationViewModel ViewModel { get; set; }
-        public IUserViewModel User { get; set; }
-        public IPersonViewModel Person { get; set; }
+        public IUser User { get; set; }
 
         public AddUserCommand(IDisplayService displayService, IUnitOfWork unitOfWork)
         {
@@ -63,22 +55,23 @@ namespace AvenueOne.ViewModels.Commands
 
                 if (password == null || passwordConfirm == null)
                     throw new ArgumentNullException("Password and PasswordConfirm cannot be null.");
-                if (User == null || Person == null)
+                if (User == null)
                     throw new ArgumentNullException("User and person view model cannot be null, must assign valid view model to the properties.");
 
                 User.Password = password;
                 User.PasswordConfirm = passwordConfirm;
 
-                int n = await AddUser(User, Person);
+                //int n = await Task.Run(()=> AddUser(User));
+                int n = await AddUser(User);
 
                 if (n != 0)
                 {
-                    _displayService.MessageDisplay($"Added accoun:\n\nUsername: {User.Username}\nName:{Person.FullName}\n\nAffected rows:{n}.",
+                    _displayService.MessageDisplay($"Added accoun:\n\nUsername: {User.Username}\nName:{User.Person.FullName}\n\nAffected rows:{n}.",
                                                     "Account added.");
                 }
                 else
                 {
-                    _displayService.MessageDisplay($"Info: Could not add {User.Username} belongin to {Person.FullName}.",
+                    _displayService.MessageDisplay($"Info: Could not add {User.Username} belongin to {User.Person.FullName}.",
                                                     "Error on insert.");
                 }
 
@@ -89,38 +82,40 @@ namespace AvenueOne.ViewModels.Commands
             catch (Exception ex)
             {
                 _displayService.ErrorDisplay(ex.Message, "Error");
+                throw;
             }
         }
 
-        private async Task<int> AddUser(IUserViewModel User, IPersonViewModel Person)
+        private async Task<int> AddUser(IUser User)
         {
-            if (User == null || Person == null)
+            if (User == null || User.Person == null)
                 throw new ArgumentNullException("User and person view model cannot be null.");
-            if (!Person.IsValid)
+
+            if (!User.Person.IsValid)
                 throw new ArgumentException("Invalid profile detais.");
             if (!User.IsValid)
                 throw new ArgumentException("Invalid user details.");
             if (!User.IsValidProperty("Password") || !User.IsValidProperty("PasswordConfirm"))
                 throw new ArgumentException("Invalid password or password confirmation.");
 
-                User user = User.User as User;
-                Person person = Person.Person as Person;
-                user.Password = HashService.Hash(User.Password);
-                user.Person = person;
-                _unitOfWork.Users.Add(user);
-                int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+            byte[] salt = HashService.CreateSalt();
+            User.Password = HashService.Hash(User.Password, salt);
+            User.PasswordConfirm = HashService.Hash(User.PasswordConfirm, salt);
+            User user = User as User;
+            _unitOfWork.Users.Add(user);
+            int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 
-                if (n != 0)
-                    OnUserAdded(user);
+            //if (n != 0)
+            //    OnUserAdded(User);
 
-                return n;
-                //return await _unitOfWork.CompleteAsync();
+            return n;
+            //return await _unitOfWork.CompleteAsync();
         }
 
-        public event EventHandler<UserEventArgs> UserAdded;
-        protected virtual void OnUserAdded(User user)
-        {
-            UserAdded?.Invoke(this, new UserEventArgs(user));
-        }
+        //public event EventHandler<UserEventArgs> UserAdded;
+        //protected virtual void OnUserAdded(User user)
+        //{
+        //    UserAdded?.Invoke(this, new UserEventArgs(user));
+        //}
     }
 }

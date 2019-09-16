@@ -24,6 +24,12 @@ namespace AvenueOne.Models
         private DateTime? _birthDate;
         private User _user;
 
+        public Person()
+        {
+            this.Id = GenerateId();
+        }
+
+        #region Properties
         public string Id
         {
             get { return _id; }
@@ -117,6 +123,9 @@ namespace AvenueOne.Models
             {
                 _gender = value;
                 OnPropertyChanged();
+                OnPropertyChanged("IsMaiden");
+                OnPropertyChanged("WasMaiden");
+                OnPropertyChanged("MaidenName");
             }
         }
         public CivilStatusType CivilStatus
@@ -126,6 +135,9 @@ namespace AvenueOne.Models
             {
                 _civilStatus = value;
                 OnPropertyChanged();
+                OnPropertyChanged("IsMaiden");
+                OnPropertyChanged("WasMaiden");
+                OnPropertyChanged("MaidenName");
             }
         }
         public string Nationality
@@ -146,6 +158,28 @@ namespace AvenueOne.Models
                 OnPropertyChanged();
             }
         }
+        #endregion
+
+        #region Tools
+        public byte[] GenderValues { get { return (byte[])Enum.GetValues(typeof(GenderType)); } }
+        public byte[] CivilStatusValues { get { return (byte[])Enum.GetValues(typeof(CivilStatusType)); } }
+        public bool IsMaiden
+        {
+            get
+            {
+                return CivilStatus == CivilStatusType.Single && Gender == GenderType.Female;
+            }
+        }
+        public bool WasMaiden
+        {
+            get
+            {
+                return CivilStatus != CivilStatusType.Single && Gender == GenderType.Female;
+            }
+        }
+        #endregion
+
+        ////reference
         public virtual User User
         {
             get { return _user; }
@@ -159,11 +193,8 @@ namespace AvenueOne.Models
         //for XML
         //<Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><MaidenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStatus><Nationality></Nationality><BirthDate></BirthDate>
 
-        public Person()
-        {
-            this.Id = GenerateId();
-        }
 
+        #region MethodsAndOverrides
         private bool HasContent(string content)
         {
             return !string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content);
@@ -195,5 +226,6 @@ namespace AvenueOne.Models
                 (this.Nationality == null ? 0 : this.Nationality.GetHashCode()) ^
                 (this.BirthDate == null ? 0 : this.BirthDate.GetHashCode());
         }
+        #endregion
     }
 }

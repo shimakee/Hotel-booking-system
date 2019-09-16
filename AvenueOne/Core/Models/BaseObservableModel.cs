@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -76,6 +77,7 @@ namespace AvenueOne.Models
         public bool IsValidProperty(string property)
         {
             string result = ValidateProperty(property);
+            Trace.WriteLine($"{property}: {result}");
             if (result == null)
                 return true;
             return false;

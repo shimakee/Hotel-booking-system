@@ -1,28 +1,14 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
-using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
-using AvenueOne.Utilities.Tools;
 using AvenueOne.ViewModels.Commands;
-using AvenueOne.ViewModels.ModelViewModel;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace AvenueOne.Views
 {
@@ -38,11 +24,11 @@ namespace AvenueOne.Views
 
             IUnitOfWork unitOfWork= new UnitOfWork(_context);
             ILoginService loginService = new LoginService(unitOfWork);
-            IUserViewModel userViewModel = new UserViewModel(new User());
+            IUser user = new User();
             IDisplayService displayService = new WpfDisplayService();
             ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(this,
                                                                                                                                     new LoginCommand(loginService, displayService),
-                                                                                                                                    userViewModel);
+                                                                                                                                    user);
             DataContext = loginWindowViewModel;
         }
 

@@ -85,7 +85,7 @@
 
                     <TextBlock Text="First name:" Grid.Column="0"/>
                     <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding Person.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding User.Person.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              ToolTip="{Binding Person.ErrorCollection[FirstName]}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
@@ -98,7 +98,7 @@
 
                     <TextBlock Text="Middle name:" Grid.Column="0"/>
                     <TextBox x:Name="Middlename"  Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding Person.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding User.Person.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
 
@@ -110,7 +110,7 @@
 
                     <TextBlock Text="Last name:" Grid.Column="0"/>
                     <TextBox x:Name="Lastname" Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding Person.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding User.Person.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
 
@@ -122,19 +122,19 @@
 
                     <TextBlock Text="Suffix:" Grid.Column="0"/>
                     <TextBox x:Name="Suffix" Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding Person.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding User.Person.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
 
-                <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding Person.GenderValues}" 
-                          SelectedValue="{Binding Person.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding User.Person.GenderValues}" 
+                                                  SelectedValue="{Binding User.Person.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-                <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding Person.CivilStatusValues}"
-                          SelectedValue="{Binding Person.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding User.Person.CivilStatusValues}"
+                                                  SelectedValue="{Binding User.Person.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-                <Grid IsEnabled="{Binding Person.IsNotMaiden}" Visibility="{Binding Person.IsNotMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                <Grid IsEnabled="{Binding User.Person.WasMaiden}" Visibility="{Binding User.Person.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
                     <!--<Grid>-->
                         <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="94*"/>
@@ -144,7 +144,7 @@
 
                     <TextBlock Text="Maiden name:" Grid.Column="0"/>
                     <TextBox x:Name="MaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
-                             Text="{Binding Person.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding User.Person.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
 
@@ -157,7 +157,7 @@
                     <TextBlock Text="Brithdate:" Grid.Column="0"/>
                     <DatePicker x:Name="Birthdate" Grid.Column="1"
                                 DisplayDateEnd="{x:Static system:DateTime.Today}"
-                                SelectedDate="{Binding Person.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                SelectedDate="{Binding User.Person.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                         ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
                 </Grid>
             </StackPanel>

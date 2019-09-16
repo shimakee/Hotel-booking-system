@@ -1,14 +1,5 @@
 ﻿using AvenueOne.Interfaces;
-using AvenueOne.Interfaces.ViewModelInterfaces;
-using AvenueOne.Models;
-using AvenueOne.Properties;
-using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,7 +8,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     public class LoginWindowViewModel: WindowViewModel, ILoginViewModel
     {
         public ICommand LoginCommand { get; private set; }
-        public IUserViewModel User { get;  private set; }
+        public IUser User { get; set; }
 
         #region Ctor
         LoginWindowViewModel(Window window)
@@ -25,14 +16,12 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         {
         }
 
-        public LoginWindowViewModel(Window loginWindow, LoginCommand loginCommand, IUserViewModel userViewModel)
+        public LoginWindowViewModel(Window loginWindow, LoginCommand loginCommand, IUser user)
             : this(loginWindow)
         {
-            //this._loginService = loginService;
-            this.User = userViewModel;
+            this.User = user;
             this.LoginCommand = loginCommand;
             loginCommand.ViewModel = this;
-            loginCommand.User = User;
         }
         #endregion
     }

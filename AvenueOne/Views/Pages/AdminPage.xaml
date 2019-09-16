@@ -5,9 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AvenueOne.Views.Pages"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:converters="clr-namespace:AvenueOne.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminPage">
+    
+    <Page.Resources>
+        <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+    </Page.Resources>
+
 
     <TabControl>
 
@@ -69,7 +75,7 @@
 
                                 <TextBlock Text="Firstname:" Grid.Column="0"/>
                                 <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding Person.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding User.Person.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -83,7 +89,7 @@
 
                                 <TextBlock Text="Middlename:" Grid.Column="0"/>
                                 <TextBox x:Name="Middlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"
-                                         Text="{Binding Person.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Text="{Binding User.Person.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -95,7 +101,7 @@
 
                                 <TextBlock Text="Lastname:" Grid.Column="0"/>
                                 <TextBox x:Name="Lastname"  Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding Person.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding User.Person.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
                             <Grid>
@@ -106,18 +112,31 @@
 
                                 <TextBlock Text="Suffix:" Grid.Column="0"/>
                                 <TextBox x:Name="Suffix" Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding Person.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding User.Person.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
-                            <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding Person.GenderValues}" 
-                                                  SelectedValue="{Binding Person.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding User.Person.GenderValues}" 
+                                                  SelectedValue="{Binding User.Person.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-                            <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding Person.CivilStatusValues}"
-                                                  SelectedValue="{Binding Person.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding User.Person.CivilStatusValues}"
+                                                  SelectedValue="{Binding User.Person.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
+                            <Grid IsEnabled="{Binding User.Person.WasMaiden}" Visibility="{Binding User.Person.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                                <!--<Grid>-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="94*"/>
+                                    <ColumnDefinition Width="173*"/>
+                                    <ColumnDefinition Width="110*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Maiden name:" Grid.Column="0"/>
+                                <TextBox x:Name="MaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
+                             Text="{Binding User.Person.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                            </Grid>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -127,7 +146,7 @@
 
                                 <TextBlock Text="Brithdate:" Grid.Column="0"/>
                                 <DatePicker x:Name="Birthdate" Grid.Column="1"
-                                            SelectedDate="{Binding Person.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            SelectedDate="{Binding User.Person.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                             ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
                             </Grid>
                         </StackPanel>
@@ -203,7 +222,7 @@
 
                 <GroupBox Header="User list" Grid.Row="1">
                     <DataGrid  x:Name="UsersList" Grid.Column="1"
-                            ItemsSource="{Binding UsersList}" SelectedItem="{Binding Account}"
+                            ItemsSource="{Binding UsersList}" SelectedItem="{Binding User}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                         <!--<DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>

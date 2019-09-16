@@ -21,6 +21,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     public class MainWindowViewModel : WindowViewModel, IMainWindowViewModel, INotifyPropertyChanged
     {
         private PlutoContext _context;
+
+        private Page _currentPage;
         public IUser User { get; set; }
         public Dictionary<string, Page> Pages { get;  private set; }
         public ICommand ChangePageCommand { get; private set; }
@@ -30,22 +32,20 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         {
             if (window == null || context == null)
                 throw new ArgumentNullException("Window or context cannot be null.");
-
+            //assign logged in account
             this.User = Settings.Default.UserAccount;
-
             this._context = context;
+            //command
             this.ChangePageCommand = new ChangePageCommand(this);
-
+            //pages
             this.Pages = new Dictionary<string, Page>();
-
            this.Pages.Add("AdminPage", new AdminPage(_context));
             this.Pages.Add("SettingsPage", new SettingsPage());
             this.Pages.Add("BookingPage", new BookingPage());
-
+            //current page
             this.CurrentPage = Pages["AdminPage"];
         }
 
-        private Page _currentPage;
         public Page CurrentPage
         {
             get { return _currentPage; }

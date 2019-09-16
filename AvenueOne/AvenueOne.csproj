@@ -107,14 +107,10 @@
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IPerson.cs" />
-    <Compile Include="ViewModels\ModelViewModel\Interfaces\IModelViewModel.cs" />
-    <Compile Include="ViewModels\ModelViewModel\Interfaces\IPersonViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IProfileEditViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationParent.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IUser.cs" />
-    <Compile Include="ViewModels\ModelViewModel\Interfaces\IUserViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IWindowViewModel.cs" />
     <Compile Include="Core\IRepositories\IUserRepository.cs" />
     <Compile Include="Core\Models\Person.cs" />
@@ -130,9 +126,6 @@
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
     <Compile Include="ViewModels\Commands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
-    <Compile Include="ViewModels\ModelViewModel\ModelViewModel.cs" />
-    <Compile Include="ViewModels\ModelViewModel\PersonViewModel.cs" />
-    <Compile Include="ViewModels\ModelViewModel\UserViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\MainWindowViewModel.cs" />
