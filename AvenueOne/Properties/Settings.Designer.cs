@@ -25,20 +25,8 @@ namespace AvenueOne.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<User xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <Id />
-  <Username>Shimakee</Username>
-  <Password>Shimakee</Password>
-  <IsAdmin>false</IsAdmin>
-  <Person>
-    <Id>0be814c0a2664d12aac33996f6be56ff</Id>
-    <Gender>Male</Gender>
-    <CivilStatus>Single</CivilStatus>
-    <BirthDate xsi:nil=""true"" />
-    <FullName />
-  </Person>
-</User>")]
+        [global::System.Configuration.DefaultSettingValueAttribute("<User><Id></Id><Username></Username><Password></Password><IsAdmin>false</IsAdmin>" +
+            "<Person></Person></User>")]
         public global::AvenueOne.Models.User UserAccount {
             get {
                 return ((global::AvenueOne.Models.User)(this["UserAccount"]));

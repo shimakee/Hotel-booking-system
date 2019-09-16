@@ -24,7 +24,7 @@ namespace AvenueOne.Interfaces
     }
 
 
-    public interface IPerson
+    public interface IPerson : IBaseObservableModel
     {
         string Id { get; set; }
         string FirstName { get; set; }
@@ -38,6 +38,5 @@ namespace AvenueOne.Interfaces
         DateTime? BirthDate { get; set; }
 
         string FullName { get; set; }
-
     }
 }

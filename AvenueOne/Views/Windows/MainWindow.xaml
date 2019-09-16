@@ -24,11 +24,11 @@
                         </Ellipse.Fill>
                     </Ellipse>
 
-                    <TextBlock Text="Username" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding User.Username}" HorizontalAlignment="Center"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="Lastname,"/>
-                        <TextBlock Text="Firstname"/>
+                        <TextBlock Text="{Binding User.Person.LastName}"/>
+                        <TextBlock Text="{Binding User.Person.FirstName}"/>
                     </StackPanel>
                 </StackPanel>
 

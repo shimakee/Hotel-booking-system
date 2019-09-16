@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.ViewModelInterfaces;
+using AvenueOne.Models;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
 using System;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.ModelViewModel 
 {
-    public class PersonViewModel : ModelViewModel, IPersonViewModel //TODO : ADd User property; - also in settings
+    public class PersonViewModel : BaseObservableModel, IPersonViewModel //TODO : ADd User property; - also in settings
     {
         private IPerson _person;
         public byte[] GenderValues { get { return (byte[])Enum.GetValues(typeof(GenderType)); } }

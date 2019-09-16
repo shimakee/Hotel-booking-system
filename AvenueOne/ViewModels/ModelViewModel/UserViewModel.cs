@@ -14,7 +14,7 @@ using System.Collections.ObjectModel;
 
 namespace AvenueOne.ViewModels.ModelViewModel
 {
-    public class UserViewModel : ModelViewModel, IUserViewModel //TODO: Add Person property - also in settings
+    public class UserViewModel : BaseObservableModel, IUserViewModel //TODO: Add Person property - also in settings
     {
         private IUser _user;
         private string _passwordConfirm;
@@ -94,6 +94,11 @@ namespace AvenueOne.ViewModels.ModelViewModel
             set { _user.IsAdmin = value;
                 OnPropertyChanged();
             }
+        }
+        public Person Person
+        {
+            get { return _user.Person; }
+            set { _user.Person = value; }
         }
     }
 }

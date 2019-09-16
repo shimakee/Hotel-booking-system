@@ -1,5 +1,7 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Models;
 using AvenueOne.Persistence.Repositories;
+using AvenueOne.Properties;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using AvenueOne.Views.Pages;
@@ -19,6 +21,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     public class MainWindowViewModel : WindowViewModel, IMainWindowViewModel, INotifyPropertyChanged
     {
         private PlutoContext _context;
+        public IUser User { get; set; }
         public Dictionary<string, Page> Pages { get;  private set; }
         public ICommand ChangePageCommand { get; private set; }
 
@@ -27,6 +30,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         {
             if (window == null || context == null)
                 throw new ArgumentNullException("Window or context cannot be null.");
+
+            this.User = Settings.Default.UserAccount;
 
             this._context = context;
             this.ChangePageCommand = new ChangePageCommand(this);

@@ -10,28 +10,78 @@ using System.Configuration;
 namespace AvenueOne.Models
 {
     [SettingsSerializeAs(SettingsSerializeAs.Xml)]
-    public class Person : IPerson
+    public class Person : BaseObservableModel, IPerson
     {
-        public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string MaidenName { get; set; }
-        public string Suffix { get; set; }
-        public GenderType Gender { get; set; }
-        public CivilStatusType CivilStatus { get; set; }
-        public string Nationality { get; set; }
-        public DateTime? BirthDate { get; set; }
-        public virtual User User { get; set; }
+        private string _id;
+        private string _firstName;
+        private string _middleName;
+        private string _lastName;
+        private string _maidenName;
+        private string _suffix;
+        private GenderType _gender;
+        private CivilStatusType _civilStatus;
+        private string _nationality;
+        private DateTime? _birthDate;
+        private User _user;
 
-        //for XML
-        //<Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><MaidenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStatus><Nationality></Nationality><BirthDate></BirthDate>
-
-        public Person()
+        public string Id
         {
-            this.Id = GenerateId();
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
         }
+        public string FirstName
+        {
+            get { return _firstName; }
+            set
+            {
+                _firstName = value;
+                OnPropertyChanged();
+                OnPropertyChanged("FullName");
+            }
+        }
+        public string MiddleName
+        {
+            get { return _middleName; }
+            set { _middleName = value;
+                OnPropertyChanged();
+                OnPropertyChanged("FullName");
+            }
+        }
+        public string LastName
+        {
+            get { return _lastName; }
+            set
+            {
+                _lastName = value;
+                OnPropertyChanged();
+                OnPropertyChanged("FullName");
+            }
+        }
+        public string MaidenName
+        {
+            get { return _maidenName; }
+            set
+            {
+                _maidenName = value;
+                OnPropertyChanged();
+                OnPropertyChanged("FullName");
+            }
+        }
+        public string Suffix
+        {
+            get { return _suffix; }
+            set
+            {
+                _suffix = value;
+                OnPropertyChanged();
+                OnPropertyChanged("FullName");
 
+            }
+        }
         public string FullName
         {
             get
@@ -56,54 +106,67 @@ namespace AvenueOne.Models
             }
             set
             {
-                StringBuilder fullname = new StringBuilder();
-                if (HasContent(FirstName))
-                    fullname.Append(FirstName);
-
-                if (HasContent(MiddleName))
-                    fullname.Append($" {MiddleName}");
-
-                if (HasContent(MaidenName) && Gender == GenderType.Female)
-                    fullname.Append($" {MaidenName}");
-
-                if (HasContent(LastName))
-                    fullname.Append($" {LastName}");
-
-                if (HasContent(Suffix))
-                    fullname.Append($" {Suffix}");
-
-                //assign
                 if (FullName != value)
-                    FullName = fullname.ToString();
+                    OnPropertyChanged();
             }
+        }
+        public GenderType Gender
+        {
+            get { return _gender; }
+            set
+            {
+                _gender = value;
+                OnPropertyChanged();
+            }
+        }
+        public CivilStatusType CivilStatus
+        {
+            get { return _civilStatus; }
+            set
+            {
+                _civilStatus = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Nationality
+        {
+            get { return _nationality; }
+            set
+            {
+                _nationality = value;
+                OnPropertyChanged();
+            }
+        }
+        public DateTime? BirthDate
+        {
+            get { return _birthDate; }
+            set
+            {
+                _birthDate = value;
+                OnPropertyChanged();
+            }
+        }
+        public virtual User User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //for XML
+        //<Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><MaidenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStatus><Nationality></Nationality><BirthDate></BirthDate>
+
+        public Person()
+        {
+            this.Id = GenerateId();
         }
 
         private bool HasContent(string content)
         {
             return !string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content);
-        }
-
-        private string GenerateId()
-        {
-            return GenerateId(32);
-        }
-
-        private string GenerateId(int length)
-        {
-            if (length <= 0)
-                throw new ArgumentOutOfRangeException("Id length cannot be less than 1 in length.");
-
-            decimal d = length / 32;
-            int repeat = (int)Math.Floor(d);
-            StringBuilder Id = new StringBuilder();
-
-            if (repeat > 0)
-                for (int i = 0; i < repeat; i++)
-                {
-                    Id.Append(Guid.NewGuid().ToString("N"));
-                }
-
-            return Id.ToString(0, length);
         }
 
         public override bool Equals(object obj)
@@ -113,9 +176,9 @@ namespace AvenueOne.Models
 
             if (!(obj is Person))
                 return false;
-            
+
             Person person = (Person)obj;
-            
+
             return this.FullName == person.FullName &&
                 this.Gender == person.Gender &&
                 this.BirthDate.GetValueOrDefault().Year == person.BirthDate.GetValueOrDefault().Year &&
@@ -128,7 +191,7 @@ namespace AvenueOne.Models
             return
                 this.FullName.GetHashCode() ^
                 this.Gender.GetHashCode() ^
-                this.CivilStatus.GetHashCode()^
+                this.CivilStatus.GetHashCode() ^
                 (this.Nationality == null ? 0 : this.Nationality.GetHashCode()) ^
                 (this.BirthDate == null ? 0 : this.BirthDate.GetHashCode());
         }

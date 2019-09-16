@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,15 +13,50 @@ namespace AvenueOne.Models
 {
     //[TypeConverter(typeof(UserConverter))] // for settings
     [SettingsSerializeAs(SettingsSerializeAs.Xml)] //for settings
-    public class User : IUser
+    public class User : BaseObservableModel, IUser
     {
-        public string Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool IsAdmin { get; set; }
+        private string _id;
+        public string Id
+        {
+            get { return _id; }
+            set { _id = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _username;
+        public string Username
+        {
+            get { return _username; }
+            set { _username = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _password;
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _isAdmin;
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set { _isAdmin = value;
+                OnPropertyChanged();
+            }
+        }
 
         //reference
-        public virtual Person Person { get; set; }
+        private Person _person;
+        public virtual Person Person
+        {
+            get { return _person; }
+            set { _person = value;
+                OnPropertyChanged();
+            }
+        }
 
         //For Xml
         //<User><Id></Id><Username></Username><Password></Password><IsAdmin></IsAdmin><Person></Person></User>
@@ -79,29 +115,6 @@ namespace AvenueOne.Models
             :this(username, password, isAdmin)
         {
             this.Id =id;
-        }
-        
-        private string GenerateId()
-        {
-            return GenerateId(32);
-        }
-
-        private string GenerateId(int length)
-        {
-            if (length <= 0)
-                throw new ArgumentOutOfRangeException("Id length cannot be less than 1 in length.");
-
-            decimal d = length / 32;
-            int repeat = (int)Math.Floor(d);
-            StringBuilder Id = new StringBuilder();
-
-            if (repeat > 0)
-                for (int i = 0; i < repeat; i++)
-                {
-                    Id.Append(Guid.NewGuid().ToString("N"));
-                }
-
-            return Id.ToString(0, length);
         }
 
         public override bool Equals(object obj)

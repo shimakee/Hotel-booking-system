@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces
 {
-    public interface IUser
+    public interface IUser : IBaseObservableModel
     {
         string Id { get; set; }
         string Username { get; set; }
         string Password { get; set; }
         bool IsAdmin { get; set; }
+        Person Person { get; set; }
     }
 }

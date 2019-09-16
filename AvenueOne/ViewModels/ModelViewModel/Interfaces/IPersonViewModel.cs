@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces.ViewModelInterfaces
 {
-    public interface IPersonViewModel : IPerson, IModelViewModel
+    public interface IPersonViewModel : IPerson
     {
         #region Properties
         IPerson Person { get; set; }

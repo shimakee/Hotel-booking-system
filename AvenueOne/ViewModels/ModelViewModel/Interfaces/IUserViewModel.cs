@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces.ViewModelInterfaces
 {
-    public interface IUserViewModel : IUser, IModelViewModel
+    public interface IUserViewModel : IUser
     {
 
         IUser User { get; set; }
