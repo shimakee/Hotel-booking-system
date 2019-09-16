@@ -4,6 +4,7 @@ using AvenueOne.Interfaces.ViewModelInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Properties;
+using AvenueOne.Services;
 using AvenueOne.Utilities;
 using AvenueOne.Utilities.Tools;
 using AvenueOne.ViewModels.Commands;
@@ -47,8 +48,10 @@ namespace AvenueOne.Views.Pages
             IUser User = new User();
             IPerson Person = new Person();
             RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
+            EditProfileCommand editProfileCommand = new EditProfileCommand(new UnitOfWork(context), new WpfDisplayService());
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
+                                                                                                                                editProfileCommand,
                                                                                                                                 new UserViewModel(User), 
                                                                                                                                 new PersonViewModel(Person),
                                                                                                                                 _context.Users.Local);
@@ -60,18 +63,21 @@ namespace AvenueOne.Views.Pages
         //used a bit of code behind because its easier to implement
         private void Refresh_UsersList(object sender, RoutedEventArgs e)
         {
-            if(_context != null && ViewModel != null)
+            if (_context != null && ViewModel != null)
             {
                 _context.Users.ToList();
                 this.ViewModel.UsersList = _context.Users.Local;
             }
+            UsersList.Items.Refresh();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var person = this.ViewModel.Person;
-            var user = this.ViewModel.User;
-            MessageBox.Show($"Username:{user.Username}\nFull name:{person.FullName}.");
+            //var person = this.ViewModel.Person;
+            //var user = this.ViewModel.User;
+            //MessageBox.Show($"Username:{user.Username}\nFull name:{person.FullName}.");
+            if (_context != null)
+                _context.SaveChanges();
         }
     }
 }

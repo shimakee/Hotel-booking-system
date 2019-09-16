@@ -40,6 +40,7 @@ namespace AvenueOne.ViewModels.ModelViewModel
                 OnPropertyChanged("FirstName");
                 OnPropertyChanged("MiddleName");
                 OnPropertyChanged("LastName");
+                OnPropertyChanged("Suffix");
                 OnPropertyChanged("MaidenName");
                 OnPropertyChanged("IsNotMaiden");
                 OnPropertyChanged("Fullname");

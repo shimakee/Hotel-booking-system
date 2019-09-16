@@ -24,11 +24,23 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class AdminPageViewModel : WindowViewModel, IRegistrationParent
+    public class AdminPageViewModel : WindowViewModel, IRegistrationParent, IProfileEditViewModel
     {
+        //private ObservableCollection<User> _usersList;
+        public ObservableCollection<User> UsersList { get; set; }
+        //{
+        //    get { return _usersList; }
+        //    set
+        //    {
+        //        _usersList = value;
+        //    }
+        //}
+        public RegisterUserCommand RegisterUserCommand { get; private set; }
+        public EditProfileCommand EditProfileCommand { get; set; }
         public IPersonViewModel Person { get;  set; }
         public IUserViewModel User { get; set; }
         private User _account;
+
         public User Account
         {
             get
@@ -42,23 +54,23 @@ namespace AvenueOne.ViewModels.PagesViewModels
                 Person.Person = value.Person;
             }
         }
-        public ObservableCollection<User> UsersList { get; set; }
-
-        public RegisterUserCommand RegisterUserCommand { get; private set; }
 
         AdminPageViewModel(Window window)
             :base(window)
         {
         }
 
-        public AdminPageViewModel(Window window, RegisterUserCommand registerUserCommand, IUserViewModel userViewModel, IPersonViewModel personViewModel, ObservableCollection<User> usersList)
+        public AdminPageViewModel(Window window, RegisterUserCommand registerUserCommand, EditProfileCommand editProfileCommand, IUserViewModel userViewModel, IPersonViewModel personViewModel, ObservableCollection<User> usersList)
             : this(window)
         {
             this.User = userViewModel;
             this.Person = personViewModel;
-            registerUserCommand.ViewModel = this;
+            //registerUserCommand.ViewModel = this;
             this.RegisterUserCommand = registerUserCommand;
+            this.RegisterUserCommand.ViewModel = this;
             this.UsersList = usersList;
+            this.EditProfileCommand = editProfileCommand;
+            this.EditProfileCommand.ViewModel = this;
 
         }
 
@@ -71,6 +83,11 @@ namespace AvenueOne.ViewModels.PagesViewModels
                 UsersList.Add(e.User);
         }
 
+        //public event PropertyChangedEventHandler PropertyChanged;
 
+        //public void OnPropertyChanged([CallerMemberName] String property = "")
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        //}
     }
 }
