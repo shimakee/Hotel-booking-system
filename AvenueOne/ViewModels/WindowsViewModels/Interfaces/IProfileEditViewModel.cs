@@ -2,8 +2,9 @@
 
 namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
-    public interface IProfileEditViewModel : IWindowViewModel
+    public interface IProfileEditViewModel : IUserCrudViewModel
     {
-        IUser User { get; set; }
+        IUser Account { get; set; }
+        IPerson Profile { get; set; }
     }
 }

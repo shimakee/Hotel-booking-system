@@ -1,11 +1,11 @@
 ﻿using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 
 namespace AvenueOne.Interfaces
 {
-    public interface IRegistrationViewModel : IWindowViewModel
+    public interface IRegistrationViewModel : IUserCrudViewModel
     {
         AddUserCommand AddUserCommand { get; }
-        IUser User { get; }
 
         //event EventHandler<UserEventArgs> UserAdded;
     }

@@ -41,31 +41,44 @@ namespace AvenueOne.ViewModels.Commands
 
         public async void Execute(object parameter)
         {
-            if (ViewModel == null)
-                throw new NullReferenceException("View model must not be null in order to execute command.");
-
-            //User user = this.ViewModel.User.User as User;
-            if (ViewModel != null)
+            try
             {
-                IUser user = await Task.Run(() => _unitOfWork.Users.GetAsync(ViewModel.User.Id));
-                //User user = await Task.Run(()=> _unitOfWork.Users.Find(u => u.Id == ViewModel.Account.Id).FirstOrDefault());
-                if (user == null)
-                    throw new NullReferenceException("Account does not exist.");
+                if (ViewModel == null)
+                    throw new NullReferenceException("View model must not be null in order to execute command.");
 
-                string password = user.Password; //conserve password;
-                user = ViewModel.User as User;
-                user.Password = password;
-                user.PasswordConfirm = password;
-                int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+                if (ViewModel.User == null)
+                    throw new NullReferenceException("No item selected to update.");
 
-                if (n == 0)
+                //User user = this.ViewModel.User.User as User;
+                if (ViewModel != null && ViewModel.User != null)
                 {
-                    _displayService.MessageDisplay("Could not edit accout.", "Account edit");
+
+                    IUser user = await Task.Run(() => _unitOfWork.Users.GetAsync(ViewModel.User.Id));
+                    //User user = await Task.Run(()=> _unitOfWork.Users.Find(u => u.Id == ViewModel.Account.Id).FirstOrDefault());
+                    if (user == null)
+                        throw new NullReferenceException("Account does not exist.");
+
+                    string password = user.Password; //conserve hashed password;
+                    user = ViewModel.Account.CopyPropertyValues(user);
+                    IPerson person = user.Person;
+                    person = ViewModel.Profile.CopyPropertyValues(person);
+                    user.Password = password;
+                    user.PasswordConfirm = password;
+                    int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+
+                    if (n == 0)
+                    {
+                        _displayService.MessageDisplay("Could not edit accout.", "Account edit");
+                    }
+                    else
+                    {
+                        _displayService.MessageDisplay($"Edited account: {user.Username}.\nAffected rows: {n}.");
+                    }
                 }
-                else
-                {
-                    _displayService.MessageDisplay($"Edited account: {user.Username}.\nAffected rows: {n}.");
-                }
+            }
+            catch(Exception ex)
+            {
+                _displayService.ErrorDisplay(ex.Message, "Error");
             }
         }
     }

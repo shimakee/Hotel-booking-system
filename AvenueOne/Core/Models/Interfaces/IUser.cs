@@ -15,5 +15,7 @@ namespace AvenueOne.Interfaces
         string PasswordConfirm { get; set; }
         bool IsAdmin { get; set; }
         Person Person { get; set; }
+        IUser CopyPropertyValues();
+        IUser CopyPropertyValues(IUser user);
     }
 }

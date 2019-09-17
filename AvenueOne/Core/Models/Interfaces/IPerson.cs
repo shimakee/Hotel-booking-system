@@ -39,5 +39,7 @@ namespace AvenueOne.Interfaces
 
         string FullName { get; set; }
         //User User { get; set; }
+        IPerson CopyPropertyValues();
+        IPerson CopyPropertyValues(IPerson person);
     }
 }

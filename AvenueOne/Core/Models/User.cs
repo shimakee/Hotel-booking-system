@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -144,6 +145,49 @@ namespace AvenueOne.Models
         #endregion
 
         #region MethodsAndOverrides
+        //public static void CopyPropertiesTo<T, TU>(this T source, TU dest)
+        //{
+        //    var sourceProps = typeof(T).GetProperties().Where(x => x.CanWrite && x.CanRead).ToList();
+        //    var destProps = typeof(TU).GetProperties()
+        //            .Where(x => x.CanWrite && x.CanRead)
+        //            .ToList();
+
+        //    foreach (var sourceProp in sourceProps)
+        //    {
+        //        if (destProps.Any(x => x.Name == sourceProp.Name))
+        //        {
+        //            var p = destProps.First(x => x.Name == sourceProp.Name);
+        //            if (p.CanWrite)
+        //            { // check if the property can be set or no.
+        //                p.SetValue(dest, sourceProp.GetValue(source, null), null);
+        //            }
+        //        }
+
+        //    }
+
+        //}
+
+        public IUser CopyPropertyValues()
+        {
+            return CopyPropertyValues(new User());
+        }
+        public IUser CopyPropertyValues(IUser user)
+        {
+            List<PropertyInfo> propertyList = typeof(IUser).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
+
+            foreach( PropertyInfo info in propertyList)
+            {
+                if(typeof(IUser).GetProperty(info.Name) != null)
+                    info.SetValue(user, info.GetValue(this));
+            }
+            return user;
+        }
+
+        public User Clone()
+        {
+            User user = this.MemberwiseClone() as User;
+            return user;
+        }
         public override bool Equals(object obj)
         {
             if (obj == null)

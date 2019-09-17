@@ -104,6 +104,7 @@
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
     <Compile Include="ViewModels\Commands\EditProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
+    <Compile Include="ViewModels\Commands\RemoveUserCommand.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IPerson.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IProfileEditViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IUser.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IUserCrudViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IWindowViewModel.cs" />
     <Compile Include="Core\IRepositories\IUserRepository.cs" />
     <Compile Include="Core\Models\Person.cs" />

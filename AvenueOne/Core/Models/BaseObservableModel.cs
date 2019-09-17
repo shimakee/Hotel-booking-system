@@ -77,7 +77,6 @@ namespace AvenueOne.Models
         public bool IsValidProperty(string property)
         {
             string result = ValidateProperty(property);
-            Trace.WriteLine($"{property}: {result}");
             if (result == null)
                 return true;
             return false;

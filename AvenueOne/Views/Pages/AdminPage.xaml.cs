@@ -2,6 +2,7 @@
 using AvenueOne.Models;
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
+using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.PagesViewModels;
@@ -29,11 +30,16 @@ namespace AvenueOne.Views.Pages
             this._context = context;
             IUser User = new User();
             User.Person = new Person();
+            IDisplayService displayService = new WpfDisplayService();
             RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
-            EditProfileCommand editProfileCommand = new EditProfileCommand(new UnitOfWork(context), new WpfDisplayService());
+            EditProfileCommand editProfileCommand = new EditProfileCommand(new UnitOfWork(context), 
+                                                                                                                                displayService);
+            RemoveUserCommand removeUserCommand = new RemoveUserCommand(new UnitOfWork(context), 
+                                                                                                                                        displayService);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,
+                                                                                                                                removeUserCommand,
                                                                                                                                 User,
                                                                                                                                 _context.Users.Local);
 

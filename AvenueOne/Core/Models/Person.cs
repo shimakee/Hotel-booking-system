@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using System.Reflection;
 
 namespace AvenueOne.Models
 {
@@ -195,6 +196,22 @@ namespace AvenueOne.Models
 
 
         #region MethodsAndOverrides
+
+        public IPerson CopyPropertyValues()
+        {
+            return CopyPropertyValues(new Person());
+        }
+        public IPerson CopyPropertyValues(IPerson person)
+        {
+            List<PropertyInfo> propertyList = typeof(IPerson).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
+
+            foreach (PropertyInfo info in propertyList)
+            {
+                if (typeof(IPerson).GetProperty(info.Name) != null)
+                    info.SetValue(person, info.GetValue(this));
+            }
+            return person;
+        }
         private bool HasContent(string content)
         {
             return !string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content);

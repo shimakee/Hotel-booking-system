@@ -10,7 +10,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     public class RegistrationWindowViewModel : WindowViewModel, IRegistrationViewModel
     {
         public AddUserCommand AddUserCommand { get; private set; }
-        public IUser User { get; private set; }
+        public IUser User { get; set; }
 
         RegistrationWindowViewModel(Window window)
             :base (window)

@@ -12,7 +12,7 @@ namespace AvenueOne.Services.Interfaces
         void MessageDisplay(string message, string caption);
         void ErrorDisplay(string message, string caption);
         bool MessagePrompt(string message, string caption);
-        bool? MessagePromt(string message, string caption);
+        bool? MessagePromptNullable(string message, string caption);
 
     }
 }

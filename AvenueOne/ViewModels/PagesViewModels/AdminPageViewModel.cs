@@ -6,23 +6,57 @@ using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class AdminPageViewModel : WindowViewModel, IProfileEditViewModel
+    public class AdminPageViewModel : WindowViewModel, IProfileEditViewModel, INotifyPropertyChanged
     {
         public ObservableCollection<User> UsersList { get; set; }
         public RegisterUserCommand RegisterUserCommand { get; private set; }
         public EditProfileCommand EditProfileCommand { get; set; }
-        public IUser User { get; set; }
+        public RemoveUserCommand RemoveUserCommand { get; set; }
+        private IUser _user;
+        public IPerson Profile { get; set; }
+        public IUser Account { get; set; }
+
+        public IUser User
+        {
+            get { return _user; }
+            set { _user = value;
+                //to separate editing... conserve the original values.
+                if(value != null)
+                {
+                    Profile = value.Person.CopyPropertyValues();
+                    Account = value.CopyPropertyValues();
+                }
+                else
+                {
+                    Account = null;
+                    Profile = null;
+                }
+                OnPropertyChanged();
+                OnPropertyChanged("Account");
+                OnPropertyChanged("Profile");
+            }
+        }
 
         AdminPageViewModel(Window window)
             :base(window)
         {
+            Account = new User();
+            Profile = new Person();
         }
 
-        public AdminPageViewModel(Window window, RegisterUserCommand registerUserCommand, EditProfileCommand editProfileCommand, IUser user, ObservableCollection<User> usersList)
+        public AdminPageViewModel(Window window, 
+                                                        RegisterUserCommand registerUserCommand, 
+                                                        EditProfileCommand editProfileCommand, 
+                                                        RemoveUserCommand removeUserCommand, 
+                                                        IUser user, 
+                                                        ObservableCollection<User> usersList)
             : this(window)
         {
 
@@ -35,6 +69,8 @@ namespace AvenueOne.ViewModels.PagesViewModels
             this.RegisterUserCommand.ViewModel = this;
             this.EditProfileCommand = editProfileCommand;
             this.EditProfileCommand.ViewModel = this;
+            this.RemoveUserCommand = removeUserCommand;
+            this.RemoveUserCommand.ViewModel = this;
 
         }
 
@@ -49,6 +85,12 @@ namespace AvenueOne.ViewModels.PagesViewModels
                 UsersList.Add(e.User);
             }
 
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

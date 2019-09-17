@@ -39,7 +39,7 @@ namespace AvenueOne.Services
             return false;
         }
 
-        public bool? MessagePromt(string message, string caption)
+        public bool? MessagePromptNullable(string message, string caption)
         {
             MessageBoxResult result = MessageBox.Show(message, caption, MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
 
