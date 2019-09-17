@@ -27,7 +27,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             this.User = user;
             this.AddUserCommand = addUserCommand;
             addUserCommand.ViewModel = this;
-            addUserCommand.User = User;
+            //addUserCommand.User = User;
         }
     }
 

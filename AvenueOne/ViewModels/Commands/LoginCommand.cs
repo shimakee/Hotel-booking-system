@@ -12,17 +12,16 @@ namespace AvenueOne.ViewModels.Commands
     public class LoginCommand : ICommand
     {
         public ILoginViewModel ViewModel { get; set; }
-        //public IUser User { get; set; }
         private ILoginService _loginService;
         private IDisplayService _displayService;
 
         //public LoginCommand(ILoginViewModel loginWindowViewModel)
         public LoginCommand(ILoginService loginService, IDisplayService displayService)
         {
-            //_viewModel = loginWindowViewModel;
-            //_user = user;
-            _loginService = loginService;
-            _displayService = displayService;
+
+
+            _loginService = loginService ?? throw new ArgumentNullException("Login service cannot be null.");
+            _displayService = displayService ?? throw new ArgumentNullException("Display service cannot be null.");
         }
 
         public event EventHandler CanExecuteChanged;
@@ -48,7 +47,8 @@ namespace AvenueOne.ViewModels.Commands
                 PasswordBox passwordBox = (PasswordBox)values[1];
                 string password = passwordBox.Password;
 
-                IUser user = ViewModel.User;
+
+                IUser user = ViewModel.User ?? throw new ArgumentNullException("View model user cannot be null.");
                 //_viewModel.Login(username, password);
                 if (user == null)
                     throw new NullReferenceException("User cannot be null");

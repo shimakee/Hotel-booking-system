@@ -16,7 +16,7 @@ namespace AvenueOne.ViewModels.Commands
         private IDisplayService _displayService;
         private IUnitOfWork _unitOfWork;
         public IRegistrationViewModel ViewModel { get; set; }
-        public IUser User { get; set; }
+        //public IUser User { get; set; }
 
         public AddUserCommand(IDisplayService displayService, IUnitOfWork unitOfWork)
         {
@@ -55,8 +55,11 @@ namespace AvenueOne.ViewModels.Commands
 
                 if (password == null || passwordConfirm == null)
                     throw new ArgumentNullException("Password and PasswordConfirm cannot be null.");
-                if (User == null)
-                    throw new ArgumentNullException("User and person view model cannot be null, must assign valid view model to the properties.");
+                //if (User == null)
+                //    throw new ArgumentNullException("User and person view model cannot be null, must assign valid view model to the properties.");
+                if (ViewModel.User == null)
+                    throw new NullReferenceException("User cannot be null");
+                IUser User = ViewModel.User;
 
                 User.Password = password;
                 User.PasswordConfirm = passwordConfirm;
@@ -82,7 +85,7 @@ namespace AvenueOne.ViewModels.Commands
             catch (Exception ex)
             {
                 _displayService.ErrorDisplay(ex.Message, "Error");
-                throw;
+                //throw;
             }
         }
 

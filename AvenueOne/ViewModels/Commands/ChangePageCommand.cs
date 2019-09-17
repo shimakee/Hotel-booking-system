@@ -15,7 +15,7 @@ namespace AvenueOne.ViewModels.Commands
 
         public ChangePageCommand(IMainWindowViewModel viewModel)
         {
-            this.ViewModel = viewModel;
+            this.ViewModel = viewModel ?? throw new ArgumentNullException("ViewModel cannot be null.");
         }
         public event EventHandler CanExecuteChanged;
 
