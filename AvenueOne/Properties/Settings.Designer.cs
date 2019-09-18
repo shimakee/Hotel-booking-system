@@ -25,19 +25,6 @@ namespace AvenueOne.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<User><Id></Id><Username></Username><Password></Password><IsAdmin>false</IsAdmin>" +
-            "<Person></Person></User>")]
-        public global::AvenueOne.Models.User UserAccount {
-            get {
-                return ((global::AvenueOne.Models.User)(this["UserAccount"]));
-            }
-            set {
-                this["UserAccount"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><Ma" +
             "idenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStat" +
             "us><Nationality></Nationality><BirthDate></BirthDate><FullName></FullName>")]
@@ -47,6 +34,30 @@ namespace AvenueOne.Properties {
             }
             set {
                 this["UserProfile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"
+          <User>
+            <Id>
+            </Id>
+            <Username>
+            </Username>
+            <Password>
+            </Password>
+            <IsAdmin>false</IsAdmin>
+            <Person>
+            </Person>
+          </User>
+        ")]
+        public global::AvenueOne.Models.User UserAccount {
+            get {
+                return ((global::AvenueOne.Models.User)(this["UserAccount"]));
+            }
+            set {
+                this["UserAccount"] = value;
             }
         }
     }
