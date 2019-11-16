@@ -5,6 +5,7 @@ namespace AvenueOne.Migrations
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using AvenueOne.Services;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<AvenueOne.Persistence.Repositories.PlutoContext>
@@ -26,7 +27,11 @@ namespace AvenueOne.Migrations
             User user2 = new User("dinah", "dinah", false);
 
             user.Person = person;
+            user.Password = HashService.Hash(user.Password);
+            user.PasswordConfirm = user.Password;
             user2.Person = person2;
+            user2.Password = HashService.Hash(user2.Password);
+            user2.PasswordConfirm = user2.Password;
 
             //insert
             context.Users.AddRange(new List<User>() { user, user2 });
