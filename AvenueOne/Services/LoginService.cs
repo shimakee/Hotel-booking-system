@@ -32,15 +32,38 @@ namespace AvenueOne.Utilities
             if (String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(password))
                 throw new ArgumentNullException("The argument username and password cannot be null, empty, or whitespace.");
 
-            User user = _unitOfWork.Users.Find(u => u.Username == username).FirstOrDefault<User>();
+            User user;
 
-            //check that password matches
-            if (user == null)
-                return null;
-            if (!HashService.Verify(password, user.Password))
-                return null;
+            List<User> users = _unitOfWork.Users.GetAll() as List<User>;
+            if (users.Count <= 0)
+            {
+                Person person = new Person()
+                {
+                    FirstName = "Temporary",
+                    LastName = "Account"
+                };
+
+                user = new User("tempAccount", "password123", true);
+
+                user.Person = person;
+            }
+            else
+            {
+                //User user = _unitOfWork.Users.Find(u => u.Username == username).FirstOrDefault<User>();
+                user = users.Find(u => u.Username == username);
+
+                //check that password matches
+                if (user == null)
+                    return null;
+                if (!HashService.Verify(password, user.Password))
+                    return null;
+            }
 
             user.Password = null; //remove password so that it wont be shown.
+            Settings.Default.UserAccount = user;
+            Settings.Default.UserProfile = user.Person;
+            Settings.Default.Save();
+
             return user;
         }
 

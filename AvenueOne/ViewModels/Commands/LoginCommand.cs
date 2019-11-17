@@ -1,6 +1,4 @@
 ﻿using AvenueOne.Interfaces;
-using AvenueOne.Models;
-using AvenueOne.Properties;
 using AvenueOne.Services.Interfaces;
 using System;
 using System.Windows;
@@ -70,11 +68,6 @@ namespace AvenueOne.ViewModels.Commands
                     }
                     else
                     {
-
-                        userLogin.Password = null; //TODO: redundancy, i think no longer necessary since it is already null in the loginService;
-                        Settings.Default.UserAccount = userLogin as User;
-                        Settings.Default.UserProfile = userLogin.Person;
-                        Settings.Default.Save();
                         _displayService.MessageDisplay($"Welcome {userLogin.Person.FullName} using account {userLogin.Username}.");
 
                         Window mainWindow = _displayService.CreateMainWindow();
