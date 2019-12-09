@@ -4,10 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AvenueOne.Views.Pages"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
+      xmlns:converters="clr-namespace:AvenueOne.Converters"
       mc:Ignorable="d" 
-      Loaded="SettingsPage_Loaded"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SettingsPage">
+
+
+    <Page.Resources>
+        <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+    </Page.Resources>
 
     <TabControl>
 
@@ -24,39 +30,125 @@
 
 
                 <GroupBox Header="Account Info" Grid.Column="0">
-                    <Grid Grid.Column="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="20*"/>
-                        </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="10">
+                        <Grid Margin="0 0 0 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <CheckBox Content="isAdmin" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Account.IsAdmin}"/>
+                        </Grid>
 
-                        <StackPanel  Grid.Column="0">
-                            <TextBlock x:Name="IsAdminDisplay" Text="Administrator"/>
-                            <TextBlock x:Name="IdDisplay" Text="Id"/>
-                            <TextBlock x:Name="UsernameDisplay" Text="Username"/>
-                            <TextBlock x:Name="PasswordDisplay" Text="Password"/>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="1" IsEnabled="False">
-                            <CheckBox x:Name="IsAdmin" IsChecked="{x:Null}"/>
-                            <TextBox x:Name="Id" Text=""/>
-                            <TextBox x:Name="Username" Text=""/>
-                            <TextBox x:Name="Password" Text=""/>
-                        </StackPanel>
+                            <TextBlock Text="Username:" Grid.Column="0"/>
+                            <TextBox x:Name="Username" Text="{Binding Account.Username}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                        </Grid>
 
-                    </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Password:" Grid.Column="0"/>
+                            <TextBox x:Name="Password" IsEnabled="False"
+                                         Text="Password" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                        </Grid>
+
+                        <Grid Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Firstname:" Grid.Column="0"/>
+                            <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
+                                         Text="{Binding Profile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="93*"/>
+                                <ColumnDefinition Width="62*"/>
+                                <ColumnDefinition Width="26*"/>
+                                <ColumnDefinition Width="190*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Middlename:" Grid.Column="0"/>
+                            <TextBox x:Name="Middlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"
+                                         Text="{Binding Profile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Lastname:" Grid.Column="0"/>
+                            <TextBox x:Name="Lastname"  Grid.Column="1" HorizontalAlignment="Stretch"
+                                         Text="{Binding Profile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Suffix:" Grid.Column="0"/>
+                            <TextBox x:Name="Suffix" Grid.Column="1" HorizontalAlignment="Stretch"
+                             Text="{Binding Profile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                        </Grid>
+
+                        <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding Profile.GenderValues}" 
+                                                  SelectedValue="{Binding Profile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}" HorizontalAlignment="Left" Width="365"/>
+
+                        <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding Profile.CivilStatusValues}"
+                                                  SelectedValue="{Binding Profile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+
+                        <Grid IsEnabled="{Binding Profile.WasMaiden}" Visibility="{Binding Profile.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                            <!--<Grid>-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="94*"/>
+                                <ColumnDefinition Width="173*"/>
+                                <ColumnDefinition Width="110*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Maiden name:" Grid.Column="0"/>
+                            <TextBox x:Name="MaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
+                             Text="{Binding Profile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                        </Grid>
+                        
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Brithdate:" Grid.Column="0"/>
+                            <DatePicker x:Name="Birthdate" Grid.Column="1"
+                                            SelectedDate="{Binding Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+                        </Grid>
+                        <Button Content="Save Edit" Margin="0 10 0 0" 
+                                    Command="{Binding EditProfileCommand}"/>
+                    </StackPanel>
                 </GroupBox>
                 
-                <StackPanel Grid.Row="1" Grid.Column="1"
-                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Content="Load"
-                            Padding="20 5 20 5"
-                            Click="Button_LoadSettings"/>
-                    <Button Content="Save"
-                            Padding="20 5 20 5"
-                            Click="Button_SaveSettings"
-                            IsEnabled="False"/>
-                </StackPanel>
             </Grid>
 
         </TabItem>

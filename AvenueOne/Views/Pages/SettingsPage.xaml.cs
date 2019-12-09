@@ -1,6 +1,13 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
+using AvenueOne.Persistence.Repositories;
 using AvenueOne.Properties;
+using AvenueOne.Services;
+using AvenueOne.Services.Interfaces;
+using AvenueOne.Utilities;
+using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.PagesViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,35 +30,54 @@ namespace AvenueOne.Views.Pages
     /// </summary>
     public partial class SettingsPage : Page
     {
-        public SettingsPage()
+        private PlutoContext _context;
+        public SettingsPageViewModel ViewModel { get; private set; }
+        public SettingsPage(PlutoContext context)
         {
+            if (context == null)
+            {
+                throw new NullReferenceException("context cannot be null.");
+            }
+
             InitializeComponent();
+
+            this._context = context;
+
+            IDisplayService displayService = new WpfDisplayService();
+            IUnitOfWork unitOfWork = new UnitOfWork(_context);
+            IUser user = _context.Users.Find(Settings.Default.UserAccount.Id);
+            EditProfileCommand editProfileCommand = new EditProfileCommand(unitOfWork, displayService);
+            SettingsPageViewModel settingsPageViewModel = new SettingsPageViewModel(Window.GetWindow(this),
+                                                                                                                                                editProfileCommand, user);
+
+            this.ViewModel = settingsPageViewModel;
+            DataContext = settingsPageViewModel;
         }
 
-        private void SettingsPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadSettings();
-        }
+        //private void SettingsPage_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    this.ViewModel.User = _context.Users.Find((User)Settings.Default.UserAccount);
+        //}
 
-        private void Button_SaveSettings(object sender, RoutedEventArgs e)
-        {
-            IUser user = new User(Username.Text,Password.Text, IsAdmin.IsChecked ?? false,  Id.Text);
-            Settings.Default["UserAccount"] = user;
-            Settings.Default.Save();
-        }
+        //private void Button_SaveSettings(object sender, RoutedEventArgs e)
+        //{
+        //    IUser user = new User(Username.Text,Password.Text, IsAdmin.IsChecked ?? false,  Id.Text);
+        //    Settings.Default["UserAccount"] = user;
+        //    Settings.Default.Save();
+        //}
 
-        private void Button_LoadSettings(object sender, RoutedEventArgs e)
-        {
-            LoadSettings();
-        }
+        //private void Button_LoadSettings(object sender, RoutedEventArgs e)
+        //{
+        //    LoadSettings();
+        //}
 
-        private void LoadSettings()
-         {
-            IUser user = (User)Settings.Default["UserAccount"];
-            Id.Text = user.Id?.ToString() ?? "";
-            Username.Text = user.Username?.ToString() ?? "";
-            Password.Text = user.Password?.ToString() ?? "";
-            IsAdmin.IsChecked = user.IsAdmin;
-        }
+        //private void LoadSettings()
+        // {
+        //    IUser user = (User)Settings.Default["UserAccount"];
+        //    Id.Text = user.Id?.ToString() ?? "";
+        //    Username.Text = user.Username?.ToString() ?? "";
+        //    Password.Text = user.Password?.ToString() ?? "";
+        //    IsAdmin.IsChecked = user.IsAdmin;
+        //}
     }
 }

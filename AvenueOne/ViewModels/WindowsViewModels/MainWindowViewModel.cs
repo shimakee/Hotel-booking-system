@@ -40,7 +40,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             //pages
             this.Pages = new Dictionary<string, Page>();
            this.Pages.Add("AdminPage", new AdminPage(_context));
-            this.Pages.Add("SettingsPage", new SettingsPage());
+            this.Pages.Add("SettingsPage", new SettingsPage(_context));
             this.Pages.Add("BookingPage", new BookingPage());
             //current page
             this.CurrentPage = Pages["AdminPage"];

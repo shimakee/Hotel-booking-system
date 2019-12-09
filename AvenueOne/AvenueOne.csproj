@@ -145,6 +145,7 @@
     <Compile Include="ViewModels\Commands\EditProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
     <Compile Include="ViewModels\Commands\RemoveUserCommand.cs" />
+    <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IPerson.cs" />
