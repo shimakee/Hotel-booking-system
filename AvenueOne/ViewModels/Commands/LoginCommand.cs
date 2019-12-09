@@ -79,10 +79,11 @@ namespace AvenueOne.ViewModels.Commands
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //perhaps log something here.
-                throw;
+                _displayService.ErrorDisplay(ex.Message, "Login error!");
+               throw;
             }
         }
     }

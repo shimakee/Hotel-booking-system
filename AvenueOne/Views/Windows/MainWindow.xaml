@@ -20,7 +20,7 @@
                 <StackPanel Margin="5">
                     <Ellipse Height="50" Width="50">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="C:\Users\deleo\OneDrive\Pictures\VimiMagic\imm_2018_07_29_12_27_55_894.JPG"/>
+                            <ImageBrush ImageSource="/AvenueOne;component/Assets/defaultAvatar.JPG"/>
                         </Ellipse.Fill>
                     </Ellipse>
 
