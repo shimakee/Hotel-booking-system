@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
+using AvenueOne.Properties;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.PagesViewModels;
@@ -35,7 +36,11 @@ namespace AvenueOne.ViewModels.Commands
         public bool CanExecute(object parameter)
         {
             if (ViewModel != null)
-                return ViewModel.UserAccount.IsAdmin;
+            {
+
+                return ViewModel.UserAccount.IsAdmin || ViewModel.Account.Id == ViewModel.UserAccount.Id;
+            }
+
             return false;
         }
 

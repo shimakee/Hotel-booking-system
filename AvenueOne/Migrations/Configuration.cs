@@ -21,20 +21,20 @@ namespace AvenueOne.Migrations
             context.Database.ExecuteSqlCommand("DELETE FROM USERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
 
-            //Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
-            //Person person2 = new Person() { FirstName = "Dinah", LastName = "Hong" };
-            //User user = new User("shimakee", "shimakee", true);
-            //User user2 = new User("dinah", "dinah", false);
+            Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
+            Person person2 = new Person() { FirstName = "Dinah", LastName = "Hong" };
+            User user = new User("shimakee", "shimakee", true);
+            User user2 = new User("dinah", "dinah", false);
 
-            //user.Person = person;
-            //user.Password = HashService.Hash(user.Password);
-            //user.PasswordConfirm = user.Password;
-            //user2.Person = person2;
-            //user2.Password = HashService.Hash(user2.Password);
-            //user2.PasswordConfirm = user2.Password;
+            user.Person = person;
+            user.Password = HashService.Hash(user.Password);
+            user.PasswordConfirm = user.Password;
+            user2.Person = person2;
+            user2.Password = HashService.Hash(user2.Password);
+            user2.PasswordConfirm = user2.Password;
 
             //insert
-            //context.Users.AddRange(new List<User>() { user, user2 });
+            context.Users.AddRange(new List<User>() { user, user2 });
 
             //  This method will be called after migrating to the latest version.
 

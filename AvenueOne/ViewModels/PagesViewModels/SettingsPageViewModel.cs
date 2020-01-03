@@ -27,8 +27,11 @@ namespace AvenueOne.ViewModels.PagesViewModels
                                                         IUser user)
             : this(window)
         {
-            if (user.Person == null)
-                throw new ArgumentNullException("Person object inside user of type IUser cannot be null.");
+
+            //commented out because it causes an error when there is no user in the database
+            //and a temporary null user is granted access to enable to create a user account.
+            //if (user.Person == null)
+            //    throw new ArgumentNullException("Person object inside user of type IUser cannot be null.");
 
             this.User = user;
             this.EditProfileCommand = editProfileCommand;

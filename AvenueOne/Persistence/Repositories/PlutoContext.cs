@@ -17,7 +17,7 @@ namespace AvenueOne.Persistence.Repositories
         public DbSet<Person> People { get; set; }
 
         public PlutoContext()
-            :base("name=DefaultConnection")
+            :base("name=LocalConnection")
         {
 
         }
