@@ -45,6 +45,17 @@ namespace AvenueOne.ViewModels.PagesViewModels
         private IUser _user;
         public IUser Account { get; set; }
         public IPerson Profile { get; set; }
+
+        private bool _isPasswordIncluded;
+        public bool IsPasswordIncluded
+        {
+            get { return _isPasswordIncluded; }
+            set
+            {
+                _isPasswordIncluded = value;
+                OnPropertyChanged();
+            }
+        }
         public IUser User
         {
             get { return _user; }

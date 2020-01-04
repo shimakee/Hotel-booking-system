@@ -23,6 +23,15 @@ namespace AvenueOne.ViewModels.PagesViewModels
         public IPerson Profile { get; set; }
         public IUser Account { get; set; }
 
+        private bool _isPasswordIncluded;
+        public bool IsPasswordIncluded
+        {
+            get { return _isPasswordIncluded; }
+            set { _isPasswordIncluded = value;
+                OnPropertyChanged();
+            }
+        }
+
         public IUser User
         {
             get { return _user; }

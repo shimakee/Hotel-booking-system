@@ -6,5 +6,6 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
     {
         IUser Account { get; set; }
         IPerson Profile { get; set; }
+        bool IsPasswordIncluded { get; set; }
     }
 }
