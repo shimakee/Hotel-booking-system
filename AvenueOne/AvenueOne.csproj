@@ -108,7 +108,9 @@
     <Compile Include="Core\IRepositories\IPersonRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\BaseObservableModel.cs" />
+    <Compile Include="Core\Models\Customer.cs" />
     <Compile Include="Core\Models\Interfaces\IBaseObservableModel.cs" />
+    <Compile Include="Core\Models\Interfaces\ICustomer.cs" />
     <Compile Include="Core\Models\UserEventArgs.cs" />
     <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
     <Compile Include="EntityConfiguration\UserConfiguration.cs" />
@@ -146,7 +148,9 @@
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
     <Compile Include="ViewModels\Commands\RemoveUserCommand.cs" />
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerTabViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IPerson.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IMainWindowViewModel.cs" />

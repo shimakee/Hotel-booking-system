@@ -6,6 +6,7 @@ using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.PagesViewModels;
+using AvenueOne.ViewModels.TabViewModels;
 using System;
 using System.Linq;
 using System.Windows;
@@ -30,18 +31,22 @@ namespace AvenueOne.Views.Pages
             this._context = context;
             IUser User = new User();
             User.Person = new Person();
+            ICustomer Customer = new Customer();
+            Customer.Person = new Person();
             IDisplayService displayService = new WpfDisplayService();
             RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
             EditProfileCommand editProfileCommand = new EditProfileCommand(new UnitOfWork(context), 
                                                                                                                                 displayService);
             RemoveUserCommand removeUserCommand = new RemoveUserCommand(new UnitOfWork(context), 
                                                                                                                                         displayService);
+            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,
                                                                                                                                 removeUserCommand,
                                                                                                                                 User,
-                                                                                                                                _context.Users.Local);
+                                                                                                                                _context.Users.Local,
+                                                                                                                                customerTab);
 
             this.ViewModel = _adminViewModel;
             DataContext = _adminViewModel;

@@ -75,7 +75,7 @@
                                     <ColumnDefinition Width="4*"/>
                                 </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="Password:" Grid.Column="0"/>
+                                <TextBlock Text="Password:" Grid.Column="0"/>
 
                                 <TextBox 
                                          IsEnabled="{Binding IsPasswordIncluded}"
@@ -280,6 +280,227 @@
 
         <TabItem Header="Room management">
 
+        </TabItem>
+
+        <TabItem    Header="Customer Management">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Customer info" Grid.Row="0">
+                    <Grid IsEnabled="{Binding UserAccount.IsAdmin}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--User Info - left box-->
+                        <StackPanel Grid.Column="0" Margin="10">
+                            <Grid Margin="0 0 0 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Content="+ Add new Customer +" Grid.Column="0" 
+                                        Command="{Binding CustomerTab.RegisterUserCommand}"
+                                    />
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Customer Id:" Grid.Column="0"/>
+                                <TextBox IsEnabled="False"
+                                    x:Name="Usernames" Text="{Binding CustomerTab.Customer.Id}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                            </Grid>
+
+                            <Grid Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Firstname:" Grid.Column="0"/>
+                                <TextBox x:Name="CustomerFirstname" Grid.Column="1" HorizontalAlignment="Stretch"
+                                         Text="{Binding CustomerTab.CustomerProfile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="93*"/>
+                                    <ColumnDefinition Width="62*"/>
+                                    <ColumnDefinition Width="26*"/>
+                                    <ColumnDefinition Width="21*"/>
+                                    <ColumnDefinition Width="124*"/>
+                                    <ColumnDefinition Width="45*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Middlename:" Grid.Column="0"/>
+                                <TextBox x:Name="CustomerMiddlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="5"
+                                         Text="{Binding CustomerTab.CustomerProfile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Lastname:" Grid.Column="0"/>
+                                <TextBox x:Name="CustomerLastname"  Grid.Column="1" HorizontalAlignment="Stretch"
+                                         Text="{Binding CustomerTab.CustomerProfile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Suffix:" Grid.Column="0"/>
+                                <TextBox x:Name="CustomerSuffix" Grid.Column="1" HorizontalAlignment="Stretch"
+                             Text="{Binding CustomerTab.CustomerProfile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                            </Grid>
+
+                            <ComboBox x:Name="CustomerGender" SelectedIndex="0"  ItemsSource="{Binding CustomerTab.CustomerProfile.GenderValues}" 
+                                                  SelectedValue="{Binding CustomerTab.CustomerProfile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+
+                            <ComboBox x:Name="CustomerCivilStatus" SelectedIndex="0" ItemsSource="{Binding CustomerTab.CustomerProfile.CivilStatusValues}"
+                                                  SelectedValue="{Binding CustomerTab.CustomerProfile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+
+                            <Grid IsEnabled="{Binding CustomerTab.CustomerProfile.WasMaiden}" Visibility="{Binding CustomerTab.CustomerProfile.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                                <!--<Grid>-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="94*"/>
+                                    <ColumnDefinition Width="173*"/>
+                                    <ColumnDefinition Width="110*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Maiden name:" Grid.Column="0"/>
+                                <TextBox x:Name="CustomerMaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
+                             Text="{Binding CustomerTab.CustomerProfile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Brithdate:" Grid.Column="0"/>
+                                <DatePicker x:Name="CustomerBirthdate" Grid.Column="1"
+                                            SelectedDate="{Binding CustomerTab.CustomerProfile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <!--User info - right-->
+                        <StackPanel Grid.Column="1" Margin="10">
+                            <Grid IsEnabled="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Address:" Grid.Column="0"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBox x:Name="Streets" Text="Street"/>
+
+
+                                    <Grid Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBox x:Name="Citys" Text="City" Grid.Column="0" Grid.Row="0"/>
+                                        <TextBox x:Name="Zipcodes" Text="Zipcode" Grid.Column="1" Grid.Row="0"/>
+                                        <TextBox x:Name="Regions" Text="Region" Grid.Column="0" Grid.Row="1"/>
+                                        <TextBox x:Name="Countrys" Text="Country" Grid.Column="1" Grid.Row="1"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid IsEnabled="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Contact #:" Grid.Column="0"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox x:Name="CountryCodes" Text="Country" Grid.Column="0"/>
+                                    <TextBox x:Name="AreaCodes" Text="Area" Grid.Column="1"/>
+                                    <TextBox x:Name="Numbers" Text="Number" Grid.Column="2"/>
+                                </Grid>
+                            </Grid>
+
+                            <Grid IsEnabled="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Email:" Grid.Column="0"/>
+                                <TextBox x:Name="Emails" Text="Email address" Grid.Column="1"/>
+                            </Grid>
+
+                            <Button Content="Save Edit" Margin="0 10 0 0" 
+                                    Command="{Binding CustomerTab.EditCustomerProfileCommand}"/>
+                            <Button Content="Delete User"
+                                    Command="{Binding CustomerTab.RemoveCustomerCommand}"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Customer list" Grid.Row="1">
+                    <DataGrid  x:Name="CustomerList" Grid.Column="1"
+                            ItemsSource="{Binding CustomerTab.CustomerList}" SelectedItem="{Binding CustomerTab.Customer}"
+                               IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
+                        <!--<DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>
+                            <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
+                        </DataGrid.Columns>-->
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
+                            <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>-->
+                            <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
+                            <DataGridTextColumn Header="Full name" Binding="{Binding Person.FullName}" Width="4*"/>
+                            <DataGridTextColumn Header="Gender" Binding="{Binding Person.Gender}" Width="*"/>
+                            <DataGridTextColumn>
+                                <DataGridTextColumn.Header>
+                                    <Button Content="Refresh" Click="Refresh_UsersList"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </Grid>
         </TabItem>
     </TabControl>
 </Page>

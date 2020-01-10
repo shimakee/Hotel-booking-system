@@ -30,6 +30,18 @@ namespace AvenueOne.Models
             this.Id = GenerateId();
         }
 
+        public Person(string firstname)
+            : this()
+        {
+            this.FirstName = firstname;
+        }
+
+        public Person (string firstname, string lastname)
+            : this(firstname)
+        {
+            this.LastName = lastname;
+        }
+
         #region Properties
         public string Id
         {
