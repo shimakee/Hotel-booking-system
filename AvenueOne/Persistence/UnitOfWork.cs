@@ -15,12 +15,14 @@ namespace AvenueOne.Utilities
         private readonly PlutoContext _context;
         public IUserRepository Users { get; private set; }
         public IPersonRepository People { get; private set; }
+        public ICustomerRepository Customers { get; private set; }
 
         public UnitOfWork(PlutoContext context)
         {
             _context = context;
             Users = new UserRepository(_context);
             People = new PersonRepository(_context);
+            Customers = new CustomerRepository(_context);
         }
 
 

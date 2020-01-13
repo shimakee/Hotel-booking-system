@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
     public interface ICustomerTabViewModel
     {
-        ObservableCollection<ICustomer> CustomerList { get; set; }
+        ObservableCollection<Customer> CustomerList { get; set; }
         IPerson CustomerProfile { get; set; }
         ICustomer Customer { get; set; }
     }

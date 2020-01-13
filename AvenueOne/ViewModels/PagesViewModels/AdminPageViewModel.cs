@@ -25,43 +25,44 @@ namespace AvenueOne.ViewModels.PagesViewModels
         #endregion
 
         #region Properties
-            public ObservableCollection<User> UsersList { get; set; } //TODO check to see if you can use interface
             private IUser _user;
+            public ObservableCollection<User> UsersList { get; set; } //TODO check to see if you can use interface
+            //private ICustomerTabViewModel _customerTab;
             public IPerson Profile { get; set; }
             public IUser Account { get; set; }
-            public CustomerTabViewModel CustomerTab { get; set; }
+            public ICustomerTabViewModel CustomerTab { get; set; }
 
+            private bool _isPasswordIncluded;
+            public bool IsPasswordIncluded
+            {
+                get { return _isPasswordIncluded; }
+                set { _isPasswordIncluded = value;
+                    OnPropertyChanged();
+                }
+            }
+
+            public IUser User
+            {
+                get { return _user; }
+                set { _user = value;
+                    //to separate editing... conserve the original values.
+                    if(value != null)
+                    {
+                        Profile = value.Person.CopyPropertyValues();
+                        Account = value.CopyPropertyValues();
+                    }
+                    else
+                    {
+                        Account = null;
+                        Profile = null;
+                    }
+                    OnPropertyChanged();
+                    OnPropertyChanged("Account");
+                    OnPropertyChanged("Profile");
+                }
+            }
         #endregion
 
-        private bool _isPasswordIncluded;
-        public bool IsPasswordIncluded
-        {
-            get { return _isPasswordIncluded; }
-            set { _isPasswordIncluded = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public IUser User
-        {
-            get { return _user; }
-            set { _user = value;
-                //to separate editing... conserve the original values.
-                if(value != null)
-                {
-                    Profile = value.Person.CopyPropertyValues();
-                    Account = value.CopyPropertyValues();
-                }
-                else
-                {
-                    Account = null;
-                    Profile = null;
-                }
-                OnPropertyChanged();
-                OnPropertyChanged("Account");
-                OnPropertyChanged("Profile");
-            }
-        }
 
         #region Constructor
 
@@ -78,7 +79,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
                                                             RemoveUserCommand removeUserCommand, 
                                                             IUser user, 
                                                             ObservableCollection<User> usersList,
-                                                            CustomerTabViewModel customerTabViewModel)
+                                                            ICustomerTabViewModel customerTab)
                 : this(window)
             {
 
@@ -93,29 +94,33 @@ namespace AvenueOne.ViewModels.PagesViewModels
                 this.EditProfileCommand.ViewModel = this;
                 this.RemoveUserCommand = removeUserCommand;
                 this.RemoveUserCommand.ViewModel = this;
-                this.CustomerTab = customerTabViewModel;
+                this.CustomerTab = customerTab;
 
-            }
+        }
         #endregion
 
 
-        public void OnUserAdded(object source, UserEventArgs e)
-        {
-            if (e == null)
+
+        #region Utilities
+
+            public void OnUserAdded(object source, UserEventArgs e)
             {
-                throw new ArgumentNullException("Event args must not be null.");
-            }
-            else
-            {
-                UsersList.Add(e.User);
+                if (e == null)
+                {
+                    throw new ArgumentNullException("Event args must not be null.");
+                }
+                else
+                {
+                    UsersList.Add(e.User);
+                }
+
             }
 
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+            public event PropertyChangedEventHandler PropertyChanged;
+            public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        #endregion
     }
 }

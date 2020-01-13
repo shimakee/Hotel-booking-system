@@ -105,6 +105,7 @@
     <Compile Include="Converters\BooleanVisibilityConverter.cs" />
     <Compile Include="Converters\PasswordConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
+    <Compile Include="Core\IRepositories\ICustomerRepository.cs" />
     <Compile Include="Core\IRepositories\IPersonRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\BaseObservableModel.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Core\Models\Interfaces\IBaseObservableModel.cs" />
     <Compile Include="Core\Models\Interfaces\ICustomer.cs" />
     <Compile Include="Core\Models\UserEventArgs.cs" />
+    <Compile Include="EntityConfiguration\CustomerConfiguration.cs" />
     <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
     <Compile Include="EntityConfiguration\UserConfiguration.cs" />
     <Compile Include="Migrations\201909070930092_InitialModel.cs" />
@@ -134,7 +136,12 @@
     <Compile Include="Migrations\201909090930346_PersonUserRelationshipOptional.Designer.cs">
       <DependentUpon>201909090930346_PersonUserRelationshipOptional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001130325312_CustomerWithRequiredPersonRelationship.cs" />
+    <Compile Include="Migrations\202001130325312_CustomerWithRequiredPersonRelationship.Designer.cs">
+      <DependentUpon>202001130325312_CustomerWithRequiredPersonRelationship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
     <Compile Include="Persistence\Repositories\PersonRepository.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
     <Compile Include="Services\HashService.cs" />
@@ -255,11 +262,13 @@
     <EmbeddedResource Include="Migrations\201909090930346_PersonUserRelationshipOptional.resx">
       <DependentUpon>201909090930346_PersonUserRelationshipOptional.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001130325312_CustomerWithRequiredPersonRelationship.resx">
+      <DependentUpon>202001130325312_CustomerWithRequiredPersonRelationship.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="AvenueOne_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -274,6 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Domain\" />
+    <Folder Include="Db\" />
     <Folder Include="Persistence\EntityConfigurations\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
     <Folder Include="Views\Pages\Interfaces\" />
@@ -299,15 +309,6 @@
     <Resource Include="Assets\defaultAvatar.JPG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Db\AvenueOneDb.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Db\AvenueOneDb_log.ldf">
-      <DependentUpon>AvenueOneDb.mdf</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

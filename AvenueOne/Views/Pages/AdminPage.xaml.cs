@@ -39,7 +39,7 @@ namespace AvenueOne.Views.Pages
                                                                                                                                 displayService);
             RemoveUserCommand removeUserCommand = new RemoveUserCommand(new UnitOfWork(context), 
                                                                                                                                         displayService);
-            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer);
+            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,

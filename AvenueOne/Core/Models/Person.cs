@@ -24,6 +24,7 @@ namespace AvenueOne.Models
         private string _nationality;
         private DateTime? _birthDate;
         private User _user;
+        private Customer _customer;
 
         public Person()
         {
@@ -199,6 +200,16 @@ namespace AvenueOne.Models
             set
             {
                 _user = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public virtual Customer Customer
+        {
+            get { return _customer; }
+            set
+            {
+                _customer = value;
                 OnPropertyChanged();
             }
         }

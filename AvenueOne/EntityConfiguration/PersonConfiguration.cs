@@ -45,6 +45,9 @@ namespace AvenueOne.EntityConfiguration
             //relatioships
             HasOptional(p => p.User)
             .WithOptionalPrincipal(u => u.Person);
+
+            HasOptional(p => p.Customer)
+                .WithRequired(c => c.Person);
         }
     }
 }

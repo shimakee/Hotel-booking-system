@@ -15,6 +15,7 @@ namespace AvenueOne.Persistence.Repositories
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         public PlutoContext()
             :base("name=LocalConnection")
@@ -33,6 +34,8 @@ namespace AvenueOne.Persistence.Repositories
 
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
+            modelBuilder.Configurations.Add(new CustomerConfiguration());
+
         }
     }
 }

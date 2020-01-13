@@ -50,6 +50,8 @@ namespace AvenueOne
             //eager loading data; - careful with this since it slows app loading time
             _plutoContext.Users.ToList();
             _plutoContext.People.ToList();
+            _plutoContext.Customers.ToList();
+
         }
         protected override void OnClosing(CancelEventArgs e)
         {

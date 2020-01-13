@@ -262,14 +262,15 @@
                             <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
                         </DataGrid.Columns>-->
                         <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Admin" Binding="{Binding IsAdmin}" Width="*"/>
                             <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>-->
-                            <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
+                            <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="1.5*"/>
                             <DataGridTextColumn Header="Full name" Binding="{Binding Person.FullName}" Width="4*"/>
+                            <DataGridTextColumn Header="Birth date" Binding="{Binding Person.BirthDate, StringFormat=d}" Width="1.5*"/>
                             <DataGridTextColumn Header="Gender" Binding="{Binding Person.Gender}" Width="*"/>
                             <DataGridTextColumn>
                                 <DataGridTextColumn.Header>
-                                    <Button Content="Refresh" Click="Refresh_UsersList"/>
+                                    <Button Content="Refresh"/>
                                 </DataGridTextColumn.Header>
                             </DataGridTextColumn>
                         </DataGrid.Columns>
@@ -487,14 +488,14 @@
                             <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
                         </DataGrid.Columns>-->
                         <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                             <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>-->
-                            <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
                             <DataGridTextColumn Header="Full name" Binding="{Binding Person.FullName}" Width="4*"/>
+                            <DataGridTextColumn Header="Birth date" Binding="{Binding Person.BirthDate , StringFormat=d}" Width="2*"/>
                             <DataGridTextColumn Header="Gender" Binding="{Binding Person.Gender}" Width="*"/>
                             <DataGridTextColumn>
                                 <DataGridTextColumn.Header>
-                                    <Button Content="Refresh" Click="Refresh_UsersList"/>
+                                    <Button Content="Refresh"/>
                                 </DataGridTextColumn.Header>
                             </DataGridTextColumn>
                         </DataGrid.Columns>

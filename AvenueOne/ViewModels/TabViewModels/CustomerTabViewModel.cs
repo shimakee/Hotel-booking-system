@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
@@ -29,7 +30,7 @@ namespace AvenueOne.ViewModels.TabViewModels
         private IPerson _customerProfile;
 
 
-        public ObservableCollection<ICustomer> CustomerList { get; set; }
+        public ObservableCollection<Customer> CustomerList { get; set; }
         public IPerson CustomerProfile
         {
             get { return _customerProfile; }
@@ -55,11 +56,11 @@ namespace AvenueOne.ViewModels.TabViewModels
         #region Constructors
 
         //public CustomerTabViewModel(IPerson person, ICustomer customer, ObservableCollection<ICustomer> customersList)
-        public CustomerTabViewModel(IPerson person, ICustomer customer)
+        public CustomerTabViewModel(IPerson person, ICustomer customer, ObservableCollection<Customer> customerList)
         {
             this.Customer = customer;
             this.CustomerProfile = person;
-            //this.CustomerList = CustomerList;
+            this.CustomerList = customerList;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
