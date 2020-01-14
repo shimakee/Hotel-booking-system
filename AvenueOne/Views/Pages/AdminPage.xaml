@@ -286,12 +286,17 @@
         <TabItem    Header="Customer Management">
 
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="18*"/>
+                    <ColumnDefinition Width="153*"/>
+                    <ColumnDefinition Width="623*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1.5*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <GroupBox Header="Customer info" Grid.Row="0">
+                <GroupBox Header="Customer info" Grid.Row="0" Grid.ColumnSpan="3">
                     <Grid IsEnabled="{Binding UserAccount.IsAdmin}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -307,7 +312,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Button Content="+ Add new Customer +" Grid.Column="0" 
-                                        Command="{Binding CustomerTab.RegisterUserCommand}"
+                                        Command="{Binding CustomerTab.OpeCustomerWindowCommand}"
                                     />
                             </Grid>
 
@@ -478,7 +483,7 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="Customer list" Grid.Row="1">
+                <GroupBox Header="Customer list" Grid.Row="1" Grid.ColumnSpan="3">
                     <DataGrid  x:Name="CustomerList" Grid.Column="1"
                             ItemsSource="{Binding CustomerTab.CustomerList}" SelectedItem="{Binding CustomerTab.Customer}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">

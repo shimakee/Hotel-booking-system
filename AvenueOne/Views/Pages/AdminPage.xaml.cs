@@ -8,6 +8,7 @@ using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.PagesViewModels;
 using AvenueOne.ViewModels.TabViewModels;
+using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Linq;
 using System.Windows;
@@ -42,7 +43,8 @@ namespace AvenueOne.Views.Pages
             RemoveUserCommand removeUserCommand = new RemoveUserCommand(unitOfWork, 
                                                                                                                                         displayService);
             EditCustomerCommand editCustomerCommand = new EditCustomerCommand(unitOfWork, displayService);
-            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand);
+            OpenCustomerWindowCommand openCustomerWindowCommand = new OpenCustomerWindowCommand(context);
+            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,
@@ -50,6 +52,7 @@ namespace AvenueOne.Views.Pages
                                                                                                                                 User,
                                                                                                                                 _context.Users.Local,
                                                                                                                                 customerTab);
+
 
             this.ViewModel = _adminViewModel;
             DataContext = _adminViewModel;
