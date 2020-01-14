@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.TabViewModels
 {
-    public class CustomerTabViewModel : ICustomerTabViewModel, INotifyPropertyChanged
+    public class CustomerTabViewModel : AccountViewModel, ICustomerTabViewModel, INotifyPropertyChanged
     {
         //todo
 
