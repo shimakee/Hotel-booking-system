@@ -66,7 +66,7 @@ namespace AvenueOne.ViewModels.Commands
                     string password = user.Password; //conserve hashed password;
                     user = ViewModel.Account.CopyPropertyValues(user);
                     IPerson person = user.Person;
-                    person = ViewModel.Profile.CopyPropertyValues(person);
+                    person = ViewModel.Profile.CopyPropertyValuesTo(person);
                     user.Password = password;
                     user.PasswordConfirm = password;
                     int n = await Task.Run(() => _unitOfWork.CompleteAsync());

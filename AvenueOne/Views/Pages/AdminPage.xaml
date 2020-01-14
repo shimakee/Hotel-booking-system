@@ -471,7 +471,7 @@
                             </Grid>
 
                             <Button Content="Save Edit" Margin="0 10 0 0" 
-                                    Command="{Binding CustomerTab.EditCustomerProfileCommand}"/>
+                                    Command="{Binding CustomerTab.EditCustomerCommand}"/>
                             <Button Content="Delete User"
                                     Command="{Binding CustomerTab.RemoveCustomerCommand}"/>
                         </StackPanel>

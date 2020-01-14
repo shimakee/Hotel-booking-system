@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
@@ -34,12 +35,14 @@ namespace AvenueOne.Views.Pages
             ICustomer Customer = new Customer();
             Customer.Person = new Person();
             IDisplayService displayService = new WpfDisplayService();
+            IUnitOfWork unitOfWork = new UnitOfWork(context);
             RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
-            EditProfileCommand editProfileCommand = new EditProfileCommand(new UnitOfWork(context), 
+            EditProfileCommand editProfileCommand = new EditProfileCommand(unitOfWork, 
                                                                                                                                 displayService);
-            RemoveUserCommand removeUserCommand = new RemoveUserCommand(new UnitOfWork(context), 
+            RemoveUserCommand removeUserCommand = new RemoveUserCommand(unitOfWork, 
                                                                                                                                         displayService);
-            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local);
+            EditCustomerCommand editCustomerCommand = new EditCustomerCommand(unitOfWork, displayService);
+            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,

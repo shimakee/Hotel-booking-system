@@ -151,6 +151,7 @@
     <Compile Include="Core\IRepositories\IRepository.cs" />
     <Compile Include="Services\Interfaces\IWindowGenerator.cs" />
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
+    <Compile Include="ViewModels\Commands\EditCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\EditProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
     <Compile Include="ViewModels\Commands\RemoveUserCommand.cs" />

@@ -222,9 +222,9 @@ namespace AvenueOne.Models
 
         public IPerson CopyPropertyValues()
         {
-            return CopyPropertyValues(new Person());
+            return CopyPropertyValuesTo(new Person());
         }
-        public IPerson CopyPropertyValues(IPerson person)
+        public IPerson CopyPropertyValuesTo(IPerson person)
         {
             List<PropertyInfo> propertyList = typeof(IPerson).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
 

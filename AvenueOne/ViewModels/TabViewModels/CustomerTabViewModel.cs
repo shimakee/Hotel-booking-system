@@ -20,7 +20,7 @@ namespace AvenueOne.ViewModels.TabViewModels
         #region Commands
 
         //public RegisterUserCommand RegisterUserCommand { get; private set; }
-        //public EditProfileCommand EditProfileCommand { get; set; }
+        public EditCustomerCommand EditCustomerCommand { get; set; }
         //public RemoveUserCommand RemoveUserCommand { get; set; }
 
         #endregion
@@ -45,6 +45,7 @@ namespace AvenueOne.ViewModels.TabViewModels
             set
             {
                 _customer = value;
+                CustomerProfile = value.Person.CopyPropertyValues();
                 OnPropertyChanged();
             }
         }
@@ -56,11 +57,13 @@ namespace AvenueOne.ViewModels.TabViewModels
         #region Constructors
 
         //public CustomerTabViewModel(IPerson person, ICustomer customer, ObservableCollection<ICustomer> customersList)
-        public CustomerTabViewModel(IPerson person, ICustomer customer, ObservableCollection<Customer> customerList)
+        public CustomerTabViewModel(IPerson person, ICustomer customer, ObservableCollection<Customer> customerList, EditCustomerCommand editCustomerCommand)
         {
             this.Customer = customer;
             this.CustomerProfile = person;
             this.CustomerList = customerList;
+            this.EditCustomerCommand = editCustomerCommand;
+            this.EditCustomerCommand.ViewModel = this;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
