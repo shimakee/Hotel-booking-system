@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
-    public interface ICustomerWindowViewModel : IWindowViewModel
+    public interface ICustomerWindowViewModel : IWindowViewModel, ICustomerViewModel
     {
-        IPerson CustomerProfile { get; set; }
-        ICustomer Customer { get; set; }
     }
 }

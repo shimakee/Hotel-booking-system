@@ -19,10 +19,9 @@ namespace AvenueOne.ViewModels.TabViewModels
 
         #region Commands
 
-        //public RegisterUserCommand RegisterUserCommand { get; private set; }
-        public EditCustomerCommand EditCustomerCommand { get; set; }
         public OpenCustomerWindowCommand OpeCustomerWindowCommand { get; set; }
-        //public RemoveUserCommand RemoveUserCommand { get; set; }
+        public EditCustomerCommand EditCustomerCommand { get; set; }
+        public RemoveCustomerCommand RemoveCustomerCommand { get; set; }
 
         #endregion
 
@@ -58,7 +57,10 @@ namespace AvenueOne.ViewModels.TabViewModels
         #region Constructors
 
         //public CustomerTabViewModel(IPerson person, ICustomer customer, ObservableCollection<ICustomer> customersList)
-        public CustomerTabViewModel(IPerson person, ICustomer customer, ObservableCollection<Customer> customerList, EditCustomerCommand editCustomerCommand, OpenCustomerWindowCommand openCustomerWindowCommand)
+        public CustomerTabViewModel(IPerson person, ICustomer customer, ObservableCollection<Customer> customerList, 
+            EditCustomerCommand editCustomerCommand, 
+            OpenCustomerWindowCommand openCustomerWindowCommand,
+            RemoveCustomerCommand removeCustomerCommand)
         {
             this.Customer = customer;
             this.CustomerProfile = person;
@@ -66,6 +68,8 @@ namespace AvenueOne.ViewModels.TabViewModels
             this.EditCustomerCommand = editCustomerCommand;
             this.EditCustomerCommand.ViewModel = this;
             this.OpeCustomerWindowCommand = openCustomerWindowCommand;
+            this.RemoveCustomerCommand = removeCustomerCommand;
+            removeCustomerCommand.ViewModel = this;
         }
         #endregion
 

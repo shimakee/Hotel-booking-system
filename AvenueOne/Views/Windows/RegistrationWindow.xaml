@@ -12,7 +12,7 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         AllowsTransparency="True"
-        Title="RegistrationWindow" Height="350" Width="800">
+        Title="RegistrationWindow" Height="250" Width="800">
 
     <Window.Resources>
         <converters:PasswordConverter x:Key="PasswordConverter"/>
@@ -84,7 +84,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="First name:" Grid.Column="0"/>
-                    <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
+                    <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch" 
                              Text="{Binding User.Person.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              ToolTip="{Binding Person.ErrorCollection[FirstName]}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>

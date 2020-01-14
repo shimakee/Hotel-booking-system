@@ -44,7 +44,8 @@ namespace AvenueOne.Views.Pages
                                                                                                                                         displayService);
             EditCustomerCommand editCustomerCommand = new EditCustomerCommand(unitOfWork, displayService);
             OpenCustomerWindowCommand openCustomerWindowCommand = new OpenCustomerWindowCommand(context);
-            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand);
+            RemoveCustomerCommand removeCustomerCommand = new RemoveCustomerCommand(unitOfWork, displayService);
+            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand, removeCustomerCommand);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,

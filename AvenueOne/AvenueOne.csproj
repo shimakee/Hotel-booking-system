@@ -156,12 +156,14 @@
     <Compile Include="ViewModels\Commands\EditProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenCustomerWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
+    <Compile Include="ViewModels\Commands\RemoveCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\RemoveUserCommand.cs" />
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\CustomerWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerTabViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IPerson.cs" />

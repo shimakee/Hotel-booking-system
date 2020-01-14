@@ -12,60 +12,62 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands
 {
-    public class RemoveUserCommand : ICommand
+
+    public class RemoveCustomerCommand : ICommand
     {
-        public IUserCrudViewModel ViewModel { get; set; }
+
+        #region Properties
+        public ICustomerViewModel ViewModel { get; set; }
         private IUnitOfWork _unitOfWork;
         private IDisplayService _displayService;
+        #endregion
 
-        public RemoveUserCommand(IUnitOfWork unitOfWork ,IDisplayService displayService)
+        public RemoveCustomerCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
         {
-            if (unitOfWork == null || displayService == null)
-                throw new ArgumentNullException("Arguements cannot be null.");
-            _unitOfWork = unitOfWork;
-            _displayService = displayService;
 
+            this._unitOfWork = unitOfWork;
+            this._displayService = displayService;
         }
+
         public event EventHandler CanExecuteChanged;
+
 
         public bool CanExecute(object parameter)
         {
-            if (ViewModel != null)
-                return ViewModel.UserAccount.IsAdmin;
-            return false;
+            return true;
         }
 
         public async void Execute(object parameter)
         {
             try
             {
-                if (ViewModel.User == null)
+                if (ViewModel.Customer == null || ViewModel.CustomerProfile == null)
                     throw new NullReferenceException("No item selected to remove.");
 
-                if(ViewModel != null && ViewModel.User != null)
-                    {
-                    bool confirm = _displayService.MessagePrompt($"Confirm delete on account {ViewModel.User.Username}?", "Delete");
+                if (ViewModel != null && ViewModel.Customer != null)
+                {
+                    bool confirm = _displayService.MessagePrompt($"Confirm delete on customer {ViewModel.CustomerProfile.FullName}?", "Delete");
                     if (confirm)
                     {
-                        User user = _unitOfWork.Users.Get(ViewModel.User.Id);
-                        //TODO : improve User Person relationship view Fluent api
+                        Customer customer = _unitOfWork.Customers.Get(ViewModel.Customer.Id);
+                        //TODO : improve customer Person relationship view Fluent api
                         //TODO : implement a cascade delte
-                        _unitOfWork.Users.Remove(user);
+                        _unitOfWork.Customers.Remove(customer);
                         int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 
-                        if(n == 0)
+                        if (n == 0)
                         {
-                            _displayService.MessageDisplay("Could not remove account.");
+                            _displayService.MessageDisplay("Could not remove customer.");
                         }
                         else
                         {
                             //ViewModel.User = new User(); //replace instance deleted with clear slate
-                            _displayService.MessageDisplay($"Successfully removed {ViewModel.User.Username}\nRows affected: {n}.");
+                            _displayService.MessageDisplay($"Successfully removed {ViewModel.CustomerProfile.FullName}\nRows affected: {n}.");
                         }
-                    }   
+                    }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _displayService.ErrorDisplay(ex.Message, "Error:");
 

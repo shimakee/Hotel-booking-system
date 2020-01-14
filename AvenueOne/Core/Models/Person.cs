@@ -53,6 +53,8 @@ namespace AvenueOne.Models
                 OnPropertyChanged();
             }
         }
+
+
         public string FirstName
         {
             get { return _firstName; }
