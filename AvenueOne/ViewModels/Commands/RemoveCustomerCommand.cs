@@ -6,6 +6,7 @@ using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -52,9 +53,16 @@ namespace AvenueOne.ViewModels.Commands
                     bool confirm = _displayService.MessagePrompt($"Confirm delete on customer {ViewModel.CustomerProfile.FullName}?", "Delete");
                     if (confirm)
                     {
+                        //Use Person for cascade on delete - implemented via fluent api
+                        //Person person = _unitOfWork.People.Get(ViewModel.CustomerProfile.Id);
+                        //_unitOfWork.People.Remove(person);
+
+
+                        /*
+                            I used non cascading delete to retain data integrity, so that all info that is link to customers transaction will still remain even if user account is deleted.
+                         */
+                        //Use Customer for set null on delete
                         Customer customer = _unitOfWork.Customers.Get(ViewModel.Customer.Id);
-                        //TODO : improve customer Person relationship view Fluent api
-                        //TODO : implement a cascade delte
                         _unitOfWork.Customers.Remove(customer);
                         int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 

@@ -47,9 +47,15 @@ namespace AvenueOne.ViewModels.Commands
                     bool confirm = _displayService.MessagePrompt($"Confirm delete on account {ViewModel.User.Username}?", "Delete");
                     if (confirm)
                     {
+                        //use person to implement cascade delete view fluent api
+                        //Person person = _unitOfWork.People.Get(ViewModel.User.Person.Id);
+                        //_unitOfWork.People.Remove(person);
+
+                        /*
+                            I used non cascading delete to retain data integrity, so that all info that is link to users transaction will still remain even if user account is deleted.
+                         */
+                        //use user to implement set null on delete
                         User user = _unitOfWork.Users.Get(ViewModel.User.Id);
-                        //TODO : improve User Person relationship view Fluent api
-                        //TODO : implement a cascade delte
                         _unitOfWork.Users.Remove(user);
                         int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 

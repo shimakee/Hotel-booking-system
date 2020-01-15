@@ -140,6 +140,10 @@
     <Compile Include="Migrations\202001130325312_CustomerWithRequiredPersonRelationship.Designer.cs">
       <DependentUpon>202001130325312_CustomerWithRequiredPersonRelationship.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001141536376_CustomerAndUserCascadeOnDelete.cs" />
+    <Compile Include="Migrations\202001141536376_CustomerAndUserCascadeOnDelete.Designer.cs">
+      <DependentUpon>202001141536376_CustomerAndUserCascadeOnDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
     <Compile Include="Persistence\Repositories\PersonRepository.cs" />
@@ -279,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001130325312_CustomerWithRequiredPersonRelationship.resx">
       <DependentUpon>202001130325312_CustomerWithRequiredPersonRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001141536376_CustomerAndUserCascadeOnDelete.resx">
+      <DependentUpon>202001141536376_CustomerAndUserCascadeOnDelete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

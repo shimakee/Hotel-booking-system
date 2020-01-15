@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using AvenueOne.Models;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -48,9 +50,16 @@ namespace AvenueOne
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //eager loading data; - careful with this since it slows app loading time
-            _plutoContext.Users.ToList();
-            _plutoContext.People.ToList();
-            _plutoContext.Customers.ToList();
+            //_plutoContext.Users.Load();
+            //_plutoContext.People.Load();
+            //_plutoContext.Customers.Load();
+            _plutoContext.Customers.Include(c => c.Person)
+                                                    .ToList();
+            _plutoContext.Users.Include(u => u.Person)
+                                                    .ToList();
+            //_plutoContext.People.Include(p => p.Customer)
+            //                                    .Include(p=> p.User)
+            //                                    .ToList();
 
         }
         protected override void OnClosing(CancelEventArgs e)

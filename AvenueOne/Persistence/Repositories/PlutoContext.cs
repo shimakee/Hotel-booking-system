@@ -35,7 +35,6 @@ namespace AvenueOne.Persistence.Repositories
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
             modelBuilder.Configurations.Add(new CustomerConfiguration());
-
         }
     }
 }

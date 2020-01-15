@@ -45,8 +45,11 @@ namespace AvenueOne.ViewModels.TabViewModels
             get { return _customer; }
             set
             {
-                _customer = value;
-                CustomerProfile = value.Person.CopyPropertyValues();
+                if (value != null)
+                {
+                    _customer = value;
+                    CustomerProfile = value.Person.CopyPropertyValues();
+                }
                 OnPropertyChanged();
             }
         }

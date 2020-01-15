@@ -21,9 +21,9 @@ namespace AvenueOne.EntityConfiguration
 
             //relationships
             HasRequired(c => c.Person)
-                .WithOptional(p=>p.Customer)
-                .Map(c=> c.MapKey("PersonId"));
-
+                .WithOptional(p => p.Customer)
+                .Map(c => c.MapKey("PersonId"))
+                .WillCascadeOnDelete(true);
         }
     }
 }

@@ -56,6 +56,7 @@ namespace AvenueOne.Utilities
         public void Remove(TEntity entity)
         {
             Context.Set<TEntity>().Remove(entity);
+
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)

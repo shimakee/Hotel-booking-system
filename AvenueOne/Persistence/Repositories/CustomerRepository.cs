@@ -15,7 +15,7 @@ namespace AvenueOne.Persistence.Repositories
         public CustomerRepository(PlutoContext context)
             : base(context)
         {
-
+           
         }
     }
 }

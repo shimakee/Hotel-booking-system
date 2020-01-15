@@ -44,10 +44,11 @@ namespace AvenueOne.ViewModels.PagesViewModels
             public IUser User
             {
                 get { return _user; }
-                set { _user = value;
+                set {
                     //to separate editing... conserve the original values.
                     if(value != null)
                     {
+                        _user = value;
                         Profile = value.Person.CopyPropertyValues();
                         Account = value.CopyPropertyValues();
                     }
