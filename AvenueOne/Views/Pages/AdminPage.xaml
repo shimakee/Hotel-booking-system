@@ -12,6 +12,7 @@
 
     <Page.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+        <converters:PasswordConverter x:Key="PasswordConverter"/>
     </Page.Resources>
 
 
@@ -77,24 +78,19 @@
 
                                 <TextBlock Text="Password:" Grid.Column="0"/>
 
-                                <TextBox 
-                                         IsEnabled="{Binding IsPasswordIncluded}"
-                                        x:Name="Password"
-                                          Text="{Binding Account.Password}" Grid.Column="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
+                                <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
                             </Grid>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="124*"/>
+                                    <ColumnDefinition Width="191*"/>
+                                    <ColumnDefinition Width="56*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="PasswordConfirm:" Grid.Column="0"/>
 
-                                <TextBox 
-                                         IsEnabled="{Binding IsPasswordIncluded}"
-                                        x:Name="PasswordConfirm"
-                                          Text="{Binding Account.PasswordConfirm}" Grid.Column="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
+                                <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
                             </Grid>
 
 
@@ -244,8 +240,15 @@
                                 <TextBox x:Name="Email" Text="Email address" Grid.Column="1"/>
                             </Grid>
 
-                            <Button Content="Save Edit" Margin="0 10 0 0" 
-                                    Command="{Binding EditProfileCommand}"/>
+                            <Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding EditProfileCommand, Mode=OneWay}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                        <Binding ElementName="Password"/>
+                                        <Binding ElementName="PasswordConfirm"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
+
                             <Button Content="Delete User"
                                     Command="{Binding RemoveUserCommand}"/>
                         </StackPanel>

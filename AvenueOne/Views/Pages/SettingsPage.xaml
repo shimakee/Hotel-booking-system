@@ -13,6 +13,7 @@
 
     <Page.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+        <converters:PasswordConverter x:Key="PasswordConverter"/>
     </Page.Resources>
 
     <TabControl>
@@ -52,13 +53,38 @@
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Include Password:" Grid.Column="0"/>
+
+                            <CheckBox Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsPasswordIncluded}"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Text="Password:" Grid.Column="0"/>
-                            <TextBox x:Name="Password" IsEnabled="False"
-                                         Text="Password" Grid.Column="1" HorizontalAlignment="Stretch"/>
+
+                            <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="124*"/>
+                                <ColumnDefinition Width="191*"/>
+                                <ColumnDefinition Width="56*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="PasswordConfirm:" Grid.Column="0"/>
+
+                            <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
                         </Grid>
 
                         <Grid Margin="0 10 0 0">
@@ -144,8 +170,14 @@
                                             SelectedDate="{Binding Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                             ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
                         </Grid>
-                        <Button Content="Save Edit" Margin="0 10 0 0" 
-                                    Command="{Binding EditProfileCommand}"/>
+                        <Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding EditProfileCommand, Mode=OneWay}">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                    <Binding ElementName="Password"/>
+                                    <Binding ElementName="PasswordConfirm"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
                     </StackPanel>
                 </GroupBox>
                 

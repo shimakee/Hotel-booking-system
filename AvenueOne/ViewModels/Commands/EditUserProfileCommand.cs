@@ -13,7 +13,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+
 
 namespace AvenueOne.ViewModels.Commands
 {
@@ -64,12 +66,26 @@ namespace AvenueOne.ViewModels.Commands
                     if (user == null)
                         throw new NullReferenceException("Account does not exist.");
 
-                    string password = user.Password; //conserve hashed password;
+                    string password = user.Password;
+                    user = ViewModel.Account.CopyPropertyValues(user);
+                    user.Password = password;
+
                     if (ViewModel.IsPasswordIncluded)
                     {
-                        if(ViewModel.Account.IsValidProperty("Password") && ViewModel.Account.IsValidProperty("PasswordConfirm"))
+                        //get parameters
+                        object[] values = (object[])parameter ?? throw new ArgumentNullException("parameter cannot be null, you need to pass password and password confirmbox");
+
+                        //get username
+                        PasswordBox passwordBox = (PasswordBox)values[0];
+                        ViewModel.Account.Password = passwordBox.Password;
+                        //get password
+                        PasswordBox passwordConfirmBox = (PasswordBox)values[1];
+                        ViewModel.Account.PasswordConfirm = passwordConfirmBox.Password;
+
+                        if (ViewModel.Account.IsValidProperty("Password") && ViewModel.Account.IsValidProperty("PasswordConfirm"))
                         {
-                            password = HashService.Hash(ViewModel.Account.Password);
+                            user.Password = HashService.Hash(ViewModel.Account.Password);
+                            user.PasswordConfirm = user.Password;
                         }
                         else
                         {
@@ -77,9 +93,9 @@ namespace AvenueOne.ViewModels.Commands
                             return;
                         }
                     }
-                    user = ViewModel.Account.CopyPropertyValues(user);
-                    user.Password = password;
-                    user.PasswordConfirm = password;
+                    
+                    
+                    
 
                     if (!ViewModel.Profile.IsValid)
                     {
