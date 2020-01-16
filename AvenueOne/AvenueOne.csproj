@@ -108,13 +108,19 @@
     <Compile Include="Core\IRepositories\ICustomerRepository.cs" />
     <Compile Include="Core\IRepositories\IPersonRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Models\Amenities.cs" />
     <Compile Include="Core\Models\BaseObservableModel.cs" />
     <Compile Include="Core\Models\Customer.cs" />
+    <Compile Include="Core\Models\Interfaces\IAmenities.cs" />
     <Compile Include="Core\Models\Interfaces\IBaseObservableModel.cs" />
     <Compile Include="Core\Models\Interfaces\ICustomer.cs" />
+    <Compile Include="Core\Models\Interfaces\IRoomType.cs" />
+    <Compile Include="Core\Models\RoomType.cs" />
     <Compile Include="Core\Models\UserEventArgs.cs" />
+    <Compile Include="EntityConfiguration\AmenitiesConfiguration.cs" />
     <Compile Include="EntityConfiguration\CustomerConfiguration.cs" />
     <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
+    <Compile Include="EntityConfiguration\RoomTypeConfiguration.cs" />
     <Compile Include="EntityConfiguration\UserConfiguration.cs" />
     <Compile Include="Migrations\201909070930092_InitialModel.cs" />
     <Compile Include="Migrations\201909070930092_InitialModel.Designer.cs">
@@ -143,6 +149,10 @@
     <Compile Include="Migrations\202001141536376_CustomerAndUserCascadeOnDelete.cs" />
     <Compile Include="Migrations\202001141536376_CustomerAndUserCascadeOnDelete.Designer.cs">
       <DependentUpon>202001141536376_CustomerAndUserCascadeOnDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001160823367_AddedRoomTypeAndAmenities.cs" />
+    <Compile Include="Migrations\202001160823367_AddedRoomTypeAndAmenities.Designer.cs">
+      <DependentUpon>202001160823367_AddedRoomTypeAndAmenities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
@@ -286,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001141536376_CustomerAndUserCascadeOnDelete.resx">
       <DependentUpon>202001141536376_CustomerAndUserCascadeOnDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001160823367_AddedRoomTypeAndAmenities.resx">
+      <DependentUpon>202001160823367_AddedRoomTypeAndAmenities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

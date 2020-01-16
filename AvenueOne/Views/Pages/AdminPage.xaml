@@ -283,7 +283,141 @@
         </TabItem>
 
         <TabItem Header="Room management">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+
+                <GroupBox Header="Room info" Grid.Column="0">
+                    
+                </GroupBox>
+                
+                <GroupBox Header="Room Type" Grid.Column="1"
+                          Padding="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                            Content="Add Room Type"/>
+                        <TextBlock Grid.Row ="0" Grid.Column="2"  HorizontalAlignment="Right"
+                                   Text="Id:" />
+                        <TextBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                    Text="Name:"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                            Text="Details:"/>
+                        <TextBox Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" 
+                                    Margin="1" VerticalAlignment="Stretch"
+                                     TextWrapping="Wrap" AcceptsReturn="True"
+                                     HorizontalScrollBarVisibility="Disabled"
+                                     VerticalScrollBarVisibility="Auto"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="3"
+                                   Text="Amenities:"/>
+                        <DataGrid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2">
+                        </DataGrid>
+
+                        <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                            Content="Save" />
+                        <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                            Content="Delete " />
+
+
+                        <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
+                                Margin="0 10 0 0"
+                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
+                                <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Amenities" Grid.Column="2"
+                           Padding="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                            Content="Add Amenities"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                    Text="Name:"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                            Text="Details:"/>
+                        <TextBox Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" 
+                                    Margin="1" VerticalAlignment="Stretch"
+                                     TextWrapping="Wrap" AcceptsReturn="True"
+                                     HorizontalScrollBarVisibility="Disabled"
+                                     VerticalScrollBarVisibility="Auto"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="3"
+                                   Text="Room Type:"/>
+                        <DataGrid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2">
+                        </DataGrid>
+
+                        <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                            Content="Save" />
+                        <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                            Content="Delete " />
+
+
+                        <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
+                                Margin="0 10 0 0"
+                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
+                                <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </GroupBox>
+            </Grid>
         </TabItem>
 
         <TabItem    Header="Customer Management">
@@ -480,7 +614,7 @@
 
                             <Button Content="Save Edit" Margin="0 10 0 0" 
                                     Command="{Binding CustomerTab.EditCustomerCommand}"/>
-                            <Button Content="Delete User"
+                            <Button Content="Delete Customer"
                                     Command="{Binding CustomerTab.RemoveCustomerCommand}"/>
                         </StackPanel>
                     </Grid>

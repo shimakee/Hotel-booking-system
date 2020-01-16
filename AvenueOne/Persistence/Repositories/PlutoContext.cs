@@ -1,4 +1,5 @@
-﻿using AvenueOne.EntityConfiguration;
+﻿using AvenueOne.Core.Models;
+using AvenueOne.EntityConfiguration;
 using AvenueOne.Interfaces;
 using AvenueOne.Models;
 using System;
@@ -16,6 +17,8 @@ namespace AvenueOne.Persistence.Repositories
         public DbSet<User> Users { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Amenities> Amenities { get; set; }
+        public DbSet<RoomType> RoomType { get; set; }
 
         public PlutoContext()
             :base("name=LocalConnection")
@@ -35,6 +38,8 @@ namespace AvenueOne.Persistence.Repositories
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
             modelBuilder.Configurations.Add(new CustomerConfiguration());
+            modelBuilder.Configurations.Add(new AmenitiesConfiguration());
+            modelBuilder.Configurations.Add(new RoomTypeConfiguration());
         }
     }
 }
