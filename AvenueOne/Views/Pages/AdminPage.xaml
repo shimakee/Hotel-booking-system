@@ -80,7 +80,7 @@
                                 <TextBox 
                                          IsEnabled="{Binding IsPasswordIncluded}"
                                         x:Name="Password"
-                                         Text="Password" Grid.Column="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
+                                          Text="{Binding Account.Password}" Grid.Column="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
                             </Grid>
 
                             <Grid>
@@ -94,7 +94,7 @@
                                 <TextBox 
                                          IsEnabled="{Binding IsPasswordIncluded}"
                                         x:Name="PasswordConfirm"
-                                         Text="Password confirm" Grid.Column="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
+                                          Text="{Binding Account.PasswordConfirm}" Grid.Column="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
                             </Grid>
 
 

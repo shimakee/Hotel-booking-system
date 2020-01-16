@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class SettingsPageViewModel : WindowViewModel, IProfileEditViewModel, INotifyPropertyChanged
+    public class SettingsPageViewModel : WindowViewModel, IUserProfileEditViewModel, INotifyPropertyChanged
     {
         #region Ctor
         SettingsPageViewModel(Window window)
@@ -23,7 +23,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
         }
 
         public SettingsPageViewModel(Window window,
-                                                        EditProfileCommand editProfileCommand,
+                                                        EditUserProfileCommand editProfileCommand,
                                                         IUser user)
             : this(window)
         {
@@ -41,7 +41,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
 
         #region Properties
 
-        public EditProfileCommand EditProfileCommand { get; set; }
+        public EditUserProfileCommand EditProfileCommand { get; set; }
         private IUser _user;
         public IUser Account { get; set; }
         public IPerson Profile { get; set; }

@@ -14,12 +14,12 @@ using System.Windows;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class AdminPageViewModel : WindowViewModel, IProfileEditViewModel, INotifyPropertyChanged
+    public class AdminPageViewModel : WindowViewModel, IUserProfileEditViewModel, INotifyPropertyChanged
     {
 
         #region Commands
             public RegisterUserCommand RegisterUserCommand { get; private set; }
-            public EditProfileCommand EditProfileCommand { get; set; }
+            public EditUserProfileCommand EditProfileCommand { get; set; }
             public RemoveUserCommand RemoveUserCommand { get; set; }
 
         #endregion
@@ -45,10 +45,10 @@ namespace AvenueOne.ViewModels.PagesViewModels
             {
                 get { return _user; }
                 set {
+                        _user = value;
                     //to separate editing... conserve the original values.
                     if(value != null)
                     {
-                        _user = value;
                         Profile = value.Person.CopyPropertyValues();
                         Account = value.CopyPropertyValues();
                     }
@@ -76,7 +76,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
 
             public AdminPageViewModel(Window window, 
                                                             RegisterUserCommand registerUserCommand, 
-                                                            EditProfileCommand editProfileCommand, 
+                                                            EditUserProfileCommand editProfileCommand, 
                                                             RemoveUserCommand removeUserCommand, 
                                                             IUser user, 
                                                             ObservableCollection<User> usersList,

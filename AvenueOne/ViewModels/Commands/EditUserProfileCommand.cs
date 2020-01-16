@@ -17,13 +17,13 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands
 {
-    public class EditProfileCommand : ICommand
+    public class EditUserProfileCommand : ICommand
     {
-        public IProfileEditViewModel ViewModel { get; set; }
+        public IUserProfileEditViewModel ViewModel { get; set; }
         private IUnitOfWork _unitOfWork;
         private IDisplayService _displayService;
 
-        public EditProfileCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
+        public EditUserProfileCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
         {
             if (unitOfWork == null || displayService == null)
                 throw new ArgumentNullException("Unit of work and display service cannot be null.");
@@ -50,12 +50,13 @@ namespace AvenueOne.ViewModels.Commands
             {
                 if (ViewModel == null)
                     throw new NullReferenceException("View model must not be null in order to execute command.");
-
                 if (ViewModel.User == null)
+                    throw new NullReferenceException("No item selected to update.");
+                if (ViewModel.Profile == null)
                     throw new NullReferenceException("No item selected to update.");
 
                 //User user = this.ViewModel.User.User as User;
-                if (ViewModel != null && ViewModel.User != null)
+                if (ViewModel != null && ViewModel.User != null && ViewModel.Account.IsValidProperty("Username"))
                 {
 
                     IUser user = await Task.Run(() => _unitOfWork.Users.GetAsync(ViewModel.User.Id));
@@ -64,11 +65,29 @@ namespace AvenueOne.ViewModels.Commands
                         throw new NullReferenceException("Account does not exist.");
 
                     string password = user.Password; //conserve hashed password;
+                    if (ViewModel.IsPasswordIncluded)
+                    {
+                        if(ViewModel.Account.IsValidProperty("Password") && ViewModel.Account.IsValidProperty("PasswordConfirm"))
+                        {
+                            password = HashService.Hash(ViewModel.Account.Password);
+                        }
+                        else
+                        {
+                            _displayService.ErrorDisplay("Invalid entry on password or password confirmation does not match.", "Invalid entry.");
+                            return;
+                        }
+                    }
                     user = ViewModel.Account.CopyPropertyValues(user);
-                    IPerson person = user.Person;
-                    person = ViewModel.Profile.CopyPropertyValuesTo(person);
                     user.Password = password;
                     user.PasswordConfirm = password;
+
+                    if (!ViewModel.Profile.IsValid)
+                    {
+                        _displayService.ErrorDisplay("Invalid entry on profile", "Invalid entry.");
+                        return;
+                    }
+                    ViewModel.Profile.CopyPropertyValuesTo(user.Person);
+
                     int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 
                     if (n == 0)
@@ -80,10 +99,15 @@ namespace AvenueOne.ViewModels.Commands
                         _displayService.MessageDisplay($"Edited account: {user.Username}.\nAffected rows: {n}.");
                     }
                 }
+                else
+                {
+                    _displayService.ErrorDisplay("Invalid entry on ViewModel, User, or null reference.", "Invalid entry.");
+                }
             }
             catch(Exception ex)
             {
                 _displayService.ErrorDisplay(ex.Message, "Error");
+                throw;
             }
         }
     }

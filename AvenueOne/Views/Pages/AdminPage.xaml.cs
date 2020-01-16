@@ -38,7 +38,7 @@ namespace AvenueOne.Views.Pages
             IDisplayService displayService = new WpfDisplayService();
             IUnitOfWork unitOfWork = new UnitOfWork(context);
             RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
-            EditProfileCommand editProfileCommand = new EditProfileCommand(unitOfWork, 
+            EditUserProfileCommand editProfileCommand = new EditUserProfileCommand(unitOfWork, 
                                                                                                                                 displayService);
             RemoveUserCommand removeUserCommand = new RemoveUserCommand(unitOfWork, 
                                                                                                                                         displayService);

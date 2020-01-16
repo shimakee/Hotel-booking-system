@@ -157,7 +157,7 @@
     <Compile Include="ViewModels\Commands\AddCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
     <Compile Include="ViewModels\Commands\EditCustomerCommand.cs" />
-    <Compile Include="ViewModels\Commands\EditProfileCommand.cs" />
+    <Compile Include="ViewModels\Commands\EditUserProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenCustomerWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
     <Compile Include="ViewModels\Commands\RemoveCustomerCommand.cs" />
@@ -173,7 +173,7 @@
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IPerson.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IMainWindowViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IProfileEditViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IUserProfileEditViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IUser.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IUserCrudViewModel.cs" />
@@ -307,6 +307,8 @@
     <Folder Include="Core\Domain\" />
     <Folder Include="Db\" />
     <Folder Include="Persistence\EntityConfigurations\" />
+    <Folder Include="ViewModels\Commands\Customer\" />
+    <Folder Include="ViewModels\Commands\User\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
     <Folder Include="Views\Pages\Interfaces\" />
   </ItemGroup>

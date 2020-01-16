@@ -46,7 +46,7 @@ namespace AvenueOne.Views.Pages
             IDisplayService displayService = new WpfDisplayService();
             IUnitOfWork unitOfWork = new UnitOfWork(_context);
             IUser user = _context.Users.Find(Settings.Default.UserAccount.Id);
-            EditProfileCommand editProfileCommand = new EditProfileCommand(unitOfWork, displayService);
+            EditUserProfileCommand editProfileCommand = new EditUserProfileCommand(unitOfWork, displayService);
             SettingsPageViewModel settingsPageViewModel = new SettingsPageViewModel(Window.GetWindow(this),
                                                                                                                                                 editProfileCommand, user);
 
