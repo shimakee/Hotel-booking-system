@@ -154,14 +154,14 @@
     <Compile Include="Services\Interfaces\ILoginService.cs" />
     <Compile Include="Core\IRepositories\IRepository.cs" />
     <Compile Include="Services\Interfaces\IWindowGenerator.cs" />
-    <Compile Include="ViewModels\Commands\AddCustomerCommand.cs" />
+    <Compile Include="ViewModels\Commands\Customer\AddCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
-    <Compile Include="ViewModels\Commands\EditCustomerCommand.cs" />
-    <Compile Include="ViewModels\Commands\EditUserProfileCommand.cs" />
+    <Compile Include="ViewModels\Commands\Customer\EditCustomerCommand.cs" />
+    <Compile Include="ViewModels\Commands\User\EditUserProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenCustomerWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
-    <Compile Include="ViewModels\Commands\RemoveCustomerCommand.cs" />
-    <Compile Include="ViewModels\Commands\RemoveUserCommand.cs" />
+    <Compile Include="ViewModels\Commands\Customer\RemoveCustomerCommand.cs" />
+    <Compile Include="ViewModels\Commands\User\RemoveUserCommand.cs" />
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\AccountViewModel.cs" />
@@ -190,7 +190,7 @@
     <Compile Include="Services\Tools\SampleData.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
-    <Compile Include="ViewModels\Commands\AddUserCommand.cs" />
+    <Compile Include="ViewModels\Commands\User\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
@@ -307,8 +307,6 @@
     <Folder Include="Core\Domain\" />
     <Folder Include="Db\" />
     <Folder Include="Persistence\EntityConfigurations\" />
-    <Folder Include="ViewModels\Commands\Customer\" />
-    <Folder Include="ViewModels\Commands\User\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
     <Folder Include="Views\Pages\Interfaces\" />
   </ItemGroup>
