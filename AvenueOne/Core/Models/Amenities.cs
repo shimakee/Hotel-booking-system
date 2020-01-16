@@ -30,9 +30,22 @@ namespace AvenueOne.Core.Models
 
         public IList<RoomType> RoomTypes { get; set; }
 
-        public Amenities(string name)
-        {
-            this.Name = name;
-        }
+        #region Constructors
+            Amenities()
+            {
+                this.RoomTypes = new List<RoomType>();
+            }
+            public Amenities(string name)
+                :this()
+            {
+                this.Name = name;
+            }
+
+            public Amenities(string name, IList<RoomType> roomTypes)
+                :this(name)
+            {
+                this.RoomTypes = roomTypes;
+            }
+        #endregion
     }
 }

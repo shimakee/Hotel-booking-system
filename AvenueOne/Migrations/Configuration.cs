@@ -7,6 +7,7 @@ namespace AvenueOne.Migrations
     using System.Data.Entity.Migrations;
     using AvenueOne.Services;
     using System.Linq;
+    using AvenueOne.Core.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<AvenueOne.Persistence.Repositories.PlutoContext>
     {
@@ -22,33 +23,71 @@ namespace AvenueOne.Migrations
             context.Database.ExecuteSqlCommand("DELETE FROM CUSTOMERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
 
-            Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
-            Person person2 = new Person() { FirstName = "Dinah", LastName = "Hong" };
-            Person person3 = new Person() { FirstName = "Darius", LastName = "De Leon" };
-            Person person4 = new Person() { FirstName = "Kristof", LastName = "De Leon" };
-            person.BirthDate = new DateTime(1980, 10, 10);
-            person2.BirthDate = new DateTime(1918, 12, 18);
-            person3.BirthDate = new DateTime(1989, 10, 18);
-            person4.BirthDate = new DateTime(1988, 12, 31);
-            User user = new User("shimakee", "shimakee", true);
-            User user2 = new User("dinah", "dinah", false);
+            #region Seed Users
+                Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
+                Person person2 = new Person() { FirstName = "Dinah", LastName = "Hong" };
+                person.BirthDate = new DateTime(1980, 10, 10);
+                person2.BirthDate = new DateTime(1918, 12, 18);
 
-            Customer customer = new Customer();
-            Customer customer2 = new Customer();
+                User user = new User("shimakee", "shimakee", true);
+                User user2 = new User("dinah", "dinah", false);
 
-            customer.Person = person3;
-            customer2.Person = person4;
+                user.Person = person;
+                user.Password = HashService.Hash(user.Password);
+                user.PasswordConfirm = user.Password;
+                user2.Person = person2;
+                user2.Password = HashService.Hash(user2.Password);
+                user2.PasswordConfirm = user2.Password;
 
-            user.Person = person;
-            user.Password = HashService.Hash(user.Password);
-            user.PasswordConfirm = user.Password;
-            user2.Person = person2;
-            user2.Password = HashService.Hash(user2.Password);
-            user2.PasswordConfirm = user2.Password;
+                context.Users.AddRange(new List<User>() { user, user2 });
+            #endregion
 
+            #region Seed Customers
+                Person person3 = new Person() { FirstName = "Darius", LastName = "De Leon" };
+                Person person4 = new Person() { FirstName = "Kristof", LastName = "De Leon" };
+                person3.BirthDate = new DateTime(1989, 10, 18);
+                person4.BirthDate = new DateTime(1988, 12, 31);
+            
+
+                Customer customer = new Customer();
+                Customer customer2 = new Customer();
+
+                customer.Person = person3;
+                customer2.Person = person4;
+
+                context.Customers.AddRange(new List<Customer>() { customer, customer2 });
+            #endregion
+
+            #region Seed Amenities
+                Amenities amenity = new Amenities("Pool");
+                Amenities amenity2 = new Amenities("TV");
+                Amenities amenity3 = new Amenities("Internet");
+                Amenities amenity4 = new Amenities("Aircondition");
+
+                context.Amenities.AddRange(new List<Amenities>() { amenity, amenity2, amenity3, amenity4 });
+            #endregion
+
+            #region Seed RoomType
+                RoomType roomType = new RoomType("Standard");
+                RoomType roomType2 = new RoomType("Deluxe");
+                RoomType roomType3 = new RoomType("Single");
+                RoomType roomType4 = new RoomType("Matrimonial");
+                RoomType roomType5 = new RoomType("Suite");
+
+
+                roomType.Amenities.Add(amenity);
+                roomType.Amenities.Add(amenity2);
+                roomType.Amenities.Add(amenity3);
+                roomType.Amenities.Add(amenity4);
+
+                roomType2.Amenities.Add(amenity);
+                roomType2.Amenities.Add(amenity2);
+                roomType2.Amenities.Add(amenity3);
+
+
+                context.RoomType.AddRange(new List<RoomType>() { roomType, roomType2, roomType3, roomType4, roomType5 });
+            #endregion
             //insert
-            context.Users.AddRange(new List<User>() { user, user2 });
-            context.Customers.AddRange(new List<Customer>() { customer, customer2 });
             //  This method will be called after migrating to the latest version.
 
 

@@ -33,9 +33,23 @@ namespace AvenueOne.Core.Models
 
         public IList<Amenities> Amenities { get; set; }
 
-        public RoomType(string name)
-        {
-            this.Name = name;
-        }
+        #region Constructors
+            RoomType()
+            {
+                this.Amenities = new List<Amenities>();
+                this.Id = GenerateId();
+            }
+            public RoomType(string name)
+            :this()
+            {
+                this.Name = name;
+            }
+
+            public RoomType(string name, IList<Amenities> amenities)
+                :this(name)
+            {
+                this.Amenities = amenities;
+            }
+        #endregion
     }
 }
