@@ -390,7 +390,7 @@
 
 
                         <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                            Content="Add Amenities"/>
+                            Content="Add Amenities" Command="{Binding RoomTab.OpenAmenitiesWindowCommand}"/>
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
                                     Text="Name:"/>

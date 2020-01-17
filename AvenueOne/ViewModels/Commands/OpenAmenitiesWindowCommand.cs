@@ -11,18 +11,16 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands
 {
-    public class OpenCustomerWindowCommand : ICommand
+    public class OpenAmenitiesWindowCommand : ICommand
     {
 
-        public ICustomerTabViewModel ViewModel { get; set; }
+        public IRoomTabViewModel ViewModel { get; set; }
         private PlutoContext _plutoContext;
 
-        public OpenCustomerWindowCommand(PlutoContext plutoContext)
+        public OpenAmenitiesWindowCommand(PlutoContext plutoContext)
         {
             this._plutoContext = plutoContext ?? throw new ArgumentNullException("Pluto context cannot be null.");
         }
-
-
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -32,9 +30,8 @@ namespace AvenueOne.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-
-            AddCustomerWindow customerWindow = new AddCustomerWindow(_plutoContext);
-            customerWindow.ShowDialog();
+            AmenitiesWindow amenitiesWindow = new AmenitiesWindow(_plutoContext);
+            amenitiesWindow.ShowDialog();
         }
     }
 }

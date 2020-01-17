@@ -10,5 +10,6 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
     public interface IRoomTabViewModel : IRoomTypeViewModel, IAmenitiesViewModel
     {
+        //openamenitieswindowcommand
     }
 }

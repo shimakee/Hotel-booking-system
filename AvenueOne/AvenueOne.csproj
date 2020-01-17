@@ -167,6 +167,7 @@
     <Compile Include="ViewModels\Commands\Customer\AddCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
     <Compile Include="ViewModels\Commands\Customer\EditCustomerCommand.cs" />
+    <Compile Include="ViewModels\Commands\OpenAmenitiesWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\User\EditUserProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenCustomerWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
@@ -176,9 +177,11 @@
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTabViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\AmenitiesWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\CustomerWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerTabViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerWindowViewModel.cs" />

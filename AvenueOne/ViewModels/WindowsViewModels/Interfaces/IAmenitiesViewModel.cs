@@ -12,7 +12,6 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
     public interface IAmenitiesViewModel : IAccountViewModel
     {
         IAmenities Amenities { get; set; }
-
         ObservableCollection<Amenities> AmenitiesList { get; set; }
     }
 }
