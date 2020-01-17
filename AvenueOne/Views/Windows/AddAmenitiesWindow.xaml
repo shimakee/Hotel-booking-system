@@ -1,0 +1,62 @@
+﻿<Window x:Class="AvenueOne.Views.Windows.AmenitiesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AvenueOne.Views.Windows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Title="AmenitiesWindow" Height="250" Width="500">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                                    Text="Name:"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                                 Text="{Binding RoomTab.Amenities.Name}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0"
+                            Text="Details:"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" 
+                                    Margin="1" VerticalAlignment="Stretch"
+                                     TextWrapping="Wrap" AcceptsReturn="True"
+                                     HorizontalScrollBarVisibility="Disabled"
+                                     VerticalScrollBarVisibility="Auto"
+                                    Text="{Binding RoomTab.Amenities.Details}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="3"
+                                   Text="Room Type:"/>
+        <DataGrid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
+                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                                  ItemsSource="{Binding RoomTab.Amenities.RoomTypes}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                            Content="Add" />
+        <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                            Content="Cancel " />
+    </Grid>
+</Window>
