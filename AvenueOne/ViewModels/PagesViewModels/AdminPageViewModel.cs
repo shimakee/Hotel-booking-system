@@ -31,6 +31,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
             public IPerson Profile { get; set; }
             public IUser Account { get; set; }
             public ICustomerTabViewModel CustomerTab { get; set; }
+            public IRoomTabViewModel RoomTab { get; set; }
 
             private bool _isPasswordIncluded;
             public bool IsPasswordIncluded
@@ -80,7 +81,8 @@ namespace AvenueOne.ViewModels.PagesViewModels
                                                             RemoveUserCommand removeUserCommand, 
                                                             IUser user, 
                                                             ObservableCollection<User> usersList,
-                                                            ICustomerTabViewModel customerTab)
+                                                            ICustomerTabViewModel customerTab,
+                                                            IRoomTabViewModel roomTab)
                 : this(window)
             {
 
@@ -96,6 +98,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
                 this.RemoveUserCommand = removeUserCommand;
                 this.RemoveUserCommand.ViewModel = this;
                 this.CustomerTab = customerTab;
+                this.RoomTab = roomTab;
 
         }
         #endregion

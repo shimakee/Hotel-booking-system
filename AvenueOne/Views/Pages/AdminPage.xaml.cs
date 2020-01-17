@@ -1,4 +1,6 @@
-﻿using AvenueOne.Interfaces;
+﻿using AvenueOne.Core.Models;
+using AvenueOne.Core.Models.Interfaces;
+using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Persistence.Repositories;
@@ -46,13 +48,15 @@ namespace AvenueOne.Views.Pages
             OpenCustomerWindowCommand openCustomerWindowCommand = new OpenCustomerWindowCommand(context);
             RemoveCustomerCommand removeCustomerCommand = new RemoveCustomerCommand(unitOfWork, displayService);
             CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand, removeCustomerCommand);
+            RoomTabViewModel roomTab = new RoomTabViewModel(new Amenities(), new Amenities(), new RoomType(), new RoomType(), _context.Amenities.Local, _context.RoomType.Local);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,
                                                                                                                                 removeUserCommand,
                                                                                                                                 User,
                                                                                                                                 _context.Users.Local,
-                                                                                                                                customerTab);
+                                                                                                                                customerTab,
+                                                                                                                                roomTab);
 
 
             this.ViewModel = _adminViewModel;

@@ -12,5 +12,7 @@ namespace AvenueOne.Core.Models.Interfaces
         string Name { get; set; }
         string Details { get; set; }
         IList<RoomType> RoomTypes { get; set; }
+        IAmenities CopyPropertyValues();
+        IAmenities CopyPropertyValuesTo(IAmenities amenities);
     }
 }
