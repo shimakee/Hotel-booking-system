@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AvenueOne.Views.Windows"
         mc:Ignorable="d"
+        FocusManager.FocusedElement="{x:Reference Name}"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -32,6 +33,7 @@
             <TextBlock Grid.Row="1" Grid.Column="0"
                                     Text="Name:"/>
             <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                                x:Name="Name"
                                  Text="{Binding Amenities.Name}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0"
@@ -56,7 +58,8 @@
 
             <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
                                 HorizontalAlignment="Center"
-                            Content="Add" />
+                            Content="Add" 
+                            Command="{Binding AddAmenitiesCommand}"/>
             <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                 HorizontalAlignment="Center"
                             Content="Cancel " Click="Button_Close"/>

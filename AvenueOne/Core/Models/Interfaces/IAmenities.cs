@@ -9,6 +9,7 @@ namespace AvenueOne.Core.Models.Interfaces
 {
     public interface IAmenities : IBaseObservableModel
     {
+        string Id { get; set; }
         string Name { get; set; }
         string Details { get; set; }
         IList<RoomType> RoomTypes { get; set; }

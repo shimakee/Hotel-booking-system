@@ -2,6 +2,7 @@
 using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.Room;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
@@ -22,6 +23,8 @@ namespace AvenueOne.ViewModels.TabViewModels
         public ObservableCollection<RoomType> RoomTypesList { get; set; }
         public ObservableCollection<Amenities> AmenitiesList { get; set; }
         public OpenAmenitiesWindowCommand OpenAmenitiesWindowCommand { get; set; }
+        public RemoveAmenitiesCommand RemoveAmenitiesCommand { get; set; }
+        public EditAmenitiesCommand EditAmenitiesCommand { get; set; }
         private IRoomType _roomTypeSelected;
         public IRoomType RoomTypeSelected
         {
@@ -71,7 +74,8 @@ namespace AvenueOne.ViewModels.TabViewModels
 
             public RoomTabViewModel(IAmenities amenities, IAmenities amenitiesSelected, IRoomType roomType, IRoomType roomTypeSelected, 
                 ObservableCollection<Amenities> amenitiesList, ObservableCollection<RoomType> roomTypesList,
-                OpenAmenitiesWindowCommand openAmenitiesWindowCommand)
+                OpenAmenitiesWindowCommand openAmenitiesWindowCommand,
+                EditAmenitiesCommand editAmenitiesCommand, RemoveAmenitiesCommand removeAmenitiesCommand)
             {
                 this.Amenities = amenities;
                 this.AmenitiesSelected = amenitiesSelected;
@@ -80,7 +84,11 @@ namespace AvenueOne.ViewModels.TabViewModels
                 this.AmenitiesList = amenitiesList;
                 this.RoomTypesList = roomTypesList;
                 this.OpenAmenitiesWindowCommand = openAmenitiesWindowCommand;
-                openAmenitiesWindowCommand.ViewModel = this;
+                this.OpenAmenitiesWindowCommand.ViewModel = this;
+                this.EditAmenitiesCommand = editAmenitiesCommand;
+                this.EditAmenitiesCommand.ViewModel = this;
+                this.RemoveAmenitiesCommand = removeAmenitiesCommand;
+                this.RemoveAmenitiesCommand.ViewModel = this;
             }
 
         #endregion

@@ -105,6 +105,7 @@
     <Compile Include="Converters\BooleanVisibilityConverter.cs" />
     <Compile Include="Converters\PasswordConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
+    <Compile Include="Core\IRepositories\IAmenitiesRepository.cs" />
     <Compile Include="Core\IRepositories\ICustomerRepository.cs" />
     <Compile Include="Core\IRepositories\IPersonRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
@@ -154,7 +155,12 @@
     <Compile Include="Migrations\202001160823367_AddedRoomTypeAndAmenities.Designer.cs">
       <DependentUpon>202001160823367_AddedRoomTypeAndAmenities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001200733031_ChangedAmenitiesPMkey.cs" />
+    <Compile Include="Migrations\202001200733031_ChangedAmenitiesPMkey.Designer.cs">
+      <DependentUpon>202001200733031_ChangedAmenitiesPMkey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistence\Repositories\AmenitiesRepository.cs" />
     <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
     <Compile Include="Persistence\Repositories\PersonRepository.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
@@ -168,6 +174,9 @@
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
     <Compile Include="ViewModels\Commands\Customer\EditCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenAmenitiesWindowCommand.cs" />
+    <Compile Include="ViewModels\Commands\Room\AddAmenitiesCommand.cs" />
+    <Compile Include="ViewModels\Commands\Room\EditAmenitiesCommand.cs" />
+    <Compile Include="ViewModels\Commands\Room\RemoveAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\User\EditUserProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenCustomerWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
@@ -320,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001160823367_AddedRoomTypeAndAmenities.resx">
       <DependentUpon>202001160823367_AddedRoomTypeAndAmenities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001200733031_ChangedAmenitiesPMkey.resx">
+      <DependentUpon>202001200733031_ChangedAmenitiesPMkey.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

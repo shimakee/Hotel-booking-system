@@ -16,7 +16,7 @@ namespace AvenueOne.EntityConfiguration
             //table
 
             //keys
-            HasKey(a => a.Name);
+            HasKey(a => a.Id);
 
             //property
             Property(a => a.Name)

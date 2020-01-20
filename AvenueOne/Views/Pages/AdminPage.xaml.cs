@@ -8,6 +8,7 @@ using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.Room;
 using AvenueOne.ViewModels.PagesViewModels;
 using AvenueOne.ViewModels.TabViewModels;
 using AvenueOne.ViewModels.WindowsViewModels;
@@ -49,7 +50,13 @@ namespace AvenueOne.Views.Pages
             RemoveCustomerCommand removeCustomerCommand = new RemoveCustomerCommand(unitOfWork, displayService);
             CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand, removeCustomerCommand);
             OpenAmenitiesWindowCommand openAmenitiesWindowCommand = new OpenAmenitiesWindowCommand(context);
-            RoomTabViewModel roomTab = new RoomTabViewModel(new Amenities(), new Amenities(), new RoomType(), new RoomType(), _context.Amenities.Local, _context.RoomType.Local, openAmenitiesWindowCommand);
+            RemoveAmenitiesCommand removeAmenitiesCommand = new RemoveAmenitiesCommand(unitOfWork, displayService);
+            EditAmenitiesCommand editAmenitiesCommand = new EditAmenitiesCommand(unitOfWork, displayService);
+            RoomTabViewModel roomTab = new RoomTabViewModel(new Amenities(), new Amenities(), new RoomType(), new RoomType(),
+                                                                                                            _context.Amenities.Local, _context.RoomType.Local, 
+                                                                                                            openAmenitiesWindowCommand,
+                                                                                                            editAmenitiesCommand, 
+                                                                                                            removeAmenitiesCommand);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,

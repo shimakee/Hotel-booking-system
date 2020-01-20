@@ -2,6 +2,7 @@
 using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,8 +14,19 @@ namespace AvenueOne.Core.Models
     public class Amenities : BaseObservableModel, IAmenities
     {
         #region Properties
+        private string _id;
 
-            private string _name;
+        [Required(ErrorMessage ="Id is required.")]
+        public string Id
+        {
+            get { return _id; }
+            set { _id = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _name;
+        [Required(ErrorMessage ="Name is required.")]
             public string Name
             {
                 get { return _name; }
@@ -38,6 +50,7 @@ namespace AvenueOne.Core.Models
         #region Constructors
             public Amenities()
             {
+                this.Id = GenerateId();
                 this.RoomTypes = new List<RoomType>();
             }
             public Amenities(string name)
@@ -52,8 +65,6 @@ namespace AvenueOne.Core.Models
                 this.RoomTypes = roomTypes;
             }
         #endregion
-
-        
 
         #region Methods and Utilities
         public IAmenities CopyPropertyValues()

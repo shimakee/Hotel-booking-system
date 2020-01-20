@@ -19,12 +19,13 @@ namespace AvenueOne.Migrations
         protected override void Seed(AvenueOne.Persistence.Repositories.PlutoContext context)
         {
             //clean database
+            context.Database.ExecuteSqlCommand("DELETE FROM AMENITIES");
             context.Database.ExecuteSqlCommand("DELETE FROM USERS");
             context.Database.ExecuteSqlCommand("DELETE FROM CUSTOMERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
 
             #region Seed Users
-                Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
+            Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
                 Person person2 = new Person() { FirstName = "Dinah", LastName = "Hong" };
                 person.BirthDate = new DateTime(1980, 10, 10);
                 person2.BirthDate = new DateTime(1918, 12, 18);
@@ -59,33 +60,33 @@ namespace AvenueOne.Migrations
             #endregion
 
             #region Seed Amenities
-                Amenities amenity = new Amenities("Pool");
-                Amenities amenity2 = new Amenities("TV");
-                Amenities amenity3 = new Amenities("Internet");
-                Amenities amenity4 = new Amenities("Aircondition");
+            Amenities amenity = new Amenities("Pool");
+            Amenities amenity2 = new Amenities("TV");
+            Amenities amenity3 = new Amenities("Internet");
+            Amenities amenity4 = new Amenities("Aircondition");
 
-                context.Amenities.AddRange(new List<Amenities>() { amenity, amenity2, amenity3, amenity4 });
+            context.Amenities.AddRange(new List<Amenities>() { amenity, amenity2, amenity3, amenity4 });
             #endregion
 
             #region Seed RoomType
-                RoomType roomType = new RoomType("Standard");
-                RoomType roomType2 = new RoomType("Deluxe");
-                RoomType roomType3 = new RoomType("Single");
-                RoomType roomType4 = new RoomType("Matrimonial");
-                RoomType roomType5 = new RoomType("Suite");
+            RoomType roomType = new RoomType("Standard");
+            RoomType roomType2 = new RoomType("Deluxe");
+            RoomType roomType3 = new RoomType("Single");
+            RoomType roomType4 = new RoomType("Matrimonial");
+            RoomType roomType5 = new RoomType("Suite");
 
 
-                roomType.Amenities.Add(amenity);
-                roomType.Amenities.Add(amenity2);
-                roomType.Amenities.Add(amenity3);
-                roomType.Amenities.Add(amenity4);
+            roomType.Amenities.Add(amenity);
+            roomType.Amenities.Add(amenity2);
+            roomType.Amenities.Add(amenity3);
+            roomType.Amenities.Add(amenity4);
 
-                roomType2.Amenities.Add(amenity);
-                roomType2.Amenities.Add(amenity2);
-                roomType2.Amenities.Add(amenity3);
+            roomType2.Amenities.Add(amenity);
+            roomType2.Amenities.Add(amenity2);
+            roomType2.Amenities.Add(amenity3);
 
 
-                context.RoomType.AddRange(new List<RoomType>() { roomType, roomType2, roomType3, roomType4, roomType5 });
+            context.RoomType.AddRange(new List<RoomType>() { roomType, roomType2, roomType3, roomType4, roomType5 });
             #endregion
             //insert
             //  This method will be called after migrating to the latest version.

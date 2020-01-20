@@ -1,4 +1,6 @@
 ﻿using AvenueOne.Core.Models;
+using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.Room;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,5 +13,6 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
     public interface IRoomTabViewModel : IRoomTypeViewModel, IAmenitiesViewModel
     {
         //openamenitieswindowcommand
+
     }
 }

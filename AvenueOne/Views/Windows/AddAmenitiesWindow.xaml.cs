@@ -1,5 +1,8 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Persistence.Repositories;
+using AvenueOne.Services;
+using AvenueOne.Utilities;
+using AvenueOne.ViewModels.Commands.Room;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
@@ -30,8 +33,8 @@ namespace AvenueOne.Views.Windows
             InitializeComponent();
 
             this._plutoContext = plutoContext;
-
-            IAmenitiesWindowViewModel amenititesWindowViewModel = new AmenitiesWindowViewModel(this, new Amenities());
+            AddAmenitiesCommand addAmenitiesCommand = new AddAmenitiesCommand(new UnitOfWork(plutoContext), new WpfDisplayService());
+            IAmenitiesWindowViewModel amenititesWindowViewModel = new AmenitiesWindowViewModel(this, new Amenities(), addAmenitiesCommand);
             this.ViewModel = amenititesWindowViewModel;
             this.DataContext = amenititesWindowViewModel;
         }
