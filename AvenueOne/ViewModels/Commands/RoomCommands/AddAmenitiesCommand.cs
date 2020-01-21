@@ -45,7 +45,9 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
 
                 if(!ViewModel.Amenities.IsValid)
                     throw new ValidationException("Invalid input on amenities.");
-
+                Amenities amenities = _unitOfWork.Amenities.Find(a => a.Name.ToLower() == ViewModel.Amenities.Name.ToLower()).FirstOrDefault();
+                if (amenities != null)
+                    throw new InvalidOperationException("Invalid, amenity with similar name already exist.");
                 _unitOfWork.Amenities.Add(ViewModel.Amenities as Amenities);
 
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
