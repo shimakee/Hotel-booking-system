@@ -5,7 +5,7 @@ using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
-using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.CustomerCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;

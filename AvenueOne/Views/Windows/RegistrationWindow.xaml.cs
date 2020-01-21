@@ -6,6 +6,7 @@ using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.UserCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Windows;

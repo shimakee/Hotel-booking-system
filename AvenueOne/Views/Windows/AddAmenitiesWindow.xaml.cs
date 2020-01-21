@@ -2,7 +2,7 @@
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
 using AvenueOne.Utilities;
-using AvenueOne.ViewModels.Commands.Room;
+using AvenueOne.ViewModels.Commands.RoomCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;

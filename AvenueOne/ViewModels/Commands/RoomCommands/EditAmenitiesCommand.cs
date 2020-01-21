@@ -1,25 +1,25 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Interfaces.RepositoryInterfaces;
-using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AvenueOne.ViewModels.Commands.Room
+namespace AvenueOne.ViewModels.Commands.RoomCommands
 {
-    public class AddAmenitiesCommand : ICommand
+    public class EditAmenitiesCommand : ICommand
     {
-        public IAmenitiesWindowViewModel ViewModel;
+        public IAmenitiesViewModel ViewModel;
         private IUnitOfWork _unitOfWork;
         private IDisplayService _displayService;
 
-        public AddAmenitiesCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
+        public EditAmenitiesCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
         {
             this._unitOfWork = unitOfWork;
             this._displayService = displayService;
@@ -29,8 +29,8 @@ namespace AvenueOne.ViewModels.Commands.Room
 
         public bool CanExecute(object parameter)
         {
-            if (this.ViewModel != null)
-                return this.ViewModel.UserAccount.IsAdmin;
+            if (ViewModel != null)
+                return ViewModel.UserAccount.IsAdmin;
             return false;
         }
 
@@ -40,23 +40,22 @@ namespace AvenueOne.ViewModels.Commands.Room
             {
                 if (ViewModel == null)
                     throw new NullReferenceException("Viewmodel cannot be null.");
-                if (ViewModel.Amenities == null)
+                if (ViewModel.Amenities == null || ViewModel.AmenitiesSelected == null)
                     throw new NullReferenceException("Ameneties cannot be null.");
 
-                if(!ViewModel.Amenities.IsValid)
+                if (!ViewModel.AmenitiesSelected.IsValid || !ViewModel.Amenities.IsValid)
                     throw new ValidationException("Invalid input on amenities.");
 
-                _unitOfWork.Amenities.Add(ViewModel.Amenities as Amenities);
-
+                Amenities amenities = _unitOfWork.Amenities.Get(ViewModel.Amenities.Id) ?? throw new InvalidOperationException("Could not delete, amenity does not exist.");
+                ViewModel.AmenitiesSelected.CopyPropertyValuesTo(amenities);
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 
                 if (n == 0)
-                    throw new InvalidOperationException("Could not add amenities.");
+                    throw new InvalidOperationException("Could not edit amenities.");
 
-                _displayService.MessageDisplay($"Added amenities.\nName:{ViewModel.Amenities.Name}\nAffected rows:{n}", "Amenities added");
-                ViewModel.Window.Close();
+                _displayService.MessageDisplay($"Changed amenities.\nName from:{ViewModel.Amenities.Name}\nName to:{ViewModel.AmenitiesSelected.Name}\nAffected rows:{n}", "Amenities edited");
             }
-            catch(ValidationException validationException)
+            catch (ValidationException validationException)
             {
                 _displayService.ErrorDisplay(validationException.Message, "Validation error!");
             }

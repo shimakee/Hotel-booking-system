@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace AvenueOne.ViewModels.Commands
+namespace AvenueOne.ViewModels.Commands.UserCommands
 {
     public class AddUserCommand : ICommand
     {

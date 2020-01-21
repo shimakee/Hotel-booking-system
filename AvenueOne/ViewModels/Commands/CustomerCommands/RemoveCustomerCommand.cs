@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AvenueOne.ViewModels.Commands
+namespace AvenueOne.ViewModels.Commands.CustomerCommands
 {
 
     public class RemoveCustomerCommand : ICommand

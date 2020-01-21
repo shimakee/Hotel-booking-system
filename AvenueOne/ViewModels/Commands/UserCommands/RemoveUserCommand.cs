@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
+using AvenueOne.Core.Models;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;

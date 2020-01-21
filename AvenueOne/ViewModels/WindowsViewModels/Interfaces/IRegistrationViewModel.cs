@@ -1,4 +1,5 @@
 ﻿using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.UserCommands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 
 namespace AvenueOne.Interfaces

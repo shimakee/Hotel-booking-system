@@ -1,7 +1,7 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.ViewModels.Commands;
-using AvenueOne.ViewModels.Commands.Room;
+using AvenueOne.ViewModels.Commands.RoomCommands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

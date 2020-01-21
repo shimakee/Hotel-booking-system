@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AvenueOne.ViewModels.Commands
+namespace AvenueOne.ViewModels.Commands.CustomerCommands
 {
     public class AddCustomerCommand : ICommand
     {
@@ -31,6 +31,7 @@ namespace AvenueOne.ViewModels.Commands
 
 
         public event EventHandler CanExecuteChanged;
+
 
         public bool CanExecute(object parameter)
         {

@@ -1,7 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
-using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.UserCommands;
 using System.Windows;
 using System;
 

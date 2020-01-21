@@ -13,6 +13,7 @@ namespace AvenueOne.Interfaces.RepositoryInterfaces
         IPersonRepository People { get; }
         ICustomerRepository Customers { get; }
         IAmenitiesRepository Amenities { get; }
+        IRoomTypeRepository RoomType {get;}
         Task<int> CompleteAsync();
         int Complete();
     }

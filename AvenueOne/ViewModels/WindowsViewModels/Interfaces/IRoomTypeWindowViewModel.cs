@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands.RoomCommands;
+using AvenueOne.ViewModels.Commands.UserCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,9 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
-    public interface IAmenitiesWindowViewModel : IWindowViewModel
+    public interface IRoomTypeWindowViewModel : IWindowViewModel
     {
-        AddAmenitiesCommand AddAmenitiesCommand { get; }
-        IAmenities Amenities { get; set; }
-        //add amenities command
+        AddRoomTypeCommand AddRoomTypeCommand { get; }
+        IRoomType RoomType { get; set; }
     }
 }

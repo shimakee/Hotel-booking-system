@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.CustomerCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
