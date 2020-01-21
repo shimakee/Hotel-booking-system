@@ -1,6 +1,8 @@
 ﻿using AvenueOne.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -21,7 +23,9 @@ namespace AvenueOne.EntityConfiguration
             //property
             Property(a => a.Name)
                 .IsRequired()
-                .HasMaxLength(maxLength); ;
+                .HasMaxLength(maxLength)
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                                                                                                new IndexAnnotation(new IndexAttribute("Name") { IsUnique = true })); ; ;
 
             //relationships
         }

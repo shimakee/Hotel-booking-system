@@ -41,6 +41,9 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
                 if (!ViewModel.RoomType.IsValid)
                     throw new ValidationException("Invalid entry on room type.");
 
+                RoomType roomType = _unitOfWork.RoomType.Find(room => room.Name.ToLower() == ViewModel.RoomType.Name.ToLower()).FirstOrDefault();
+                if (roomType != null)
+                    throw new InvalidOperationException("Room type with similar name already exist.");
                 _unitOfWork.RoomType.Add(ViewModel.RoomType as RoomType);
 
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());

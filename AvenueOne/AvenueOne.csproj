@@ -160,6 +160,10 @@
     <Compile Include="Migrations\202001200733031_ChangedAmenitiesPMkey.Designer.cs">
       <DependentUpon>202001200733031_ChangedAmenitiesPMkey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001210423211_PropertyChangedOnAmenitiesAndRoomType.cs" />
+    <Compile Include="Migrations\202001210423211_PropertyChangedOnAmenitiesAndRoomType.Designer.cs">
+      <DependentUpon>202001210423211_PropertyChangedOnAmenitiesAndRoomType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\AmenitiesRepository.cs" />
     <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
@@ -342,6 +346,9 @@
     <EmbeddedResource Include="Migrations\202001200733031_ChangedAmenitiesPMkey.resx">
       <DependentUpon>202001200733031_ChangedAmenitiesPMkey.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001210423211_PropertyChangedOnAmenitiesAndRoomType.resx">
+      <DependentUpon>202001210423211_PropertyChangedOnAmenitiesAndRoomType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -361,7 +368,6 @@
   <ItemGroup>
     <Folder Include="Core\Domain\" />
     <Folder Include="Db\" />
-    <Folder Include="Persistence\EntityConfigurations\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
     <Folder Include="Views\Pages\Interfaces\" />
   </ItemGroup>

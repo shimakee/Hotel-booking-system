@@ -26,37 +26,37 @@ namespace AvenueOne.Migrations
 
             #region Seed Users
             Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
-                Person person2 = new Person() { FirstName = "Dinah", LastName = "Hong" };
-                person.BirthDate = new DateTime(1980, 10, 10);
-                person2.BirthDate = new DateTime(1918, 12, 18);
+            Person person2 = new Person() { FirstName = "Dinah", LastName = "Hong" };
+            person.BirthDate = new DateTime(1980, 10, 10);
+            person2.BirthDate = new DateTime(1918, 12, 18);
 
-                User user = new User("shimakee", "shimakee", true);
-                User user2 = new User("dinah", "dinah", false);
+            User user = new User("shimakee", "shimakee", true);
+            User user2 = new User("dinah", "dinah", false);
 
-                user.Person = person;
-                user.Password = HashService.Hash(user.Password);
-                user.PasswordConfirm = user.Password;
-                user2.Person = person2;
-                user2.Password = HashService.Hash(user2.Password);
-                user2.PasswordConfirm = user2.Password;
+            user.Person = person;
+            user.Password = HashService.Hash(user.Password);
+            user.PasswordConfirm = user.Password;
+            user2.Person = person2;
+            user2.Password = HashService.Hash(user2.Password);
+            user2.PasswordConfirm = user2.Password;
 
-                context.Users.AddRange(new List<User>() { user, user2 });
+            context.Users.AddRange(new List<User>() { user, user2 });
             #endregion
 
             #region Seed Customers
-                Person person3 = new Person() { FirstName = "Darius", LastName = "De Leon" };
-                Person person4 = new Person() { FirstName = "Kristof", LastName = "De Leon" };
-                person3.BirthDate = new DateTime(1989, 10, 18);
-                person4.BirthDate = new DateTime(1988, 12, 31);
-            
+            Person person3 = new Person() { FirstName = "Darius", LastName = "De Leon" };
+            Person person4 = new Person() { FirstName = "Kristof", LastName = "De Leon" };
+            person3.BirthDate = new DateTime(1989, 10, 18);
+            person4.BirthDate = new DateTime(1988, 12, 31);
 
-                Customer customer = new Customer();
-                Customer customer2 = new Customer();
 
-                customer.Person = person3;
-                customer2.Person = person4;
+            Customer customer = new Customer();
+            Customer customer2 = new Customer();
 
-                context.Customers.AddRange(new List<Customer>() { customer, customer2 });
+            customer.Person = person3;
+            customer2.Person = person4;
+
+            context.Customers.AddRange(new List<Customer>() { customer, customer2 });
             #endregion
 
             #region Seed Amenities
