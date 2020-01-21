@@ -20,6 +20,7 @@ namespace AvenueOne.Migrations
         {
             //clean database
             context.Database.ExecuteSqlCommand("DELETE FROM AMENITIES");
+            context.Database.ExecuteSqlCommand("DELETE FROM ROOMTYPE");
             context.Database.ExecuteSqlCommand("DELETE FROM USERS");
             context.Database.ExecuteSqlCommand("DELETE FROM CUSTOMERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
