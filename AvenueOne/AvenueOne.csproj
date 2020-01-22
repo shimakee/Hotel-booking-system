@@ -118,6 +118,7 @@
     <Compile Include="Core\Models\Interfaces\ICustomer.cs" />
     <Compile Include="Core\Models\Interfaces\IRoom.cs" />
     <Compile Include="Core\Models\Interfaces\IRoomType.cs" />
+    <Compile Include="Core\Models\Room.cs" />
     <Compile Include="Core\Models\RoomType.cs" />
     <Compile Include="Core\Models\UserEventArgs.cs" />
     <Compile Include="EntityConfiguration\AmenitiesConfiguration.cs" />
