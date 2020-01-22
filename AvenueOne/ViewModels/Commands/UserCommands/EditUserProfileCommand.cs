@@ -66,6 +66,7 @@ namespace AvenueOne.ViewModels.Commands
                 string password = user.Password; 
                 user = ViewModel.Account.CopyPropertyValues(user);
                 user.Password = password;
+                user.PasswordConfirm = password;
 
                 if (!ViewModel.Profile.IsValid)
                     throw new ArgumentException("Invalid entry on profile");
