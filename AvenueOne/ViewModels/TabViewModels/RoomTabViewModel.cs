@@ -22,39 +22,22 @@ namespace AvenueOne.ViewModels.TabViewModels
     {
 
         #region Properties
-        public ObservableCollection<RoomType> RoomTypesList { get; set; }
+        //public ObservableCollection<RoomType> RoomTypesList { get; set; }
         public ObservableCollection<Amenities> AmenitiesList { get; set; }
-        public OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
-        public RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
-        public EditRoomTypeCommand EditRoomTypeCommand { get; set; }
+        //public OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
+        //public RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
+        //public EditRoomTypeCommand EditRoomTypeCommand { get; set; }
         public OpenAmenitiesWindowCommand OpenAmenitiesWindowCommand { get; set; }
         public RemoveAmenitiesCommand RemoveAmenitiesCommand { get; set; }
         public EditAmenitiesCommand EditAmenitiesCommand { get; set; }
-        private IRoomType _roomTypeSelected;
-        public IRoomType RoomTypeSelected
-        {
-            get { return _roomTypeSelected; }
-            set { _roomTypeSelected = value;
-                OnPropertyChanged();
-            }
-        }
 
-        private IRoomType _roomType;
-            public IRoomType RoomType
-            {
-                get { return _roomType; }
-                set
-                {
-                    _roomType = value;
-                    if (value != null)
-                {
-                    //Debug.WriteLine($"RoomType: {value.Name.ToString()}");
-                    RoomTypeSelected = value.CopyPropertyValues();
-                }
-                     OnPropertyChanged();
-                    OnPropertyChanged("RoomTypeSelected");
-            }
-            }
+        private IRoomTypeViewModel _roomTypeViewModel;
+
+        public IRoomTypeViewModel RoomTypeViewModel
+        {
+            get { return _roomTypeViewModel; }
+            set { _roomTypeViewModel = value; OnPropertyChanged(); }
+        }
 
         private IAmenities _amenitiesSelected;
         public IAmenities AmenitiesSelected
@@ -76,7 +59,6 @@ namespace AvenueOne.ViewModels.TabViewModels
                 _amenities = value;
                     if (value != null)
                 {
-                    //Debug.WriteLine($"Amenities: {value.Name.ToString()}");
                     AmenitiesSelected = value.CopyPropertyValues();
                 }
                     OnPropertyChanged();
@@ -86,32 +68,22 @@ namespace AvenueOne.ViewModels.TabViewModels
         #endregion
 
         #region Constructors
-
-            public RoomTabViewModel(IAmenities amenities, IAmenities amenitiesSelected, IRoomType roomType, IRoomType roomTypeSelected, 
-                ObservableCollection<Amenities> amenitiesList, ObservableCollection<RoomType> roomTypesList,
+            public RoomTabViewModel(IAmenities amenities, IAmenities amenitiesSelected,
+                ObservableCollection<Amenities> amenitiesList,
                 OpenAmenitiesWindowCommand openAmenitiesWindowCommand,
                 EditAmenitiesCommand editAmenitiesCommand, RemoveAmenitiesCommand removeAmenitiesCommand,
-                OpenRoomTypeWindowCommand openRoomTypeWindowCommand,
-                EditRoomTypeCommand editRoomTypeCommand, RemoveRoomTypeCommand removeRoomTypeCommand)
-            {
+                IRoomTypeViewModel roomTypeViewModel)
+        {
+                this.RoomTypeViewModel = roomTypeViewModel;
                 this.Amenities = amenities;
                 this.AmenitiesSelected = amenitiesSelected;
-                this.RoomType = roomType;
-                this.RoomTypeSelected = roomTypeSelected;
                 this.AmenitiesList = amenitiesList;
-                this.RoomTypesList = roomTypesList;
                 this.OpenAmenitiesWindowCommand = openAmenitiesWindowCommand;
                 this.OpenAmenitiesWindowCommand.ViewModel = this;
                 this.EditAmenitiesCommand = editAmenitiesCommand;
                 this.EditAmenitiesCommand.ViewModel = this;
                 this.RemoveAmenitiesCommand = removeAmenitiesCommand;
                 this.RemoveAmenitiesCommand.ViewModel = this;
-                this.OpenRoomTypeWindowCommand = openRoomTypeWindowCommand;
-                this.OpenRoomTypeWindowCommand.ViewModel = this;
-                this.EditRoomTypeCommand = editRoomTypeCommand;
-                this.EditRoomTypeCommand.ViewModel = this;
-                this.RemoveRoomTypeCommand = removeRoomTypeCommand;
-                this.RemoveRoomTypeCommand.ViewModel = this;
             }
 
         #endregion

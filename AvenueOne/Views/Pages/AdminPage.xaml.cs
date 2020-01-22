@@ -14,6 +14,7 @@ using AvenueOne.ViewModels.Commands.UserCommands;
 using AvenueOne.ViewModels.PagesViewModels;
 using AvenueOne.ViewModels.TabViewModels;
 using AvenueOne.ViewModels.WindowsViewModels;
+using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Linq;
 using System.Windows;
@@ -57,14 +58,17 @@ namespace AvenueOne.Views.Pages
             OpenRoomTypeWindowCommand openRoomTypeWindowCommand = new OpenRoomTypeWindowCommand(context);
             RemoveRoomTypeCommand removeRoomTypeCommand = new RemoveRoomTypeCommand(unitOfWork, displayService);
             EditRoomTypeCommand editRoomTypeCommand = new EditRoomTypeCommand(unitOfWork, displayService);
-            RoomTabViewModel roomTab = new RoomTabViewModel(new Amenities(), new Amenities(), new RoomType(), new RoomType(),
-                                                                                                            _context.Amenities.Local, _context.RoomType.Local, 
+            IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(), new RoomType(),
+                                                                                                                                    openRoomTypeWindowCommand,
+                                                                                                                                    editRoomTypeCommand,
+                                                                                                                                    removeRoomTypeCommand,
+                                                                                                                                    _context.RoomType.Local);
+            RoomTabViewModel roomTab = new RoomTabViewModel(new Amenities(), new Amenities(),
+                                                                                                            _context.Amenities.Local,
                                                                                                             openAmenitiesWindowCommand,
                                                                                                             editAmenitiesCommand, 
                                                                                                             removeAmenitiesCommand,
-                                                                                                            openRoomTypeWindowCommand,
-                                                                                                            editRoomTypeCommand,
-                                                                                                            removeRoomTypeCommand);
+                                                                                                            roomTypeViewModel);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,

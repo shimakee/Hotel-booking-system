@@ -197,6 +197,7 @@
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTabViewModel.cs" />
+    <Compile Include="ViewModels\TabViewModels\RoomTypeViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\AmenitiesWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\CustomerWindowViewModel.cs" />
