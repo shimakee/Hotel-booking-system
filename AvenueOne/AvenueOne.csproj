@@ -195,6 +195,7 @@
     <Compile Include="ViewModels\Commands\OpenRoomTypeWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\RemoveUserCommand.cs" />
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\TabViewModels\AmenitiesViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTypeViewModel.cs" />

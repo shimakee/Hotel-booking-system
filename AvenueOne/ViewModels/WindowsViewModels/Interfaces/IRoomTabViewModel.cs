@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
-    public interface IRoomTabViewModel :  IAmenitiesViewModel
+    public interface IRoomTabViewModel
     {
         //openamenitieswindowcommand
         IRoomTypeViewModel RoomTypeViewModel { get; set; }
+        IAmenitiesViewModel AmenitiesViewModel { get; set; }
 
     }
 }

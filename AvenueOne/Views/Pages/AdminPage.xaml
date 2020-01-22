@@ -397,12 +397,12 @@
 
 
                         <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                            Content="Add Amenities" Command="{Binding RoomTab.OpenAmenitiesWindowCommand}"/>
+                            Content="Add Amenities" Command="{Binding RoomTab.AmenitiesViewModel.OpenAmenitiesWindowCommand}"/>
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
                                     Text="Name:"/>
                         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
-                                 Text="{Binding RoomTab.AmenitiesSelected.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                 Text="{Binding RoomTab.AmenitiesViewModel.AmenitiesSelected.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="0"
@@ -412,14 +412,14 @@
                                      TextWrapping="Wrap" AcceptsReturn="True"
                                      HorizontalScrollBarVisibility="Disabled"
                                      VerticalScrollBarVisibility="Auto"
-                                    Text="{Binding RoomTab.AmenitiesSelected.Details, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                    Text="{Binding RoomTab.AmenitiesViewModel.AmenitiesSelected.Details, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="3"
                                    Text="Room Type:"/>
                         <DataGrid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                                  ItemsSource="{Binding RoomTab.AmenitiesSelected.RoomTypes, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                  ItemsSource="{Binding RoomTab.AmenitiesViewModel.AmenitiesSelected.RoomTypes, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
@@ -430,16 +430,16 @@
                         <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
                                 HorizontalAlignment="Center"
                             Content="Save"
-                                Command="{Binding RoomTab.EditAmenitiesCommand}"/>
+                                Command="{Binding RoomTab.AmenitiesViewModel.EditAmenitiesCommand}"/>
                         <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                 HorizontalAlignment="Center"
                             Content="Delete " 
-                                Command="{Binding RoomTab.RemoveAmenitiesCommand}"/>
+                                Command="{Binding RoomTab.AmenitiesViewModel.RemoveAmenitiesCommand}"/>
 
 
                         <DataGrid  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
                             x:Name="AmenitiesList"
-                            ItemsSource="{Binding RoomTab.AmenitiesList}" SelectedItem="{Binding RoomTab.Amenities, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding RoomTab.AmenitiesViewModel.AmenitiesList}" SelectedItem="{Binding RoomTab.AmenitiesViewModel.AmenitiesSelected, UpdateSourceTrigger=PropertyChanged}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>

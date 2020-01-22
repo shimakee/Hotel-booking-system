@@ -14,7 +14,7 @@ namespace AvenueOne.ViewModels.Commands
     public class OpenAmenitiesWindowCommand : ICommand
     {
 
-        public IRoomTabViewModel ViewModel { get; set; }
+        public IAmenitiesViewModel ViewModel { get; set; }
         private PlutoContext _plutoContext;
 
         public OpenAmenitiesWindowCommand(PlutoContext plutoContext)

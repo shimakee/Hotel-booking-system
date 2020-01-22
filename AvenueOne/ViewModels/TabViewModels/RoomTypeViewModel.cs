@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.TabViewModels
 {
-    public class RoomTypeViewModel : AccountViewModel, IRoomTypeViewModel
+    public class RoomTypeViewModel : AccountViewModel, IRoomTypeViewModel, INotifyPropertyChanged
     {
         public EditRoomTypeCommand EditRoomTypeCommand { get; set; }
         public RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
@@ -48,14 +48,14 @@ namespace AvenueOne.ViewModels.TabViewModels
         }
 
 
-        public RoomTypeViewModel(IRoomType roomType, IRoomType roomTypeSelected,
+        public RoomTypeViewModel(IRoomType roomType,
                                                     OpenRoomTypeWindowCommand openRoomTypeWindowCommand, 
                                                     EditRoomTypeCommand editRoomTypeCommand, 
                                                     RemoveRoomTypeCommand removeRoomTypeCommand,
                                                     ObservableCollection<RoomType> roomTypesList)
             : base()
         {
-            this.RoomTypeSelected = roomTypeSelected;
+            //this.RoomTypeSelected = roomTypeSelected;
             this.RoomType = roomType;
             this.RoomTypesList = roomTypesList;
             this.OpenRoomTypeWindowCommand = openRoomTypeWindowCommand;
