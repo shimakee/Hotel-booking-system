@@ -296,7 +296,109 @@
 
 
                 <GroupBox Header="Room info" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
 
+
+                        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                            Content="Add Room Type"
+                                Command="{Binding RoomTab.RoomViewModel.OpenRoomWindowCommand}"/>
+                        <TextBlock Grid.Row ="0" Grid.Column="2"  HorizontalAlignment="Right"
+                                   Text="Id:" />
+                        <TextBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.Id}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                    Text="Name:"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.Name}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                            Text="Roomtype :"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.RoomType.Name}"/>
+                        
+                        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                            Text="Max Occupants :"/>
+                        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1"
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.MaxOccupants}"/>
+                        
+                        <TextBlock Grid.Row="3" Grid.Column="3"
+                            Text="Floor :"/>
+                        <TextBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.Floor}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0"
+                            Text="Rate :"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.Rate}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="3"
+                            Text="Rate type :"/>
+                        <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.RateType}"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0"
+                            Text="Details :"/>
+                        <TextBox Grid.Row="6" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" 
+                                    Margin="1" VerticalAlignment="Stretch"
+                                     TextWrapping="Wrap" AcceptsReturn="True"
+                                     HorizontalScrollBarVisibility="Disabled"
+                                     VerticalScrollBarVisibility="Auto"
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.Details}"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="3"
+                                   Text="Amenities:"/>
+                        <DataGrid Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2"
+                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                                  ItemsSource="{Binding RoomTab.RoomViewModel.RoomSelected.RoomType.Amenities}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
+                                <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                            Content="Save" 
+                                Command="{Binding RoomTab.RoomViewModel.EditRoomCommand}"/>
+                        <Button Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                            Content="Delete " 
+                                Command="{Binding RoomTab.RoomViewModel.RemoveRoomCommand}"/>
+
+                        <DataGrid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="5"
+                                Margin="0 10 0 0"
+                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                                  
+                                  ItemsSource="{Binding RoomTab.RoomViewModel.RoomTypesList}" SelectedItem="{Binding RoomTab.RoomViewModel.RoomSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
+                                <DataGridTextColumn Header="Room type" Binding="{Binding RoomType}" Width="4*"/>
+                                <DataGridTextColumn Header="Max" Binding="{Binding MaxOccupants}" Width="3*"/>
+                                <DataGridTextColumn Header="Floor" Binding="{Binding Floor}" Width="3*"/>
+                                <DataGridTextColumn Header="Rate" Binding="{Binding Rate}" Width="4*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </GroupBox>
 
                 <GroupBox Header="Room Type" Grid.Column="2"
@@ -318,8 +420,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-
-
+                        
                         <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                             Content="Add Room Type"
                                 Command="{Binding RoomTab.RoomTypeViewModel.OpenRoomTypeWindowCommand}"/>
