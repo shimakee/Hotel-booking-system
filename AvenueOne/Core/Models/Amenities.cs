@@ -95,13 +95,17 @@ namespace AvenueOne.Core.Models
 
             Amenities amenities = (Amenities)obj;
 
-            return this.Name.ToLower() == amenities.Name.ToLower();
+            if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(amenities.Name))
+                return this.Name.ToLower() == amenities.Name.ToLower();
+            if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(amenities.Name))
+                return true;
+            return false;
         }
 
         public override int GetHashCode()
         {
             return
-                this.Name.GetHashCode();
+                this.Id.GetHashCode();
         }
         #endregion
     }

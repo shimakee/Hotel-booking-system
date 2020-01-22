@@ -26,11 +26,27 @@ namespace AvenueOne.ViewModels.PagesViewModels
 
         #region Properties
             private IUser _user;
-            public ObservableCollection<User> UsersList { get; set; } //TODO check to see if you can use interface
-            //private ICustomerTabViewModel _customerTab;
-            public IPerson Profile { get; set; }
-            public IUser Account { get; set; }
-            public ICustomerTabViewModel CustomerTab { get; set; }
+            public ObservableCollection<User> UsersList { get; set; } 
+            private IPerson _profile;
+            public IPerson Profile
+            {
+                get { return _profile; }
+                set
+                {
+                    _profile = value;
+                    OnPropertyChanged();
+                }
+            }
+        private IUser _account;
+        public IUser Account
+        {
+            get { return _account; }
+            set { _account = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICustomerTabViewModel CustomerTab { get; set; }
             public IRoomTabViewModel RoomTab { get; set; }
 
             private bool _isPasswordIncluded;
@@ -46,21 +62,14 @@ namespace AvenueOne.ViewModels.PagesViewModels
             {
                 get { return _user; }
                 set {
-                        _user = value;
                     //to separate editing... conserve the original values.
                     if(value != null)
                     {
+                        _user = value;
                         Profile = value.Person.CopyPropertyValues();
                         Account = value.CopyPropertyValues();
                     }
-                    else
-                    {
-                        Account = null;
-                        Profile = null;
-                    }
                     OnPropertyChanged();
-                    OnPropertyChanged("Account");
-                    OnPropertyChanged("Profile");
                 }
             }
         #endregion

@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
+using AvenueOne.ViewModels.Commands.RoomCommands;
 using AvenueOne.ViewModels.Commands.UserCommands;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
     public interface IRoomTypeViewModel : IAccountViewModel
     {
-
+        EditRoomTypeCommand EditRoomTypeCommand { get; set; }
+        RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
         OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
         IRoomType RoomType { get; set; }
         IRoomType RoomTypeSelected { get; set; }

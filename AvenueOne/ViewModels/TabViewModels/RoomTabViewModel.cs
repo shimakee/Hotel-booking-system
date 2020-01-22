@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -24,6 +25,8 @@ namespace AvenueOne.ViewModels.TabViewModels
         public ObservableCollection<RoomType> RoomTypesList { get; set; }
         public ObservableCollection<Amenities> AmenitiesList { get; set; }
         public OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
+        public RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
+        public EditRoomTypeCommand EditRoomTypeCommand { get; set; }
         public OpenAmenitiesWindowCommand OpenAmenitiesWindowCommand { get; set; }
         public RemoveAmenitiesCommand RemoveAmenitiesCommand { get; set; }
         public EditAmenitiesCommand EditAmenitiesCommand { get; set; }
@@ -44,8 +47,12 @@ namespace AvenueOne.ViewModels.TabViewModels
                 {
                     _roomType = value;
                     if (value != null)
-                        RoomTypeSelected = value.CopyPropertyValues();
-                        OnPropertyChanged();
+                {
+                    //Debug.WriteLine($"RoomType: {value.Name.ToString()}");
+                    RoomTypeSelected = value.CopyPropertyValues();
+                }
+                     OnPropertyChanged();
+                    OnPropertyChanged("RoomTypeSelected");
             }
             }
 
@@ -53,7 +60,8 @@ namespace AvenueOne.ViewModels.TabViewModels
         public IAmenities AmenitiesSelected
         {
             get { return _amenitiesSelected; }
-            set { _amenitiesSelected = value;
+            set {
+                _amenitiesSelected = value;
                 OnPropertyChanged();
             }
         }
@@ -64,11 +72,16 @@ namespace AvenueOne.ViewModels.TabViewModels
                 get { return _amenities; }
                 set
                 {
-                    _amenities = value;
+
+                _amenities = value;
                     if (value != null)
-                        AmenitiesSelected = value.CopyPropertyValues();
-                    OnPropertyChanged();
+                {
+                    //Debug.WriteLine($"Amenities: {value.Name.ToString()}");
+                    AmenitiesSelected = value.CopyPropertyValues();
                 }
+                    OnPropertyChanged();
+                    OnPropertyChanged("AmenitiesSelected");
+            }
             }
         #endregion
 
@@ -78,7 +91,8 @@ namespace AvenueOne.ViewModels.TabViewModels
                 ObservableCollection<Amenities> amenitiesList, ObservableCollection<RoomType> roomTypesList,
                 OpenAmenitiesWindowCommand openAmenitiesWindowCommand,
                 EditAmenitiesCommand editAmenitiesCommand, RemoveAmenitiesCommand removeAmenitiesCommand,
-                OpenRoomTypeWindowCommand openRoomTypeWindowCommand)
+                OpenRoomTypeWindowCommand openRoomTypeWindowCommand,
+                EditRoomTypeCommand editRoomTypeCommand, RemoveRoomTypeCommand removeRoomTypeCommand)
             {
                 this.Amenities = amenities;
                 this.AmenitiesSelected = amenitiesSelected;
@@ -94,6 +108,10 @@ namespace AvenueOne.ViewModels.TabViewModels
                 this.RemoveAmenitiesCommand.ViewModel = this;
                 this.OpenRoomTypeWindowCommand = openRoomTypeWindowCommand;
                 this.OpenRoomTypeWindowCommand.ViewModel = this;
+                this.EditRoomTypeCommand = editRoomTypeCommand;
+                this.EditRoomTypeCommand.ViewModel = this;
+                this.RemoveRoomTypeCommand = removeRoomTypeCommand;
+                this.RemoveRoomTypeCommand.ViewModel = this;
             }
 
         #endregion

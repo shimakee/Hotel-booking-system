@@ -11,20 +11,17 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands.CustomerCommands
 {
-    public class EditCustomerCommand : ICommand
+    public class EditCustomerCommand : BaseClassCommand, ICommand
     {
 
         #region Properties
             public ICustomerTabViewModel ViewModel { get; set; }
-            private IUnitOfWork _unitOfWork;
-            private IDisplayService _displayService;
         #endregion
 
         #region Constructor
             public EditCustomerCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
+            :base(unitOfWork, displayService)
             {
-                this._displayService = displayService;
-                this._unitOfWork = unitOfWork;
             }
         #endregion
 
@@ -66,7 +63,7 @@ namespace AvenueOne.ViewModels.Commands.CustomerCommands
             catch (Exception ex)
             {
 
-                //throw;
+                throw;
             }
         }
     }

@@ -48,10 +48,11 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
 
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 
-                if (n == 0)
+                if (n <= 0)
                     throw new InvalidOperationException("Could not add room type.");
 
                 _displayService.MessageDisplay($"Added:\nName:{ViewModel.RoomType.Name}\nAffected rows:{n}.");
+                ViewModel.Window.Close();
             }
             catch(ArgumentNullException argEx)
             {

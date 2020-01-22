@@ -201,7 +201,7 @@ namespace AvenueOne.Models
 
         public override int GetHashCode()
         {
-            return this.Username.GetHashCode();
+            return this.Id.GetHashCode();
         }
         #endregion
     }

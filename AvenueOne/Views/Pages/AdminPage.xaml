@@ -54,7 +54,9 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="Username:" Grid.Column="0"/>
-                                <TextBox x:Name="Username" Text="{Binding Account.Username}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                                <TextBox x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"
+                                         Text="{Binding Account.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
                             <Grid>
@@ -285,18 +287,20 @@
         <TabItem Header="Room management">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="244*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="70*"/>
+                    <ColumnDefinition Width="195*"/>
+                    <ColumnDefinition Width="265*"/>
                 </Grid.ColumnDefinitions>
 
 
-                <GroupBox Header="Room info" Grid.Column="0">
-                    
+                <GroupBox Header="Room info" Grid.Column="0" Grid.ColumnSpan="2">
+
                 </GroupBox>
-                
-                <GroupBox Header="Room Type" Grid.Column="1"
-                          Padding="5">
+
+                <GroupBox Header="Room Type" Grid.Column="2"
+                          Padding="5" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -351,16 +355,51 @@
 
                         <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
                                 HorizontalAlignment="Center"
-                            Content="Save" />
+                            Content="Save" 
+                                Command="{Binding RoomTab.EditRoomTypeCommand}"/>
                         <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                 HorizontalAlignment="Center"
-                            Content="Delete " />
+                            Content="Delete " 
+                                Command="{Binding RoomTab.RemoveRoomTypeCommand}"/>
 
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
 
                         <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
                                 Margin="0 10 0 0"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                                  ItemsSource="{Binding RoomTab.RoomTypesList}" SelectedItem="{Binding RoomTab.RoomType}">
+                                  
+                                  ItemsSource="{Binding RoomTab.RoomTypesList}" SelectedItem="{Binding RoomTab.RoomType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                                 <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
@@ -369,7 +408,7 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="Amenities" Grid.Column="2"
+                <GroupBox Header="Amenities" Grid.Column="4"
                            Padding="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -396,7 +435,8 @@
                         <TextBlock Grid.Row="1" Grid.Column="0"
                                     Text="Name:"/>
                         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
-                                 Text="{Binding RoomTab.AmenitiesSelected.Name}"/>
+                                 Text="{Binding RoomTab.AmenitiesSelected.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="0"
                             Text="Details:"/>
@@ -405,13 +445,15 @@
                                      TextWrapping="Wrap" AcceptsReturn="True"
                                      HorizontalScrollBarVisibility="Disabled"
                                      VerticalScrollBarVisibility="Auto"
-                                    Text="{Binding RoomTab.AmenitiesSelected.Details}"/>
+                                    Text="{Binding RoomTab.AmenitiesSelected.Details, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="3"
                                    Text="Room Type:"/>
                         <DataGrid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                                  ItemsSource="{Binding RoomTab.AmenitiesSelected.RoomTypes}">
+                                  ItemsSource="{Binding RoomTab.AmenitiesSelected.RoomTypes, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                                 <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
@@ -428,13 +470,18 @@
                                 Command="{Binding RoomTab.RemoveAmenitiesCommand}"/>
 
 
-                        <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
-                                Margin="0 10 0 0"
-                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                                  ItemsSource="{Binding RoomTab.AmenitiesList}" SelectedItem="{Binding RoomTab.Amenities}">
+                        <DataGrid  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
+                            x:Name="AmenitiesList"
+                            ItemsSource="{Binding RoomTab.AmenitiesList}" SelectedItem="{Binding RoomTab.Amenities, UpdateSourceTrigger=PropertyChanged}"
+                               IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
-                                <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
+                                <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="3*"/>
+                                <DataGridTextColumn>
+                                    <DataGridTextColumn.Header>
+                                        <Button Content="Refresh"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -646,14 +693,8 @@
                     <DataGrid  x:Name="CustomerList" Grid.Column="1"
                             ItemsSource="{Binding CustomerTab.CustomerList}" SelectedItem="{Binding CustomerTab.Customer}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
-                        <!--<DataGrid.Columns>
-                            <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>
-                            <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="2*"/>
-                        </DataGrid.Columns>-->
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
-                            <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="3*"/>-->
                             <DataGridTextColumn Header="Full name" Binding="{Binding Person.FullName}" Width="4*"/>
                             <DataGridTextColumn Header="Birth date" Binding="{Binding Person.BirthDate , StringFormat=d}" Width="2*"/>
                             <DataGridTextColumn Header="Gender" Binding="{Binding Person.Gender}" Width="*"/>
