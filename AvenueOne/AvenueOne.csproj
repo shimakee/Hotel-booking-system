@@ -116,6 +116,7 @@
     <Compile Include="Core\Models\Interfaces\IAmenities.cs" />
     <Compile Include="Core\Models\Interfaces\IBaseObservableModel.cs" />
     <Compile Include="Core\Models\Interfaces\ICustomer.cs" />
+    <Compile Include="Core\Models\Interfaces\IRoom.cs" />
     <Compile Include="Core\Models\Interfaces\IRoomType.cs" />
     <Compile Include="Core\Models\RoomType.cs" />
     <Compile Include="Core\Models\UserEventArgs.cs" />

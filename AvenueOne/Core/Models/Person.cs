@@ -261,12 +261,12 @@ namespace AvenueOne.Models
 
         public override int GetHashCode()
         {
-            return
-                this.FullName.GetHashCode() ^
-                this.Gender.GetHashCode() ^
-                this.CivilStatus.GetHashCode() ^
-                (this.Nationality == null ? 0 : this.Nationality.GetHashCode()) ^
-                (this.BirthDate == null ? 0 : this.BirthDate.GetHashCode());
+            return this.Id.GetHashCode();
+                //this.FullName.GetHashCode() ^
+                //this.Gender.GetHashCode() ^
+                //this.CivilStatus.GetHashCode() ^
+                //(this.Nationality == null ? 0 : this.Nationality.GetHashCode()) ^
+                //(this.BirthDate == null ? 0 : this.BirthDate.GetHashCode());
         }
         #endregion
     }
