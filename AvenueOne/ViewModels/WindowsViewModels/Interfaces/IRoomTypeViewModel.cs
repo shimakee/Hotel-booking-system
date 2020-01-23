@@ -17,6 +17,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
         RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
         OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
         DetachAmenityCommand DetachAmenityCommand { get; set; }
+        OpenAmenitiesListWindowCommand OpenAmenitiesListWindowCommand {get; set;}
         IRoomType RoomType { get; set; }
         IRoomType RoomTypeSelected { get; set; }
         IAmenities AmenitiesSelected { get; set; }

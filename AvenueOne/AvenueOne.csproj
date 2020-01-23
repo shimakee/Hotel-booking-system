@@ -192,6 +192,8 @@
     <Compile Include="ViewModels\Commands\RoomCommands\DetachAmenityCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\EditAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\EditRoomTypeCommand.cs" />
+    <Compile Include="ViewModels\Commands\RoomCommands\LinkAmenityToRoomTypeCommand.cs" />
+    <Compile Include="ViewModels\Commands\RoomCommands\OpenAmenitiesListWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\EditUserProfileCommand.cs" />
@@ -206,6 +208,11 @@
     <Compile Include="ViewModels\TabViewModels\RoomTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTypeViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\AmenitiesListWindowViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesListWindowViewModel.cs" />
+    <Compile Include="Views\Windows\AmenitiesListWindow.xaml.cs">
+      <DependentUpon>AmenitiesListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\WindowsViewModels\AmenitiesWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\CustomerWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
@@ -269,6 +276,10 @@
     <Compile Include="Views\Windows\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Windows\AmenitiesListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

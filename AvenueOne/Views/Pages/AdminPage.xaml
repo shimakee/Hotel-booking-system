@@ -447,7 +447,8 @@
                         <TextBlock Grid.Row="3" Grid.Column="3"
                                    Text="Amenities:"/>
                         <Button Grid.Row="4" Grid.Column="3"
-                                   Content="Link"/>
+                                   Content="Link"
+                                Command="{Binding RoomTab.RoomTypeViewModel.OpenAmenitiesListWindowCommand}"/>
                         <Button Grid.Row="4" Grid.Column="4"
                                    Content="Detach"
                                 Command="{Binding RoomTab.RoomTypeViewModel.DetachAmenityCommand}"/>

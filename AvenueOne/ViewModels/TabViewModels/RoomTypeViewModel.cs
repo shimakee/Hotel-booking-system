@@ -23,6 +23,7 @@ namespace AvenueOne.ViewModels.TabViewModels
         public RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
         public OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
         public DetachAmenityCommand DetachAmenityCommand { get; set; }
+        public OpenAmenitiesListWindowCommand OpenAmenitiesListWindowCommand { get; set; }
         public ObservableCollection<RoomType> RoomTypesList { get; set; }
         private IRoomType _roomTypeSelected;
         public IRoomType RoomTypeSelected
@@ -63,6 +64,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                                                     EditRoomTypeCommand editRoomTypeCommand, 
                                                     RemoveRoomTypeCommand removeRoomTypeCommand,
                                                     DetachAmenityCommand detachAmenityCommand,
+                                                    OpenAmenitiesListWindowCommand openAmenitiesListWindowCommand,
                                                     ObservableCollection<RoomType> roomTypesList)
             : base()
         {
@@ -73,10 +75,12 @@ namespace AvenueOne.ViewModels.TabViewModels
             this.EditRoomTypeCommand = editRoomTypeCommand;
             this.RemoveRoomTypeCommand = removeRoomTypeCommand;
             this.DetachAmenityCommand = detachAmenityCommand;
+            this.OpenAmenitiesListWindowCommand = openAmenitiesListWindowCommand;
             this.OpenRoomTypeWindowCommand.ViewModel = this;
             this.EditRoomTypeCommand.ViewModel = this;
             this.RemoveRoomTypeCommand.ViewModel = this;
             this.DetachAmenityCommand.ViewModel = this;
+            this.OpenAmenitiesListWindowCommand.ViewModel = this;
 
         }
 
