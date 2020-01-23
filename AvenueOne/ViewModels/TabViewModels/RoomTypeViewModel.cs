@@ -22,6 +22,7 @@ namespace AvenueOne.ViewModels.TabViewModels
         public EditRoomTypeCommand EditRoomTypeCommand { get; set; }
         public RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
         public OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
+        public DetachAmenityCommand DetachAmenityCommand { get; set; }
         public ObservableCollection<RoomType> RoomTypesList { get; set; }
         private IRoomType _roomTypeSelected;
         public IRoomType RoomTypeSelected
@@ -47,11 +48,21 @@ namespace AvenueOne.ViewModels.TabViewModels
             }
         }
 
+        private IAmenities _amenitiesSelected;
+        public IAmenities AmenitiesSelected
+        {
+            get { return _amenitiesSelected; }
+            set { _amenitiesSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public RoomTypeViewModel(IRoomType roomType,
                                                     OpenRoomTypeWindowCommand openRoomTypeWindowCommand, 
                                                     EditRoomTypeCommand editRoomTypeCommand, 
                                                     RemoveRoomTypeCommand removeRoomTypeCommand,
+                                                    DetachAmenityCommand detachAmenityCommand,
                                                     ObservableCollection<RoomType> roomTypesList)
             : base()
         {
@@ -61,9 +72,12 @@ namespace AvenueOne.ViewModels.TabViewModels
             this.OpenRoomTypeWindowCommand = openRoomTypeWindowCommand;
             this.EditRoomTypeCommand = editRoomTypeCommand;
             this.RemoveRoomTypeCommand = removeRoomTypeCommand;
+            this.DetachAmenityCommand = detachAmenityCommand;
             this.OpenRoomTypeWindowCommand.ViewModel = this;
             this.EditRoomTypeCommand.ViewModel = this;
             this.RemoveRoomTypeCommand.ViewModel = this;
+            this.DetachAmenityCommand.ViewModel = this;
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

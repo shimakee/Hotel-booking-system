@@ -189,6 +189,7 @@
     <Compile Include="ViewModels\Commands\OpenAmenitiesWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\AddAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\AddRoomTypeCommand.cs" />
+    <Compile Include="ViewModels\Commands\RoomCommands\DetachAmenityCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\EditAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\EditRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveAmenitiesCommand.cs" />

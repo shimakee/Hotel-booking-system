@@ -449,9 +449,11 @@
                         <Button Grid.Row="4" Grid.Column="3"
                                    Content="Link"/>
                         <Button Grid.Row="4" Grid.Column="4"
-                                   Content="Detach"/>
+                                   Content="Detach"
+                                Command="{Binding RoomTab.RoomTypeViewModel.DetachAmenityCommand}"/>
                         <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                                  SelectionMode="Single" SelectedItem="{Binding RoomTab.RoomTypeViewModel.AmenitiesSelected}"
                                   ItemsSource="{Binding RoomTab.RoomTypeViewModel.RoomTypeSelected.Amenities}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>

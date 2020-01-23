@@ -16,8 +16,10 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
         EditRoomTypeCommand EditRoomTypeCommand { get; set; }
         RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
         OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
+        DetachAmenityCommand DetachAmenityCommand { get; set; }
         IRoomType RoomType { get; set; }
         IRoomType RoomTypeSelected { get; set; }
+        IAmenities AmenitiesSelected { get; set; }
         ObservableCollection<RoomType> RoomTypesList { get; set; }
     }
 }
