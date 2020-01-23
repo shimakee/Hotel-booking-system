@@ -21,24 +21,6 @@ namespace AvenueOne.Core.Models
             }
         }
 
-        private decimal _rate;
-        public decimal Rate
-        {
-            get { return _rate; }
-            set { _rate = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private rateType _rateType;
-        public rateType RateType
-        {
-            get { return _rateType; }
-            set { _rateType = value;
-                OnPropertyChanged();
-            }
-        }
-
         private string _name;
         public string Name
         {

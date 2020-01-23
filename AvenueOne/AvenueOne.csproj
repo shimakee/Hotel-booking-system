@@ -166,6 +166,10 @@
     <Compile Include="Migrations\202001210423211_PropertyChangedOnAmenitiesAndRoomType.Designer.cs">
       <DependentUpon>202001210423211_PropertyChangedOnAmenitiesAndRoomType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001230606168_AddedRateToRoomType.cs" />
+    <Compile Include="Migrations\202001230606168_AddedRateToRoomType.Designer.cs">
+      <DependentUpon>202001230606168_AddedRateToRoomType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\AmenitiesRepository.cs" />
     <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
@@ -352,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001210423211_PropertyChangedOnAmenitiesAndRoomType.resx">
       <DependentUpon>202001210423211_PropertyChangedOnAmenitiesAndRoomType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001230606168_AddedRateToRoomType.resx">
+      <DependentUpon>202001230606168_AddedRateToRoomType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

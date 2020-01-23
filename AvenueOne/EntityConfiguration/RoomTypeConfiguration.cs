@@ -25,7 +25,11 @@ namespace AvenueOne.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(maxLength)
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                                                                                                new IndexAnnotation(new IndexAttribute("Name") { IsUnique = true })); ;
+                                                                                                new IndexAnnotation(new IndexAttribute("Name") { IsUnique = true }));
+            Property(r => r.Rate)
+                .IsRequired();
+            Property(r => r.RateType)
+                .IsRequired();
 
             //relationships
             HasMany(r => r.Amenities);

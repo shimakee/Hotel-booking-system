@@ -323,7 +323,8 @@
                                 Command="{Binding RoomTab.RoomViewModel.OpenRoomWindowCommand}"/>
                         <TextBlock Grid.Row ="0" Grid.Column="2"  HorizontalAlignment="Right"
                                    Text="Id:" />
-                        <TextBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
+                        <TextBox IsEnabled="False"
+                            Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.RoomSelected.Id}"/>
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
@@ -331,30 +332,20 @@
                         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
                                  Text="{Binding RoomTab.RoomViewModel.RoomSelected.Name}"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0"
-                            Text="Roomtype :"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
-                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.RoomType.Name}"/>
-                        
-                        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1"
                             Text="Max Occupants :"/>
-                        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1"
+                        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.RoomSelected.MaxOccupants}"/>
                         
-                        <TextBlock Grid.Row="3" Grid.Column="3"
+                        <TextBlock Grid.Row="2" Grid.Column="3"
                             Text="Floor :"/>
-                        <TextBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2"
+                        <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.RoomSelected.Floor}"/>
 
                         <TextBlock Grid.Row="4" Grid.Column="0"
-                            Text="Rate :"/>
+                            Text="Roomtype :"/>
                         <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
-                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.Rate}"/>
-
-                        <TextBlock Grid.Row="4" Grid.Column="3"
-                            Text="Rate type :"/>
-                        <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
-                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.RateType}"/>
+                                 Text="{Binding RoomTab.RoomViewModel.RoomSelected.RoomType.Name}"/>
 
                         <TextBlock Grid.Row="5" Grid.Column="0"
                             Text="Details :"/>
@@ -376,12 +367,10 @@
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <Button Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2"
-                                HorizontalAlignment="Center"
+                        <Button Grid.Row="7" Grid.Column="3"
                             Content="Save" 
                                 Command="{Binding RoomTab.RoomViewModel.EditRoomCommand}"/>
-                        <Button Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2"
-                                HorizontalAlignment="Center"
+                        <Button Grid.Row="7" Grid.Column="4"
                             Content="Delete " 
                                 Command="{Binding RoomTab.RoomViewModel.RemoveRoomCommand}"/>
 
@@ -415,6 +404,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
@@ -426,7 +416,8 @@
                                 Command="{Binding RoomTab.RoomTypeViewModel.OpenRoomTypeWindowCommand}"/>
                         <TextBlock Grid.Row ="0" Grid.Column="2"  HorizontalAlignment="Right"
                                    Text="Id:" />
-                        <TextBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
+                        <TextBox IsEnabled="False"
+                            Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomTypeViewModel.RoomTypeSelected.Id}"/>
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
@@ -435,21 +426,31 @@
                                  Text="{Binding RoomTab.RoomTypeViewModel.RoomTypeSelected.Name}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="0"
+                            Text="Rate :"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.RoomTypeViewModel.RoomTypeSelected.Rate}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="3"
+                            Text="Rate type :"/>
+                        <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.RoomTypeViewModel.RoomTypeSelected.RateType}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0"
                             Text="Details:"/>
-                        <TextBox Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" 
+                        <TextBox Grid.Row="4" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" 
                                     Margin="1" VerticalAlignment="Stretch"
                                      TextWrapping="Wrap" AcceptsReturn="True"
                                      HorizontalScrollBarVisibility="Disabled"
                                      VerticalScrollBarVisibility="Auto"
                                  Text="{Binding RoomTab.RoomTypeViewModel.RoomTypeSelected.Details}"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="3"
+                        <TextBlock Grid.Row="3" Grid.Column="3"
                                    Text="Amenities:"/>
-                        <Button Grid.Row="3" Grid.Column="3"
+                        <Button Grid.Row="4" Grid.Column="3"
                                    Content="Link"/>
-                        <Button Grid.Row="3" Grid.Column="4"
-                                   Content="Remove"/>
-                        <DataGrid Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
+                        <Button Grid.Row="4" Grid.Column="4"
+                                   Content="Detach"/>
+                        <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                   ItemsSource="{Binding RoomTab.RoomTypeViewModel.RoomTypeSelected.Amenities}">
                             <DataGrid.Columns>
@@ -458,12 +459,10 @@
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
-                                HorizontalAlignment="Center"
+                        <Button Grid.Row="6" Grid.Column="0"
                             Content="Save" 
                                 Command="{Binding RoomTab.RoomTypeViewModel.EditRoomTypeCommand}"/>
-                        <Button Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2"
-                                HorizontalAlignment="Center"
+                        <Button Grid.Row="6" Grid.Column="1"
                             Content="Delete " 
                                 Command="{Binding RoomTab.RoomTypeViewModel.RemoveRoomTypeCommand}"/>
                         
@@ -506,6 +505,14 @@
                         <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                             Content="Add Amenities" Command="{Binding RoomTab.AmenitiesViewModel.OpenAmenitiesWindowCommand}"/>
 
+                        <TextBlock Grid.Row="0" Grid.Column="2"
+                                   HorizontalAlignment="Right"
+                                    Text="Id:"/>
+                        <TextBox IsEnabled="False"
+                                Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.AmenitiesViewModel.AmenitiesSelected.Id, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+
                         <TextBlock Grid.Row="1" Grid.Column="0"
                                     Text="Name:"/>
                         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
@@ -534,17 +541,16 @@
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
-                                HorizontalAlignment="Center"
+                        <Button Grid.Row="4" Grid.Column="3"
                             Content="Save"
                                 Command="{Binding RoomTab.AmenitiesViewModel.EditAmenitiesCommand}"/>
-                        <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
-                                HorizontalAlignment="Center"
+                        <Button Grid.Row="4" Grid.Column="4"
                             Content="Delete " 
                                 Command="{Binding RoomTab.AmenitiesViewModel.RemoveAmenitiesCommand}"/>
 
 
-                        <DataGrid  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
+                        <DataGrid  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5"
+                            Margin="0 10 0 0"
                             x:Name="AmenitiesList"
                             ItemsSource="{Binding RoomTab.AmenitiesViewModel.AmenitiesList}" SelectedItem="{Binding RoomTab.AmenitiesViewModel.AmenitiesSelected, UpdateSourceTrigger=PropertyChanged}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">

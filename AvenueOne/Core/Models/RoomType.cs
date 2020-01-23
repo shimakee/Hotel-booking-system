@@ -2,6 +2,7 @@
 using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -21,6 +22,7 @@ namespace AvenueOne.Core.Models
         }
 
         private string _name;
+        [Required(ErrorMessage ="Name is required.")]
         public string Name
         {
             get { return _name; }
@@ -34,6 +36,29 @@ namespace AvenueOne.Core.Models
         {
             get { return _details; }
             set { _details = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private decimal _rate;
+        [Required(ErrorMessage ="Rate is required.")]
+        public decimal Rate
+        {
+            get { return _rate; }
+            set
+            {
+                _rate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private rateType _rateType;
+        public rateType RateType
+        {
+            get { return _rateType; }
+            set
+            {
+                _rateType = value;
                 OnPropertyChanged();
             }
         }
@@ -52,11 +77,20 @@ namespace AvenueOne.Core.Models
                 this.Name = name;
             }
 
+
             public RoomType(string name, IList<Amenities> amenities)
                 :this(name)
             {
                 this.Amenities = amenities;
             }
+
+        public RoomType(string name, decimal rate, rateType rateType)
+            :this()
+        {
+            this.Name = name;
+            this.Rate = rate;
+            this.RateType = rateType;
+        }
         #endregion
 
         #region Methods and Utilities

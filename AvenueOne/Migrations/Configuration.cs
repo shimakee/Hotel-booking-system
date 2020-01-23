@@ -8,6 +8,7 @@ namespace AvenueOne.Migrations
     using AvenueOne.Services;
     using System.Linq;
     using AvenueOne.Core.Models;
+    using AvenueOne.Core.Models.Interfaces;
 
     internal sealed class Configuration : DbMigrationsConfiguration<AvenueOne.Persistence.Repositories.PlutoContext>
     {
@@ -20,7 +21,7 @@ namespace AvenueOne.Migrations
         {
             //clean database
             context.Database.ExecuteSqlCommand("DELETE FROM AMENITIES");
-            context.Database.ExecuteSqlCommand("DELETE FROM ROOMTYPE");
+            context.Database.ExecuteSqlCommand("DELETE FROM ROOMTYPES");
             context.Database.ExecuteSqlCommand("DELETE FROM USERS");
             context.Database.ExecuteSqlCommand("DELETE FROM CUSTOMERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
@@ -70,11 +71,11 @@ namespace AvenueOne.Migrations
             #endregion
 
             #region Seed RoomType
-            RoomType roomType = new RoomType("Standard");
-            RoomType roomType2 = new RoomType("Deluxe");
-            RoomType roomType3 = new RoomType("Single");
-            RoomType roomType4 = new RoomType("Matrimonial");
-            RoomType roomType5 = new RoomType("Suite");
+            RoomType roomType = new RoomType("Standard", 100, rateType.Daily);
+            RoomType roomType2 = new RoomType("Deluxe", 200, rateType.Daily);
+            RoomType roomType3 = new RoomType("Single", 350, rateType.Daily);
+            RoomType roomType4 = new RoomType("Matrimonial", 630, rateType.Daily);
+            RoomType roomType5 = new RoomType("Suite", 270, rateType.Daily);
 
 
             roomType.Amenities.Add(amenity);
