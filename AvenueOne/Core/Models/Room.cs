@@ -95,5 +95,26 @@ namespace AvenueOne.Core.Models
             return room;
         }
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (!(obj is Room))
+                return false;
+
+            Room room = (Room)obj;
+            if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(room.Name))
+                return this.Name.ToLower() == room.Name.ToLower() && this.Id == room.Id;
+            if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(room.Name))
+                return this.Id == room.Id;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
     }
 }

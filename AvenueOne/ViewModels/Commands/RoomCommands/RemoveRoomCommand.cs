@@ -1,4 +1,5 @@
-﻿using AvenueOne.Core.Models;
+﻿using AvenueOne.Core;
+using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Services.Interfaces;
@@ -12,13 +13,17 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands.RoomCommands
 {
-    public class RemoveRoomCommand : BaseClassCommand, ICommand
+    public class RemoveRoomCommand : ICommand
     {
         public IRoomViewModel ViewModel { get; set; }
-        public RemoveRoomCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
-            :base(unitOfWork, displayService)
+        private IGenericUnitOfWork<Room> _unitOfWork;
+        private IDisplayService _displayService;
+        public RemoveRoomCommand(IGenericUnitOfWork<Room> unitOfWork, IDisplayService displayService)
+        //public RemoveRoomCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
+            //: base(unitOfWork, displayService)
         {
-
+            this._unitOfWork = unitOfWork;
+            this._displayService = displayService;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -39,8 +44,8 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
                 if (ViewModel.Room == null || ViewModel.RoomSelected == null)
                     throw new ArgumentNullException("Room or room selected cannot be null.");
 
-                Room room = await Task.Run(() => _unitOfWork.Rooms.GetAsync(ViewModel.RoomSelected.Id)) ?? throw new InvalidOperationException("Room does not exist.");
-                _unitOfWork.Rooms.Remove(room);
+                Room room = await Task.Run(() => _unitOfWork.Repositories[typeof(Room)].GetAsync(ViewModel.RoomSelected.Id)) ?? throw new InvalidOperationException("Room does not exist.");
+                _unitOfWork.Repositories[typeof(Room)].Remove(room);
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
                 if (n <= 0)
                     throw new InvalidOperationException("Could not remove.");

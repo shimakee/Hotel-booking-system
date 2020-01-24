@@ -1,8 +1,10 @@
-﻿using AvenueOne.Core.Models;
+﻿using AvenueOne.Core;
+using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
+using AvenueOne.Persistence;
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
@@ -60,7 +62,8 @@ namespace AvenueOne.Views.Pages
             EditRoomTypeCommand editRoomTypeCommand = new EditRoomTypeCommand(unitOfWork, displayService);
             DetachAmenityCommand detachAmenityCommand = new DetachAmenityCommand(unitOfWork, displayService);
             OpenAmenitiesListWindowCommand openAmenitiesListWindowCommand = new OpenAmenitiesListWindowCommand(context);
-            RemoveRoomCommand removeRoomCommand = new RemoveRoomCommand(unitOfWork, displayService);
+            IGenericUnitOfWork<Room> genericUnitOfWork = new GenericUnitOfWork<Room>(context);
+            RemoveRoomCommand removeRoomCommand = new RemoveRoomCommand(genericUnitOfWork, displayService);
             IRoomViewModel roomViewModel = new RoomViewModel(new Room(), context.Room.Local, removeRoomCommand);
             IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
                                                                                                                                     openRoomTypeWindowCommand,

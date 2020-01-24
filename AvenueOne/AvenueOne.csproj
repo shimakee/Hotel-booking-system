@@ -105,6 +105,7 @@
     <Compile Include="Converters\BooleanVisibilityConverter.cs" />
     <Compile Include="Converters\PasswordConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
+    <Compile Include="Core\IGenericUnitOfWork.cs" />
     <Compile Include="Core\IRepositories\IAmenitiesRepository.cs" />
     <Compile Include="Core\IRepositories\ICustomerRepository.cs" />
     <Compile Include="Core\IRepositories\IPersonRepository.cs" />
@@ -177,6 +178,7 @@
       <DependentUpon>202001240312303_AddedRoomModelAndConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistence\GenericUnitOfWork.cs" />
     <Compile Include="Persistence\Repositories\AmenitiesRepository.cs" />
     <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
     <Compile Include="Persistence\Repositories\PersonRepository.cs" />
