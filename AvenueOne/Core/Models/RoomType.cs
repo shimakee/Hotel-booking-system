@@ -64,6 +64,7 @@ namespace AvenueOne.Core.Models
         }
 
         public IList<Amenities> Amenities { get; set; }
+        public IList<Room> Rooms { get; set; }
 
         #region Constructors
             public RoomType()

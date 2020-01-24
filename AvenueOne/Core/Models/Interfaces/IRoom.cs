@@ -15,5 +15,7 @@ namespace AvenueOne.Core.Models.Interfaces
         int Floor { get; set; }
         int MaxOccupants { get; set; }
         RoomType RoomType { get; set; }
+        IRoom CopyPropertyValues();
+        IRoom CopyPropertyValuesTo(IRoom room);
     }
 }

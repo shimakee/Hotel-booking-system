@@ -124,6 +124,7 @@
     <Compile Include="EntityConfiguration\AmenitiesConfiguration.cs" />
     <Compile Include="EntityConfiguration\CustomerConfiguration.cs" />
     <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
+    <Compile Include="EntityConfiguration\RoomConfiguration.cs" />
     <Compile Include="EntityConfiguration\RoomTypeConfiguration.cs" />
     <Compile Include="EntityConfiguration\UserConfiguration.cs" />
     <Compile Include="Migrations\201909070930092_InitialModel.cs" />
@@ -170,6 +171,10 @@
     <Compile Include="Migrations\202001230606168_AddedRateToRoomType.Designer.cs">
       <DependentUpon>202001230606168_AddedRateToRoomType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001240312303_AddedRoomModelAndConfiguration.cs" />
+    <Compile Include="Migrations\202001240312303_AddedRoomModelAndConfiguration.Designer.cs">
+      <DependentUpon>202001240312303_AddedRoomModelAndConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\AmenitiesRepository.cs" />
     <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
@@ -207,9 +212,11 @@
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTypeViewModel.cs" />
+    <Compile Include="ViewModels\TabViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\AmenitiesListWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesListWindowViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRoomViewModel.cs" />
     <Compile Include="Views\Windows\AmenitiesListWindow.xaml.cs">
       <DependentUpon>AmenitiesListWindow.xaml</DependentUpon>
     </Compile>
@@ -371,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001230606168_AddedRateToRoomType.resx">
       <DependentUpon>202001230606168_AddedRateToRoomType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001240312303_AddedRoomModelAndConfiguration.resx">
+      <DependentUpon>202001240312303_AddedRoomModelAndConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

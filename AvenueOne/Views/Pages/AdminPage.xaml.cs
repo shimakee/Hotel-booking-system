@@ -60,6 +60,7 @@ namespace AvenueOne.Views.Pages
             EditRoomTypeCommand editRoomTypeCommand = new EditRoomTypeCommand(unitOfWork, displayService);
             DetachAmenityCommand detachAmenityCommand = new DetachAmenityCommand(unitOfWork, displayService);
             OpenAmenitiesListWindowCommand openAmenitiesListWindowCommand = new OpenAmenitiesListWindowCommand(context);
+            IRoomViewModel roomViewModel = new RoomViewModel(new Room(), context.Room.Local);
             IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
                                                                                                                                     openRoomTypeWindowCommand,
                                                                                                                                     editRoomTypeCommand,
@@ -72,7 +73,8 @@ namespace AvenueOne.Views.Pages
                                                                                                                                 removeAmenitiesCommand,
                                                                                                                                 _context.Amenities.Local);
             RoomTabViewModel roomTab = new RoomTabViewModel(amenitiesViewModel,
-                                                                                                            roomTypeViewModel);
+                                                                                                            roomTypeViewModel,
+                                                                                                            roomViewModel);
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,

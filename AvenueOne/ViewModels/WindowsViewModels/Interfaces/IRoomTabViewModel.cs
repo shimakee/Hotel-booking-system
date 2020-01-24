@@ -15,6 +15,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
         //openamenitieswindowcommand
         IRoomTypeViewModel RoomTypeViewModel { get; set; }
         IAmenitiesViewModel AmenitiesViewModel { get; set; }
+        IRoomViewModel RoomViewModel { get; set; }
 
     }
 }

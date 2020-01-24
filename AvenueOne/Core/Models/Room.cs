@@ -3,6 +3,7 @@ using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,19 +49,51 @@ namespace AvenueOne.Core.Models
             }
         }
 
-        private RoomType _roomType;
-        public RoomType RoomType
-        {
-            get { return _roomType; }
-            set { _roomType = value;
-                OnPropertyChanged();
+        public RoomType RoomType { get; set; }
+
+        #region Constructors
+            public Room()
+                : base()
+            {
+                this.Id = GenerateId();
             }
+
+        public Room(string name)
+            :this()
+        {
+            this.Name = name;
         }
 
-        public Room()
-            : base()
+        public Room(string name, int maxOccupants)
+            :this(name)
         {
-            this.Id = GenerateId();
+            this.MaxOccupants = maxOccupants;
         }
+
+        public Room(string name, int maxOccupants, int floor)
+            :this(name, maxOccupants)
+        {
+            this.Floor = floor;
+        }
+        #endregion
+
+
+        #region Methods and Utilities
+        public IRoom CopyPropertyValues()
+        {
+            return CopyPropertyValuesTo(new Room());
+        }
+        public IRoom CopyPropertyValuesTo(IRoom room)
+        {
+            List<PropertyInfo> propertyList = typeof(IRoom).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
+
+            foreach (PropertyInfo info in propertyList)
+            {
+                if (typeof(IRoom).GetProperty(info.Name) != null)
+                    info.SetValue(room, info.GetValue(this));
+            }
+            return room;
+        }
+        #endregion
     }
 }

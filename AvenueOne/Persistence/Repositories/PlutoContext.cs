@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ namespace AvenueOne.Persistence.Repositories
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Amenities> Amenities { get; set; }
         public DbSet<RoomType> RoomType { get; set; }
-        //public DbSet<Room> Room { get; set; }
+        public DbSet<Room> Room { get; set; }
 
         public PlutoContext()
             :base("name=LocalConnection")
@@ -41,6 +43,7 @@ namespace AvenueOne.Persistence.Repositories
             modelBuilder.Configurations.Add(new CustomerConfiguration());
             modelBuilder.Configurations.Add(new AmenitiesConfiguration());
             modelBuilder.Configurations.Add(new RoomTypeConfiguration());
+            modelBuilder.Configurations.Add(new RoomConfiguration());
         }
     }
 }

@@ -1,27 +1,35 @@
+using AvenueOne.Persistence.Repositories;
+using AvenueOne.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using AvenueOne.Services;
+using System.Linq;
+using AvenueOne.Core.Models;
+using AvenueOne.Core.Models.Interfaces;
+using System.Data.Entity.Validation;
+
 namespace AvenueOne.Migrations
 {
-    using AvenueOne.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using AvenueOne.Services;
-    using System.Linq;
-    using AvenueOne.Core.Models;
-    using AvenueOne.Core.Models.Interfaces;
 
     internal sealed class Configuration : DbMigrationsConfiguration<AvenueOne.Persistence.Repositories.PlutoContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //{
+            //    System.Diagnostics.Debugger.Launch();
+            //}
         }
 
-        protected override void Seed(AvenueOne.Persistence.Repositories.PlutoContext context)
+        protected override void Seed(PlutoContext context)
         {
             //clean database
             context.Database.ExecuteSqlCommand("DELETE FROM AMENITIES");
             context.Database.ExecuteSqlCommand("DELETE FROM ROOMTYPES");
+            context.Database.ExecuteSqlCommand("DELETE FROM ROOMS");
             context.Database.ExecuteSqlCommand("DELETE FROM USERS");
             context.Database.ExecuteSqlCommand("DELETE FROM CUSTOMERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
@@ -68,6 +76,7 @@ namespace AvenueOne.Migrations
             Amenities amenity4 = new Amenities("Aircondition");
 
             context.Amenities.AddRange(new List<Amenities>() { amenity, amenity2, amenity3, amenity4 });
+            //context.SaveChanges();
             #endregion
 
             #region Seed RoomType
@@ -89,6 +98,24 @@ namespace AvenueOne.Migrations
 
 
             context.RoomType.AddRange(new List<RoomType>() { roomType, roomType2, roomType3, roomType4, roomType5 });
+            //context.SaveChanges();
+            #endregion
+
+            #region Seed Room
+
+            Room room = new Room("Some", 1, 1);
+            Room room2 = new Room("Something", 2, 1);
+            Room room3 = new Room("Someone", 3, 1);
+            Room room4 = new Room("Somewhere", 4, 1);
+            Room room5 = new Room("Somehow", 5, 1);
+            room.RoomType = roomType;
+            room2.RoomType = roomType2;
+            room3.RoomType = roomType3;
+            room4.RoomType = roomType4;
+            room5.RoomType = roomType5;
+
+            context.Room.AddRange(new List<Room>() { room, room2, room3, room4, room5 });
+            //context.SaveChanges();
             #endregion
             //insert
             //  This method will be called after migrating to the latest version.

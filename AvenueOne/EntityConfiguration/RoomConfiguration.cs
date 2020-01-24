@@ -10,31 +10,27 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.EntityConfiguration
 {
-    public class RoomTypeConfiguration : EntityTypeConfiguration<RoomType>
+    public class RoomConfiguration : EntityTypeConfiguration<Room>
     {
-        public RoomTypeConfiguration()
+        public RoomConfiguration()
         {
+
             int maxLength = 50;
             //table
 
             //keys
-            HasKey(r => r.Id);
+            HasKey(a => a.Id);
 
             //property
-            Property(r => r.Name)
+            Property(a => a.Name)
                 .IsRequired()
                 .HasMaxLength(maxLength)
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                                                                                                 new IndexAnnotation(new IndexAttribute("Name") { IsUnique = true }));
-            Property(r => r.Rate)
-                .IsRequired();
-            Property(r => r.RateType)
-                .IsRequired();
 
             //relationships
-            HasMany(r => r.Amenities);
-            HasMany(r => r.Rooms);
-                //.WithMany(a=> a.RoomTypes);
+            HasRequired(r => r.RoomType);
+            //HasOptional(r => r.RoomType);
         }
     }
 }
