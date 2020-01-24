@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
+using AvenueOne.ViewModels.Commands.RoomCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
@@ -15,6 +16,7 @@ namespace AvenueOne.ViewModels.TabViewModels
 {
     public class RoomViewModel : AccountViewModel, IRoomViewModel
     {
+        public RemoveRoomCommand RemoveRoomCommand { get; set; }
         public ObservableCollection<Room> RoomsList { get; set; }
         private IRoom _room;
         public IRoom Room
@@ -38,10 +40,13 @@ namespace AvenueOne.ViewModels.TabViewModels
         }
 
         #region Constructors
-        public RoomViewModel(IRoom room, ObservableCollection<Room> roomsList)
+        public RoomViewModel(IRoom room, ObservableCollection<Room> roomsList,
+                                                RemoveRoomCommand removeRoomCommand)
         {
             this.RoomsList = roomsList;
             this.Room = room;
+            this.RemoveRoomCommand = removeRoomCommand;
+            this.RemoveRoomCommand.ViewModel = this;
         }
         #endregion
 

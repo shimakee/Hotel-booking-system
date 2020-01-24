@@ -18,6 +18,7 @@ namespace AvenueOne.Utilities
         public ICustomerRepository Customers { get; private set; }
         public IAmenitiesRepository Amenities { get; private set; }
         public IRoomTypeRepository RoomType { get; private set; }
+        public IRoomRepository Rooms  { get; private set; }
 
         public UnitOfWork(PlutoContext context)
         {
@@ -27,6 +28,8 @@ namespace AvenueOne.Utilities
             Customers = new CustomerRepository(_context);
             Amenities = new AmenitiesRepository(_context);
             RoomType = new RoomTypeRepository(_context);
+            Rooms = new RoomRepository(_context);
+
         }
 
 

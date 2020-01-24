@@ -108,6 +108,7 @@
     <Compile Include="Core\IRepositories\IAmenitiesRepository.cs" />
     <Compile Include="Core\IRepositories\ICustomerRepository.cs" />
     <Compile Include="Core\IRepositories\IPersonRepository.cs" />
+    <Compile Include="Core\IRepositories\IRoomRepository.cs" />
     <Compile Include="Core\IRepositories\IRoomTypeRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\Amenities.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Persistence\Repositories\CustomerRepository.cs" />
     <Compile Include="Persistence\Repositories\PersonRepository.cs" />
     <Compile Include="Persistence\Repositories\PlutoContext.cs" />
+    <Compile Include="Persistence\Repositories\RoomRepository.cs" />
     <Compile Include="Persistence\Repositories\RoomTypeRepository.cs" />
     <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\WpfDisplayService.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="ViewModels\Commands\RoomCommands\LinkAmenityToRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\OpenAmenitiesListWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveAmenitiesCommand.cs" />
+    <Compile Include="ViewModels\Commands\RoomCommands\RemoveRoomCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\EditUserProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenCustomerWindowCommand.cs" />

@@ -60,7 +60,8 @@ namespace AvenueOne.Views.Pages
             EditRoomTypeCommand editRoomTypeCommand = new EditRoomTypeCommand(unitOfWork, displayService);
             DetachAmenityCommand detachAmenityCommand = new DetachAmenityCommand(unitOfWork, displayService);
             OpenAmenitiesListWindowCommand openAmenitiesListWindowCommand = new OpenAmenitiesListWindowCommand(context);
-            IRoomViewModel roomViewModel = new RoomViewModel(new Room(), context.Room.Local);
+            RemoveRoomCommand removeRoomCommand = new RemoveRoomCommand(unitOfWork, displayService);
+            IRoomViewModel roomViewModel = new RoomViewModel(new Room(), context.Room.Local, removeRoomCommand);
             IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
                                                                                                                                     openRoomTypeWindowCommand,
                                                                                                                                     editRoomTypeCommand,
