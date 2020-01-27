@@ -15,24 +15,14 @@ namespace AvenueOne.Models
 {
     //[TypeConverter(typeof(UserConverter))] // for settings
     [SettingsSerializeAs(SettingsSerializeAs.Xml)] //for settings
-    public class User : BaseObservableModel, IUser
+    public class User : BaseObservableModel<User>, IUser
     {
-        private string _id;
+
+        #region Properties
         private string _username;
         private string _password;
         private string _passwordConfirm;
         private bool _isAdmin;
-        private Person _person;
-
-        #region Properties
-        [Required]
-        public string Id
-        {
-            get { return _id; }
-            set { _id = value;
-                OnPropertyChanged();
-            }
-        }
 
         [Required(ErrorMessage = "required.")]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "min 5, max 30 chars.")]
@@ -74,7 +64,10 @@ namespace AvenueOne.Models
             }
         }
 
-        //reference
+        #endregion
+
+        #region Reference
+        private Person _person;
         public virtual Person Person
         {
             get { return _person; }
@@ -84,14 +77,11 @@ namespace AvenueOne.Models
         }
         #endregion
 
-        //For Xml
-        //<User><Id></Id><Username></Username><Password></Password><IsAdmin></IsAdmin><Person></Person></User>
-
         #region Constructor
         public User()
+            :base()
         {
             this.IsAdmin = false;
-            this.Id = GenerateId();
         }
 
         public User(string username)
@@ -145,44 +135,6 @@ namespace AvenueOne.Models
         #endregion
 
         #region MethodsAndOverrides
-        //public static void CopyPropertiesTo<T, TU>(this T source, TU dest)
-        //{
-        //    var sourceProps = typeof(T).GetProperties().Where(x => x.CanWrite && x.CanRead).ToList();
-        //    var destProps = typeof(TU).GetProperties()
-        //            .Where(x => x.CanWrite && x.CanRead)
-        //            .ToList();
-
-        //    foreach (var sourceProp in sourceProps)
-        //    {
-        //        if (destProps.Any(x => x.Name == sourceProp.Name))
-        //        {
-        //            var p = destProps.First(x => x.Name == sourceProp.Name);
-        //            if (p.CanWrite)
-        //            { // check if the property can be set or no.
-        //                p.SetValue(dest, sourceProp.GetValue(source, null), null);
-        //            }
-        //        }
-
-        //    }
-
-        //}
-
-        public IUser CopyPropertyValues()
-        {
-            return CopyPropertyValues(new User());
-        }
-        public IUser CopyPropertyValues(IUser user)
-        {
-            List<PropertyInfo> propertyList = typeof(IUser).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
-
-            foreach( PropertyInfo info in propertyList)
-            {
-                if(typeof(IUser).GetProperty(info.Name) != null)
-                    info.SetValue(user, info.GetValue(this));
-            }
-            return user;
-        }
-
         public User Clone()
         {
             User user = this.MemberwiseClone() as User;
@@ -196,7 +148,9 @@ namespace AvenueOne.Models
             if (!(obj is User))
                 return false;
 
-            return this.Username == ((User)obj).Username;
+            User user = (User)obj;
+
+            return this.Username == user.Username && this.Id == user.Id;
         }
 
         public override int GetHashCode()

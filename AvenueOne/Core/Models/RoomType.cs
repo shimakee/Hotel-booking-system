@@ -10,67 +10,65 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Core.Models
 {
-    public class RoomType : BaseObservableModel, IRoomType
+    public class RoomType : BaseObservableModel<RoomType>, IRoomType
     {
-        private string _id;
-        public string Id
-        {
-            get { return _id; }
-            set { _id = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _name;
-        [Required(ErrorMessage ="Name is required.")]
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _details;
-        public string Details
-        {
-            get { return _details; }
-            set { _details = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private decimal _rate;
-        [Required(ErrorMessage ="Rate is required.")]
-        public decimal Rate
-        {
-            get { return _rate; }
-            set
+        #region Properties
+            private string _name;
+            [Required(ErrorMessage ="Name is required.")]
+            public string Name
             {
-                _rate = value;
-                OnPropertyChanged();
+                get { return _name; }
+                set { _name = value;
+                    OnPropertyChanged();
+                }
             }
-        }
 
-        private rateType _rateType;
-        public rateType RateType
-        {
-            get { return _rateType; }
-            set
+            private string _details;
+            public string Details
             {
-                _rateType = value;
-                OnPropertyChanged();
+                get { return _details; }
+                set { _details = value;
+                    OnPropertyChanged();
+                }
             }
-        }
 
+            private decimal _rate;
+            [Required(ErrorMessage ="Rate is required.")]
+            public decimal Rate
+            {
+                get { return _rate; }
+                set
+                {
+                    _rate = value;
+                    OnPropertyChanged();
+                }
+            }
+
+            private RateType _rateType;
+            public RateType RateType
+            {
+                get { return _rateType; }
+                set
+                {
+                    _rateType = value;
+                    OnPropertyChanged();
+                }
+            }
+
+            public byte[] RateTypeValues { get { return (byte[])Enum.GetValues(typeof(RateType)); } }
+        #endregion
+
+        #region  Reference
         public IList<Amenities> Amenities { get; set; }
         public IList<Room> Rooms { get; set; }
+        #endregion
 
         #region Constructors
             public RoomType()
+            :base()
             {
                 this.Amenities = new List<Amenities>();
-                this.Id = GenerateId();
+                //this.Id = GenerateId();
             }
             public RoomType(string name)
             :this()
@@ -85,7 +83,7 @@ namespace AvenueOne.Core.Models
                 this.Amenities = amenities;
             }
 
-        public RoomType(string name, decimal rate, rateType rateType)
+        public RoomType(string name, decimal rate, RateType rateType)
             :this()
         {
             this.Name = name;
@@ -95,21 +93,21 @@ namespace AvenueOne.Core.Models
         #endregion
 
         #region Methods and Utilities
-            public IRoomType CopyPropertyValues()
-            {
-                return CopyPropertyValuesTo(new RoomType());
-            }
-            public IRoomType CopyPropertyValuesTo(IRoomType roomType)
-            {
-                List<PropertyInfo> propertyList = typeof(IRoomType).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
+            //public IRoomType CopyPropertyValues()
+            //{
+            //    return CopyPropertyValuesTo(new RoomType());
+            //}
+            //public IRoomType CopyPropertyValuesTo(IRoomType roomType)
+            //{
+            //    List<PropertyInfo> propertyList = typeof(IRoomType).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
 
-                foreach (PropertyInfo info in propertyList)
-                {
-                    if (typeof(IRoomType).GetProperty(info.Name) != null)
-                        info.SetValue(roomType, info.GetValue(this));
-                }
-                return roomType;
-            }
+            //    foreach (PropertyInfo info in propertyList)
+            //    {
+            //        if (typeof(IRoomType).GetProperty(info.Name) != null)
+            //            info.SetValue(roomType, info.GetValue(this));
+            //    }
+            //    return roomType;
+            //}
         #endregion
 
         #region Overrides

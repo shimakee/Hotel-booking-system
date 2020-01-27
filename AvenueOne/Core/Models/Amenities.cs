@@ -11,19 +11,9 @@ using System.Threading.Tasks;
 namespace AvenueOne.Core.Models
 {
     
-    public class Amenities : BaseObservableModel, IAmenities
+    public class Amenities : BaseObservableModel<Amenities>, IAmenities
     {
         #region Properties
-        private string _id;
-
-        [Required(ErrorMessage ="Id is required.")]
-        public string Id
-        {
-            get { return _id; }
-            set { _id = value;
-                OnPropertyChanged();
-            }
-        }
 
         private string _name;
         [Required(ErrorMessage ="Name is required.")]
@@ -44,13 +34,16 @@ namespace AvenueOne.Core.Models
                 }
             }
 
-            public IList<RoomType> RoomTypes { get; set; }
+        #endregion
+        #region Reference
+        public IList<RoomType> RoomTypes { get; set; }
+
         #endregion
 
         #region Constructors
-            public Amenities()
+        public Amenities()
+            :base()
             {
-                this.Id = GenerateId();
                 this.RoomTypes = new List<RoomType>();
             }
             public Amenities(string name)
@@ -66,24 +59,6 @@ namespace AvenueOne.Core.Models
             }
         #endregion
 
-        #region Methods and Utilities
-        public IAmenities CopyPropertyValues()
-        {
-            return CopyPropertyValuesTo(new Amenities());
-        }
-        public IAmenities CopyPropertyValuesTo(IAmenities amenities)
-        {
-            List<PropertyInfo> propertyList = typeof(IAmenities).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
-
-            foreach (PropertyInfo info in propertyList)
-            {
-                if (typeof(IAmenities).GetProperty(info.Name) != null)
-                    info.SetValue(amenities, info.GetValue(this));
-            }
-            return amenities;
-        }
-        #endregion
-
         #region Overrides
         public override bool Equals(object obj)
         {
@@ -96,7 +71,7 @@ namespace AvenueOne.Core.Models
             Amenities amenities = (Amenities)obj;
 
             if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(amenities.Name))
-                return this.Name.ToLower() == amenities.Name.ToLower();
+                return this.Name.ToLower() == amenities.Name.ToLower() && this.Id == amenities.Id;
             if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(amenities.Name))
                 return true;
             return false;

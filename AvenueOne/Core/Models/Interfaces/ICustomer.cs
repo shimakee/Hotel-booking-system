@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces
 {
-    public interface ICustomer
+    public interface ICustomer : IBaseObservableModel<Customer>
     {
-        string Id { get; set; }
         Person Person { get; set; }
     }
 }

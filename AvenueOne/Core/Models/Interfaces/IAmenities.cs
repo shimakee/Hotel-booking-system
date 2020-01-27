@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Core.Models.Interfaces
 {
-    public interface IAmenities : IBaseObservableModel
+    public interface IAmenities : IBaseObservableModel<Amenities>
     {
-        string Id { get; set; }
         string Name { get; set; }
         string Details { get; set; }
         IList<RoomType> RoomTypes { get; set; }
-        IAmenities CopyPropertyValues();
-        IAmenities CopyPropertyValuesTo(IAmenities amenities);
     }
 }

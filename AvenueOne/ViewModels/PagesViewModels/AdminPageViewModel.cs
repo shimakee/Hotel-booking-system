@@ -66,8 +66,8 @@ namespace AvenueOne.ViewModels.PagesViewModels
                     if(value != null)
                     {
                         _user = value;
-                        Profile = value.Person.CopyPropertyValues();
-                        Account = value.CopyPropertyValues();
+                        Profile = value.Person.DeepCopy();
+                        Account = value.DeepCopy();
                     }
                     OnPropertyChanged();
                 }

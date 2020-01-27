@@ -24,9 +24,8 @@ namespace AvenueOne.Interfaces
     }
 
 
-    public interface IPerson : IBaseObservableModel
+    public interface IPerson : IBaseObservableModel<Person>
     {
-        string Id { get; set; }
         string FirstName { get; set; }
         string MiddleName { get; set; }
         string LastName { get; set; }
@@ -38,8 +37,7 @@ namespace AvenueOne.Interfaces
         DateTime? BirthDate { get; set; }
 
         string FullName { get; set; }
-        //User User { get; set; }
-        IPerson CopyPropertyValues();
-        IPerson CopyPropertyValuesTo(IPerson person);
+        User User { get; set; }
+        Customer Customer { get; set; }
     }
 }

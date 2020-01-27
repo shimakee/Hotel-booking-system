@@ -45,7 +45,7 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
                     throw new ValidationException("Invalid input on amenities.");
 
                 IAmenities amenities = await Task.Run(()=>_unitOfWork.Amenities.GetAsync(ViewModel.Amenities.Id)) ?? throw new InvalidOperationException("Amenity does not exist.");
-                ViewModel.AmenitiesSelected.CopyPropertyValuesTo(amenities);
+                ViewModel.AmenitiesSelected.DeepCopyTo(amenities as Amenities);
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
 
                 if (n == 0)

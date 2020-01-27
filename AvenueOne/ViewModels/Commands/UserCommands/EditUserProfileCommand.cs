@@ -64,13 +64,13 @@ namespace AvenueOne.ViewModels.Commands
 
                 // to retain original password
                 string password = user.Password; 
-                user = ViewModel.Account.CopyPropertyValues(user);
+                ViewModel.Account.DeepCopyTo(user as User);
                 user.Password = password;
                 user.PasswordConfirm = password;
 
                 if (!ViewModel.Profile.IsValid)
                     throw new ArgumentException("Invalid entry on profile");
-                ViewModel.Profile.CopyPropertyValuesTo(user.Person);
+                ViewModel.Profile.DeepCopyTo(user.Person);
 
                 if (ViewModel.IsPasswordIncluded)
                 {

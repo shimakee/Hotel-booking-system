@@ -9,53 +9,44 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Core.Models
 {
-    public class Room : BaseObservableModel, IRoom
+    public class Room : BaseObservableModel<Room>, IRoom
     {
-        private string _id;
-        public string Id
-        {
-            get { return _id; }
-            set
+        #region Properties
+
+            private string _name;
+            public string Name
             {
-                _id = value;
-                OnPropertyChanged();
+                get { return _name; }
+                set { _name = value;
+                    OnPropertyChanged();
+                }
             }
-        }
 
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value;
-                OnPropertyChanged();
+            private int _floor;
+            public int Floor
+            {
+                get { return _floor; }
+                set { _floor = value;
+                    OnPropertyChanged();
+                }
             }
-        }
 
-        private int _floor;
-        public int Floor
-        {
-            get { return _floor; }
-            set { _floor = value;
-                OnPropertyChanged();
+            private int _maxOccupants;
+            public int MaxOccupants
+            {
+                get { return _maxOccupants; }
+                set { _maxOccupants = value;
+                    OnPropertyChanged();
+                }
             }
-        }
 
-        private int _maxOccupants;
-        public int MaxOccupants
-        {
-            get { return _maxOccupants; }
-            set { _maxOccupants = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public RoomType RoomType { get; set; }
+            public RoomType RoomType { get; set; }
+        #endregion
 
         #region Constructors
             public Room()
                 : base()
             {
-                this.Id = GenerateId();
             }
 
         public Room(string name)
@@ -77,44 +68,28 @@ namespace AvenueOne.Core.Models
         }
         #endregion
 
-
-        #region Methods and Utilities
-        public IRoom CopyPropertyValues()
-        {
-            return CopyPropertyValuesTo(new Room());
-        }
-        public IRoom CopyPropertyValuesTo(IRoom room)
-        {
-            List<PropertyInfo> propertyList = typeof(IRoom).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
-
-            foreach (PropertyInfo info in propertyList)
+        #region Overrides
+            public override bool Equals(object obj)
             {
-                if (typeof(IRoom).GetProperty(info.Name) != null)
-                    info.SetValue(room, info.GetValue(this));
+                if (obj == null)
+                    return false;
+
+                if (!(obj is Room))
+                    return false;
+
+                Room room = (Room)obj;
+
+                if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(room.Name))
+                    return this.Name.ToLower() == room.Name.ToLower() && this.Id == room.Id;
+                if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(room.Name))
+                    return this.Id == room.Id;
+                return false;
             }
-            return room;
-        }
-        #endregion
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-
-            if (!(obj is Room))
-                return false;
-
-            Room room = (Room)obj;
-            if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(room.Name))
-                return this.Name.ToLower() == room.Name.ToLower() && this.Id == room.Id;
-            if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(room.Name))
-                return this.Id == room.Id;
-            return false;
-        }
-
-        public override int GetHashCode()
+            public override int GetHashCode()
         {
             return this.Id.GetHashCode();
         }
+        #endregion
     }
 }

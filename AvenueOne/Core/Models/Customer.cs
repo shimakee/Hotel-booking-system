@@ -10,44 +10,11 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Models
 {
-    public class Customer : BaseObservableModel, ICustomer
+    public class Customer : BaseObservableModel<Customer>, ICustomer
     {
-        private string _id;
-        private Person _person;
-
-        #region Properties
-
-        [Required]
-        public string Id
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-
-        #endregion
-
-
-        #region Constructors
-
-        public Customer()
-        {
-            this.Id=GenerateId();
-        }
-
-        public Customer(string id)
-        {
-            this.Id = id;
-        }
-
-        #endregion
-
         #region Reference
+
+        private Person _person;
         public virtual Person Person
         {
             get { return _person; }
@@ -57,8 +24,23 @@ namespace AvenueOne.Models
                 OnPropertyChanged();
             }
         }
+        #endregion
+
+        #region Constructors
+
+        public Customer()
+            :base()
+        {
+        }
+
+        public Customer(string id)
+        {
+            this.Id = id;
+        }
 
         #endregion
+
+        #region Overrides
 
         public override bool Equals(object obj)
         {
@@ -75,5 +57,7 @@ namespace AvenueOne.Models
         {
             return this.Id.GetHashCode();
         }
+        #endregion
+
     }
 }

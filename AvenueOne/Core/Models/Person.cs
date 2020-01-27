@@ -11,9 +11,30 @@ using System.Reflection;
 namespace AvenueOne.Models
 {
     [SettingsSerializeAs(SettingsSerializeAs.Xml)]
-    public class Person : BaseObservableModel, IPerson
+    public class Person : BaseObservableModel<Person>, IPerson
     {
-        private string _id;
+        #region Constructors
+
+            public Person()
+                :base()
+            {
+            }
+
+            public Person(string firstname)
+                : this()
+            {
+                this.FirstName = firstname;
+            }
+
+            public Person (string firstname, string lastname)
+                : this(firstname)
+            {
+                this.LastName = lastname;
+            }
+        #endregion
+
+        #region Properties
+
         private string _firstName;
         private string _middleName;
         private string _lastName;
@@ -25,35 +46,6 @@ namespace AvenueOne.Models
         private DateTime? _birthDate;
         private User _user;
         private Customer _customer;
-
-        public Person()
-        {
-            this.Id = GenerateId();
-        }
-
-        public Person(string firstname)
-            : this()
-        {
-            this.FirstName = firstname;
-        }
-
-        public Person (string firstname, string lastname)
-            : this(firstname)
-        {
-            this.LastName = lastname;
-        }
-
-        #region Properties
-        public string Id
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                OnPropertyChanged();
-            }
-        }
-
 
         public string FirstName
         {
@@ -177,6 +169,10 @@ namespace AvenueOne.Models
         #endregion
 
         #region Tools
+        private bool HasContent(string content)
+        {
+            return !string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content);
+        }
         public byte[] GenderValues { get { return (byte[])Enum.GetValues(typeof(GenderType)); } }
         public byte[] CivilStatusValues { get { return (byte[])Enum.GetValues(typeof(CivilStatusType)); } }
         public bool IsMaiden
@@ -195,53 +191,30 @@ namespace AvenueOne.Models
         }
         #endregion
 
-        ////reference
-        public virtual User User
-        {
-            get { return _user; }
-            set
+        #region Reference
+            public virtual User User
             {
-                _user = value;
-                OnPropertyChanged();
+                get { return _user; }
+                set
+                {
+                    _user = value;
+                    OnPropertyChanged();
+                }
             }
-        }
 
-        public virtual Customer Customer
-        {
-            get { return _customer; }
-            set
+            public virtual Customer Customer
             {
-                _customer = value;
-                OnPropertyChanged();
+                get { return _customer; }
+                set
+                {
+                    _customer = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-
-        //for XML
-        //<Id></Id><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><MaidenName></MaidenName><Suffix></Suffix><Gender></Gender><CivilStatus></CivilStatus><Nationality></Nationality><BirthDate></BirthDate>
+        #endregion
 
 
-        #region MethodsAndOverrides
-
-        public IPerson CopyPropertyValues()
-        {
-            return CopyPropertyValuesTo(new Person());
-        }
-        public IPerson CopyPropertyValuesTo(IPerson person)
-        {
-            List<PropertyInfo> propertyList = typeof(IPerson).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
-
-            foreach (PropertyInfo info in propertyList)
-            {
-                if (typeof(IPerson).GetProperty(info.Name) != null)
-                    info.SetValue(person, info.GetValue(this));
-            }
-            return person;
-        }
-        private bool HasContent(string content)
-        {
-            return !string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content);
-        }
-
+        #region Overrides
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -252,7 +225,8 @@ namespace AvenueOne.Models
 
             Person person = (Person)obj;
 
-            return this.FullName == person.FullName &&
+            return this.Id == person.Id &&
+                this.FullName == person.FullName &&
                 this.Gender == person.Gender &&
                 this.BirthDate.GetValueOrDefault().Year == person.BirthDate.GetValueOrDefault().Year &&
                 this.BirthDate.GetValueOrDefault().Month == person.BirthDate.GetValueOrDefault().Month &&

@@ -80,11 +80,11 @@ namespace AvenueOne.Migrations
             #endregion
 
             #region Seed RoomType
-            RoomType roomType = new RoomType("Standard", 100, rateType.Daily);
-            RoomType roomType2 = new RoomType("Deluxe", 200, rateType.Daily);
-            RoomType roomType3 = new RoomType("Single", 350, rateType.Daily);
-            RoomType roomType4 = new RoomType("Matrimonial", 630, rateType.Daily);
-            RoomType roomType5 = new RoomType("Suite", 270, rateType.Daily);
+            RoomType roomType = new RoomType("Standard", 100, RateType.Daily);
+            RoomType roomType2 = new RoomType("Deluxe", 200, RateType.Daily);
+            RoomType roomType3 = new RoomType("Single", 350, RateType.Daily);
+            RoomType roomType4 = new RoomType("Matrimonial", 630, RateType.Daily);
+            RoomType roomType5 = new RoomType("Suite", 270, RateType.Daily);
 
 
             roomType.Amenities.Add(amenity);

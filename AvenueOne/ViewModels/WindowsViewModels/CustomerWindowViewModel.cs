@@ -36,7 +36,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             set
             {
                 _customer = value;
-                CustomerProfile = value.Person.CopyPropertyValues();
+                CustomerProfile = value.Person.DeepCopy();
                 OnPropertyChanged();
             }
         }

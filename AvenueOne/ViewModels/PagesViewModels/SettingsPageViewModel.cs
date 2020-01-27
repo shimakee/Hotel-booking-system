@@ -65,8 +65,8 @@ namespace AvenueOne.ViewModels.PagesViewModels
                 //to separate editing... conserve the original values.
                 if (value != null)
                 {
-                    Profile = value.Person.CopyPropertyValues();
-                    Account = value.CopyPropertyValues();
+                    Profile = value.Person.DeepCopy();
+                    Account = value.DeepCopy();
                 }
                 else
                 {

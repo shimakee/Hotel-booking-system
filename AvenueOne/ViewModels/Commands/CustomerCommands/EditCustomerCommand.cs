@@ -48,7 +48,7 @@ namespace AvenueOne.ViewModels.Commands.CustomerCommands
 
                 if (customer == null)
                     throw new NullReferenceException("Customer does not exist.");
-                ViewModel.CustomerProfile.CopyPropertyValuesTo(customer.Person);
+                ViewModel.CustomerProfile.DeepCopyTo(customer.Person);
 
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
                 if (n == 0)

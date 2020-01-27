@@ -41,7 +41,7 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
                     throw new InvalidOperationException("Invalid entry on room type or selection.");
 
                 RoomType roomType = _unitOfWork.RoomType.Get(ViewModel.RoomType.Id) ?? throw new InvalidOperationException("Could not find the room type.");
-                ViewModel.RoomTypeSelected.CopyPropertyValuesTo(roomType);
+                ViewModel.RoomTypeSelected.DeepCopyTo(roomType);
 
                 int n = await Task.Run(() => _unitOfWork.CompleteAsync());
                 if (n == 0)

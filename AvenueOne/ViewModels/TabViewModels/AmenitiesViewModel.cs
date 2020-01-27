@@ -40,7 +40,7 @@ namespace AvenueOne.ViewModels.TabViewModels
             set {
                 Amenities = value;
                 if(value != null)
-                _amenitiesSelected = value.CopyPropertyValues();
+                _amenitiesSelected = value.DeepCopy();
                 OnPropertyChanged();
             }
         }

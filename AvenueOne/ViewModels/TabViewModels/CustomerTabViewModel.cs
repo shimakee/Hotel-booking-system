@@ -49,7 +49,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                 if (value != null)
                 {
                     _customer = value;
-                    CustomerProfile = value.Person.CopyPropertyValues();
+                    CustomerProfile = value.Person.DeepCopy();
                 }
                 OnPropertyChanged();
             }

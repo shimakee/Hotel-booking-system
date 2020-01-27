@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AvenueOne.Core.Models.Interfaces
 {
 
-    public enum rateType
+    public enum RateType
     {
         Seconds,
         Minutes,
@@ -17,15 +17,12 @@ namespace AvenueOne.Core.Models.Interfaces
         Monthly,
         Yearly
     }
-    public interface IRoomType : IBaseObservableModel
+    public interface IRoomType : IBaseObservableModel<RoomType>
     {
-        string Id { get; set; }
         string Name { get; set; }
         string Details { get; set; }
         decimal Rate { get; set; }
-        rateType RateType { get; set; }
+        RateType RateType { get; set; }
         IList<Amenities> Amenities { get; set; }
-        IRoomType CopyPropertyValues();
-        IRoomType CopyPropertyValuesTo(IRoomType roomType);
     }
 }

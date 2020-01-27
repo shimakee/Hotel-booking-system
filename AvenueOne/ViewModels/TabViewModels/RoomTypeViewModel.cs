@@ -33,7 +33,7 @@ namespace AvenueOne.ViewModels.TabViewModels
             {
                 RoomType = value;
                 if (value != null)
-                    _roomTypeSelected = value.CopyPropertyValues();
+                    _roomTypeSelected = value.DeepCopy();
                 OnPropertyChanged();
             }
         }
