@@ -195,7 +195,9 @@
     <Compile Include="Services\Interfaces\ILoginService.cs" />
     <Compile Include="Core\IRepositories\IRepository.cs" />
     <Compile Include="Services\Interfaces\IWindowGenerator.cs" />
-    <Compile Include="ViewModels\Commands\BaseClassCommand.cs" />
+    <Compile Include="ViewModels\BaseObservableViewModel.cs" />
+    <Compile Include="ViewModels\Commands\ClassCommands\BaseClassCommand.cs" />
+    <Compile Include="ViewModels\Commands\ClassCommands\CreateClassCommand.cs" />
     <Compile Include="ViewModels\Commands\CustomerCommands\AddCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
     <Compile Include="ViewModels\Commands\CustomerCommands\EditCustomerCommand.cs" />
@@ -216,13 +218,18 @@
     <Compile Include="ViewModels\Commands\CustomerCommands\RemoveCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenRoomTypeWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\RemoveUserCommand.cs" />
+    <Compile Include="ViewModels\Commands\WindowCommands\BaseWindowCommand.cs" />
+    <Compile Include="ViewModels\Commands\WindowCommands\CloseWindowCommand.cs" />
+    <Compile Include="ViewModels\Commands\WindowCommands\ShowDialogWindowCommand.cs" />
+    <Compile Include="ViewModels\Commands\WindowCommands\ShowWindowCommand.cs" />
+    <Compile Include="ViewModels\IBaseObservableViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\AmenitiesViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTypeViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\AmenitiesListWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesListWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRoomViewModel.cs" />
@@ -231,7 +238,7 @@
     </Compile>
     <Compile Include="ViewModels\WindowsViewModels\AmenitiesWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\CustomerWindowViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAccountViewModel.cs" />
+    <Compile Include="ViewModels\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerTabViewModel.cs" />
@@ -247,7 +254,7 @@
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IUser.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IUserCrudViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IWindowViewModel.cs" />
+    <Compile Include="ViewModels\IWindowViewModel.cs" />
     <Compile Include="Core\IRepositories\IUserRepository.cs" />
     <Compile Include="Core\Models\Person.cs" />
     <Compile Include="Core\Models\User.cs" />
@@ -267,7 +274,7 @@
     <Compile Include="ViewModels\WindowsViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\RegistrationWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\RoomTypeWindowViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\WindowViewModel.cs" />
+    <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>

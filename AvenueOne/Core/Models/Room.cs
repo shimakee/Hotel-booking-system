@@ -79,11 +79,18 @@ namespace AvenueOne.Core.Models
 
                 Room room = (Room)obj;
 
-                if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(room.Name))
-                    return this.Name.ToLower() == room.Name.ToLower() && this.Id == room.Id;
-                if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(room.Name))
-                    return this.Id == room.Id;
-                return false;
+            //if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(room.Name))
+            //    return this.Name.ToLower() == room.Name.ToLower() && this.Id == room.Id;
+            //if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(room.Name))
+            //    return this.Id == room.Id;
+            //return false;
+
+            return this.Id == room.Id &&
+                        this.Name == room.Name &&
+                        this.Floor == room.Floor &&
+                        this.MaxOccupants == room.MaxOccupants &&
+                        this.RoomType.Equals(room.RoomType);
+
             }
 
             public override int GetHashCode()

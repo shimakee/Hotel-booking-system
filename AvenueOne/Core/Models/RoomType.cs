@@ -121,11 +121,17 @@ namespace AvenueOne.Core.Models
 
                 RoomType roomType = (RoomType)obj;
 
-                if(!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(roomType.Name))
-                    return this.Name.ToLower() == roomType.Name.ToLower();
-                if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(roomType.Name))
-                    return true;
-            return false;
+            //    if(!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(roomType.Name))
+            //        return this.Name.ToLower() == roomType.Name.ToLower();
+            //    if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(roomType.Name))
+            //        return true;
+            //return false;
+
+            return this.Id == roomType.Id &&
+                        this.Name == roomType.Name &&
+                        this.Details == roomType.Details &&
+                        this.Rate == roomType.Rate &&
+                        this.RateType == roomType.RateType;
             }
 
             public override int GetHashCode()

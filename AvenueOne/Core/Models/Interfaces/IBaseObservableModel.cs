@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Interfaces
 {
-    public interface IBaseObservableModel<T> : IDataErrorInfo, INotifyPropertyChanged where T : IBaseObservableModel<T>, new ()
+    public interface IBaseObservableModel<T> : IDataErrorInfo, INotifyPropertyChanged where T : class, IBaseObservableModel<T>, new()
     {
         //Dictionary<string, string> ErrorCollection { get; }
         string Id { get; set; }

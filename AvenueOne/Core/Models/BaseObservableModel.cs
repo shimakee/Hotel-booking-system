@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Models
 {
-    public abstract class BaseObservableModel<T> : IBaseObservableModel<T> where T:  IBaseObservableModel<T>, new()
+    public abstract class BaseObservableModel<T> : IBaseObservableModel<T> where T: class, IBaseObservableModel<T>, new()
     {
         #region Properties
             protected Dictionary<string, string> ErrorCollection { get; private set; }
