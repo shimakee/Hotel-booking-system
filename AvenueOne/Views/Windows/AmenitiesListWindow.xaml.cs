@@ -4,6 +4,7 @@ using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands.RoomCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     public partial class AmenitiesListWindow : Window
     {
         private PlutoContext _plutoContext;
-        public AmenitiesListWindow(PlutoContext plutoContext, IRoomType roomType)
+        public AmenitiesListWindow(PlutoContext plutoContext)
         {
             InitializeComponent();
 
@@ -35,9 +36,11 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 
             LinkAmenityToRoomTypeCommand linkAmenityToRoomTypeCommand = new LinkAmenityToRoomTypeCommand(new UnitOfWork(_plutoContext),
                                                                                                                                                                                                     new WpfDisplayService());
+            BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
             IAmenitiesListWindowViewModel amenitiesListWindowViewModel = new AmenitiesListWindowViewModel(this,
+                                                                                                                                                                                        closeWindowCommand,
                                                                                                                                                                                         _plutoContext.Amenities.Local,
-                                                                                                                                                                                        roomType,
+                                                                                                                                                                                        new RoomType(),
                                                                                                                                                                                         linkAmenityToRoomTypeCommand);
             DataContext = amenitiesListWindowViewModel;
         }

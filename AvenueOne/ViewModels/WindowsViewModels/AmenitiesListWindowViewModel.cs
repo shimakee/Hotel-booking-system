@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.ViewModels.Commands.RoomCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public LinkAmenityToRoomTypeCommand LinkAmenityToRoomTypeCommand { get; set; }
         public IRoomType RoomType { get; set; }
         public IAmenities AmenitiesSelected { get; set; }
-        public AmenitiesListWindowViewModel(Window window, ObservableCollection<Amenities> amenitiesList,
+        public AmenitiesListWindowViewModel(Window window, BaseWindowCommand closeWindowCommand, ObservableCollection<Amenities> amenitiesList,
                                                                             IRoomType roomType,
                                                                             LinkAmenityToRoomTypeCommand linkAmenityToRoomTypeCommand)
-            :base(window)
+            :base(window, closeWindowCommand)
         {
             this.AmenitiesList = amenitiesList;
             this.RoomType = roomType;

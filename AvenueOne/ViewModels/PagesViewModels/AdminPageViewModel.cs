@@ -2,6 +2,7 @@
 using AvenueOne.Interfaces;
 using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.TabViewModels;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
@@ -77,14 +78,15 @@ namespace AvenueOne.ViewModels.PagesViewModels
 
         #region Constructor
 
-            AdminPageViewModel(Window window)
-                :base(window)
+            AdminPageViewModel(Window window, BaseWindowCommand closeWindowCommand)
+                :base(window, closeWindowCommand)
             {
                 Account = new User();
                 Profile = new Person();
             }
 
             public AdminPageViewModel(Window window, 
+                                                            BaseWindowCommand closeWindowCommand, 
                                                             RegisterUserCommand registerUserCommand, 
                                                             EditUserProfileCommand editProfileCommand, 
                                                             RemoveUserCommand removeUserCommand, 
@@ -92,7 +94,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
                                                             ObservableCollection<User> usersList,
                                                             ICustomerTabViewModel customerTab,
                                                             IRoomTabViewModel roomTab)
-                : this(window)
+                : this(window, closeWindowCommand)
             {
 
                 if (user.Person == null)

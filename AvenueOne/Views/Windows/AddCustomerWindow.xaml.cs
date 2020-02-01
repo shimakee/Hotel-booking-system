@@ -6,6 +6,7 @@ using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands.CustomerCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
@@ -43,8 +44,9 @@ namespace AvenueOne.Views.Windows
             IDisplayService displayService = new WpfDisplayService();
             IUnitOfWork unitOfWork = new UnitOfWork(_plutoContext);
             AddCustomerCommand addCustomerCommand = new AddCustomerCommand(unitOfWork, displayService);
-
-            ICustomerWindowViewModel customerWindowViewModel = new CustomerWindowViewModel(this, addCustomerCommand, customer, new Person());
+            BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
+            ICustomerWindowViewModel customerWindowViewModel = new CustomerWindowViewModel(this, 
+                closeWindowCommand, addCustomerCommand, customer, new Person());
 
             this.ViewModel = customerWindowViewModel;
             DataContext = customerWindowViewModel;

@@ -4,6 +4,7 @@ using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands.UserCommands;
 using System.Windows;
 using System;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
@@ -12,13 +13,13 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public AddUserCommand AddUserCommand { get; private set; }
         public IUser User { get; set; }
 
-        RegistrationWindowViewModel(Window window)
-            :base (window)
+        RegistrationWindowViewModel(Window window, BaseWindowCommand closeWindowCommand)
+            :base (window, closeWindowCommand)
         {
         }
 
-        public RegistrationWindowViewModel(Window registrationWindow, AddUserCommand addUserCommand, IUser user)
-            : this(registrationWindow)
+        public RegistrationWindowViewModel(Window registrationWindow, BaseWindowCommand closeWindowCommand, AddUserCommand addUserCommand, IUser user)
+            : this(registrationWindow, closeWindowCommand)
         {
             //this._unitOfWork = unitOfWork;
             if (user.Person == null)

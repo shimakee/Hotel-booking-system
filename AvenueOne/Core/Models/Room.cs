@@ -40,7 +40,17 @@ namespace AvenueOne.Core.Models
                 }
             }
 
-            public RoomType RoomType { get; set; }
+            //private string _details;
+            //public string Details
+            //{
+            //    get { return _details; }
+            //    set { _details = value;
+            //        OnPropertyChanged();
+            //    }
+            //}
+
+
+        public RoomType RoomType { get; set; }
         #endregion
 
         #region Constructors
@@ -79,19 +89,16 @@ namespace AvenueOne.Core.Models
 
                 Room room = (Room)obj;
 
-            //if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(room.Name))
-            //    return this.Name.ToLower() == room.Name.ToLower() && this.Id == room.Id;
-            //if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(room.Name))
-            //    return this.Id == room.Id;
-            //return false;
+            if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(room.Name))
+                return this.Name.ToLower() == room.Name.ToLower();
+            if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(room.Name))
+                return this.Id == room.Id;
+            return false;
 
-            return this.Id == room.Id &&
-                        this.Name == room.Name &&
-                        this.Floor == room.Floor &&
-                        this.MaxOccupants == room.MaxOccupants &&
-                        this.RoomType.Equals(room.RoomType);
+            //return this.Id == room.Id &&
+            //            this.Name == room.Name;
 
-            }
+        }
 
             public override int GetHashCode()
         {

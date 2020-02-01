@@ -150,7 +150,7 @@ namespace AvenueOne.Models
 
             User user = (User)obj;
 
-            return this.Username == user.Username && this.Id == user.Id;
+            return this.Username == user.Username;
         }
 
         public override int GetHashCode()

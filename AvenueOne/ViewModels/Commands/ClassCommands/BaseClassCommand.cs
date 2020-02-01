@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands
 {
-    public abstract class BaseClassCommand<T> where T : class, IBaseObservableModel<T>, new()
+    public abstract class BaseClassCommand<T> : IBaseClassCommand<T> where T : class, IBaseObservableModel<T>, new()
     {
         public IBaseObservableViewModel<T> ViewModel { get; set; }
         protected IGenericUnitOfWork<T> _genericUnitOfWork;

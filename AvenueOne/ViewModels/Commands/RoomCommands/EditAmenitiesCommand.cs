@@ -14,13 +14,17 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands.RoomCommands
 {
-    public class EditAmenitiesCommand : BaseClassCommand, ICommand
+    public class EditAmenitiesCommand : ICommand
     {
         public IAmenitiesViewModel ViewModel;
+        private IUnitOfWork _unitOfWork;
+        private IDisplayService _displayService;
 
         public EditAmenitiesCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
-            :base(unitOfWork, displayService)
+        //:base(unitOfWork, displayService)
         {
+            this._unitOfWork = unitOfWork;
+            this._displayService = displayService;
         }
 
         public event EventHandler CanExecuteChanged;

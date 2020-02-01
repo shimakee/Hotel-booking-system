@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.CustomerCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -47,8 +48,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels
 
         #region Constructors
 
-            public CustomerWindowViewModel(Window window, AddCustomerCommand addCustomerCommand, ICustomer customer, IPerson person)
-                :base(window)
+            public CustomerWindowViewModel(Window window, BaseWindowCommand closeWindowCommand,
+                AddCustomerCommand addCustomerCommand, ICustomer customer, IPerson person)
+                :base(window, closeWindowCommand)
             {
                 this.Customer = customer;
                 this.CustomerProfile = person;

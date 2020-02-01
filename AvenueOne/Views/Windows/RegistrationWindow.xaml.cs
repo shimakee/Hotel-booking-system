@@ -7,6 +7,7 @@ using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.UserCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Windows;
@@ -32,8 +33,8 @@ namespace AvenueOne.Views.Windows
             IDisplayService displayService = new WpfDisplayService();
             IUnitOfWork unitOfWork = new UnitOfWork(_plutoContext);
             AddUserCommand addUserCommand = new AddUserCommand(displayService, unitOfWork);
-
-            IRegistrationViewModel registrationWindowViewModel = new RegistrationWindowViewModel(this, addUserCommand, user);
+            BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
+            IRegistrationViewModel registrationWindowViewModel = new RegistrationWindowViewModel(this, closeWindowCommand, addUserCommand, user);
 
             this.ViewModel = registrationWindowViewModel;
             DataContext = registrationWindowViewModel;

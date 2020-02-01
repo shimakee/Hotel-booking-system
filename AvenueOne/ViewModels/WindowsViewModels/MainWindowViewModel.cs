@@ -3,6 +3,7 @@ using AvenueOne.Models;
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Properties;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using AvenueOne.Views.Pages;
 using System;
@@ -27,8 +28,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public Dictionary<string, Page> Pages { get;  private set; }
         public ICommand ChangePageCommand { get; private set; }
 
-        public MainWindowViewModel(Window window, PlutoContext context)
-            :base(window)
+        public MainWindowViewModel(Window window, BaseWindowCommand closeWindowCommand, PlutoContext context)
+            :base(window, closeWindowCommand)
         {
             if (window == null || context == null)
                 throw new ArgumentNullException("Window or context cannot be null.");

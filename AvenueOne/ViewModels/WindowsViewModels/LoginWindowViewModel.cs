@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,13 +12,13 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public IUser User { get; set; }
 
         #region Ctor
-        LoginWindowViewModel(Window window)
-            :base(window)
+        LoginWindowViewModel(Window window, BaseWindowCommand closeWindowCommand)
+            :base(window, closeWindowCommand)
         {
         }
 
-        public LoginWindowViewModel(Window loginWindow, LoginCommand loginCommand, IUser user)
-            : this(loginWindow)
+        public LoginWindowViewModel(Window loginWindow, BaseWindowCommand closeWindowCommand, LoginCommand loginCommand, IUser user)
+            : this(loginWindow, closeWindowCommand)
         {
             this.User = user;
             this.LoginCommand = loginCommand;

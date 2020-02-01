@@ -6,7 +6,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using AvenueOne.Interfaces;
+using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.ClassCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 
@@ -15,7 +17,9 @@ namespace AvenueOne.ViewModels
     public class BaseObservableViewModel<T> : AccountViewModel, IBaseObservableViewModel<T> where T : class, IBaseObservableModel<T>, new()
     {
         #region Properties
-        public CreateClassCommand<T> CreateClassCommand { get; set; }
+        public BaseClassCommand<T> CreateClassCommand { get; set; }
+        public BaseClassCommand<T> UpdateClassCommand { get; set; }
+        public BaseClassCommand<T> DeleteClassCommand { get; set; }
         public ObservableCollection<T> ModelList { get; set; }
         private IBaseObservableModel<T> _model { get; set; }
         public IBaseObservableModel<T> Model
@@ -33,7 +37,7 @@ namespace AvenueOne.ViewModels
             set {
                 Model = value;
                 if(value != null)
-                    _modelSelected = value;
+                    _modelSelected = value.Copy();
                 OnPropertyChanged();
             }
         }
@@ -41,12 +45,21 @@ namespace AvenueOne.ViewModels
 
         #region Constructors
 
-        public BaseObservableViewModel(ObservableCollection<T> modelList, CreateClassCommand<T> createClassCommand)
+        public BaseObservableViewModel(IBaseObservableModel<T> model,
+                                                            ObservableCollection<T> modelList,
+                                                            BaseClassCommand<T> createClassCommand,
+                                                            BaseClassCommand<T> updateClassCommand,
+                                                            BaseClassCommand<T> deleteClassCommand)
             :base()
         {
+            this.ModelSelected = model;
             this.ModelList = modelList;
             this.CreateClassCommand = createClassCommand;
+            this.UpdateClassCommand = updateClassCommand;
+            this.DeleteClassCommand = deleteClassCommand;
             this.CreateClassCommand.ViewModel = this;
+            this.UpdateClassCommand.ViewModel = this;
+            this.DeleteClassCommand.ViewModel = this;
         }
         #endregion
 

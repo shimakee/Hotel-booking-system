@@ -1,11 +1,9 @@
 ﻿using AvenueOne.Core;
 using AvenueOne.Interfaces;
-using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -13,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.Commands.ClassCommands
 {
-    public class CreateClassCommand<T> : BaseClassCommand<T> where T : class, IBaseObservableModel<T>, new()
+    public class UpdateClassCommand<T> : BaseClassCommand<T> where T : class, IBaseObservableModel<T>, new()
     {
-        public CreateClassCommand(IGenericUnitOfWork<T> genericUnitOfWork, IDisplayService displayService)
+        public UpdateClassCommand(IGenericUnitOfWork<T> genericUnitOfWork, IDisplayService displayService)
             : base(genericUnitOfWork, displayService)
         {
         }
@@ -31,19 +29,19 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
 
                 if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
                     throw new ValidationException("Invalid input on Model or ModelSelected.");
-                //T model = await Task.Run(()=> _genericUnitOfWork.Repositories[typeof(T)].GetAsync(ViewModel.ModelSelected.Id));
-                T model = await Task.Run(()=> _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.ModelSelected.Id));
-                //or use find with model.equals method
-                if (model != null)
-                    throw new InvalidOperationException("Invalid, model with similar property values already exist.");
-                _genericUnitOfWork.Repositories[typeof(T)].Add(ViewModel.ModelSelected as T);
+
+                T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.Model.Id));
+                if (model == null)
+                    throw new InvalidOperationException("Invalid, model does not exist.");
+                ViewModel.ModelSelected.Id = model.Id;
+                ViewModel.ModelSelected.DeepCopyTo(model);
 
                 int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
 
                 if (n == 0)
-                    throw new InvalidOperationException("Could not add model to database.");
+                    throw new InvalidOperationException("Could not update model.");
 
-                _displayService.MessageDisplay($"Added {typeof(T)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model added");
+                _displayService.MessageDisplay($"Updated {typeof(T)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model updated");
                 //ViewModel.Window.Close();
             }
             catch (DbUpdateException dbEx)

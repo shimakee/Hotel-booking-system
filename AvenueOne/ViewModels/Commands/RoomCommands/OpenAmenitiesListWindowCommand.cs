@@ -34,7 +34,7 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
         {
             try
             {
-                AmenitiesListWindow amenitiesListWindow = new AmenitiesListWindow(_plutoContext, ViewModel.RoomTypeSelected);
+                AmenitiesListWindow amenitiesListWindow = new AmenitiesListWindow(_plutoContext);
                 amenitiesListWindow.ShowDialog();
             }
             catch (Exception ex)

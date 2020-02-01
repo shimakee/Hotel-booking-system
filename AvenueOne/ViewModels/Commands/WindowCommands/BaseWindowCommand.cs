@@ -1,4 +1,5 @@
-﻿using AvenueOne.Services.Interfaces;
+﻿using AvenueOne.Interfaces;
+using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace AvenueOne.ViewModels.Commands.WindowCommands
     public abstract class BaseWindowCommand : ICommand
     {
         public IAccountViewModel ViewModel { get; set; }
+        //public IAccountViewModel ViewModel { get; set; }
         public Window Window { get; set; }
         public BaseWindowCommand()
         {

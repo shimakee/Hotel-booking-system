@@ -5,6 +5,7 @@ using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands.RoomCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
@@ -38,7 +39,8 @@ namespace AvenueOne.Views.Windows
             IUnitOfWork unitOfWork = new UnitOfWork(_plutoContext);
             IDisplayService displayService = new WpfDisplayService();
             AddRoomTypeCommand addRoomTypeCommand = new AddRoomTypeCommand(unitOfWork, displayService);
-            IRoomTypeWindowViewModel roomTypeWindowViewModel = new RoomTypeWindowViewModel(this, new RoomType(), addRoomTypeCommand);
+            BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
+            IRoomTypeWindowViewModel roomTypeWindowViewModel = new RoomTypeWindowViewModel(this, closeWindowCommand, new RoomType(), addRoomTypeCommand);
             this.ViewModel = roomTypeWindowViewModel;
             DataContext = roomTypeWindowViewModel;
         }

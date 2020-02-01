@@ -9,14 +9,18 @@ using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
+using AvenueOne.ViewModels;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.ClassCommands;
 using AvenueOne.ViewModels.Commands.CustomerCommands;
 using AvenueOne.ViewModels.Commands.RoomCommands;
 using AvenueOne.ViewModels.Commands.UserCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.PagesViewModels;
 using AvenueOne.ViewModels.TabViewModels;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
+using AvenueOne.Views.Windows;
 using System;
 using System.Linq;
 using System.Windows;
@@ -57,29 +61,56 @@ namespace AvenueOne.Views.Pages
             OpenAmenitiesWindowCommand openAmenitiesWindowCommand = new OpenAmenitiesWindowCommand(context);
             RemoveAmenitiesCommand removeAmenitiesCommand = new RemoveAmenitiesCommand(unitOfWork, displayService);
             EditAmenitiesCommand editAmenitiesCommand = new EditAmenitiesCommand(unitOfWork, displayService);
-            OpenRoomTypeWindowCommand openRoomTypeWindowCommand = new OpenRoomTypeWindowCommand(context);
+            //OpenRoomTypeWindowCommand openRoomTypeWindowCommand = new OpenRoomTypeWindowCommand(context);
             RemoveRoomTypeCommand removeRoomTypeCommand = new RemoveRoomTypeCommand(unitOfWork, displayService);
             EditRoomTypeCommand editRoomTypeCommand = new EditRoomTypeCommand(unitOfWork, displayService);
             DetachAmenityCommand detachAmenityCommand = new DetachAmenityCommand(unitOfWork, displayService);
-            OpenAmenitiesListWindowCommand openAmenitiesListWindowCommand = new OpenAmenitiesListWindowCommand(context);
-            IGenericUnitOfWork<Room> genericUnitOfWork = new GenericUnitOfWork<Room>(context);
-            RemoveRoomCommand removeRoomCommand = new RemoveRoomCommand(genericUnitOfWork, displayService);
-            IRoomViewModel roomViewModel = new RoomViewModel(new Room(), context.Room.Local, removeRoomCommand);
+            //OpenAmenitiesListWindowCommand openAmenitiesListWindowCommand = new OpenAmenitiesListWindowCommand(context);
+            IGenericUnitOfWork<Room> genericUnitOfWorkRoom = new GenericUnitOfWork<Room>(context);
+            RemoveRoomCommand removeRoomCommand = new RemoveRoomCommand(genericUnitOfWorkRoom, displayService);
+            BaseClassCommand<Room> createRoomCommand = new CreateClassCommand<Room>(genericUnitOfWorkRoom, displayService);
+            BaseClassCommand<Room> updateRoomCommand = new UpdateClassCommand<Room>(genericUnitOfWorkRoom, displayService);
+            BaseClassCommand<Room> deleteRoomCommand = new DeleteClassCommand<Room>(genericUnitOfWorkRoom, displayService);
+            IBaseObservableViewModel<Room> roomViewModel = new BaseObservableViewModel<Room>(new Room(),
+                                                                                                                                                                            context.Room.Local,
+                                                                                                                                                                            createRoomCommand,
+                                                                                                                                                                            updateRoomCommand,
+                                                                                                                                                                            deleteRoomCommand);
+            GenericUnitOfWork<RoomType> genericUnitOfWorkRoomType = new GenericUnitOfWork<RoomType>(context);
+            BaseClassCommand<RoomType> createRoomTypeCommand = new CreateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
+            BaseClassCommand<RoomType> updateRoomTypeCommand = new UpdateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
+            BaseClassCommand<RoomType> deleteRoomTypeCommand = new DeleteClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
+            ShowDialogWindowCommand openRoomTypeWindowCommand = new ShowDialogWindowCommand();
+            AddRoomTypeWindow addRoomTypeWindow = new AddRoomTypeWindow(context);
+            openRoomTypeWindowCommand.Window = addRoomTypeWindow;
+            ShowDialogWindowCommand openAmenitiesListWindowCommand = new ShowDialogWindowCommand();
+            AmenitiesListWindow amenitiesListWindow = new AmenitiesListWindow(context);
+            openAmenitiesListWindowCommand.Window = amenitiesListWindow;
+
             IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
+                                                                                                                                    _context.RoomType.Local,
+                                                                                                                                    createRoomTypeCommand,
+                                                                                                                                    updateRoomTypeCommand,
+                                                                                                                                    deleteRoomTypeCommand,
                                                                                                                                     openRoomTypeWindowCommand,
-                                                                                                                                    editRoomTypeCommand,
-                                                                                                                                    removeRoomTypeCommand,
-                                                                                                                                    detachAmenityCommand,
                                                                                                                                     openAmenitiesListWindowCommand,
-                                                                                                                                    _context.RoomType.Local);
-            IAmenitiesViewModel amenitiesViewModel = new AmenitiesViewModel(openAmenitiesWindowCommand,
-                                                                                                                                editAmenitiesCommand,
-                                                                                                                                removeAmenitiesCommand,
-                                                                                                                                _context.Amenities.Local);
+                                                                                                                                    detachAmenityCommand);
+
+            GenericUnitOfWork<Amenities> genericUnitOfWorkAmenities = new GenericUnitOfWork<Amenities>(context);
+            BaseClassCommand<Amenities> createAmenitiesCommand = new CreateClassCommand<Amenities>(genericUnitOfWorkAmenities, displayService);
+            BaseClassCommand<Amenities> updateAmenitiesCommand = new UpdateClassCommand<Amenities>(genericUnitOfWorkAmenities, displayService);
+            BaseClassCommand<Amenities> deleteAmenitiesCommand = new DeleteClassCommand<Amenities>(genericUnitOfWorkAmenities, displayService);
+            IBaseObservableViewModel<Amenities> amenitiesViewModel = new BaseObservableViewModel<Amenities>(new Amenities(),
+                                                                                                                                                                                            context.Amenities.Local,
+                                                                                                                                                                                            createAmenitiesCommand,
+                                                                                                                                                                                            updateAmenitiesCommand,
+                                                                                                                                                                                            deleteAmenitiesCommand);
             RoomTabViewModel roomTab = new RoomTabViewModel(amenitiesViewModel,
                                                                                                             roomTypeViewModel,
                                                                                                             roomViewModel);
+            BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
+                                                                                                                                closeWindowCommand,
                                                                                                                                 RegisterUserCommand, 
                                                                                                                                 editProfileCommand,
                                                                                                                                 removeUserCommand,

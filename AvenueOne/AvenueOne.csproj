@@ -198,9 +198,12 @@
     <Compile Include="ViewModels\BaseObservableViewModel.cs" />
     <Compile Include="ViewModels\Commands\ClassCommands\BaseClassCommand.cs" />
     <Compile Include="ViewModels\Commands\ClassCommands\CreateClassCommand.cs" />
+    <Compile Include="ViewModels\Commands\ClassCommands\DeleteClassCommand.cs" />
+    <Compile Include="ViewModels\Commands\ClassCommands\UpdateClassCommand.cs" />
     <Compile Include="ViewModels\Commands\CustomerCommands\AddCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
     <Compile Include="ViewModels\Commands\CustomerCommands\EditCustomerCommand.cs" />
+    <Compile Include="ViewModels\Commands\IBaseClassCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenAmenitiesWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\AddAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\AddRoomTypeCommand.cs" />
@@ -223,6 +226,8 @@
     <Compile Include="ViewModels\Commands\WindowCommands\ShowDialogWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\WindowCommands\ShowWindowCommand.cs" />
     <Compile Include="ViewModels\IBaseObservableViewModel.cs" />
+    <Compile Include="ViewModels\IObservableWindowViewModel.cs" />
+    <Compile Include="ViewModels\ObservableWindowViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\AmenitiesViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />

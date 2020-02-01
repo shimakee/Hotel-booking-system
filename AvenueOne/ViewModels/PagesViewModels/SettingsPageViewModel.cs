@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
@@ -17,15 +18,16 @@ namespace AvenueOne.ViewModels.PagesViewModels
     public class SettingsPageViewModel : WindowViewModel, IUserProfileEditViewModel, INotifyPropertyChanged
     {
         #region Ctor
-        SettingsPageViewModel(Window window)
-            : base(window)
+        SettingsPageViewModel(Window window, BaseWindowCommand closeWindowCommand)
+            : base(window, closeWindowCommand)
         {
         }
 
         public SettingsPageViewModel(Window window,
+                                                        BaseWindowCommand closeWindowCommand,
                                                         EditUserProfileCommand editProfileCommand,
                                                         IUser user)
-            : this(window)
+            : this(window, closeWindowCommand)
         {
 
             //commented out because it causes an error when there is no user in the database

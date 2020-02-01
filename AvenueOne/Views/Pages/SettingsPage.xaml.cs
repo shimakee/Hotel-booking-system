@@ -7,6 +7,7 @@ using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.PagesViewModels;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,9 @@ namespace AvenueOne.Views.Pages
             IUnitOfWork unitOfWork = new UnitOfWork(_context);
             IUser user = _context.Users.Find(Settings.Default.UserAccount.Id);
             EditUserProfileCommand editProfileCommand = new EditUserProfileCommand(unitOfWork, displayService);
+            BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
             SettingsPageViewModel settingsPageViewModel = new SettingsPageViewModel(Window.GetWindow(this),
+                closeWindowCommand,
                                                                                                                                                 editProfileCommand, user);
 
             this.ViewModel = settingsPageViewModel;

@@ -21,6 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 
 namespace AvenueOne
 {
@@ -36,7 +37,8 @@ namespace AvenueOne
             InitializeComponent();
             this._plutoContext = new PlutoContext();
 
-            IMainWindowViewModel mainWindowViewModel = new MainWindowViewModel(this, _plutoContext);
+            BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
+            IMainWindowViewModel mainWindowViewModel = new MainWindowViewModel(this, closeWindowCommand, _plutoContext);
             DataContext = mainWindowViewModel;
         }
 

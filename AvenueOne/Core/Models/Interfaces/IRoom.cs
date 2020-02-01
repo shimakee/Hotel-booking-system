@@ -12,6 +12,7 @@ namespace AvenueOne.Core.Models.Interfaces
         string Name { get; set; }
         int Floor { get; set; }
         int MaxOccupants { get; set; }
+        //string Details { get; set; }
         RoomType RoomType { get; set; }
     }
 }

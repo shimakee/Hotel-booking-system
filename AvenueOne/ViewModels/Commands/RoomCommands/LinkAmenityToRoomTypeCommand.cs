@@ -13,12 +13,16 @@ using AvenueOne.Core.Models;
 
 namespace AvenueOne.ViewModels.Commands.RoomCommands
 {
-    public class LinkAmenityToRoomTypeCommand : BaseClassCommand, ICommand
+    public class LinkAmenityToRoomTypeCommand : ICommand
     {
         public IAmenitiesListWindowViewModel ViewModel { get; set; }
+        private IUnitOfWork _unitOfWork;
+        private IDisplayService _displayService;
         public LinkAmenityToRoomTypeCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
-            : base(unitOfWork, displayService)
+            //: base(unitOfWork, displayService)
         {
+            this._unitOfWork = unitOfWork;
+            this._displayService = displayService;
         }
         public event EventHandler CanExecuteChanged;
 

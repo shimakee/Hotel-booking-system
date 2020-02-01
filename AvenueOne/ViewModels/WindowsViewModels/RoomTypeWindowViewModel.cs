@@ -3,6 +3,7 @@ using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands.RoomCommands;
 using AvenueOne.ViewModels.Commands.UserCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace AvenueOne.ViewModels.WindowsViewModels
         public AddRoomTypeCommand AddRoomTypeCommand { get; set; }
         public IRoomType RoomType { get; set; }
 
-        public RoomTypeWindowViewModel(Window window, IRoomType roomType, AddRoomTypeCommand addRoomTypeCommand)
-            :base(window)
+        public RoomTypeWindowViewModel(Window window, BaseWindowCommand closeWindowCommand, IRoomType roomType, AddRoomTypeCommand addRoomTypeCommand)
+            :base(window, closeWindowCommand)
         {
             this.RoomType = roomType;
             this.AddRoomTypeCommand = addRoomTypeCommand;

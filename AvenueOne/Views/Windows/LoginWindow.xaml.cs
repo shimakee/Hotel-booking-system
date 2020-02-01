@@ -6,6 +6,7 @@ using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
 using System;
 using System.Windows;
@@ -26,7 +27,9 @@ namespace AvenueOne.Views
             ILoginService loginService = new LoginService(unitOfWork);
             IUser user = new User();
             IDisplayService displayService = new WpfDisplayService();
+            BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
             ILoginViewModel loginWindowViewModel = new LoginWindowViewModel(this,
+                                                                                                                                    closeWindowCommand,
                                                                                                                                     new LoginCommand(loginService, displayService),
                                                                                                                                     user);
             DataContext = loginWindowViewModel;

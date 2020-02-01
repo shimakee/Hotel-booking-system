@@ -1,7 +1,9 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
+using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.RoomCommands;
 using AvenueOne.ViewModels.Commands.UserCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,15 +13,15 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
-    public interface IRoomTypeViewModel : IAccountViewModel
+    public interface IRoomTypeViewModel : IBaseObservableViewModel<RoomType>
     {
-        EditRoomTypeCommand EditRoomTypeCommand { get; set; }
-        RemoveRoomTypeCommand RemoveRoomTypeCommand { get; set; }
-        OpenRoomTypeWindowCommand OpenRoomTypeWindowCommand { get; set; }
+        //BaseClassCommand<RoomType> EditRoomTypeCommand { get; set; }
+        //BaseClassCommand<RoomType> RemoveRoomTypeCommand { get; set; }
+        BaseWindowCommand OpenRoomTypeWindowCommand { get; set; }
+        BaseWindowCommand OpenAmenitiesListWindowCommand {get; set;}
         DetachAmenityCommand DetachAmenityCommand { get; set; }
-        OpenAmenitiesListWindowCommand OpenAmenitiesListWindowCommand {get; set;}
-        IRoomType RoomType { get; set; }
-        IRoomType RoomTypeSelected { get; set; }
+        //IRoomType RoomType { get; set; }
+        //IRoomType RoomTypeSelected { get; set; }
         IAmenities AmenitiesSelected { get; set; }
         ObservableCollection<RoomType> RoomTypesList { get; set; }
     }

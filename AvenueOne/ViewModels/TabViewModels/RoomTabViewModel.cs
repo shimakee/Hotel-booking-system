@@ -22,8 +22,8 @@ namespace AvenueOne.ViewModels.TabViewModels
     {
 
         #region Properties
-        private IAmenitiesViewModel _amenitiesViewModel;
-        public IAmenitiesViewModel AmenitiesViewModel
+        private IBaseObservableViewModel<Amenities> _amenitiesViewModel;
+        public IBaseObservableViewModel<Amenities> AmenitiesViewModel
         {
             get { return _amenitiesViewModel; }
             set { _amenitiesViewModel = value;
@@ -40,9 +40,9 @@ namespace AvenueOne.ViewModels.TabViewModels
             }
         }
 
-        private IRoomViewModel _roomViewModel;
+        private IBaseObservableViewModel<Room> _roomViewModel;
 
-        public IRoomViewModel RoomViewModel
+        public IBaseObservableViewModel<Room> RoomViewModel
         {
             get { return _roomViewModel; }
             set { _roomViewModel = value;
@@ -53,9 +53,9 @@ namespace AvenueOne.ViewModels.TabViewModels
         #endregion
 
         #region Constructors
-        public RoomTabViewModel(IAmenitiesViewModel amenitiesViewModel,
+        public RoomTabViewModel(IBaseObservableViewModel<Amenities> amenitiesViewModel,
                                                     IRoomTypeViewModel roomTypeViewModel,
-                                                    IRoomViewModel roomViewModel)
+                                                    IBaseObservableViewModel<Room> roomViewModel)
         {
             this.RoomTypeViewModel = roomTypeViewModel;
             this.AmenitiesViewModel = amenitiesViewModel;
