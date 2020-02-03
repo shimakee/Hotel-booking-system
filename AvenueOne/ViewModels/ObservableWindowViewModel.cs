@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.ClassCommands;
 using AvenueOne.ViewModels.Commands.WindowCommands;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,9 @@ namespace AvenueOne.ViewModels
                                                                     BaseWindowCommand closeWindowCommand,
                                                                     BaseClassCommand<T> createClassCommand,
                                                                     BaseClassCommand<T> updateClassCommand,
-                                                                    BaseClassCommand<T> deleteClassCommand)
-            :base(model, modelList, createClassCommand, updateClassCommand, deleteClassCommand)
+                                                                    BaseClassCommand<T> deleteClassCommand,
+                                                                    ClearClassCommand<T> clearClassCommand)
+            :base(model, modelList, createClassCommand, updateClassCommand, deleteClassCommand, clearClassCommand)
         {
             this.Window = window;
             this.CloseWindowCommand = closeWindowCommand;

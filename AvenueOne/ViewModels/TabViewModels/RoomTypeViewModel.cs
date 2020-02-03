@@ -3,6 +3,7 @@ using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Interfaces;
 using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.ClassCommands;
 using AvenueOne.ViewModels.Commands.RoomCommands;
 using AvenueOne.ViewModels.Commands.UserCommands;
 using AvenueOne.ViewModels.Commands.WindowCommands;
@@ -38,9 +39,10 @@ namespace AvenueOne.ViewModels.TabViewModels
                                                     BaseClassCommand<RoomType> createClassCommand,
                                                     BaseClassCommand<RoomType> updateClassCommand,
                                                     BaseClassCommand<RoomType> deleteClassCommand,
+                                                    ClearClassCommand<RoomType> clearClassCommand,
                                                     LinkAmenityCommand linkAmenityCommand,
                                                     DetachAmenityCommand detachAmenityCommand)
-            : base(model, modelList, createClassCommand, updateClassCommand, deleteClassCommand)
+            : base(model, modelList, createClassCommand, updateClassCommand, deleteClassCommand, clearClassCommand)
         {
             this.LinkAmenityCommand = linkAmenityCommand;
             this.DetachAmenityCommand = detachAmenityCommand;

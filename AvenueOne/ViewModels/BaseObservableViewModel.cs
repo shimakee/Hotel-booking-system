@@ -17,9 +17,11 @@ namespace AvenueOne.ViewModels
     public class BaseObservableViewModel<T> : AccountViewModel, IBaseObservableViewModel<T> where T : class, IBaseObservableModel<T>, new()
     {
         #region Properties
+
         public BaseClassCommand<T> CreateClassCommand { get; set; }
         public BaseClassCommand<T> UpdateClassCommand { get; set; }
         public BaseClassCommand<T> DeleteClassCommand { get; set; }
+        public ClearClassCommand<T> ClearClassCommand { get; set; }
         public ObservableCollection<T> ModelList { get; set; }
         private IBaseObservableModel<T> _model { get; set; }
         public IBaseObservableModel<T> Model
@@ -49,7 +51,8 @@ namespace AvenueOne.ViewModels
                                                             ObservableCollection<T> modelList,
                                                             BaseClassCommand<T> createClassCommand,
                                                             BaseClassCommand<T> updateClassCommand,
-                                                            BaseClassCommand<T> deleteClassCommand)
+                                                            BaseClassCommand<T> deleteClassCommand,
+                                                            ClearClassCommand<T> clearClassCommand)
             :base()
         {
             this.ModelSelected = model;
@@ -57,9 +60,11 @@ namespace AvenueOne.ViewModels
             this.CreateClassCommand = createClassCommand;
             this.UpdateClassCommand = updateClassCommand;
             this.DeleteClassCommand = deleteClassCommand;
+            this.ClearClassCommand = clearClassCommand;
             this.CreateClassCommand.ViewModel = this;
             this.UpdateClassCommand.ViewModel = this;
             this.DeleteClassCommand.ViewModel = this;
+            this.ClearClassCommand.ViewModel = this;
         }
         #endregion
 

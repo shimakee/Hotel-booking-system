@@ -411,9 +411,12 @@
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
 
-                        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                            Content="Add Room Type"
+                        <Button Grid.Row="0" Grid.Column="0"
+                            Content="Add Room type"
                                 Command="{Binding RoomTab.RoomTypeViewModel.CreateClassCommand}"/>
+                        <Button Grid.Row="0" Grid.Column="1"
+                            Content="Clear content"
+                                Command="{Binding RoomTab.RoomTypeViewModel.ClearClassCommand}"/>
                         <TextBlock Grid.Row ="0" Grid.Column="2"  HorizontalAlignment="Right"
                                    Text="Id:" />
                         <TextBox IsEnabled="False"
@@ -466,13 +469,13 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                                 <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
-                                <DataGridTemplateColumn Width="*">
+                                <!--<DataGridTemplateColumn Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="Detach"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                </DataGridTemplateColumn>-->
                             </DataGrid.Columns>
                             
                         </DataGrid>
@@ -518,8 +521,10 @@
                         </Grid.RowDefinitions>
 
 
-                        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                        <Button Grid.Row="0" Grid.Column="0"
                             Content="Add Amenities" Command="{Binding RoomTab.AmenitiesViewModel.CreateClassCommand}"/>
+                        <Button Grid.Row="0" Grid.Column="1"
+                            Content="Clear content" Command="{Binding RoomTab.AmenitiesViewModel.ClearClassCommand}"/>
 
                         <TextBlock Grid.Row="0" Grid.Column="2"
                                    HorizontalAlignment="Right"

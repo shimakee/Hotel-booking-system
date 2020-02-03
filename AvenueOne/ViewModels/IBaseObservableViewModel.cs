@@ -18,6 +18,7 @@ namespace AvenueOne.ViewModels
         BaseClassCommand<T> CreateClassCommand { get; set; }
         BaseClassCommand<T> UpdateClassCommand { get; set; }
         BaseClassCommand<T> DeleteClassCommand { get; set; }
+        ClearClassCommand<T> ClearClassCommand { get; set; }
         ObservableCollection<T> ModelList { get; set; }
         IBaseObservableModel<T> Model { get; set; }
         IBaseObservableModel<T> ModelSelected { get; set; }
