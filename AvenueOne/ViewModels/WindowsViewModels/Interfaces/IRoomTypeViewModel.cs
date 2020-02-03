@@ -15,13 +15,10 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
     public interface IRoomTypeViewModel : IBaseObservableViewModel<RoomType>
     {
-        //BaseClassCommand<RoomType> EditRoomTypeCommand { get; set; }
-        //BaseClassCommand<RoomType> RemoveRoomTypeCommand { get; set; }
-        BaseWindowCommand OpenRoomTypeWindowCommand { get; set; }
-        BaseWindowCommand OpenAmenitiesListWindowCommand {get; set;}
+        //BaseWindowCommand OpenRoomTypeWindowCommand { get; set; }
+        //BaseWindowCommand OpenAmenitiesListWindowCommand {get; set;}
         DetachAmenityCommand DetachAmenityCommand { get; set; }
-        //IRoomType RoomType { get; set; }
-        //IRoomType RoomTypeSelected { get; set; }
+        LinkAmenityCommand LinkAmenityCommand { get; set; }
         IAmenities AmenitiesSelected { get; set; }
         ObservableCollection<RoomType> RoomTypesList { get; set; }
     }

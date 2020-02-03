@@ -55,7 +55,7 @@ namespace AvenueOne.Core.Models
                 }
             }
 
-            public byte[] RateTypeValues { get { return (byte[])Enum.GetValues(typeof(RateType)); } }
+            public int[] RateTypeValues { get { return (int[])Enum.GetValues(typeof(RateType)); } }
         #endregion
 
         #region  Reference
@@ -90,24 +90,6 @@ namespace AvenueOne.Core.Models
             this.Rate = rate;
             this.RateType = rateType;
         }
-        #endregion
-
-        #region Methods and Utilities
-            //public IRoomType CopyPropertyValues()
-            //{
-            //    return CopyPropertyValuesTo(new RoomType());
-            //}
-            //public IRoomType CopyPropertyValuesTo(IRoomType roomType)
-            //{
-            //    List<PropertyInfo> propertyList = typeof(IRoomType).GetProperties().Where(u => u.CanWrite && u.CanRead).ToList();
-
-            //    foreach (PropertyInfo info in propertyList)
-            //    {
-            //        if (typeof(IRoomType).GetProperty(info.Name) != null)
-            //            info.SetValue(roomType, info.GetValue(this));
-            //    }
-            //    return roomType;
-            //}
         #endregion
 
         #region Overrides

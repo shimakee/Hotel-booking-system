@@ -57,39 +57,11 @@ namespace AvenueOne.Views.Pages
             EditCustomerCommand editCustomerCommand = new EditCustomerCommand(unitOfWork, displayService);
             OpenCustomerWindowCommand openCustomerWindowCommand = new OpenCustomerWindowCommand(context);
             RemoveCustomerCommand removeCustomerCommand = new RemoveCustomerCommand(unitOfWork, displayService);
-            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand, removeCustomerCommand);
-            //RemoveRoomTypeCommand removeRoomTypeCommand = new RemoveRoomTypeCommand(unitOfWork, displayService);
-            //EditRoomTypeCommand editRoomTypeCommand = new EditRoomTypeCommand(unitOfWork, displayService);
-            DetachAmenityCommand detachAmenityCommand = new DetachAmenityCommand(unitOfWork, displayService);
-            IGenericUnitOfWork<Room> genericUnitOfWorkRoom = new GenericUnitOfWork<Room>(context);
-            //RemoveRoomCommand removeRoomCommand = new RemoveRoomCommand(genericUnitOfWorkRoom, displayService);
-            BaseClassCommand<Room> createRoomCommand = new CreateClassCommand<Room>(genericUnitOfWorkRoom, displayService);
-            BaseClassCommand<Room> updateRoomCommand = new UpdateClassCommand<Room>(genericUnitOfWorkRoom, displayService);
-            BaseClassCommand<Room> deleteRoomCommand = new DeleteClassCommand<Room>(genericUnitOfWorkRoom, displayService);
-            IBaseObservableViewModel<Room> roomViewModel = new BaseObservableViewModel<Room>(new Room(),
-                                                                                                                                                                            context.Room.Local,
-                                                                                                                                                                            createRoomCommand,
-                                                                                                                                                                            updateRoomCommand,
-                                                                                                                                                                            deleteRoomCommand);
-            GenericUnitOfWork<RoomType> genericUnitOfWorkRoomType = new GenericUnitOfWork<RoomType>(context);
-            BaseClassCommand<RoomType> createRoomTypeCommand = new CreateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
-            BaseClassCommand<RoomType> updateRoomTypeCommand = new UpdateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
-            BaseClassCommand<RoomType> deleteRoomTypeCommand = new DeleteClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
-            ShowDialogWindowCommand openRoomTypeWindowCommand = new ShowDialogWindowCommand();
-            AddRoomTypeWindow addRoomTypeWindow = new AddRoomTypeWindow(context);
-            openRoomTypeWindowCommand.Window = addRoomTypeWindow;
-            ShowDialogWindowCommand openAmenitiesListWindowCommand = new ShowDialogWindowCommand();
-            AmenitiesListWindow amenitiesListWindow = new AmenitiesListWindow(context);
-            openAmenitiesListWindowCommand.Window = amenitiesListWindow;
 
-            IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
-                                                                                                                                    _context.RoomType.Local,
-                                                                                                                                    createRoomTypeCommand,
-                                                                                                                                    updateRoomTypeCommand,
-                                                                                                                                    deleteRoomTypeCommand,
-                                                                                                                                    openRoomTypeWindowCommand,
-                                                                                                                                    openAmenitiesListWindowCommand,
-                                                                                                                                    detachAmenityCommand);
+            CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand, removeCustomerCommand);
+           
+            #region Amenities view model
+
 
             GenericUnitOfWork<Amenities> genericUnitOfWorkAmenities = new GenericUnitOfWork<Amenities>(context);
             BaseClassCommand<Amenities> createAmenitiesCommand = new CreateClassCommand<Amenities>(genericUnitOfWorkAmenities, displayService);
@@ -100,6 +72,39 @@ namespace AvenueOne.Views.Pages
                                                                                                                                                                                             createAmenitiesCommand,
                                                                                                                                                                                             updateAmenitiesCommand,
                                                                                                                                                                                             deleteAmenitiesCommand);
+            #endregion
+
+            #region RoomType view model
+
+            GenericUnitOfWork<RoomType> genericUnitOfWorkRoomType = new GenericUnitOfWork<RoomType>(context);
+            //BaseClassCommand<RoomType> createRoomTypeCommand = new CreateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
+            BaseClassCommand<RoomType> createRoomTypeCommand = new AddRoomTypeCommand(genericUnitOfWorkRoomType, displayService);
+            BaseClassCommand<RoomType> updateRoomTypeCommand = new UpdateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
+            BaseClassCommand<RoomType> deleteRoomTypeCommand = new DeleteClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
+            LinkAmenityCommand linkAmenityCommand = new LinkAmenityCommand(genericUnitOfWorkRoomType, displayService);
+            DetachAmenityCommand detachAmenityCommand = new DetachAmenityCommand(genericUnitOfWorkRoomType, displayService);
+            IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
+                                                                                                                                    _context.RoomType.Local,
+                                                                                                                                    createRoomTypeCommand,
+                                                                                                                                    updateRoomTypeCommand,
+                                                                                                                                    deleteRoomTypeCommand,
+                                                                                                                                    linkAmenityCommand,
+                                                                                                                                    detachAmenityCommand);
+            #endregion
+
+            #region Room view model
+
+            IGenericUnitOfWork<Room> genericUnitOfWorkRoom = new GenericUnitOfWork<Room>(context);
+            BaseClassCommand<Room> createRoomCommand = new CreateClassCommand<Room>(genericUnitOfWorkRoom, displayService);
+            BaseClassCommand<Room> updateRoomCommand = new UpdateClassCommand<Room>(genericUnitOfWorkRoom, displayService);
+            BaseClassCommand<Room> deleteRoomCommand = new DeleteClassCommand<Room>(genericUnitOfWorkRoom, displayService);
+            IBaseObservableViewModel<Room> roomViewModel = new BaseObservableViewModel<Room>(new Room(),
+                                                                                                                                                                            context.Room.Local,
+                                                                                                                                                                            createRoomCommand,
+                                                                                                                                                                            updateRoomCommand,
+                                                                                                                                                                            deleteRoomCommand);
+            #endregion
+
             RoomTabViewModel roomTab = new RoomTabViewModel(amenitiesViewModel,
                                                                                                             roomTypeViewModel,
                                                                                                             roomViewModel);

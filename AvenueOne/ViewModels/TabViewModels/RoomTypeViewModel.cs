@@ -21,8 +21,7 @@ namespace AvenueOne.ViewModels.TabViewModels
 {
     public class RoomTypeViewModel : BaseObservableViewModel<RoomType>, IRoomTypeViewModel, INotifyPropertyChanged
     {
-        public BaseWindowCommand OpenRoomTypeWindowCommand { get; set; }
-        public BaseWindowCommand OpenAmenitiesListWindowCommand { get; set; }
+        public LinkAmenityCommand LinkAmenityCommand { get; set; }
         public DetachAmenityCommand DetachAmenityCommand { get; set; }
         public ObservableCollection<RoomType> RoomTypesList { get; set; }
 
@@ -39,18 +38,14 @@ namespace AvenueOne.ViewModels.TabViewModels
                                                     BaseClassCommand<RoomType> createClassCommand,
                                                     BaseClassCommand<RoomType> updateClassCommand,
                                                     BaseClassCommand<RoomType> deleteClassCommand,
-                                                    BaseWindowCommand openRoomTypeWindowCommand, 
-                                                    BaseWindowCommand openAmenitiesListWindowCommand,
+                                                    LinkAmenityCommand linkAmenityCommand,
                                                     DetachAmenityCommand detachAmenityCommand)
             : base(model, modelList, createClassCommand, updateClassCommand, deleteClassCommand)
         {
-            this.OpenRoomTypeWindowCommand = openRoomTypeWindowCommand;
-            this.OpenAmenitiesListWindowCommand = openAmenitiesListWindowCommand;
+            this.LinkAmenityCommand = linkAmenityCommand;
             this.DetachAmenityCommand = detachAmenityCommand;
-            this.OpenRoomTypeWindowCommand.ViewModel = this;
-            this.OpenAmenitiesListWindowCommand.ViewModel = this;
+            this.LinkAmenityCommand.ViewModel = this;
             this.DetachAmenityCommand.ViewModel = this;
-
         }
     }
 }

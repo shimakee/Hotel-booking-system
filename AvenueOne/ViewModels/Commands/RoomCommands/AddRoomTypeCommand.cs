@@ -1,4 +1,5 @@
-﻿using AvenueOne.Core.Models;
+﻿using AvenueOne.Core;
+using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Services.Interfaces;
@@ -13,50 +14,63 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands.RoomCommands
 {
-    public class AddRoomTypeCommand : ICommand
+    public class AddRoomTypeCommand : BaseClassCommand<RoomType>, IBaseClassCommand<RoomType>
     {
-        public IRoomTypeWindowViewModel ViewModel;
-        private IUnitOfWork _unitOfWork;
-        private IDisplayService _displayService;
-        public AddRoomTypeCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
-        //:base(unitOfWork, displaySerive)
+        public AddRoomTypeCommand(IGenericUnitOfWork<RoomType> genericUnitOfWork, IDisplayService displayService)
+            :base(genericUnitOfWork, displayService)
         {
-            this._unitOfWork = unitOfWork;
+            this._genericUnitOfWork = genericUnitOfWork;
             this._displayService = displayService;
         }
-        public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
-        {
-            if (ViewModel != null)
-                return this.ViewModel.UserAccount.IsAdmin;
-            return false;
-        }
-
-        public async void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
             try
             {
                 if (ViewModel == null)
                     throw new ArgumentNullException("ViewModel cannot be null.");
-                if (ViewModel.RoomType == null)
+                if (ViewModel.Model == null || ViewModel.ModelSelected == null)
                     throw new ArgumentNullException("Room type cannot be null.");
 
-                if (!ViewModel.RoomType.IsValid)
+                if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
                     throw new ValidationException("Invalid entry on room type.");
 
-                RoomType roomType = _unitOfWork.RoomType.Find(room => room.Name.ToLower() == ViewModel.RoomType.Name.ToLower()).FirstOrDefault();
-                if (roomType != null)
+                RoomType model = ViewModel.ModelSelected as RoomType;
+                RoomType roomType = _genericUnitOfWork.Repositories[typeof(RoomType)].Find(room => room.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+                if(roomType != null)
                     throw new InvalidOperationException("Room type with similar name already exist.");
-                _unitOfWork.RoomType.Add(ViewModel.RoomType as RoomType);
 
-                int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+                //adding amenities
+                if(model.Amenities != null && model.Amenities.Count > 0)
+                {
+                    List<Amenities> amenities = new List<Amenities>();
+                    foreach (var item in model.Amenities)
+                    {
+                        if (!amenities.Contains(item))
+                            amenities.Add(item);
+                    }
+                    model.Amenities = amenities;
+                }
+                //adding rooms
+                if(model.Rooms != null && model.Rooms.Count >0)
+                {
+                    List<Room> rooms = new List<Room>();
+                    foreach (var item in model.Rooms)
+                    {
+                        if (!rooms.Contains(item))
+                            rooms.Add(item);
+                    }
+                    model.Rooms = rooms;
+                }
+
+                _genericUnitOfWork.Repositories[typeof(RoomType)].Add(ViewModel.ModelSelected as RoomType);
+
+                int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
 
                 if (n <= 0)
                     throw new InvalidOperationException("Could not add room type.");
 
-                _displayService.MessageDisplay($"Added:\nName:{ViewModel.RoomType.Name}\nAffected rows:{n}.");
-                ViewModel.Window.Close();
+                _displayService.MessageDisplay($"Added:\nName:{model.Name}\nAffected rows:{n}.");
             }
             catch(ArgumentNullException argEx)
             {
