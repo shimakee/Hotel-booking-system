@@ -563,11 +563,11 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                                 <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="3*"/>
-                                <DataGridTextColumn>
+                                <!--<DataGridTextColumn>
                                     <DataGridTextColumn.Header>
                                         <Button Content="Refresh"/>
                                     </DataGridTextColumn.Header>
-                                </DataGridTextColumn>
+                                </DataGridTextColumn>-->
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

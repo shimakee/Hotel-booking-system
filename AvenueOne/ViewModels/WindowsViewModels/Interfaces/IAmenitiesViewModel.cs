@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
-    public interface IAmenitiesViewModel : IAccountViewModel
+    public interface IAmenitiesViewModel : IBaseObservableViewModel<Amenities>
     {
-        OpenAmenitiesWindowCommand OpenAmenitiesWindowCommand { get; set; }
-        RemoveAmenitiesCommand RemoveAmenitiesCommand { get; }
-        EditAmenitiesCommand EditAmenitiesCommand { get; }
-        IAmenities Amenities { get; set; }
-        IAmenities AmenitiesSelected { get; set; }
-        ObservableCollection<Amenities> AmenitiesList { get; set; }
+        //OpenAmenitiesWindowCommand OpenAmenitiesWindowCommand { get; set; }
+        //BaseClassCommand<Amenities> RemoveAmenitiesCommand { get; }
+        //BaseClassCommand<Amenities> EditAmenitiesCommand { get; }
+        //IAmenities Amenities { get; set; }
+        //IAmenities AmenitiesSelected { get; set; }
+        //ObservableCollection<Amenities> AmenitiesList { get; set; }
     }
 }

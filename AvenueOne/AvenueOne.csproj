@@ -204,15 +204,11 @@
     <Compile Include="ViewModels\Commands\ChangePageCommand.cs" />
     <Compile Include="ViewModels\Commands\CustomerCommands\EditCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\IBaseClassCommand.cs" />
-    <Compile Include="ViewModels\Commands\OpenAmenitiesWindowCommand.cs" />
-    <Compile Include="ViewModels\Commands\RoomCommands\AddAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\AddRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\DetachAmenityCommand.cs" />
-    <Compile Include="ViewModels\Commands\RoomCommands\EditAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\EditRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\LinkAmenityToRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\OpenAmenitiesListWindowCommand.cs" />
-    <Compile Include="ViewModels\Commands\RoomCommands\RemoveAmenitiesCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveRoomCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\EditUserProfileCommand.cs" />
@@ -229,7 +225,6 @@
     <Compile Include="ViewModels\IObservableWindowViewModel.cs" />
     <Compile Include="ViewModels\ObservableWindowViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
-    <Compile Include="ViewModels\TabViewModels\AmenitiesViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\CustomerTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTypeViewModel.cs" />
@@ -241,11 +236,8 @@
     <Compile Include="Views\Windows\AmenitiesListWindow.xaml.cs">
       <DependentUpon>AmenitiesListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\WindowsViewModels\AmenitiesWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\CustomerWindowViewModel.cs" />
     <Compile Include="ViewModels\IAccountViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAmenitiesWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerTabViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerWindowViewModel.cs" />
@@ -292,9 +284,6 @@
     <Compile Include="Views\Windows\AddCustomerWindow.xaml.cs">
       <DependentUpon>AddCustomerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Windows\AddAmenitiesWindow.xaml.cs">
-      <DependentUpon>AddAmenitiesWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Windows\AddRoomTypeWindow.xaml.cs">
       <DependentUpon>AddRoomTypeWindow.xaml</DependentUpon>
     </Compile>
@@ -321,10 +310,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\AddCustomerWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Windows\AddAmenitiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

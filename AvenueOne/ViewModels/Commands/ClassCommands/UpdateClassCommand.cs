@@ -41,7 +41,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 if (n == 0)
                     throw new InvalidOperationException("Could not update model.");
 
-                _displayService.MessageDisplay($"Updated {typeof(T)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model updated");
+                _displayService.MessageDisplay($"Updated {typeof(T)} model.\nId:{ViewModel.Model.Id}\nAffected rows:{n}", "Model updated");
                 //ViewModel.Window.Close();
             }
             catch (DbUpdateException dbEx)

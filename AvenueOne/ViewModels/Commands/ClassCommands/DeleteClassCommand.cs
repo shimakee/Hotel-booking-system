@@ -28,8 +28,8 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
 
                 if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
                     throw new ValidationException("Invalid input on Model or ModelSelected.");
-
                 T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.Model.Id));
+                string id = model.Id;
                 if (model == null)
                     throw new InvalidOperationException("Invalid, model does not exist.");
 
@@ -40,7 +40,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 if (n == 0)
                     throw new InvalidOperationException("Could not delete model from database.");
 
-                _displayService.MessageDisplay($"Deleted {typeof(T)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model deleted");
+                _displayService.MessageDisplay($"Deleted {typeof(T)} model.\nId:{id}\nAffected rows:{n}", "Model deleted");
                 //ViewModel.Window.Close();
             }
             catch (ValidationException validationException)
