@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
+using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.RoomCommands;
 using AvenueOne.ViewModels.Commands.UserCommands;
@@ -19,7 +20,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
         //BaseWindowCommand OpenAmenitiesListWindowCommand {get; set;}
         DetachAmenityCommand DetachAmenityCommand { get; set; }
         LinkAmenityCommand LinkAmenityCommand { get; set; }
-        IAmenities AmenitiesSelected { get; set; }
+        IBaseObservableModel<Amenities> AmenitiesSelected { get; set; }
         ObservableCollection<RoomType> RoomTypesList { get; set; }
     }
 }

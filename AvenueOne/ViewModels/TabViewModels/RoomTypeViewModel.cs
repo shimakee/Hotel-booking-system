@@ -26,8 +26,8 @@ namespace AvenueOne.ViewModels.TabViewModels
         public DetachAmenityCommand DetachAmenityCommand { get; set; }
         public ObservableCollection<RoomType> RoomTypesList { get; set; }
 
-        private IAmenities _amenitiesSelected;
-        public IAmenities AmenitiesSelected
+        private IBaseObservableModel<Amenities> _amenitiesSelected; // turn to baseobservableModel
+        public IBaseObservableModel<Amenities> AmenitiesSelected
         {
             get { return _amenitiesSelected; }
             set { _amenitiesSelected = value;

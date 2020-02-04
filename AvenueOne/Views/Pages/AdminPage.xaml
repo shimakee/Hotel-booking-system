@@ -456,12 +456,6 @@
 
                         <TextBlock Grid.Row="3" Grid.Column="3"
                                    Text="Amenities:"/>
-                        <Button Grid.Row="4" Grid.Column="3"
-                                   Content="Link"
-                                Command="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"/>
-                        <Button Grid.Row="4" Grid.Column="4"
-                                   Content="Detach"
-                                Command="{Binding RoomTab.RoomTypeViewModel.DetachAmenityCommand}"/>
                         <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                   SelectionMode="Single" SelectedItem="{Binding RoomTab.RoomTypeViewModel.AmenitiesSelected}"
@@ -469,13 +463,12 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                                 <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
-                                <!--<DataGridTemplateColumn Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Detach"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>-->
+                                <DataGridTextColumn Width="*">
+                                    <DataGridTextColumn.Header>
+                                        <Button Content="Detach"
+                                                    Command="{Binding RoomTab.RoomTypeViewModel.DetachAmenityCommand}"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
                             
                         </DataGrid>
@@ -573,16 +566,17 @@
                         <DataGrid  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5"
                             Margin="0 10 0 0"
                             x:Name="AmenitiesList"
-                            ItemsSource="{Binding RoomTab.AmenitiesViewModel.ModelList}" SelectedItem="{Binding RoomTab.AmenitiesViewModel.ModelSelected, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding RoomTab.AmenitiesViewModel.ModelList}" SelectedItem="{Binding RoomTab.AmenitiesSelected, UpdateSourceTrigger=PropertyChanged}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                                 <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="3*"/>
-                                <!--<DataGridTextColumn>
+                                <DataGridTextColumn Width="*">
                                     <DataGridTextColumn.Header>
-                                        <Button Content="Refresh"/>
+                                        <Button Content="Link"
+                                                    Command="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"/>
                                     </DataGridTextColumn.Header>
-                                </DataGridTextColumn>-->
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
