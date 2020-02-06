@@ -39,12 +39,22 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Content="+ Add new User +" Grid.Column="0" 
-                                        Command="{Binding RegisterUserCommand}"
-                                    />
-                                <CheckBox Content="isAdmin" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Account.IsAdmin}"/>
+                                <Button Content="Add new User" Grid.Column="0" 
+                                        Command="{Binding UserTab.CreateClassCommand}">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                            <Binding ElementName="IsPasswordIncluded"/>
+                                            <Binding ElementName="Password"/>
+                                            <Binding ElementName="PasswordConfirm"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
+                                </Button>
+                                <Button Content="Clear content" Grid.Column="1" 
+                                        Command="{Binding UserTab.ClearClassCommand}"/>
+                                <CheckBox Content="isAdmin" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding UserTab.ModelSelected.IsAdmin}"/>
                             </Grid>
 
                             <Grid>
@@ -55,7 +65,7 @@
 
                                 <TextBlock Text="Username:" Grid.Column="0"/>
                                 <TextBox x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding Account.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding UserTab.ModelSelected.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -69,7 +79,7 @@
 
                                 <TextBlock Text="Include Password:" Grid.Column="0"/>
 
-                                <CheckBox Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsPasswordIncluded}"/>
+                                <CheckBox x:Name="IsPasswordIncluded" Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding UserTab.IsPasswordIncluded}"/>
                             </Grid>
 
                             <Grid>
@@ -80,7 +90,7 @@
 
                                 <TextBlock Text="Password:" Grid.Column="0"/>
 
-                                <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
+                                <PasswordBox IsEnabled="{Binding UserTab.IsPasswordIncluded}" x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
                             </Grid>
 
                             <Grid>
@@ -92,7 +102,7 @@
 
                                 <TextBlock Text="PasswordConfirm:" Grid.Column="0"/>
 
-                                <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
+                                <PasswordBox IsEnabled="{Binding UserTab.IsPasswordIncluded}" x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
                             </Grid>
 
 
@@ -104,7 +114,7 @@
 
                                 <TextBlock Text="Firstname:" Grid.Column="0"/>
                                 <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding Profile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding UserTab.Profile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -118,7 +128,7 @@
 
                                 <TextBlock Text="Middlename:" Grid.Column="0"/>
                                 <TextBox x:Name="Middlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"
-                                         Text="{Binding Profile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Text="{Binding UserTab.Profile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -130,7 +140,7 @@
 
                                 <TextBlock Text="Lastname:" Grid.Column="0"/>
                                 <TextBox x:Name="Lastname"  Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding Profile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding UserTab.Profile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
                             <Grid>
@@ -145,15 +155,15 @@
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
-                            <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding Profile.GenderValues}" 
-                                                  SelectedValue="{Binding Profile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding UserTab.Profile.GenderValues}" 
+                                                  SelectedValue="{Binding UserTab.Profile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-                            <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding Profile.CivilStatusValues}"
-                                                  SelectedValue="{Binding Profile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding UserTab.Profile.CivilStatusValues}"
+                                                  SelectedValue="{Binding UserTab.Profile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-                            <Grid IsEnabled="{Binding Profile.WasMaiden}" Visibility="{Binding Profile.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                            <Grid IsEnabled="{Binding UserTab.Profile.WasMaiden}" Visibility="{Binding UserTab.Profile.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
                                 <!--<Grid>-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="94*"/>
@@ -163,7 +173,7 @@
 
                                 <TextBlock Text="Maiden name:" Grid.Column="0"/>
                                 <TextBox x:Name="MaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
-                             Text="{Binding Profile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding UserTab.Profile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -175,7 +185,7 @@
 
                                 <TextBlock Text="Brithdate:" Grid.Column="0"/>
                                 <DatePicker x:Name="Birthdate" Grid.Column="1"
-                                            SelectedDate="{Binding Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            SelectedDate="{Binding UserTab.Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                             ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
                             </Grid>
                         </StackPanel>
@@ -242,9 +252,10 @@
                                 <TextBox x:Name="Email" Text="Email address" Grid.Column="1"/>
                             </Grid>
 
-                            <Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding EditProfileCommand, Mode=OneWay}">
+                            <Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding UserTab.UpdateClassCommand, Mode=OneWay}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                        <!--<Binding ElementName="IsPasswordIncluded"/>-->
                                         <Binding ElementName="Password"/>
                                         <Binding ElementName="PasswordConfirm"/>
                                     </MultiBinding>
@@ -252,14 +263,14 @@
                             </Button>
 
                             <Button Content="Delete User"
-                                    Command="{Binding RemoveUserCommand}"/>
+                                    Command="{Binding UserTab.DeleteClassCommand}"/>
                         </StackPanel>
                     </Grid>
                 </GroupBox>
 
                 <GroupBox Header="User list" Grid.Row="1">
                     <DataGrid  x:Name="UsersList" Grid.Column="1"
-                            ItemsSource="{Binding UsersList}" SelectedItem="{Binding User}"
+                            ItemsSource="{Binding UserTab.ModelList}" SelectedItem="{Binding UserTab.ModelSelected}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                         <!--<DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="Administrator" Binding="{Binding IsAdmin}" Width="*"/>

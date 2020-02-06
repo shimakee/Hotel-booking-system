@@ -18,10 +18,10 @@ namespace AvenueOne.ViewModels
     {
         #region Properties
 
-        public BaseClassCommand<T> CreateClassCommand { get; set; }
-        public BaseClassCommand<T> UpdateClassCommand { get; set; }
-        public BaseClassCommand<T> DeleteClassCommand { get; set; }
-        public ClearClassCommand<T> ClearClassCommand { get; set; }
+        public virtual BaseClassCommand<T> CreateClassCommand { get; set; }
+        public virtual BaseClassCommand<T> UpdateClassCommand { get; set; }
+        public virtual BaseClassCommand<T> DeleteClassCommand { get; set; }
+        public virtual ClearClassCommand<T> ClearClassCommand { get; set; }
         public ObservableCollection<T> ModelList { get; set; }
         private T _model { get; set; }
         public T Model

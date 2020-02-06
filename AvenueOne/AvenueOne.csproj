@@ -208,6 +208,7 @@
     <Compile Include="ViewModels\Commands\RoomCommands\DetachAmenityCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\LinkAmenityCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveRoomCommand.cs" />
+    <Compile Include="ViewModels\Commands\UserCommands\CreateUserCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\EditUserProfileCommand.cs" />
     <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\RemoveUserCommand.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="ViewModels\TabViewModels\RoomTypeViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\TabViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRoomViewModel.cs" />
     <Compile Include="ViewModels\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerViewModel.cs" />
@@ -252,6 +254,7 @@
     <Compile Include="ViewModels\Commands\UserCommands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IUserViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\RegistrationWindowViewModel.cs" />

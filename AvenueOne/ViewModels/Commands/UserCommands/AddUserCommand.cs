@@ -46,17 +46,17 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                     //get parameters
                     object[] values = (object[])parameter;
 
-                    PasswordBox passwordPasswordBox = (PasswordBox)values[0];
+                    //CheckBox IsPasswordIncludedCheckBox = (CheckBox)values[0];
+                    //bool IsPasswordIncluded = IsPasswordIncludedCheckBox.IsChecked.GetValueOrDefault();
+
+                    PasswordBox passwordPasswordBox = (PasswordBox)values[1];
                     string password = passwordPasswordBox.Password;
 
-                    PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[1];
+                    PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[2];
                     string passwordConfirm = passwordConfirmPasswordBox.Password;
-
 
                 if (password == null || passwordConfirm == null)
                     throw new ArgumentNullException("Password and PasswordConfirm cannot be null.");
-                //if (User == null)
-                //    throw new ArgumentNullException("User and person view model cannot be null, must assign valid view model to the properties.");
                 if (ViewModel.User == null)
                     throw new NullReferenceException("User cannot be null");
                 IUser User = ViewModel.User;

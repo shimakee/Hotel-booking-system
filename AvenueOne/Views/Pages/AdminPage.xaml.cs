@@ -43,10 +43,9 @@ namespace AvenueOne.Views.Pages
             InitializeComponent();
 
             this._context = context;
-            IUser User = new User();
+            User User = new User();
             User.Person = new Person();
-            Customer Customer = new Customer();
-            Customer.Person = new Person();
+            
             IDisplayService displayService = new WpfDisplayService();
             IUnitOfWork unitOfWork = new UnitOfWork(context);
             RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
@@ -55,14 +54,27 @@ namespace AvenueOne.Views.Pages
             RemoveUserCommand removeUserCommand = new RemoveUserCommand(unitOfWork, 
                                                                                                                                         displayService);
 
+            IGenericUnitOfWork<User> genericUnitOfWorkUser = new GenericUnitOfWork<User>(context);
+            //BaseClassCommand<User> createUserCommand = new CreateClassCommand<User>(genericUnitOfWorkUser, displayService);
+            BaseClassCommand<User> createUserCommand = new CreateUserCommand(genericUnitOfWorkUser, displayService);
+            BaseClassCommand<User> updateUserCommand = new UpdateClassCommand<User>(genericUnitOfWorkUser, displayService);
+            BaseClassCommand<User> deleteUserCommand = new DeleteClassCommand<User>(genericUnitOfWorkUser, displayService);
+            ClearClassCommand<User> clearUserCommand = new ClearClassCommand<User>();
+            IUserViewModel userTab = new UserViewModel(new Person(), User, context.Users.Local,
+                                                                                                        createUserCommand,
+                                                                                                        updateUserCommand,
+                                                                                                        deleteUserCommand,
+                                                                                                        clearUserCommand);
+
             #region Customer tab
+                Customer Customer = new Customer();
+            Customer.Person = new Person();
+            //EditCustomerCommand editCustomerCommand = new EditCustomerCommand(unitOfWork, displayService);
+            //OpenCustomerWindowCommand openCustomerWindowCommand = new OpenCustomerWindowCommand(context);
+            //RemoveCustomerCommand removeCustomerCommand = new RemoveCustomerCommand(unitOfWork, displayService);
 
-                //EditCustomerCommand editCustomerCommand = new EditCustomerCommand(unitOfWork, displayService);
-                //OpenCustomerWindowCommand openCustomerWindowCommand = new OpenCustomerWindowCommand(context);
-                //RemoveCustomerCommand removeCustomerCommand = new RemoveCustomerCommand(unitOfWork, displayService);
-
-                //CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand, removeCustomerCommand);
-                IGenericUnitOfWork<Customer> genericUnitOfWorkCustomer = new GenericUnitOfWork<Customer>(context);
+            //CustomerTabViewModel customerTab = new CustomerTabViewModel(new Person(), Customer, _context.Customers.Local, editCustomerCommand, openCustomerWindowCommand, removeCustomerCommand);
+            IGenericUnitOfWork<Customer> genericUnitOfWorkCustomer = new GenericUnitOfWork<Customer>(context);
                 //BaseClassCommand<Customer> createCustomerCommand = new AddCustomerCommand(genericUnitOfWorkCustomer, displayService);
                 BaseClassCommand<Customer> createCustomerCommand = new CreateClassCommand<Customer>(genericUnitOfWorkCustomer, displayService);
                 //BaseClassCommand<Customer> updateCustomerCommand = new UpdateClassCommand<Customer>(genericUnitOfWorkCustomer, displayService);
@@ -136,13 +148,18 @@ namespace AvenueOne.Views.Pages
             BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
                                                                                                                                 closeWindowCommand,
-                                                                                                                                RegisterUserCommand, 
-                                                                                                                                editProfileCommand,
-                                                                                                                                removeUserCommand,
-                                                                                                                                User,
-                                                                                                                                _context.Users.Local,
+                                                                                                                                userTab,
                                                                                                                                 customerTab,
                                                                                                                                 roomTab);
+            //AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this),
+            //                                                                                                                    closeWindowCommand,
+            //                                                                                                                    RegisterUserCommand,
+            //                                                                                                                    editProfileCommand,
+            //                                                                                                                    removeUserCommand,
+            //                                                                                                                    User,
+            //                                                                                                                    _context.Users.Local,
+            //                                                                                                                    customerTab,
+            //                                                                                                                    roomTab);
 
 
             this.ViewModel = _adminViewModel;

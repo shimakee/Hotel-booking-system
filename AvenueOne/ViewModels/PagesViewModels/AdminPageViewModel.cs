@@ -47,6 +47,7 @@ namespace AvenueOne.ViewModels.PagesViewModels
             }
         }
 
+        public IBaseObservableViewModel<User> UserTab { get; set; }
         public IBaseObservableViewModel<Customer> CustomerTab { get; set; }
         public IRoomTabViewModel RoomTab { get; set; }
 
@@ -78,37 +79,43 @@ namespace AvenueOne.ViewModels.PagesViewModels
 
         #region Constructor
 
-            AdminPageViewModel(Window window, BaseWindowCommand closeWindowCommand)
-                :base(window, closeWindowCommand)
-            {
-                Account = new User();
-                Profile = new Person();
-            }
+            //AdminPageViewModel(Window window, BaseWindowCommand closeWindowCommand)
+            //    :base(window, closeWindowCommand)
+            //{
+                //Account = new User();
+                //Profile = new Person();
+            //}
 
-            public AdminPageViewModel(Window window, 
-                                                            BaseWindowCommand closeWindowCommand, 
-                                                            RegisterUserCommand registerUserCommand, 
-                                                            EditUserProfileCommand editProfileCommand, 
-                                                            RemoveUserCommand removeUserCommand, 
-                                                            IUser user, 
-                                                            ObservableCollection<User> usersList,
-                                                            //ICustomerTabViewModel customerTab,
+            //public AdminPageViewModel(Window window,
+            //                                                BaseWindowCommand closeWindowCommand,
+            //                                                RegisterUserCommand registerUserCommand,
+            //                                                EditUserProfileCommand editProfileCommand,
+            //                                                RemoveUserCommand removeUserCommand,
+            //                                                IUser user,
+            //                                                ObservableCollection<User> usersList,
+            //                                                //ICustomerTabViewModel customerTab,
+            //                                                IBaseObservableViewModel<Customer> customerTab,
+            //                                                IRoomTabViewModel roomTab)
+            public AdminPageViewModel(Window window,
+                                                            BaseWindowCommand closeWindowCommand,
+                                                            IBaseObservableViewModel<User> userTab,
                                                             IBaseObservableViewModel<Customer> customerTab,
                                                             IRoomTabViewModel roomTab)
-                : this(window, closeWindowCommand)
+                : base(window, closeWindowCommand)
             {
 
-                if (user.Person == null)
-                    throw new ArgumentNullException("Person object inside user of type IUser cannot be null.");
+            //if (user.Person == null)
+            //    throw new ArgumentNullException("Person object inside user of type IUser cannot be null.");
 
-                this.User = user;
-                this.UsersList = usersList;
-                this.RegisterUserCommand = registerUserCommand;
-                this.RegisterUserCommand.ViewModel = this;
-                this.EditProfileCommand = editProfileCommand;
-                this.EditProfileCommand.ViewModel = this;
-                this.RemoveUserCommand = removeUserCommand;
-                this.RemoveUserCommand.ViewModel = this;
+            //this.User = user;
+            //this.UsersList = usersList;
+            //this.RegisterUserCommand = registerUserCommand;
+            //this.RegisterUserCommand.ViewModel = this;
+            //this.EditProfileCommand = editProfileCommand;
+            //this.EditProfileCommand.ViewModel = this;
+            //this.RemoveUserCommand = removeUserCommand;
+            //this.RemoveUserCommand.ViewModel = this;
+                this.UserTab = userTab;
                 this.CustomerTab = customerTab;
                 this.RoomTab = roomTab;
 
