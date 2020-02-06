@@ -22,8 +22,8 @@ namespace AvenueOne.ViewModels.TabViewModels
     {
 
         #region Properties
-        private IBaseObservableModel<Amenities> _amenitiesSelected;
-        public IBaseObservableModel<Amenities> AmenitiesSelected
+        private Amenities _amenitiesSelected;
+        public Amenities AmenitiesSelected
         {
             get { return _amenitiesSelected; }
             set { _amenitiesSelected = value;

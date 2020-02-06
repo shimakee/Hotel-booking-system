@@ -29,19 +29,22 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
                     throw new ValidationException("Invalid input on Model or ModelSelected.");
                 T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.Model.Id));
-                string id = model.Id;
                 if (model == null)
                     throw new InvalidOperationException("Invalid, model does not exist.");
 
+                string id = model.Id;
                 _genericUnitOfWork.Repositories[typeof(T)].Remove(model);
 
                 int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
-
                 if (n == 0)
                     throw new InvalidOperationException("Could not delete model from database.");
 
                 _displayService.MessageDisplay($"Deleted {typeof(T)} model.\nId:{id}\nAffected rows:{n}", "Model deleted");
                 //ViewModel.Window.Close();
+            }
+            catch(NullReferenceException nullEx)
+            {
+                _displayService.ErrorDisplay(nullEx.Message, "Null reference exception.");
             }
             catch (ValidationException validationException)
             {

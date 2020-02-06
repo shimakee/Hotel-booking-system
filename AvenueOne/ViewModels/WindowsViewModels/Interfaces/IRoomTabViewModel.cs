@@ -14,7 +14,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
     public interface IRoomTabViewModel
     {
         //openamenitieswindowcommand
-        IBaseObservableModel<Amenities> AmenitiesSelected { get; set; }
+        Amenities AmenitiesSelected { get; set; }
         IRoomTypeViewModel RoomTypeViewModel { get; set; }
         IBaseObservableViewModel<Amenities> AmenitiesViewModel { get; set; }
         IBaseObservableViewModel<Room> RoomViewModel { get; set; }

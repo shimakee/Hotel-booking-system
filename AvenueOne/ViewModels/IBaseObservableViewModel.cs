@@ -20,7 +20,7 @@ namespace AvenueOne.ViewModels
         BaseClassCommand<T> DeleteClassCommand { get; set; }
         ClearClassCommand<T> ClearClassCommand { get; set; }
         ObservableCollection<T> ModelList { get; set; }
-        IBaseObservableModel<T> Model { get; set; }
-        IBaseObservableModel<T> ModelSelected { get; set; }
+        T Model { get; set; }
+        T ModelSelected { get; set; }
     }
 }

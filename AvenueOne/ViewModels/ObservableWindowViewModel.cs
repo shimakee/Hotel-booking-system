@@ -19,7 +19,7 @@ namespace AvenueOne.ViewModels
         public BaseWindowCommand CloseWindowCommand { get; set; }
 
         public ObservableWindowViewModel(Window window, 
-                                                                    IBaseObservableModel<T> model,
+                                                                    T model,
                                                                     ObservableCollection<T> modelList,
                                                                     BaseWindowCommand closeWindowCommand,
                                                                     BaseClassCommand<T> createClassCommand,

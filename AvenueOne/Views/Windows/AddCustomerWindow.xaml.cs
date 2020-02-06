@@ -45,11 +45,11 @@ namespace AvenueOne.Views.Windows
             IUnitOfWork unitOfWork = new UnitOfWork(_plutoContext);
             AddCustomerCommand addCustomerCommand = new AddCustomerCommand(unitOfWork, displayService);
             BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
-            ICustomerWindowViewModel customerWindowViewModel = new CustomerWindowViewModel(this, 
-                closeWindowCommand, addCustomerCommand, customer, new Person());
+            //ICustomerWindowViewModel customerWindowViewModel = new CustomerWindowViewModel(this, 
+            //    closeWindowCommand, addCustomerCommand, customer, new Person());
 
-            this.ViewModel = customerWindowViewModel;
-            DataContext = customerWindowViewModel;
+            //this.ViewModel = customerWindowViewModel;
+            //DataContext = customerWindowViewModel;
         }
 
 

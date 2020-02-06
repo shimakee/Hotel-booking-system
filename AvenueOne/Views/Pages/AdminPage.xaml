@@ -605,8 +605,11 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Content="+ Add new Customer +" Grid.Column="0" 
-                                        Command="{Binding CustomerTab.OpeCustomerWindowCommand}"
+                                <Button Content="Add new Customer" Grid.Column="0" 
+                                        Command="{Binding CustomerTab.CreateClassCommand}"
+                                    />
+                                <Button Content="Clear content" Grid.Column="1" 
+                                        Command="{Binding CustomerTab.ClearClassCommand}"
                                     />
                             </Grid>
 
@@ -618,7 +621,7 @@
 
                                 <TextBlock Text="Customer Id:" Grid.Column="0"/>
                                 <TextBox IsEnabled="False"
-                                    x:Name="Usernames" Text="{Binding CustomerTab.Customer.Id}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                                    x:Name="Usernames" Text="{Binding CustomerTab.Model.Id}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                             </Grid>
 
                             <Grid Margin="0 10 0 0">
@@ -629,7 +632,7 @@
 
                                 <TextBlock Text="Firstname:" Grid.Column="0"/>
                                 <TextBox x:Name="CustomerFirstname" Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding CustomerTab.CustomerProfile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding CustomerTab.Profile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -645,7 +648,7 @@
 
                                 <TextBlock Text="Middlename:" Grid.Column="0"/>
                                 <TextBox x:Name="CustomerMiddlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="5"
-                                         Text="{Binding CustomerTab.CustomerProfile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Text="{Binding CustomerTab.Profile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -657,7 +660,7 @@
 
                                 <TextBlock Text="Lastname:" Grid.Column="0"/>
                                 <TextBox x:Name="CustomerLastname"  Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding CustomerTab.CustomerProfile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding CustomerTab.Profile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
                             <Grid>
@@ -668,19 +671,19 @@
 
                                 <TextBlock Text="Suffix:" Grid.Column="0"/>
                                 <TextBox x:Name="CustomerSuffix" Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding CustomerTab.CustomerProfile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding CustomerTab.Profile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
-                            <ComboBox x:Name="CustomerGender" SelectedIndex="0"  ItemsSource="{Binding CustomerTab.CustomerProfile.GenderValues}" 
-                                                  SelectedValue="{Binding CustomerTab.CustomerProfile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            <ComboBox x:Name="CustomerGender" SelectedIndex="0"  ItemsSource="{Binding CustomerTab.Profile.GenderValues}" 
+                                                  SelectedValue="{Binding CustomerTab.Profile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-                            <ComboBox x:Name="CustomerCivilStatus" SelectedIndex="0" ItemsSource="{Binding CustomerTab.CustomerProfile.CivilStatusValues}"
-                                                  SelectedValue="{Binding CustomerTab.CustomerProfile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            <ComboBox x:Name="CustomerCivilStatus" SelectedIndex="0" ItemsSource="{Binding CustomerTab.Profile.CivilStatusValues}"
+                                                  SelectedValue="{Binding CustomerTab.Profile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-                            <Grid IsEnabled="{Binding CustomerTab.CustomerProfile.WasMaiden}" Visibility="{Binding CustomerTab.CustomerProfile.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                            <Grid IsEnabled="{Binding CustomerTab.Profile.WasMaiden}" Visibility="{Binding CustomerTab.Profile.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
                                 <!--<Grid>-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="94*"/>
@@ -690,7 +693,7 @@
 
                                 <TextBlock Text="Maiden name:" Grid.Column="0"/>
                                 <TextBox x:Name="CustomerMaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
-                             Text="{Binding CustomerTab.CustomerProfile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding CustomerTab.Profile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 
@@ -702,7 +705,7 @@
 
                                 <TextBlock Text="Brithdate:" Grid.Column="0"/>
                                 <DatePicker x:Name="CustomerBirthdate" Grid.Column="1"
-                                            SelectedDate="{Binding CustomerTab.CustomerProfile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            SelectedDate="{Binding CustomerTab.Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                             ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
                             </Grid>
                         </StackPanel>
@@ -770,16 +773,16 @@
                             </Grid>
 
                             <Button Content="Save Edit" Margin="0 10 0 0" 
-                                    Command="{Binding CustomerTab.EditCustomerCommand}"/>
+                                    Command="{Binding CustomerTab.UpdateClassCommand}"/>
                             <Button Content="Delete Customer"
-                                    Command="{Binding CustomerTab.RemoveCustomerCommand}"/>
+                                    Command="{Binding CustomerTab.DeleteClassCommand}"/>
                         </StackPanel>
                     </Grid>
                 </GroupBox>
 
                 <GroupBox Header="Customer list" Grid.Row="1" Grid.ColumnSpan="3">
                     <DataGrid  x:Name="CustomerList" Grid.Column="1"
-                            ItemsSource="{Binding CustomerTab.CustomerList}" SelectedItem="{Binding CustomerTab.Customer}"
+                            ItemsSource="{Binding CustomerTab.ModelList}" SelectedItem="{Binding CustomerTab.ModelSelected}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>

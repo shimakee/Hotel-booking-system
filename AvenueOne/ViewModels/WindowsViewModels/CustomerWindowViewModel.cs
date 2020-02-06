@@ -1,6 +1,5 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands;
-using AvenueOne.ViewModels.Commands.CustomerCommands;
 using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
@@ -14,7 +13,7 @@ using System.Windows;
 
 namespace AvenueOne.ViewModels.WindowsViewModels
 {
-    public class CustomerWindowViewModel : WindowViewModel, INotifyPropertyChanged, ICustomerWindowViewModel
+    public class CustomerWindowViewModel : WindowViewModel, INotifyPropertyChanged
     {
         #region Properties
 
@@ -55,7 +54,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
                 this.Customer = customer;
                 this.CustomerProfile = person;
                 this.AddCustomerCommand = addCustomerCommand;
-                this.AddCustomerCommand.ViewModel = this;
+                //this.AddCustomerCommand.ViewModel = this;
             }
         #endregion
 

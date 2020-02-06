@@ -13,7 +13,7 @@ namespace AvenueOne.ViewModels.Commands
 {
     public abstract class BaseClassCommand<T> : IBaseClassCommand<T> where T : class, IBaseObservableModel<T>, new()
     {
-        public IBaseObservableViewModel<T> ViewModel { get; set; }
+        public virtual IBaseObservableViewModel<T> ViewModel { get; set; }
         protected IGenericUnitOfWork<T> _genericUnitOfWork;
         protected IDisplayService _displayService;
 

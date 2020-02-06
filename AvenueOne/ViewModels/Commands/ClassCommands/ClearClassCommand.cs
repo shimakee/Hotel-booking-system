@@ -26,7 +26,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
             return true;
         }
 
-        public void Execute(object parameter)
+        public virtual void Execute(object parameter)
         {
             try
             {

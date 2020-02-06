@@ -1,4 +1,5 @@
-﻿using AvenueOne.Interfaces;
+﻿using AvenueOne.Core;
+using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
 using AvenueOne.Services.Interfaces;
@@ -12,76 +13,81 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands.CustomerCommands
 {
-    public class AddCustomerCommand : ICommand
+    public class AddCustomerCommand : BaseClassCommand<Customer>, IBaseClassCommand<Customer>
     {
 
         #region Properties
-            public ICustomerWindowViewModel ViewModel { get; set; }
-            private IUnitOfWork _unitOfWork;
-            private IDisplayService _displayService;
+        //public ICustomerViewModel ViewModel { get; set; }
+            //private IGenericUnitOfWork<Customer> _genericUnitOfWork;
+            //private IDisplayService _displayService;
+
         #endregion
 
         #region Constructors
-        public AddCustomerCommand(IUnitOfWork unitOfWork, IDisplayService displayService)
+        public AddCustomerCommand(IGenericUnitOfWork<Customer> genericUnitOfWork, IDisplayService displayService)
+            : base(genericUnitOfWork, displayService)
         {
-            this._unitOfWork = unitOfWork;
-            this._displayService = displayService;
+            //this._genericUnitOfWork = genericUnitOfWork;
+            //this._displayService = displayService;
         }
         #endregion
 
+        //public event EventHandler CanExecuteChanged;
 
-        public event EventHandler CanExecuteChanged;
-
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public async void Execute(object parameter)
+        //public bool CanExecute(object parameter)
+        //{
+        //    if (ViewModel != null)
+        //        return ViewModel.UserAccount.IsAdmin;
+        //    return false;
+        //}
+        public override async void Execute(object parameter)
         {
             try
             {
                 if (ViewModel == null)
                     throw new NullReferenceException("View model must not be null in order to execute command.");
-                if (ViewModel.Customer == null)
-                    throw new NullReferenceException("No item selected to update.");
-                if (ViewModel.CustomerProfile == null)
+                if (ViewModel.Model == null)
+                    throw new NullReferenceException("No model to update.");
+                if (ViewModel.ModelSelected == null)
+                    throw new NullReferenceException("No model selected to update.");
+                if (ViewModel.ModelSelected.Person == null)
                     throw new NullReferenceException("No profile to update.");
 
                 //ICustomer customer = await Task.Run(()=>_unitOfWork.Customers.GetAsync(ViewModel.Customer.Id));
 
-                if (ViewModel.CustomerProfile.IsValid)
-                {
-                    Customer customer = ViewModel.Customer as Customer;
-                    customer.Person = ViewModel.CustomerProfile as Person;
-                    _unitOfWork.Customers.Add(customer);
-                    int n = await Task.Run(() => _unitOfWork.CompleteAsync());
+                if (!ViewModel.ModelSelected.Person.IsValid || !ViewModel.ModelSelected.IsValid)
+                    throw new InvalidOperationException("Invalid profile entry.");
 
-                    if (n != 0)
-                    {
-                        _displayService.MessageDisplay($"Added customer:\nFull name: {customer.Person.FullName}\nAffected rows:{n}.",
+                Customer customer = await Task.Run(()=> _genericUnitOfWork.Repositories[typeof(Customer)].Find(c => c.Id == ViewModel.ModelSelected.Id || c.Person.FullName == ViewModel.ModelSelected.Person.FullName).FirstOrDefault());
+                if (customer != null)
+                    throw new InvalidOperationException("Profile information and customer id already exist.");
+
+                //ViewModel.ModelSelected.Id = ViewModel.Model.Id;
+                //ViewModel.ModelSelected.Person = ViewModel.Profile as Person;
+                ViewModel.ModelSelected.Person.Customer = ViewModel.ModelSelected; // to correct conflicting references
+                _genericUnitOfWork.Repositories[typeof(Customer)].Add(ViewModel.ModelSelected);
+                int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
+
+                if (n == 0)
+                    throw new InvalidOperationException($"Info: Could not add {ViewModel.ModelSelected.Person.FullName}.");
+
+                _displayService.MessageDisplay($"Added customer:\nFull name: {ViewModel.ModelSelected.Person.FullName}\nAffected rows:{n}.",
                                                         "Customer added.");
-                    }
-                    else
-                    {
-                        _displayService.MessageDisplay($"Info: Could not add {customer.Person.FullName}.",
-                                                        "Error on insert.");
-                    }
-
-                    if (ViewModel != null)
-                        ViewModel.Window.Close();
-                }
-                else
-                {
-                    _displayService.ErrorDisplay("Invalid profile entry.", "Customer eror!");
-                }
+            }
+            catch(InvalidOperationException inEx)
+            {
+                _displayService.ErrorDisplay(inEx.Message, "Invalid Operation Error");
+                //throw;
+            }
+            catch(NullReferenceException nullEx)
+            {
+                _displayService.ErrorDisplay(nullEx.Message, "Null reference error.");
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
+
     }
 }

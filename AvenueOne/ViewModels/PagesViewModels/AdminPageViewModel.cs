@@ -47,8 +47,8 @@ namespace AvenueOne.ViewModels.PagesViewModels
             }
         }
 
-        public ICustomerTabViewModel CustomerTab { get; set; }
-            public IRoomTabViewModel RoomTab { get; set; }
+        public IBaseObservableViewModel<Customer> CustomerTab { get; set; }
+        public IRoomTabViewModel RoomTab { get; set; }
 
             private bool _isPasswordIncluded;
             public bool IsPasswordIncluded
@@ -92,7 +92,8 @@ namespace AvenueOne.ViewModels.PagesViewModels
                                                             RemoveUserCommand removeUserCommand, 
                                                             IUser user, 
                                                             ObservableCollection<User> usersList,
-                                                            ICustomerTabViewModel customerTab,
+                                                            //ICustomerTabViewModel customerTab,
+                                                            IBaseObservableViewModel<Customer> customerTab,
                                                             IRoomTabViewModel roomTab)
                 : this(window, closeWindowCommand)
             {

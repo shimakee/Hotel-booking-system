@@ -34,7 +34,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                 OnPropertyChanged();
             }
         }
-        public RoomTypeViewModel(IRoomType model,
+        public RoomTypeViewModel(RoomType model,
                                                     ObservableCollection<RoomType> modelList,
                                                     BaseClassCommand<RoomType> createClassCommand,
                                                     BaseClassCommand<RoomType> updateClassCommand,

@@ -74,7 +74,7 @@ namespace AvenueOne.ViewModels.TabViewModels
             this.EditCustomerCommand.ViewModel = this;
             this.OpeCustomerWindowCommand = openCustomerWindowCommand;
             this.RemoveCustomerCommand = removeCustomerCommand;
-            removeCustomerCommand.ViewModel = this;
+            //removeCustomerCommand.ViewModel = this;
         }
         #endregion
 
