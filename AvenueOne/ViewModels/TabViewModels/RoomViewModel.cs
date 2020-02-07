@@ -18,7 +18,14 @@ namespace AvenueOne.ViewModels.TabViewModels
 {
     public class RoomViewModel : BaseObservableViewModel<Room>, IRoomViewModel
     {
-        public ObservableCollection<RoomType> RoomTypeList { get; set; }
+        private ObservableCollection<RoomType> _roomTypeList;
+        public ObservableCollection<RoomType> RoomTypeList
+        {
+            get { return _roomTypeList; }
+            set { _roomTypeList = value;
+                OnPropertyChanged();
+            }
+        }
 
         #region Constructors
         public RoomViewModel(Room room, ObservableCollection<Room> roomList, ObservableCollection<RoomType> roomTypeList,

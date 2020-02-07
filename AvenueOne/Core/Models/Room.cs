@@ -40,17 +40,23 @@ namespace AvenueOne.Core.Models
                 }
             }
 
-            //private string _details;
-            //public string Details
-            //{
-            //    get { return _details; }
-            //    set { _details = value;
-            //        OnPropertyChanged();
-            //    }
-            //}
+        //private string _details;
+        //public string Details
+        //{
+        //    get { return _details; }
+        //    set { _details = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-
-        public RoomType RoomType { get; set; }
+        private RoomType _roomType;
+        public RoomType RoomType
+        {
+            get { return _roomType; }
+            set { _roomType = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Constructors

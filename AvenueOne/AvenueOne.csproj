@@ -205,6 +205,7 @@
     <Compile Include="ViewModels\Commands\CustomerCommands\ClearCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\CustomerCommands\UpdateCustomerCommand.cs" />
     <Compile Include="ViewModels\Commands\IBaseClassCommand.cs" />
+    <Compile Include="ViewModels\Commands\RoomCommands\CreateRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\DetachAmenityCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\LinkAmenityCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\ClearUserCommand.cs" />

@@ -22,7 +22,14 @@ namespace AvenueOne.ViewModels
         public virtual BaseClassCommand<T> UpdateClassCommand { get; set; }
         public virtual BaseClassCommand<T> DeleteClassCommand { get; set; }
         public virtual ClearClassCommand<T> ClearClassCommand { get; set; }
-        public ObservableCollection<T> ModelList { get; set; }
+        private ObservableCollection<T> _modelList;
+        public ObservableCollection<T> ModelList
+        {
+            get { return _modelList; }
+            set { _modelList = value;
+                OnPropertyChanged();
+            }
+        }
         private T _model { get; set; }
         public T Model
         {

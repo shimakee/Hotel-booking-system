@@ -96,8 +96,9 @@ namespace AvenueOne.Views.Pages
                 #region RoomType view model
 
                 GenericUnitOfWork<RoomType> genericUnitOfWorkRoomType = new GenericUnitOfWork<RoomType>(context);
-                BaseClassCommand<RoomType> createRoomTypeCommand = new CreateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
-                BaseClassCommand<RoomType> updateRoomTypeCommand = new UpdateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
+                //BaseClassCommand<RoomType> createRoomTypeCommand = new CreateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
+                BaseClassCommand<RoomType> createRoomTypeCommand = new CreateRoomTypeCommand(genericUnitOfWorkRoomType, displayService);
+            BaseClassCommand<RoomType> updateRoomTypeCommand = new UpdateClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
                 BaseClassCommand<RoomType> deleteRoomTypeCommand = new DeleteClassCommand<RoomType>(genericUnitOfWorkRoomType, displayService);
                 ClearClassCommand<RoomType> clearRoomTypeCommand = new ClearClassCommand<RoomType>();
                 LinkAmenityCommand linkAmenityCommand = new LinkAmenityCommand(genericUnitOfWorkRoomType, displayService);
