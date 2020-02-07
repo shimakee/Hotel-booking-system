@@ -181,6 +181,10 @@
     <Compile Include="Migrations\202001270744101_ChangedBaseObservableModel.Designer.cs">
       <DependentUpon>202001270744101_ChangedBaseObservableModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002070954322_ModifiedRoomModel.cs" />
+    <Compile Include="Migrations\202002070954322_ModifiedRoomModel.Designer.cs">
+      <DependentUpon>202002070954322_ModifiedRoomModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\GenericUnitOfWork.cs" />
     <Compile Include="Persistence\Repositories\AmenitiesRepository.cs" />
@@ -347,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001270744101_ChangedBaseObservableModel.resx">
       <DependentUpon>202001270744101_ChangedBaseObservableModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002070954322_ModifiedRoomModel.resx">
+      <DependentUpon>202002070954322_ModifiedRoomModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
