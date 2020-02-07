@@ -373,19 +373,20 @@
                         <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.ModelSelected.Floor}"/>
 
-                        <TextBlock Grid.Row="4" Grid.Column="3"
-                            Text="Rate :"/>
-                        <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
+                        
+                        <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.ModelSelected.RoomType.Rate}"/>
+                        <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
+                                 Text="{Binding RoomTab.RoomViewModel.ModelSelected.RoomType.RateType}"/>
 
-                        <!--<TextBlock Grid.Row="5" Grid.Column="0"
+                        <TextBlock Grid.Row="5" Grid.Column="0"
                             Text="Details :"/>
                         <TextBox Grid.Row="6" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="5" 
                                     Margin="1" VerticalAlignment="Stretch"
                                      TextWrapping="Wrap" AcceptsReturn="True"
                                      HorizontalScrollBarVisibility="Disabled"
                                      VerticalScrollBarVisibility="Auto"
-                                 Text="{Binding RoomTab.RoomViewModel.ModelSelected.Details}"/>-->
+                                 Text="{Binding RoomTab.RoomViewModel.ModelSelected.Details}"/>
 
                         <Button Grid.Row="7" Grid.Column="3"
                             Content="Save" 
@@ -505,6 +506,8 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                                 <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
+                                <DataGridTextColumn Header="Rate" Binding="{Binding Rate}" Width="4*"/>
+                                <DataGridTextColumn Header="Rate type" Binding="{Binding RateType}" Width="4*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
