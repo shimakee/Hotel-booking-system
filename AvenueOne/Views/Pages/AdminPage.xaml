@@ -321,7 +321,6 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
@@ -356,9 +355,9 @@
                         <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.ModelSelected.Floor}"/>
 
-                        <TextBlock Grid.Row="4" Grid.Column="0"
+                        <TextBlock Grid.Row="3" Grid.Column="0"
                             Text="Roomtype :"/>
-                        <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                        <ComboBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
                                   ItemsSource="{Binding RoomTab.RoomViewModel.RoomTypeList}"
                                   SelectedItem="{Binding RoomTab.RoomViewModel.ModelSelected.RoomType}">
                             <ComboBox.ItemTemplate>
@@ -373,29 +372,30 @@
                         <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.ModelSelected.Floor}"/>
 
-                        
+                        <TextBlock Grid.Row="3" Grid.Column="3"
+                            Text="Rate :"/>
                         <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.ModelSelected.RoomType.Rate}"/>
                         <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
                                  Text="{Binding RoomTab.RoomViewModel.ModelSelected.RoomType.RateType}"/>
 
-                        <TextBlock Grid.Row="5" Grid.Column="0"
+                        <TextBlock Grid.Row="4" Grid.Column="0"
                             Text="Details :"/>
-                        <TextBox Grid.Row="6" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="5" 
+                        <TextBox Grid.Row="5" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="5" 
                                     Margin="1" VerticalAlignment="Stretch"
                                      TextWrapping="Wrap" AcceptsReturn="True"
                                      HorizontalScrollBarVisibility="Disabled"
                                      VerticalScrollBarVisibility="Auto"
                                  Text="{Binding RoomTab.RoomViewModel.ModelSelected.Details}"/>
 
-                        <Button Grid.Row="7" Grid.Column="3"
+                        <Button Grid.Row="6" Grid.Column="3"
                             Content="Save" 
                                 Command="{Binding RoomTab.RoomViewModel.UpdateClassCommand}"/>
-                        <Button Grid.Row="7" Grid.Column="4"
+                        <Button Grid.Row="6" Grid.Column="4"
                             Content="Delete " 
                                 Command="{Binding RoomTab.RoomViewModel.DeleteClassCommand}"/>
 
-                        <DataGrid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="5"
+                        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5"
                                 Margin="0 10 0 0"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                   
