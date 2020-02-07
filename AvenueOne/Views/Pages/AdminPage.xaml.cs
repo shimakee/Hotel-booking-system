@@ -119,12 +119,13 @@ namespace AvenueOne.Views.Pages
                 BaseClassCommand<Room> updateRoomCommand = new UpdateClassCommand<Room>(genericUnitOfWorkRoom, displayService);
                 BaseClassCommand<Room> deleteRoomCommand = new DeleteClassCommand<Room>(genericUnitOfWorkRoom, displayService);
                 ClearClassCommand<Room> clearRoomCommand = new ClearClassCommand<Room>();
-                IBaseObservableViewModel<Room> roomViewModel = new BaseObservableViewModel<Room>(new Room(),
-                                                                                                                                                                                context.Room.Local,
-                                                                                                                                                                                createRoomCommand,
-                                                                                                                                                                                updateRoomCommand,
-                                                                                                                                                                                deleteRoomCommand,
-                                                                                                                                                                                clearRoomCommand);
+                IRoomViewModel roomViewModel = new RoomViewModel(new Room(),
+                                                                                                                context.Room.Local,
+                                                                                                                context.RoomType.Local,
+                                                                                                                createRoomCommand,
+                                                                                                                updateRoomCommand,
+                                                                                                                deleteRoomCommand,
+                                                                                                                clearRoomCommand);
                 #endregion
 
                 RoomTabViewModel roomTab = new RoomTabViewModel(amenitiesViewModel,

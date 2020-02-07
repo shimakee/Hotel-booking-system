@@ -121,6 +121,11 @@ namespace AvenueOne.Core.Models
             return
                 this.Id.GetHashCode();
             }
+
+        public override string ToString()
+        {
+            return this.Name.ToString();
+        }
         #endregion
     }
 }

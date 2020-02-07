@@ -11,11 +11,8 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
-    public interface IRoomViewModel : IAccountViewModel, INotifyPropertyChanged
+    public interface IRoomViewModel : IBaseObservableViewModel<Room>
     {
-        IRoom Room { get; set; }
-        IRoom RoomSelected { get; set; }
-        ObservableCollection<Room> RoomsList { get; set; }
-        RemoveRoomCommand RemoveRoomCommand { get; set; }
+        ObservableCollection<RoomType> RoomTypeList { get; set; }
     }
 }
