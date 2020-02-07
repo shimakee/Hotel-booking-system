@@ -210,9 +210,6 @@
     <Compile Include="ViewModels\Commands\RoomCommands\RemoveRoomCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\ClearUserCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\CreateUserCommand.cs" />
-    <Compile Include="ViewModels\Commands\UserCommands\EditUserProfileCommand.cs" />
-    <Compile Include="ViewModels\Commands\RegisterUserCommand.cs" />
-    <Compile Include="ViewModels\Commands\UserCommands\RemoveUserCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\UpdateUserCommand.cs" />
     <Compile Include="ViewModels\Commands\WindowCommands\BaseWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\WindowCommands\CloseWindowCommand.cs" />
@@ -228,6 +225,7 @@
     <Compile Include="ViewModels\TabViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRoomViewModel.cs" />
     <Compile Include="ViewModels\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerViewModel.cs" />
@@ -236,10 +234,7 @@
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRoomTabViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRoomTypeViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IUserProfileEditViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRegistrationViewModel.cs" />
     <Compile Include="Core\Models\Interfaces\IUser.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IUserCrudViewModel.cs" />
     <Compile Include="ViewModels\IWindowViewModel.cs" />
     <Compile Include="Core\IRepositories\IUserRepository.cs" />
     <Compile Include="Core\Models\Person.cs" />
@@ -253,13 +248,11 @@
     <Compile Include="Services\Tools\SampleData.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
-    <Compile Include="ViewModels\Commands\UserCommands\AddUserCommand.cs" />
     <Compile Include="ViewModels\Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\PagesViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IUserViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\WindowsViewModels\RegistrationWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
@@ -272,9 +265,6 @@
     </Compile>
     <Compile Include="Views\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Windows\RegistrationWindow.xaml.cs">
-      <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Pages\AdminPage.xaml">
       <SubType>Designer</SubType>
@@ -301,10 +291,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Windows\LoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Windows\RegistrationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

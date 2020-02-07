@@ -1,14 +1,20 @@
-﻿using AvenueOne.Interfaces;
+﻿using AvenueOne.Core;
+using AvenueOne.Interfaces;
 using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Models;
+using AvenueOne.Persistence;
 using AvenueOne.Persistence.Repositories;
 using AvenueOne.Properties;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.Utilities;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.ClassCommands;
+using AvenueOne.ViewModels.Commands.UserCommands;
 using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.PagesViewModels;
+using AvenueOne.ViewModels.TabViewModels;
+using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +29,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
 
 namespace AvenueOne.Views.Pages
 {
@@ -43,15 +50,25 @@ namespace AvenueOne.Views.Pages
             InitializeComponent();
 
             this._context = context;
-
+            User User = Settings.Default.UserAccount;
+            //User.Person = new Person();
             IDisplayService displayService = new WpfDisplayService();
-            IUnitOfWork unitOfWork = new UnitOfWork(_context);
-            IUser user = _context.Users.Find(Settings.Default.UserAccount.Id);
-            EditUserProfileCommand editProfileCommand = new EditUserProfileCommand(unitOfWork, displayService);
             BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
+            IGenericUnitOfWork<User> genericUnitOfWorkUser = new GenericUnitOfWork<User>(_context);
+            BaseClassCommand<User> createUserCommand = new CreateUserCommand(genericUnitOfWorkUser, displayService);
+            BaseClassCommand<User> updateUserCommand = new UpdateUserCommand(genericUnitOfWorkUser, displayService);
+            BaseClassCommand<User> deleteUserCommand = new DeleteClassCommand<User>(genericUnitOfWorkUser, displayService);
+            ClearClassCommand<User> clearUserCommand = new ClearUserCommand();
+            IUserViewModel userTab = new UserViewModel(User.Person, User, _context.Users.Local,
+                                                                                                        createUserCommand,
+                                                                                                        updateUserCommand,
+                                                                                                        deleteUserCommand,
+                                                                                                        clearUserCommand);
+
             SettingsPageViewModel settingsPageViewModel = new SettingsPageViewModel(Window.GetWindow(this),
-                closeWindowCommand,
-                                                                                                                                                editProfileCommand, user);
+                                                                                                                                            closeWindowCommand,
+                                                                                                                                            userTab);
+
 
             this.ViewModel = settingsPageViewModel;
             DataContext = settingsPageViewModel;

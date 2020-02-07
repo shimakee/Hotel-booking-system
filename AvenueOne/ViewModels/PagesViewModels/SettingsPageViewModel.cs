@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Interfaces;
+using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels;
@@ -15,7 +16,7 @@ using System.Windows;
 
 namespace AvenueOne.ViewModels.PagesViewModels
 {
-    public class SettingsPageViewModel : WindowViewModel, IUserProfileEditViewModel, INotifyPropertyChanged
+    public class SettingsPageViewModel : WindowViewModel, INotifyPropertyChanged
     {
         #region Ctor
         SettingsPageViewModel(Window window, BaseWindowCommand closeWindowCommand)
@@ -25,28 +26,16 @@ namespace AvenueOne.ViewModels.PagesViewModels
 
         public SettingsPageViewModel(Window window,
                                                         BaseWindowCommand closeWindowCommand,
-                                                        EditUserProfileCommand editProfileCommand,
-                                                        IUser user)
+                                                        IBaseObservableViewModel<User> userTab)
             : this(window, closeWindowCommand)
         {
-
-            //commented out because it causes an error when there is no user in the database
-            //and a temporary null user is granted access to enable to create a user account.
-            //if (user.Person == null)
-            //    throw new ArgumentNullException("Person object inside user of type IUser cannot be null.");
-
-            this.User = user;
-            this.EditProfileCommand = editProfileCommand;
-            this.EditProfileCommand.ViewModel = this;
+            this.UserTab = userTab;
         }
         #endregion
 
         #region Properties
 
-        public EditUserProfileCommand EditProfileCommand { get; set; }
-        private IUser _user;
-        public IUser Account { get; set; }
-        public IPerson Profile { get; set; }
+        public IBaseObservableViewModel<User> UserTab { get; set; }
 
         private bool _isPasswordIncluded;
         public bool IsPasswordIncluded
@@ -56,28 +45,6 @@ namespace AvenueOne.ViewModels.PagesViewModels
             {
                 _isPasswordIncluded = value;
                 OnPropertyChanged();
-            }
-        }
-        public IUser User
-        {
-            get { return _user; }
-            set
-            {
-                _user = value;
-                //to separate editing... conserve the original values.
-                if (value != null)
-                {
-                    Profile = value.Person.DeepCopy();
-                    Account = value.DeepCopy();
-                }
-                else
-                {
-                    Account = null;
-                    Profile = null;
-                }
-                OnPropertyChanged();
-                OnPropertyChanged("Account");
-                OnPropertyChanged("Profile");
             }
         }
         #endregion
