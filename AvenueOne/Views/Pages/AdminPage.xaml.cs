@@ -47,20 +47,22 @@ namespace AvenueOne.Views.Pages
             User.Person = new Person();
             
             IDisplayService displayService = new WpfDisplayService();
-            IUnitOfWork unitOfWork = new UnitOfWork(context);
-            RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
-            EditUserProfileCommand editProfileCommand = new EditUserProfileCommand(unitOfWork, 
-                                                                                                                                displayService);
-            RemoveUserCommand removeUserCommand = new RemoveUserCommand(unitOfWork, 
-                                                                                                                                        displayService);
+            //IUnitOfWork unitOfWork = new UnitOfWork(context);
+            //RegisterUserCommand RegisterUserCommand = new RegisterUserCommand(context);
+            //EditUserProfileCommand editProfileCommand = new EditUserProfileCommand(unitOfWork, 
+            //                                                                                                                    displayService);
+            //RemoveUserCommand removeUserCommand = new RemoveUserCommand(unitOfWork, 
+            //                                                                                                                            displayService);
 
-            IGenericUnitOfWork<User> genericUnitOfWorkUser = new GenericUnitOfWork<User>(context);
+            IGenericUnitOfWork<User> genericUnitOfWorkUser = new GenericUnitOfWork<User>(_context);
             //BaseClassCommand<User> createUserCommand = new CreateClassCommand<User>(genericUnitOfWorkUser, displayService);
             BaseClassCommand<User> createUserCommand = new CreateUserCommand(genericUnitOfWorkUser, displayService);
-            BaseClassCommand<User> updateUserCommand = new UpdateClassCommand<User>(genericUnitOfWorkUser, displayService);
+            BaseClassCommand<User> updateUserCommand = new UpdateUserCommand(genericUnitOfWorkUser, displayService);
+            //BaseClassCommand<User> updateUserCommand = new UpdateClassCommand<User>(genericUnitOfWorkUser, displayService);
             BaseClassCommand<User> deleteUserCommand = new DeleteClassCommand<User>(genericUnitOfWorkUser, displayService);
-            ClearClassCommand<User> clearUserCommand = new ClearClassCommand<User>();
-            IUserViewModel userTab = new UserViewModel(new Person(), User, context.Users.Local,
+            //ClearClassCommand<User> clearUserCommand = new ClearClassCommand<User>();
+            ClearClassCommand<User> clearUserCommand = new ClearUserCommand();
+            IUserViewModel userTab = new UserViewModel(new Person(), User, _context.Users.Local,
                                                                                                         createUserCommand,
                                                                                                         updateUserCommand,
                                                                                                         deleteUserCommand,

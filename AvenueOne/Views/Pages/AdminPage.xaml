@@ -255,7 +255,7 @@
                             <Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding UserTab.UpdateClassCommand, Mode=OneWay}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource PasswordConverter}">
-                                        <!--<Binding ElementName="IsPasswordIncluded"/>-->
+                                        <Binding ElementName="IsPasswordIncluded"/>
                                         <Binding ElementName="Password"/>
                                         <Binding ElementName="PasswordConfirm"/>
                                     </MultiBinding>

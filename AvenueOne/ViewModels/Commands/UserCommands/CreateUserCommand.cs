@@ -48,7 +48,7 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                     throw new NullReferenceException("Profile cannot be null.");
 
 
-                IUser User = ViewModel.ModelSelected;
+                User User = ViewModel.ModelSelected;
                 User.Person = ViewModel.ModelSelected.Person;
 
                 User.Password = password;
@@ -81,24 +81,28 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
             }
         }
 
-        private async Task<int> AddUser(IUser User)
+        private async Task<int> AddUser(User user)
         {
-            if (User == null || User.Person == null)
+            if (user == null || user.Person == null)
                 throw new ArgumentNullException("User and person view model cannot be null.");
 
-            if (!User.Person.IsValid)
-                throw new ArgumentException("Invalid profile detais.");
-            if (!User.IsValid)
-                throw new ArgumentException("Invalid user details.");
-            if (!User.IsValidProperty("Password"))
-                throw new ArgumentException("Invalid password");
-            if (!User.IsValidProperty("PasswordConfirm"))
-                throw new ArgumentException("Invalid password");
+            if (!user.Person.IsValid)
+                throw new InvalidOperationException("Invalid profile detais.");
+            if (!user.IsValid)
+                throw new InvalidOperationException("Invalid user details.");
+            if (!user.IsValidProperty("Password"))
+                throw new InvalidOperationException("Invalid password");
+            if (!user.IsValidProperty("PasswordConfirm"))
+                throw new InvalidOperationException("Invalid password");
 
             byte[] salt = HashService.CreateSalt();
-            User.Password = HashService.Hash(User.Password, salt);
-            User.PasswordConfirm = User.Password;
-            User user = User as User;
+            user.Password = HashService.Hash(user.Password, salt);
+            user.PasswordConfirm = user.Password;
+            //User user = User as User;
+            User user2 = await Task.Run(()=> _genericUnitOfWork.Repositories[typeof(User)].Find(u=> u.Username == user.Username).FirstOrDefault());
+            if (user2 != null)
+                throw new InvalidOperationException("Username already exist.");
+
             _genericUnitOfWork.Repositories[typeof(User)].Add(user);
             int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
 
