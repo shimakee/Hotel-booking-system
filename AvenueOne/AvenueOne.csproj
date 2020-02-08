@@ -230,6 +230,7 @@
     <Compile Include="ViewModels\IObservableWindowViewModel.cs" />
     <Compile Include="ViewModels\ObservableWindowViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\TabViewModels\BookingViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTabViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\RoomTypeViewModel.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAdminPageViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\Interfaces\IBookingViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRoomViewModel.cs" />
     <Compile Include="ViewModels\IAccountViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\ICustomerViewModel.cs" />

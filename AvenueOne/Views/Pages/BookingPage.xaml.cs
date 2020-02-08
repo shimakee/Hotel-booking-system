@@ -1,4 +1,14 @@
-﻿using System;
+﻿using AvenueOne.Core;
+using AvenueOne.Core.Models;
+using AvenueOne.Persistence;
+using AvenueOne.Persistence.Repositories;
+using AvenueOne.Services;
+using AvenueOne.Services.Interfaces;
+using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.ClassCommands;
+using AvenueOne.ViewModels.TabViewModels;
+using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +30,30 @@ namespace AvenueOne.Views.Pages
     /// </summary>
     public partial class BookingPage : Page
     {
-        public BookingPage()
+        private PlutoContext _context;
+        public BookingPage(PlutoContext context)
         {
             InitializeComponent();
+
+            this._context = context;
+
+            IDisplayService displayService = new WpfDisplayService();
+            IGenericUnitOfWork<Booking> genericUnitOfWorkBooking = new GenericUnitOfWork<Booking>(context);
+
+            #region BookingTab
+            BaseClassCommand<Booking> createBookingCommand = new CreateClassCommand<Booking>(genericUnitOfWorkBooking, displayService);
+            BaseClassCommand<Booking> updateBookingCommand = new UpdateClassCommand<Booking>(genericUnitOfWorkBooking, displayService);
+            BaseClassCommand<Booking> deleteBookingCommand = new DeleteClassCommand<Booking>(genericUnitOfWorkBooking, displayService);
+            ClearClassCommand<Booking> clearBookingCommand = new ClearClassCommand<Booking>();
+            IBookingViewModel bookingTab = new BookingViewModel(new Booking(), _context.Bookings.Local, context.Room.Local,
+                                                                                                                createBookingCommand,
+                                                                                                                updateBookingCommand,
+                                                                                                                deleteBookingCommand,
+                                                                                                                clearBookingCommand);
+
+            this.DataContext = bookingTab;
+
+            #endregion
         }
     }
 }

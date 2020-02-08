@@ -63,6 +63,11 @@ namespace AvenueOne.Core.Models
         {
             get { return _room; }
             set { _room = value;
+                if(value != null)
+                {
+                    this.AmountTotal = Booking.ComputeAmountTotal(this.DateCheckin, this.DateCheckout, value.RoomType.Rate, value.RoomType.RateType);
+                    OnPropertyChanged("AmountTotal");
+                }
                 OnPropertyChanged();
             }
         }
@@ -114,7 +119,11 @@ namespace AvenueOne.Core.Models
         public Booking()
                 : base()
             {
-            }
+                DateTime today = DateTime.Today;
+                this.DateCheckin = today;
+                this.DateCheckout = today.AddDays(1);
+                this.Occupants = 1;
+        }
 
         public Booking(DateTime dateCheckin, DateTime dateCheckout, Room room)
             : base()
@@ -143,6 +152,10 @@ namespace AvenueOne.Core.Models
 
             Booking booking = (Booking)obj;
 
+            bool isSameRoom = false;
+            if(booking.Room != null && this.Room != null)
+                isSameRoom = this.Room.Equals(booking.Room);
+
             return this.DateCheckin.Year == booking.DateCheckin.Year &&
                 this.DateCheckin.Month == booking.DateCheckin.Month &&
                 this.DateCheckin.Day == booking.DateCheckin.Day &&
@@ -151,7 +164,8 @@ namespace AvenueOne.Core.Models
                 this.DateCheckout.Day == booking.DateCheckout.Day &&
                 this.AmountTotal == booking.AmountTotal &&
                 this.Status == booking.Status &&
-                this.Room.Equals(booking.Room);
+                isSameRoom;
+                
         }
 
         public override int GetHashCode()

@@ -65,6 +65,8 @@ namespace AvenueOne
                                                     .ToList();
             _plutoContext.Room.Include(r => r.RoomType)
                                                     .ToList();
+            _plutoContext.Bookings.Include(b=> b.Room)
+                                                    .ToList();
             //_plutoContext.People.Include(p => p.Customer)
             //                                    .Include(p=> p.User)
             //                                    .ToList();
