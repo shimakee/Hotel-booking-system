@@ -33,6 +33,7 @@ namespace AvenueOne.Migrations
             context.Database.ExecuteSqlCommand("DELETE FROM USERS");
             context.Database.ExecuteSqlCommand("DELETE FROM CUSTOMERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
+            context.Database.ExecuteSqlCommand("DELETE FROM BOOKINGS");
 
             #region Seed Users
             Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
@@ -117,6 +118,20 @@ namespace AvenueOne.Migrations
             context.Room.AddRange(new List<Room>() { room, room2, room3, room4, room5 });
             //context.SaveChanges();
             #endregion
+
+            #region Seed Bookings
+
+            Booking booking = new Booking(new DateTime(2020, 10, 18), new DateTime(2020, 12, 29), room);
+            Booking booking2 = new Booking(new DateTime(2020, 11, 18), new DateTime(2020, 11, 30), room);
+            Booking booking3 = new Booking(new DateTime(2020, 12, 28), new DateTime(2020, 10, 30), room2);
+            Booking booking4 = new Booking(new DateTime(2020, 1, 18), new DateTime(2020, 12, 30), room3);
+            Booking booking5 = new Booking(new DateTime(2020, 2, 18), new DateTime(2020, 12, 30), room4);
+
+
+            context.Bookings.AddRange(new List<Booking>() { booking, booking2, booking3, booking4, booking5 });
+            #endregion
+
+
             //insert
             //  This method will be called after migrating to the latest version.
 

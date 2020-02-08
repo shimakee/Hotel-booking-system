@@ -59,10 +59,12 @@ namespace AvenueOne.Core.Models
                     OnPropertyChanged();
                 }
             }
+
+        public IList<Booking> Bookings { get; set; }
         #endregion
 
         #region Constructors
-            public Room()
+        public Room()
                 : base()
             {
             }

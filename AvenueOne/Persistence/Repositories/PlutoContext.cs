@@ -22,6 +22,7 @@ namespace AvenueOne.Persistence.Repositories
         public DbSet<Amenities> Amenities { get; set; }
         public DbSet<RoomType> RoomType { get; set; }
         public DbSet<Room> Room { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
 
         public PlutoContext()
             :base("name=LocalConnection")
@@ -44,6 +45,7 @@ namespace AvenueOne.Persistence.Repositories
             modelBuilder.Configurations.Add(new AmenitiesConfiguration());
             modelBuilder.Configurations.Add(new RoomTypeConfiguration());
             modelBuilder.Configurations.Add(new RoomConfiguration());
+            modelBuilder.Configurations.Add(new BookingConfiguration());
         }
     }
 }

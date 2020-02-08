@@ -114,9 +114,11 @@
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\Amenities.cs" />
     <Compile Include="Core\Models\BaseObservableModel.cs" />
+    <Compile Include="Core\Models\Booking.cs" />
     <Compile Include="Core\Models\Customer.cs" />
     <Compile Include="Core\Models\Interfaces\IAmenities.cs" />
     <Compile Include="Core\Models\Interfaces\IBaseObservableModel.cs" />
+    <Compile Include="Core\Models\Interfaces\IBooking.cs" />
     <Compile Include="Core\Models\Interfaces\ICustomer.cs" />
     <Compile Include="Core\Models\Interfaces\IRoom.cs" />
     <Compile Include="Core\Models\Interfaces\IRoomType.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Core\Models\RoomType.cs" />
     <Compile Include="Core\Models\UserEventArgs.cs" />
     <Compile Include="EntityConfiguration\AmenitiesConfiguration.cs" />
+    <Compile Include="EntityConfiguration\BookingConfiguration.cs" />
     <Compile Include="EntityConfiguration\CustomerConfiguration.cs" />
     <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
     <Compile Include="EntityConfiguration\RoomConfiguration.cs" />
@@ -184,6 +187,10 @@
     <Compile Include="Migrations\202002070954322_ModifiedRoomModel.cs" />
     <Compile Include="Migrations\202002070954322_ModifiedRoomModel.Designer.cs">
       <DependentUpon>202002070954322_ModifiedRoomModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002080629098_CreatedBookingModel.cs" />
+    <Compile Include="Migrations\202002080629098_CreatedBookingModel.Designer.cs">
+      <DependentUpon>202002080629098_CreatedBookingModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\GenericUnitOfWork.cs" />
@@ -354,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002070954322_ModifiedRoomModel.resx">
       <DependentUpon>202002070954322_ModifiedRoomModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002080629098_CreatedBookingModel.resx">
+      <DependentUpon>202002080629098_CreatedBookingModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
