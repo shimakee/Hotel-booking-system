@@ -47,7 +47,7 @@ namespace AvenueOne.Models
             }
         }
 
-        [Compare("Password", ErrorMessage = "must match with password")]
+        [Compare(nameof(Password), ErrorMessage = "must match with password")]
         public string PasswordConfirm
         {
             get { return _passwordConfirm; }

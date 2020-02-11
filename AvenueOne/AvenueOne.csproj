@@ -115,6 +115,9 @@
     <Compile Include="Core\Models\Amenities.cs" />
     <Compile Include="Core\Models\BaseObservableModel.cs" />
     <Compile Include="Core\Models\Booking.cs" />
+    <Compile Include="Core\Models\CustomDataAnnotations\AfterDate.cs" />
+    <Compile Include="Core\Models\CustomDataAnnotations\BeforeDate.cs" />
+    <Compile Include="Core\Models\CustomDataAnnotations\BetweenDate.cs" />
     <Compile Include="Core\Models\Customer.cs" />
     <Compile Include="Core\Models\Interfaces\IAmenities.cs" />
     <Compile Include="Core\Models\Interfaces\IBaseObservableModel.cs" />

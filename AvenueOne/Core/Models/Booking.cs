@@ -1,5 +1,7 @@
-﻿using AvenueOne.Core.Models.Interfaces;
+﻿using AvenueOne.Core.Models.CustomDataAnnotations;
+using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Models;
+using AvenueOne.Utilities.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,8 @@ namespace AvenueOne.Core.Models
     {
         #region Properties
         private DateTime _dateCheckin;
+
+        [BeforeDate(nameof(DateCheckout))]
         public DateTime DateCheckin
         {
             get { return _dateCheckin; }
@@ -21,6 +25,7 @@ namespace AvenueOne.Core.Models
         }
 
         private DateTime _dateCheckout;
+        [AfterDate(nameof(DateCheckin))]
         public DateTime DateCheckout
         {
             get { return _dateCheckout; }

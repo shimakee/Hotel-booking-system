@@ -5,6 +5,7 @@ using AvenueOne.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace AvenueOne.ViewModels.Commands
 
         protected virtual void Validate()
         {
+
             if (this.ViewModel == null)
                 throw new NullReferenceException("Viewmodel cannot be null.");
             if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
