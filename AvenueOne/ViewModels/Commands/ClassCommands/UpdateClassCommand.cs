@@ -22,7 +22,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
         {
             try
             {
-                Validate();
+                base.Validate();
                 int n = await Update();
                 if (n == 0)
                     throw new InvalidOperationException("Could not update model.");

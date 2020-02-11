@@ -23,12 +23,10 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
 
         public override async void Execute(object parameter)
         {
-            
-
             try
             {
 
-                Validate();
+                base.Validate();
                 int n = await Insert();
                 if (n <= 0)
                     throw new InvalidOperationException("Could not add model to database.");

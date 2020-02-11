@@ -38,13 +38,24 @@ namespace AvenueOne.ViewModels.Commands
 
         protected virtual void Validate()
         {
+            try
+            {
+                if (this.ViewModel == null)
+                    throw new NullReferenceException("Viewmodel cannot be null.");
+                if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
+                    throw new NullReferenceException("Model or Selection cannot be null.");
+                if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
+                    throw new ValidationException("Invalid input on Model or ModelSelected.");
 
-            if (this.ViewModel == null)
-                throw new NullReferenceException("Viewmodel cannot be null.");
-            if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
-                throw new NullReferenceException("Model or Selection cannot be null.");
-            if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
-                throw new ValidationException("Invalid input on Model or ModelSelected.");
+            }
+            //catch (ValidationException valEx)
+            //{
+            //    ExceptionHandling(valEx, "Validation exception.");
+            //}
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         protected virtual void ExceptionHandling(Exception ex, string title = "Exception")

@@ -30,8 +30,8 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
         {
             try
             {
-                Validate();
                 Clear();
+                Validate();
             }
             catch (Exception exception)
             {
@@ -41,10 +41,11 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
         }
         protected virtual void Validate()
         {
-            if (this.ViewModel == null)
-                throw new NullReferenceException("Viewmodel cannot be null.");
-            if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
-                throw new NullReferenceException("Model or Selection cannot be null.");
+                if (this.ViewModel == null)
+                    throw new NullReferenceException("Viewmodel cannot be null.");
+                if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
+                    throw new NullReferenceException("Model or Selection cannot be null.");
+
         }
 
         protected virtual void Clear()

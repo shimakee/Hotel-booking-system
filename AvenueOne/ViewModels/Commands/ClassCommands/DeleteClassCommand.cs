@@ -22,7 +22,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
         {
             try
             {
-                Validate();
+                base.Validate();
                 string id = ViewModel.Model.Id;
 
                 int n = await Delete();
