@@ -25,8 +25,8 @@ namespace AvenueOne.EntityConfiguration
                 .IsRequired();
 
             //relationships
-            HasRequired(a => a.Room)
-                .WithMany(r => r.Bookings);
+            HasRequired(a => a.Room);
+                //.WithMany(r => r.Bookings);
         }
     }
 }

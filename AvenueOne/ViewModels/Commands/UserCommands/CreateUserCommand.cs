@@ -3,6 +3,7 @@ using AvenueOne.Interfaces;
 using AvenueOne.Models;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
+using AvenueOne.ViewModels.Commands.ClassCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Windows.Controls;
 
 namespace AvenueOne.ViewModels.Commands.UserCommands
 {
-    public class CreateUserCommand : BaseClassCommand<User>, IBaseClassCommand<User>
+    public class CreateUserCommand : CreateClassCommand<User>, IBaseClassCommand<User>
     {
         public CreateUserCommand(IGenericUnitOfWork<User> genericUnitOfWork, IDisplayService displayService)
             :base(genericUnitOfWork, displayService)
@@ -42,24 +43,18 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
 
                 if (password == null || passwordConfirm == null)
                     throw new NullReferenceException("Password and PasswordConfirm cannot be null.");
-                if (ViewModel.Model == null || ViewModel.ModelSelected == null)
-                    throw new NullReferenceException("User cannot be null");
-                if (ViewModel.ModelSelected.Person == null)
-                    throw new NullReferenceException("Profile cannot be null.");
 
+                Validate();
 
-                User User = ViewModel.ModelSelected;
-                User.Person = ViewModel.ModelSelected.Person;
+                ViewModel.ModelSelected.Password = password;
+                ViewModel.ModelSelected.PasswordConfirm = passwordConfirm;
 
-                User.Password = password;
-                User.PasswordConfirm = passwordConfirm;
-
-                int n = await AddUser(User);
+                int n = await Insert();
 
                 if (n <= 0)
                     throw new InvalidOperationException("Could not add user.");
 
-                _displayService.MessageDisplay($"Added accoun:\n\nUsername: {User.Username}\nName:{User.Person.FullName}\n\nAffected rows:{n}.",
+                _displayService.MessageDisplay($"Added accoun:\n\nUsername: {ViewModel.ModelSelected.Username}\nName:{ViewModel.ModelSelected.Person.FullName}\n\nAffected rows:{n}.",
                                                 "Account added.");
             }
             catch (ArgumentNullException argEx)
@@ -81,8 +76,11 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
             }
         }
 
-        private async Task<int> AddUser(User user)
+        protected override async Task<int> Insert()
         {
+            User user = ViewModel.ModelSelected;
+            user.Person = ViewModel.ModelSelected.Person;
+
             if (user == null || user.Person == null)
                 throw new ArgumentNullException("User and person view model cannot be null.");
 
@@ -98,15 +96,13 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
             byte[] salt = HashService.CreateSalt();
             user.Password = HashService.Hash(user.Password, salt);
             user.PasswordConfirm = user.Password;
-            //User user = User as User;
-            User user2 = await Task.Run(()=> _genericUnitOfWork.Repositories[typeof(User)].Find(u=> u.Username == user.Username).FirstOrDefault());
+
+            User user2 = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(User)].Find(u => u.Username == user.Username).FirstOrDefault());
             if (user2 != null)
                 throw new InvalidOperationException("Username already exist.");
 
             _genericUnitOfWork.Repositories[typeof(User)].Add(user);
-            int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
-
-            return n;
-        }
+            return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
+        }  
     }
 }

@@ -4,6 +4,7 @@ using AvenueOne.Persistence.Repositories;
 using AvenueOne.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace AvenueOne.Persistence
     public class GenericUnitOfWork<T> : IGenericUnitOfWork<T> where T: class
     {
         private PlutoContext _context;
+
         public Dictionary<Type, IRepository<T>> Repositories { get; private set; } = new Dictionary<Type, IRepository<T>>();
         public GenericUnitOfWork(PlutoContext context)
         {
@@ -27,7 +29,14 @@ namespace AvenueOne.Persistence
         {
             return _context.SaveChanges();
         }
-
+        //public void Rollback()
+        //{
+        //    _context
+        //    .ChangeTracker
+        //    .Entries()
+        //    .ToList()
+        //    .ForEach(x => x.Reload());
+        //}
         public void Dispose()
         {
             _context.Dispose();

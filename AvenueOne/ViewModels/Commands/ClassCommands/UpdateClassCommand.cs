@@ -22,45 +22,42 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
         {
             try
             {
-                if (this.ViewModel == null)
-                    throw new NullReferenceException("Viewmodel cannot be null.");
-                if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
-                    throw new NullReferenceException("Model or Selection cannot be null.");
-
-                if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
-                    throw new ValidationException("Invalid input on Model or ModelSelected.");
-
-                T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.Model.Id));
-                if (model == null)
-                    throw new InvalidOperationException("Invalid, model does not exist.");
-                ViewModel.ModelSelected.Id = model.Id;
-                ViewModel.ModelSelected.DeepCopyTo(model);
-
-                int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
-
+                Validate();
+                int n = await Update();
                 if (n == 0)
                     throw new InvalidOperationException("Could not update model.");
 
                 _displayService.MessageDisplay($"Updated {typeof(T)} model.\nId:{ViewModel.Model.Id}\nAffected rows:{n}", "Model updated");
-                //ViewModel.Window.Close();
-            }
-            catch (DbUpdateException dbEx)
-            {
-                _displayService.ErrorDisplay(dbEx.InnerException.InnerException.Message, "Db error!");
             }
             catch (ValidationException validationException)
             {
                 _displayService.ErrorDisplay(validationException.Message, "Validation error!");
             }
+            catch (DbUpdateException dbEx)
+            {
+                _displayService.ErrorDisplay(dbEx.InnerException.InnerException.Message, "Db error!");
+            }
             catch (InvalidOperationException ex)
             {
                 _displayService.ErrorDisplay(ex.Message, "Error on model insertion.");
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
                 //TODO: create logger
+                ExceptionHandling(ex);
                 throw;
             }
+        }
+
+        protected virtual async Task<int> Update()
+        {
+            T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.Model.Id));
+            if (model == null)
+                throw new InvalidOperationException("Invalid, model does not exist.");
+            ViewModel.ModelSelected.Id = model.Id;
+            ViewModel.ModelSelected.DeepCopyTo(model);
+
+            return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
         }
     }
 }

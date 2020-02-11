@@ -1,38 +1,44 @@
 ﻿using AvenueOne.Core;
-using AvenueOne.Interfaces;
-using AvenueOne.Interfaces.RepositoryInterfaces;
+using AvenueOne.Core.Models;
 using AvenueOne.Services.Interfaces;
+using AvenueOne.ViewModels.Commands.ClassCommands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Common;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvenueOne.ViewModels.Commands.ClassCommands
+namespace AvenueOne.ViewModels.Commands.BookingCommands
 {
-    public class CreateClassCommand<T> : BaseClassCommand<T> where T : class, IBaseObservableModel<T>, new()
+    public class CreateBookingCommand : CreateClassCommand<Booking>
     {
-        public CreateClassCommand(IGenericUnitOfWork<T> genericUnitOfWork, IDisplayService displayService)
+        public CreateBookingCommand(IGenericUnitOfWork<Booking> genericUnitOfWork, IDisplayService displayService)
             : base(genericUnitOfWork, displayService)
         {
+
         }
 
         public override async void Execute(object parameter)
         {
-            
-
             try
             {
-
                 Validate();
+                Booking model = ViewModel.ModelSelected;
+
+                Booking booking = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(Booking)]
+                                                                                    .Find(b => model.DateCheckin >= b.DateCheckin && model.DateCheckin <= b.DateCheckout && model.Room.Id == b.Room.Id ||
+                                                                                                b.DateCheckin >= model.DateCheckout && b.DateCheckout <= model.DateCheckout && model.Room.Id == b.Room.Id)
+                                                                                    .FirstOrDefault());
+                if (booking != null)
+                    throw new InvalidOperationException("There is a booking conflict.");
+
                 int n = await Insert();
+
                 if (n <= 0)
                     throw new InvalidOperationException("Could not add model to database.");
-                _displayService.MessageDisplay($"Added {typeof(T)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model added");
+                _displayService.MessageDisplay($"Added {typeof(Booking)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model added");
             }
             catch (ValidationException validationException)
             {
@@ -54,14 +60,5 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
             }
         }
 
-        protected virtual async Task<int>Insert()
-        {
-            T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.ModelSelected.Id));
-            if (model != null)
-                throw new InvalidOperationException("Invalid, model with similar property values already exist.");
-            _genericUnitOfWork.Repositories[typeof(T)].Add(ViewModel.ModelSelected as T);
-
-            return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
-        }
     }
 }

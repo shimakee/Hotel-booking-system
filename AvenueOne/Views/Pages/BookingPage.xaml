@@ -80,7 +80,7 @@
 
                         <!-- row 3-->
                         <DataGrid  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3"
-                            ItemsSource="{Binding RoomList}" SelectedItem="{Binding RoomSelected}"
+                            ItemsSource="{Binding RoomList}" SelectedItem="{Binding RoomSelected}" 
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>

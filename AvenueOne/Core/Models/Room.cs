@@ -60,7 +60,7 @@ namespace AvenueOne.Core.Models
                 }
             }
 
-        public IList<Booking> Bookings { get; set; }
+        //public IList<Booking> Bookings { get; set; }
         #endregion
 
         #region Constructors
@@ -100,7 +100,7 @@ namespace AvenueOne.Core.Models
                 Room room = (Room)obj;
 
             if (!String.IsNullOrWhiteSpace(this.Name) && !String.IsNullOrWhiteSpace(room.Name))
-                return this.Name.ToLower() == room.Name.ToLower();
+                return this.Name.ToLower() == room.Name.ToLower() && this.Id == room.Id;
             if (String.IsNullOrWhiteSpace(this.Name) && String.IsNullOrWhiteSpace(room.Name))
                 return this.Id == room.Id;
             return false;

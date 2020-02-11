@@ -31,7 +31,7 @@ namespace AvenueOne.EntityConfiguration
             //relationships
             HasRequired(r => r.RoomType);
             //HasOptional(r => r.RoomType);
-            HasMany(r => r.Bookings);
+            //HasMany(r => r.Bookings);
         }
     }
 }

@@ -4,6 +4,7 @@ using AvenueOne.Interfaces.RepositoryInterfaces;
 using AvenueOne.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,5 +34,20 @@ namespace AvenueOne.ViewModels.Commands
         }
 
         public abstract void Execute(object parameter);
+
+        protected virtual void Validate()
+        {
+            if (this.ViewModel == null)
+                throw new NullReferenceException("Viewmodel cannot be null.");
+            if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
+                throw new NullReferenceException("Model or Selection cannot be null.");
+            if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
+                throw new ValidationException("Invalid input on Model or ModelSelected.");
+        }
+
+        protected virtual void ExceptionHandling(Exception ex, string title = "Exception")
+        {
+            _displayService.ErrorDisplay(ex.Message, title);
+        }
     }
 }

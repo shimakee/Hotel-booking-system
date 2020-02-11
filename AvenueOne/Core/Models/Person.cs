@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Reflection;
+using AvenueOne.Utilities.Tools;
 
 namespace AvenueOne.Models
 {
@@ -157,6 +158,7 @@ namespace AvenueOne.Models
                 OnPropertyChanged();
             }
         }
+
         public DateTime? BirthDate
         {
             get { return _birthDate; }

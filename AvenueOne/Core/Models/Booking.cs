@@ -80,6 +80,15 @@ namespace AvenueOne.Core.Models
             }
         }
 
+        public bool IsBookingConflict(Booking booking)
+        {
+            if (booking.Room == null || this.Room == null)
+                return false; // there is no conflict if there is no room.
+
+            return this.DateCheckin >= booking.DateCheckin && this.DateCheckin <= booking.DateCheckout && this.Room.Id == booking.Room.Id ||
+                    booking.DateCheckin >= this.DateCheckout && booking.DateCheckout <= this.DateCheckout && this.Room.Id == booking.Room.Id;
+        }
+
         public static decimal ComputeAmountTotal(DateTime dateCheckin, DateTime dateCheckout, decimal rate, RateType rateType)
         {
             decimal lengthOfStay = 0;

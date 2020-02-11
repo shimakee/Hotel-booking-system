@@ -3,6 +3,7 @@ using AvenueOne.Interfaces;
 using AvenueOne.Models;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
+using AvenueOne.ViewModels.Commands.ClassCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Windows.Controls;
 
 namespace AvenueOne.ViewModels.Commands.UserCommands
 {
-    public class UpdateUserCommand : BaseClassCommand<User>, IBaseClassCommand<User>
+    public class UpdateUserCommand : UpdateClassCommand<User>, IBaseClassCommand<User>
     {
         public UpdateUserCommand(IGenericUnitOfWork<User> genericUnitOfWork, IDisplayService displayService)
             : base(genericUnitOfWork, displayService)
@@ -24,18 +25,12 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
         {
             try
             {
-                if (ViewModel == null)
-                    throw new NullReferenceException("View model must not be null in order to execute command.");
-                if (ViewModel.Model == null || ViewModel.ModelSelected == null)
-                        throw new NullReferenceException("No item selected to update.");
+                Validate();
                 if (ViewModel.ModelSelected.Person == null)
                         throw new NullReferenceException("No profile to update.");
-
-
                 if (!ViewModel.ModelSelected.IsValid || !ViewModel.ModelSelected.Person.IsValid)
                     throw new InvalidOperationException("Invalid entry in user account.");
-                
-                
+
 
                 //get parameters
                 object[] values = (object[])parameter ?? throw new NullReferenceException("parameter cannot be null, you need to pass password and password confirmbox");
@@ -46,16 +41,9 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
 
                 //is password included in update
                 bool IsPasswordIncluded = IsPasswordIncludedCheckBox.IsChecked.GetValueOrDefault();
-                //get password
-                ViewModel.ModelSelected.Password = passwordBox.Password;
-                ViewModel.ModelSelected.PasswordConfirm = passwordConfirmBox.Password;
-
-                User user = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(User)].GetAsync(ViewModel.Model.Id)) ?? throw new NullReferenceException("Account does not exist.");
-
-                user.Username = ViewModel.ModelSelected.Username;
-                ViewModel.ModelSelected.Person.Id = user.Person.Id;
-                ViewModel.ModelSelected.Person.User = user;
-                ViewModel.ModelSelected.Person.DeepCopyTo(user.Person);
+                //retain password
+                ViewModel.ModelSelected.Password = ViewModel.Model.Password;
+                ViewModel.ModelSelected.PasswordConfirm = ViewModel.Model.PasswordConfirm;
 
                 if (IsPasswordIncluded)
                 {
@@ -64,11 +52,11 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                     if (!ViewModel.ModelSelected.IsValidProperty("PasswordConfirm"))
                         throw new InvalidOperationException("Invalid entry on password confirmation.");
 
-                    user.Password = HashService.Hash(ViewModel.ModelSelected.Password);
-                    user.PasswordConfirm = user.Password;
+                    ViewModel.ModelSelected.Password = HashService.Hash(passwordBox.Password);
+                    ViewModel.ModelSelected.PasswordConfirm = ViewModel.ModelSelected.Password;
                 }
 
-                int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
+                int n = await Update();
 
                 if (n <= 0)
                     throw new InvalidOperationException("Could not edit accout.");
@@ -87,6 +75,20 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                 _displayService.ErrorDisplay(ex.Message, "Error");
                 throw;
             }
+        }
+
+        protected override async Task<int> Update()
+        {
+            User user = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(User)].GetAsync(ViewModel.Model.Id)) ?? throw new NullReferenceException("Account does not exist.");
+
+            user.Username = ViewModel.ModelSelected.Username;
+            user.Password = ViewModel.ModelSelected.Password;
+            user.PasswordConfirm = ViewModel.ModelSelected.PasswordConfirm;
+            ViewModel.ModelSelected.Person.Id = user.Person.Id;
+            ViewModel.ModelSelected.Person.User = user;
+            ViewModel.ModelSelected.Person.DeepCopyTo(user.Person);
+
+            return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
         }
     }
 }

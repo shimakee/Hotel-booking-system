@@ -5,6 +5,7 @@ using AvenueOne.Persistence.Repositories;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.Commands;
+using AvenueOne.ViewModels.Commands.BookingCommands;
 using AvenueOne.ViewModels.Commands.ClassCommands;
 using AvenueOne.ViewModels.TabViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
@@ -41,7 +42,7 @@ namespace AvenueOne.Views.Pages
             IGenericUnitOfWork<Booking> genericUnitOfWorkBooking = new GenericUnitOfWork<Booking>(context);
 
             #region BookingTab
-            BaseClassCommand<Booking> createBookingCommand = new CreateClassCommand<Booking>(genericUnitOfWorkBooking, displayService);
+            BaseClassCommand<Booking> createBookingCommand = new CreateBookingCommand(genericUnitOfWorkBooking, displayService);
             BaseClassCommand<Booking> updateBookingCommand = new UpdateClassCommand<Booking>(genericUnitOfWorkBooking, displayService);
             BaseClassCommand<Booking> deleteBookingCommand = new DeleteClassCommand<Booking>(genericUnitOfWorkBooking, displayService);
             ClearClassCommand<Booking> clearBookingCommand = new ClearClassCommand<Booking>();
