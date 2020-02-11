@@ -4,6 +4,7 @@ using AvenueOne.Models;
 using AvenueOne.Utilities.Tools;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,10 +47,13 @@ namespace AvenueOne.Core.Models
 
         private int _occupants;
 
+        [Range(0, int.MaxValue, ErrorMessage ="value > 0")]
         public int Occupants
         {
             get { return _occupants; }
             set { _occupants = value;
+                //if (value < 0)
+                //    _occupants = 0;
                 OnPropertyChanged();
             }
         }

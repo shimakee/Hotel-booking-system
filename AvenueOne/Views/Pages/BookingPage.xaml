@@ -101,8 +101,10 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
 
-                            
-                            <TextBox Grid.Column="0" Text="{Binding ModelSelected.Occupants}"/>
+
+                            <TextBox Grid.Column="0" Text="{Binding ModelSelected.Occupants,
+                                     ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                     Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             <TextBlock Grid.Column="1"
                                        HorizontalAlignment="Center"
                                        Text="/"/>
