@@ -15,7 +15,7 @@ namespace AvenueOne.Core.Models
         #region Properties
         private DateTime _dateCheckin;
 
-        [BeforeDate(nameof(DateCheckout))]
+        [BeforeDateProperty(nameof(DateCheckout))]
         public DateTime DateCheckin
         {
             get { return _dateCheckin; }
@@ -25,7 +25,8 @@ namespace AvenueOne.Core.Models
         }
 
         private DateTime _dateCheckout;
-        [AfterDate(nameof(DateCheckin))]
+
+        [AfterDateProperty(nameof(DateCheckin))]
         public DateTime DateCheckout
         {
             get { return _dateCheckout; }
@@ -123,6 +124,9 @@ namespace AvenueOne.Core.Models
                     lengthOfStay =  0;
                     break;
             }
+
+            if (lengthOfStay < 0)
+                throw new InvalidOperationException("Length of stay must be greater than 0.");
 
             return rate * lengthOfStay;
         }

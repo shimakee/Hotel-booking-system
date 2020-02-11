@@ -186,7 +186,8 @@
                                 <TextBlock Text="Brithdate:" Grid.Column="0"/>
                                 <DatePicker x:Name="Birthdate" Grid.Column="1"
                                             SelectedDate="{Binding UserTab.Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
-                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                            Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
                             </Grid>
                         </StackPanel>
 
@@ -723,7 +724,8 @@
                                 <TextBlock Text="Brithdate:" Grid.Column="0"/>
                                 <DatePicker x:Name="CustomerBirthdate" Grid.Column="1"
                                             SelectedDate="{Binding CustomerTab.Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
-                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                            Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
                             </Grid>
                         </StackPanel>
 

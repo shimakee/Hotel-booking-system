@@ -8,23 +8,29 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Core.Models.CustomDataAnnotations
 {
-    public class BeforeDate : ValidationAttribute
+    public class BeforeDateProperty : ValidationAttribute
     {
-        public DateTime Date { get; set; }
-
-        private string _property;
-        public BeforeDate(string property)
+        private DateTime _date;
+        public int Year { get; set; }
+        public string Property { get; set; }
+        public BeforeDateProperty()
         {
-            Date = DateTime.Today;
-            _property = property;
+                _date = DateTime.Today;
+            //Property = property;
+        }
+
+        public BeforeDateProperty(string property)
+            : this()
+        {
+            Property = property;
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            PropertyInfo instanceProperty = validationContext.ObjectType.GetProperty(_property);
+            PropertyInfo instanceProperty = validationContext.ObjectType.GetProperty(Property);
             //no need to validate if there is no property to refer to
             if (instanceProperty == null)
-                throw new NullReferenceException($"No property of {_property} exists.");
+                throw new NullReferenceException($"No property of {Property} exists.");
             //return new ValidationResult($"There is no property with the name {_property}");
 
 
@@ -32,15 +38,16 @@ namespace AvenueOne.Core.Models.CustomDataAnnotations
             object instanceValue = instanceProperty.GetValue(instance, null);
             //no need to validate if there is no value to check condition
             if (instanceValue == null)
-                return new ValidationResult($"Property {_property} is null or has no value.");
+                return ValidationResult.Success;
+            //return new ValidationResult($"Property {_property} is null or has no value.");
 
             try
             {
-                Date = (DateTime)instanceValue;
+                _date = (DateTime)instanceValue;
 
-                if ((DateTime)value < Date)
+                if ((DateTime)value < _date)
                     return ValidationResult.Success;
-                return new ValidationResult($"Date must be before {Date.Day}, {Date.Month}, {Date.Year}.");
+                return new ValidationResult($"Date must be before {_date.Day}, {_date.Month}, {_date.Year}.");
 
             }
             catch (Exception)

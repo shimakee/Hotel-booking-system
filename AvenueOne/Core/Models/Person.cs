@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Reflection;
 using AvenueOne.Utilities.Tools;
+using AvenueOne.Core.Models.CustomDataAnnotations;
 
 namespace AvenueOne.Models
 {
@@ -159,6 +160,7 @@ namespace AvenueOne.Models
             }
         }
 
+        [TimeSpanBeforeToday(Years =18)]
         public DateTime? BirthDate
         {
             get { return _birthDate; }
