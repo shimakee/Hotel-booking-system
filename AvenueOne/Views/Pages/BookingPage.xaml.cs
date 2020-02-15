@@ -46,11 +46,13 @@ namespace AvenueOne.Views.Pages
             BaseClassCommand<Booking> updateBookingCommand = new UpdateClassCommand<Booking>(genericUnitOfWorkBooking, displayService);
             BaseClassCommand<Booking> deleteBookingCommand = new DeleteClassCommand<Booking>(genericUnitOfWorkBooking, displayService);
             ClearClassCommand<Booking> clearBookingCommand = new ClearClassCommand<Booking>();
-            IBookingViewModel bookingTab = new BookingViewModel(new Booking(), _context.Bookings.Local, context.Room.Local,
+            GetAvailableRoomsCommand getAvailableRooms = new GetAvailableRoomsCommand();
+            IBookingViewModel bookingTab = new BookingViewModel(new Booking(), _context.Bookings.Local, context.Room.Local, _context.RoomType.Local,
                                                                                                                 createBookingCommand,
                                                                                                                 updateBookingCommand,
                                                                                                                 deleteBookingCommand,
-                                                                                                                clearBookingCommand);
+                                                                                                                clearBookingCommand,
+                                                                                                                getAvailableRooms);
 
             this.DataContext = bookingTab;
 

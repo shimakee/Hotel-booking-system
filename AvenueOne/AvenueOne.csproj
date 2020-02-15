@@ -210,6 +210,7 @@
     <Compile Include="Services\Interfaces\IWindowGenerator.cs" />
     <Compile Include="ViewModels\BaseObservableViewModel.cs" />
     <Compile Include="ViewModels\Commands\BookingCommands\CreateBookingCommand.cs" />
+    <Compile Include="ViewModels\Commands\BookingCommands\GetAvailableRoomsCommand.cs" />
     <Compile Include="ViewModels\Commands\ClassCommands\BaseClassCommand.cs" />
     <Compile Include="ViewModels\Commands\ClassCommands\ClearClassCommand.cs" />
     <Compile Include="ViewModels\Commands\ClassCommands\CreateClassCommand.cs" />

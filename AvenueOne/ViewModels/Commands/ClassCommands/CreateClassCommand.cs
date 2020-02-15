@@ -30,6 +30,8 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 int n = await Insert();
                 if (n <= 0)
                     throw new InvalidOperationException("Could not add model to database.");
+
+                ViewModel.ClearClassCommand.Execute(null);
                 _displayService.MessageDisplay($"Added {typeof(T)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model added");
             }
             catch (ValidationException validationException)

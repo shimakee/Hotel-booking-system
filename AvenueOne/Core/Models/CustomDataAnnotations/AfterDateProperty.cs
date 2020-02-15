@@ -47,7 +47,7 @@ namespace AvenueOne.Core.Models.CustomDataAnnotations
 
                 if ((DateTime)value > _date)
                     return ValidationResult.Success;
-                return new ValidationResult($"Date must be before {_date.Day}, {_date.Month}, {_date.Year}.");
+                return new ValidationResult($"Date must be after {_date.Day}, {_date.Month}, {_date.Year}.");
 
             }
             catch (Exception)

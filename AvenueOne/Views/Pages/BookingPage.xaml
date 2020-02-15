@@ -72,17 +72,31 @@
                                             Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
 
                         <!--row 2-->
-                        <TextBlock Grid.Row="2" Grid.Column="2"
-                                   Text="Room"/>
-                        <TextBox Grid.Row="2" Grid.Column="3"
-                            IsEnabled="False" Text="{Binding ModelSelected.Room.Name}"/>
-
                         <TextBlock Grid.Row="2" Grid.Column="0"
-                                   Text="Rooms :"/>
+                                   Text="Room Selected:"/>
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                            IsEnabled="False" Text="{Binding ModelSelected.Room.Name}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2"
+                                   Text="Room type:"/>
+                        <ComboBox Grid.Row="2" Grid.Column="3"
+                                  ItemsSource="{Binding RoomTypeList}"
+                                  SelectedItem="{Binding RoomTypeSelected}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <!--<TextBlock Grid.Row="2" Grid.Column="0"
+                                   Text="Rooms :"/>-->
 
                         <!-- row 3-->
-                        <DataGrid  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3"
-                            ItemsSource="{Binding RoomList}" SelectedItem="{Binding RoomSelected}" 
+                        <Button Content="Show available rooms" Grid.Row="3"  Grid.Column="1" 
+                                            Command="{Binding GetAvailableRoomsCommand}"/>
+                        <!-- row 4-->
+                        <DataGrid  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3"
+                            ItemsSource="{Binding RoomsAvailable}" SelectedItem="{Binding RoomSelected}" 
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
@@ -148,7 +162,7 @@
                                 <DataGridTextColumn Header="Room type" Binding="{Binding Room.RoomType}" Width="*"/>
                                 <DataGridTextColumn Header="Max Occupants" Binding="{Binding Room.MaxOccupants}" Width="*"/>
                                 <DataGridTextColumn Header="Rate" Binding="{Binding Room.RoomType.Rate}" Width="*"/>
-                                <DataGridTextColumn Header="Rate type" Binding="{Binding RoomType.RateType}" Width="*"/>
+                                <DataGridTextColumn Header="Rate type" Binding="{Binding Room.RoomType.RateType}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
 

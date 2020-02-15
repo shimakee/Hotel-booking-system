@@ -21,7 +21,10 @@ namespace AvenueOne.Core.Models
         {
             get { return _dateCheckin; }
             set { _dateCheckin = value;
+                //if (value != null) //next time make it a checkin or checkout time vlaue.
+                //    _dateCheckin = new DateTime(value.Year, value.Month, value.Day);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DateCheckout));
             }
         }
 
@@ -32,7 +35,10 @@ namespace AvenueOne.Core.Models
         {
             get { return _dateCheckout; }
             set { _dateCheckout = value;
+                //if (value != null) //next time make it a checkin or checkout time vlaue.
+                //    _dateCheckout = new DateTime(value.Year, value.Month, value.Day);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DateCheckin));
             }
         }
 
@@ -51,9 +57,16 @@ namespace AvenueOne.Core.Models
         public int Occupants
         {
             get { return _occupants; }
-            set { _occupants = value;
-                //if (value < 0)
-                //    _occupants = 0;
+            set {
+                _occupants = value;
+                if (value < 0)
+                    _occupants = 0;
+                if(Room != null)
+                {
+                    if (value > Room.MaxOccupants)
+                        _occupants = Room.MaxOccupants;
+                }
+
                 OnPropertyChanged();
             }
         }
@@ -69,6 +82,7 @@ namespace AvenueOne.Core.Models
         }
 
         private Room _room;
+        [Required(ErrorMessage ="Room is required")]
         public Room Room
         {
             get { return _room; }
@@ -76,7 +90,11 @@ namespace AvenueOne.Core.Models
                 if(value != null)
                 {
                     this.AmountTotal = Booking.ComputeAmountTotal(this.DateCheckin, this.DateCheckout, value.RoomType.Rate, value.RoomType.RateType);
-                    OnPropertyChanged("AmountTotal");
+                    OnPropertyChanged(nameof(AmountTotal));
+                    if (Occupants > value.MaxOccupants)
+                    {
+                        Occupants = value.MaxOccupants;
+                    }
                 }
                 OnPropertyChanged();
             }
@@ -92,11 +110,39 @@ namespace AvenueOne.Core.Models
 
         public bool IsBookingConflict(Booking booking)
         {
+            if (booking == null)
+                return false; // no conflict if there is no booking
             if (booking.Room == null || this.Room == null)
                 return false; // there is no conflict if there is no room.
+            if (booking.Room != this.Room)
+                return false; //not the same room so no conflict.
 
-            return this.DateCheckin >= booking.DateCheckin && this.DateCheckin <= booking.DateCheckout && this.Room.Id == booking.Room.Id ||
-                    booking.DateCheckin >= this.DateCheckout && booking.DateCheckout <= this.DateCheckout && this.Room.Id == booking.Room.Id;
+            return IsBookingDateConflict(booking);
+        }
+
+        public bool IsBookingConflict(Booking booking, Room room)
+        {
+            if (booking == null)
+                return false; // no conflict if there is no booking
+            if (room == null || this.Room == null)
+                return false; // there is no conflict if there is no room.
+            if (booking.Room != room)
+                return false; //not the same room so no conflict.
+
+            return IsBookingDateConflict(booking);
+        }
+
+        public bool IsBookingDateConflict(Booking booking)
+        {
+            if (booking == null)
+                return false; // no conflict if there is no booking
+
+            bool isConflict = this.DateCheckin.Date >= booking.DateCheckin.Date && this.DateCheckin.Date <= booking.DateCheckout.Date ||
+                this.DateCheckout.Date >= booking.DateCheckin.Date && this.DateCheckout.Date <= booking.DateCheckout.Date ||
+                booking.DateCheckin.Date >= this.DateCheckin.Date && booking.DateCheckin.Date <= this.DateCheckout.Date ||
+                booking.DateCheckout.Date >= this.DateCheckin.Date && booking.DateCheckout.Date <= this.DateCheckout.Date;
+
+            return isConflict;
         }
 
         public static decimal ComputeAmountTotal(DateTime dateCheckin, DateTime dateCheckout, decimal rate, RateType rateType)

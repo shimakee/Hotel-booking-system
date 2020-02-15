@@ -29,6 +29,9 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 if (n <= 0)
                     throw new InvalidOperationException("Could not delete model from database.");
 
+                //modelselected not be null after delete
+                ViewModel.ClearClassCommand.Execute(null);
+
                 _displayService.MessageDisplay($"Deleted {typeof(T)} model.\nId:{id}\nAffected rows:{n}", "Model deleted");
             }
             catch (ValidationException validationException)

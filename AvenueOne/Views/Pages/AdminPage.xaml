@@ -151,7 +151,7 @@
 
                                 <TextBlock Text="Suffix:" Grid.Column="0"/>
                                 <TextBox x:Name="Suffix" Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding Profile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding UserTab.Profile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             </Grid>
 

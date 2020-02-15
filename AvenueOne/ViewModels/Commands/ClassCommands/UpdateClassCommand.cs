@@ -27,6 +27,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 if (n == 0)
                     throw new InvalidOperationException("Could not update model.");
 
+                ViewModel.ClearClassCommand.Execute(null);
                 _displayService.MessageDisplay($"Updated {typeof(T)} model.\nId:{ViewModel.Model.Id}\nAffected rows:{n}", "Model updated");
             }
             catch (ValidationException validationException)

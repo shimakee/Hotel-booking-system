@@ -20,11 +20,21 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
 
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
         public override async void Execute(object parameter)
         {
             try
             {
                 Validate();
+                if (ViewModel.ModelSelected.Room == null)
+                    throw new ValidationException("Must select a room.");
+                if (ViewModel.ModelSelected.DateCheckin.Date < DateTime.Today.Date && !ViewModel.UserAccount.IsAdmin)
+                    throw new InvalidOperationException("No authority to create booking before current date.");
+
                 Booking model = ViewModel.ModelSelected;
 
                 Booking booking = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(Booking)]
@@ -38,6 +48,8 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
 
                 if (n <= 0)
                     throw new InvalidOperationException("Could not add model to database.");
+
+                ViewModel.ClearClassCommand.Execute(null);
                 _displayService.MessageDisplay($"Added {typeof(Booking)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model added");
             }
             catch (ValidationException validationException)

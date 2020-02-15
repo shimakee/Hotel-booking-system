@@ -50,8 +50,9 @@ namespace AvenueOne.Core.Models.CustomDataAnnotations
                 return new ValidationResult($"Date must be before {_date.Day}, {_date.Month}, {_date.Year}.");
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ValidationResult(ex.Message);
                 throw;
             }
         }

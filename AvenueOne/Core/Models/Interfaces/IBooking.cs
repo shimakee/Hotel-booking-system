@@ -27,6 +27,9 @@ namespace AvenueOne.Core.Models.Interfaces
         int Occupants { get; set; }
         BookingStatus Status { get; set; }
         Room Room { get; set; }
+        bool IsBookingConflict(Booking booking);
+        bool IsBookingConflict(Booking booking, Room room);
+        bool IsBookingDateConflict(Booking booking);
 
     }
 }
