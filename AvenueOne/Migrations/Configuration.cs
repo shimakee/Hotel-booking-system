@@ -30,11 +30,11 @@ namespace AvenueOne.Migrations
             context.Database.ExecuteSqlCommand("DELETE FROM AMENITIES");
             context.Database.ExecuteSqlCommand("DELETE FROM ROOMTYPES");
             context.Database.ExecuteSqlCommand("DELETE FROM ROOMS");
+            context.Database.ExecuteSqlCommand("DELETE FROM BOOKINGS");
+            context.Database.ExecuteSqlCommand("DELETE FROM TRANSACTIONS");
             context.Database.ExecuteSqlCommand("DELETE FROM USERS");
             context.Database.ExecuteSqlCommand("DELETE FROM CUSTOMERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
-            context.Database.ExecuteSqlCommand("DELETE FROM BOOKINGS");
-            context.Database.ExecuteSqlCommand("DELETE FROM TRANSACTIONS");
 
             #region Seed Users
             Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };

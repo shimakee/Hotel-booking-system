@@ -132,6 +132,7 @@ namespace AvenueOne.Core.Models
                 this.DateCheckin = today;
                 this.DateCheckout = today.AddDays(1);
                 this.Occupants = 1;
+                this.Status = BookingStatus.reserved;
         }
 
         public Booking(DateTime dateCheckin, DateTime dateCheckout, Room room)

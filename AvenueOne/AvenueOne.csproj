@@ -201,6 +201,10 @@
     <Compile Include="Migrations\202002170554558_CreatedTransactionModel.Designer.cs">
       <DependentUpon>202002170554558_CreatedTransactionModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002170825572_AddedTransactionStatus.cs" />
+    <Compile Include="Migrations\202002170825572_AddedTransactionStatus.Designer.cs">
+      <DependentUpon>202002170825572_AddedTransactionStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\GenericUnitOfWork.cs" />
     <Compile Include="Persistence\Repositories\AmenitiesRepository.cs" />
@@ -380,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002170554558_CreatedTransactionModel.resx">
       <DependentUpon>202002170554558_CreatedTransactionModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002170825572_AddedTransactionStatus.resx">
+      <DependentUpon>202002170825572_AddedTransactionStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

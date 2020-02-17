@@ -16,6 +16,7 @@ namespace AvenueOne.Core.Models
                 :base()
             {
                 this.Bookings = new List<Booking>();
+                this.Status = TransactionStatus.open;
             }
 
         public Transaction(User employee, Customer customer)
@@ -33,6 +34,15 @@ namespace AvenueOne.Core.Models
         #endregion
 
         #region Properties
+        private TransactionStatus _status;
+        public TransactionStatus Status
+        {
+            get { return _status; }
+            set { _status = value;
+                OnPropertyChanged();
+            }
+        }
+
         private List<Booking> _bookings;
         public List<Booking> Bookings
         {
@@ -59,9 +69,6 @@ namespace AvenueOne.Core.Models
                 OnPropertyChanged();
             }
         }
-
-
-
         #endregion
 
     }

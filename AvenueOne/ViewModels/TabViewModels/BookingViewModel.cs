@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Core.Models;
+using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.BookingCommands;
 using AvenueOne.ViewModels.Commands.ClassCommands;
@@ -132,8 +133,8 @@ namespace AvenueOne.ViewModels.TabViewModels
             if (currentBooking == null)
                 return roomList;
 
-
-            List<Booking> bookingWithConflict = bookingList.Where(b => b.IsBookingDateConflict(currentBooking)).ToList();
+            //be mindful of booking status.
+            List<Booking> bookingWithConflict = bookingList.Where(b => b.IsBookingDateConflict(currentBooking) && (b.Status == BookingStatus.reserved || b.Status == BookingStatus.checkedin)).ToList();
             List<Room> roomsToReturn = roomList;
 
             if(roomTypeSelected != null)
