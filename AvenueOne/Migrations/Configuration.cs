@@ -34,6 +34,7 @@ namespace AvenueOne.Migrations
             context.Database.ExecuteSqlCommand("DELETE FROM CUSTOMERS");
             context.Database.ExecuteSqlCommand("DELETE FROM PEOPLE");
             context.Database.ExecuteSqlCommand("DELETE FROM BOOKINGS");
+            context.Database.ExecuteSqlCommand("DELETE FROM TRANSACTIONS");
 
             #region Seed Users
             Person person = new Person() { FirstName = "Kenneth", LastName = "De Leon" };
@@ -121,14 +122,25 @@ namespace AvenueOne.Migrations
 
             #region Seed Bookings
 
-            Booking booking = new Booking(new DateTime(2020, 10, 18), new DateTime(2020, 12, 29), room);
+            Booking booking = new Booking(new DateTime(2020, 10, 18), new DateTime(2020, 10, 29), room);
             Booking booking2 = new Booking(new DateTime(2020, 11, 18), new DateTime(2020, 11, 30), room);
-            Booking booking3 = new Booking(new DateTime(2020, 12, 28), new DateTime(2020, 10, 30), room2);
+            Booking booking3 = new Booking(new DateTime(2020, 12, 28), new DateTime(2020, 12, 30), room2);
             Booking booking4 = new Booking(new DateTime(2020, 1, 18), new DateTime(2020, 12, 30), room3);
             Booking booking5 = new Booking(new DateTime(2020, 2, 18), new DateTime(2020, 12, 30), room4);
 
 
             context.Bookings.AddRange(new List<Booking>() { booking, booking2, booking3, booking4, booking5 });
+            #endregion
+
+            #region Seed Transactions
+
+
+            Transaction transaction = new Transaction(user, customer, new List<Booking>() { booking, booking2 });
+            Transaction transaction2 = new Transaction(user2, customer2, new List<Booking>() {booking3});
+            Transaction transaction3 = new Transaction(user, customer2, new List<Booking>() {booking4});
+            Transaction transaction4 = new Transaction(user2, customer, new List<Booking>() {booking5 });
+
+            context.Transactions.AddRange(new List<Transaction>() { transaction, transaction2, transaction3, transaction4});
             #endregion
 
 

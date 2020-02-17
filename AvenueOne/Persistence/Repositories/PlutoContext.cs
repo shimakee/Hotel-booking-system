@@ -23,6 +23,7 @@ namespace AvenueOne.Persistence.Repositories
         public DbSet<RoomType> RoomType { get; set; }
         public DbSet<Room> Room { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public PlutoContext()
             :base("name=LocalConnection")

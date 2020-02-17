@@ -15,21 +15,33 @@ namespace AvenueOne.Core.Models
             public Transaction()
                 :base()
             {
-
+                this.Bookings = new List<Booking>();
             }
+
+        public Transaction(User employee, Customer customer)
+            :this()
+        {
+            this.Employee = employee;
+            this.Customer = customer;
+        }
+
+        public Transaction(User employee, Customer customer, List<Booking> bookings)
+            :this(employee, customer)
+        {
+            this.Bookings = bookings;
+        }
         #endregion
 
         #region Properties
         private List<Booking> _bookings;
-
         public List<Booking> Bookings
         {
             get { return _bookings; }
             set { _bookings = value; }
         }
 
-        private Customer _customer;
 
+        private Customer _customer;
         public Customer Customer
         {
             get { return _customer; }
@@ -40,7 +52,6 @@ namespace AvenueOne.Core.Models
 
 
         private User _employee;
-
         public User Employee
         {
             get { return _employee; }

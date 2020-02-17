@@ -30,6 +30,7 @@ namespace AvenueOne.Core.Models.Interfaces
         bool IsBookingConflict(Booking booking);
         bool IsBookingConflict(Booking booking, Room room);
         bool IsBookingDateConflict(Booking booking);
+        Transaction Transaction { get; set; }
 
     }
 }

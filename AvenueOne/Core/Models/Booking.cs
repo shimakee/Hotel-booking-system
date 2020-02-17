@@ -25,6 +25,7 @@ namespace AvenueOne.Core.Models
                 //    _dateCheckin = new DateTime(value.Year, value.Month, value.Day);
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(DateCheckout));
+                OnPropertyChanged(nameof(LengthOfStay));
             }
         }
 
@@ -39,6 +40,7 @@ namespace AvenueOne.Core.Models
                 //    _dateCheckout = new DateTime(value.Year, value.Month, value.Day);
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(DateCheckin));
+                OnPropertyChanged(nameof(LengthOfStay));
             }
         }
 
@@ -108,6 +110,47 @@ namespace AvenueOne.Core.Models
             }
         }
 
+        private Transaction _transaction;
+
+        public Transaction Transaction
+        {
+            get { return _transaction; }
+            set { _transaction = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+        #endregion
+
+        #region Constructors
+        public Booking()
+                : base()
+            {
+                DateTime today = DateTime.Today;
+                this.DateCheckin = today;
+                this.DateCheckout = today.AddDays(1);
+                this.Occupants = 1;
+        }
+
+        public Booking(DateTime dateCheckin, DateTime dateCheckout, Room room)
+            : base()
+        {
+            this.DateCheckin = dateCheckin;
+            this.DateCheckout = dateCheckout;
+            this.Room = room;
+            this.Status = BookingStatus.reserved;
+            this.Occupants = 1;
+
+            decimal rate = this.Room.RoomType.Rate;
+            RateType rateType = this.Room.RoomType.RateType;
+
+            this.AmountTotal = ComputeAmountTotal(dateCheckin, dateCheckout, rate, rateType);
+        }
+        #endregion
+
+        #region Methods
         public bool IsBookingConflict(Booking booking)
         {
             if (booking == null)
@@ -171,7 +214,7 @@ namespace AvenueOne.Core.Models
                     break;
 
                 default:
-                    lengthOfStay =  0;
+                    lengthOfStay = 0;
                     break;
             }
 
@@ -179,33 +222,6 @@ namespace AvenueOne.Core.Models
                 throw new InvalidOperationException("Length of stay must be greater than 0.");
 
             return rate * lengthOfStay;
-        }
-
-        #endregion
-
-        #region Constructors
-        public Booking()
-                : base()
-            {
-                DateTime today = DateTime.Today;
-                this.DateCheckin = today;
-                this.DateCheckout = today.AddDays(1);
-                this.Occupants = 1;
-        }
-
-        public Booking(DateTime dateCheckin, DateTime dateCheckout, Room room)
-            : base()
-        {
-            this.DateCheckin = dateCheckin;
-            this.DateCheckout = dateCheckout;
-            this.Room = room;
-            this.Status = BookingStatus.reserved;
-            this.Occupants = 1;
-
-            decimal rate = this.Room.RoomType.Rate;
-            RateType rateType = this.Room.RoomType.RateType;
-
-            this.AmountTotal = ComputeAmountTotal(dateCheckin, dateCheckout, rate, rateType);
         }
         #endregion
 

@@ -135,6 +135,7 @@
     <Compile Include="EntityConfiguration\PersonConfiguration.cs" />
     <Compile Include="EntityConfiguration\RoomConfiguration.cs" />
     <Compile Include="EntityConfiguration\RoomTypeConfiguration.cs" />
+    <Compile Include="EntityConfiguration\TransactionConfiguration.cs" />
     <Compile Include="EntityConfiguration\UserConfiguration.cs" />
     <Compile Include="Migrations\201909070930092_InitialModel.cs" />
     <Compile Include="Migrations\201909070930092_InitialModel.Designer.cs">
@@ -195,6 +196,10 @@
     <Compile Include="Migrations\202002080629098_CreatedBookingModel.cs" />
     <Compile Include="Migrations\202002080629098_CreatedBookingModel.Designer.cs">
       <DependentUpon>202002080629098_CreatedBookingModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002170554558_CreatedTransactionModel.cs" />
+    <Compile Include="Migrations\202002170554558_CreatedTransactionModel.Designer.cs">
+      <DependentUpon>202002170554558_CreatedTransactionModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\GenericUnitOfWork.cs" />
@@ -372,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002080629098_CreatedBookingModel.resx">
       <DependentUpon>202002080629098_CreatedBookingModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002170554558_CreatedTransactionModel.resx">
+      <DependentUpon>202002170554558_CreatedTransactionModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
