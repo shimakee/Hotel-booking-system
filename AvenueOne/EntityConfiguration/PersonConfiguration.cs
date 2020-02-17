@@ -45,11 +45,11 @@ namespace AvenueOne.EntityConfiguration
             //relatioships
             HasOptional(p => p.User)
                 .WithOptionalPrincipal(u => u.Person)
-                .WillCascadeOnDelete(true);
+                .WillCascadeOnDelete(true); //  made cascade so that profile will be deleted when user is deleted.
 
             HasOptional(p => p.Customer)
                 .WithRequired(c => c.Person)
-                .WillCascadeOnDelete(true);
+                .WillCascadeOnDelete(true); //  made cascade so that profile will be deleted when customer is deleted.
         }
     }
 }

@@ -25,14 +25,19 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 base.Validate();
                 string id = ViewModel.Model.Id;
 
-                int n = await Delete();
-                if (n <= 0)
-                    throw new InvalidOperationException("Could not delete model from database.");
+                bool ConfirmDelete = _displayService.MessagePrompt($"Are you sure you want to delete? delete action will also cascade to all reference objects.", "Delete object");
 
-                //modelselected not be null after delete
-                ViewModel.ClearClassCommand.Execute(null);
+                if (ConfirmDelete)
+                {
+                    int n = await Delete();
+                    if (n <= 0)
+                        throw new InvalidOperationException("Could not delete model from database.");
 
-                _displayService.MessageDisplay($"Deleted {typeof(T)} model.\nId:{id}\nAffected rows:{n}", "Model deleted");
+                    //modelselected not be null after delete
+                    ViewModel.ClearClassCommand.Execute(null);
+
+                    _displayService.MessageDisplay($"Deleted {typeof(T)} model.\nId:{id}\nAffected rows:{n}", "Model deleted");
+                }
             }
             catch (ValidationException validationException)
             {

@@ -33,8 +33,8 @@ namespace AvenueOne.EntityConfiguration
             //relationships
             HasOptional(u => u.Person)
                 .WithOptionalDependent(p => p.User)
-                .Map(u => u.MapKey("PersonId"))
-                .WillCascadeOnDelete(true);
+                .Map(u => u.MapKey("PersonId"));
+            //.WillCascadeOnDelete(true); // place it on person only for easier maintenance
 
 
 
