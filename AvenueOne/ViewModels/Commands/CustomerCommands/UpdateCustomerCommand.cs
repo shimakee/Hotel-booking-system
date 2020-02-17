@@ -61,10 +61,17 @@ namespace AvenueOne.ViewModels.Commands.CustomerCommands
             Customer customer = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(Customer)].GetAsync(ViewModel.Model.Id)) ?? throw new InvalidOperationException("Customer does not exist.");
             ViewModel.ModelSelected.Person.Id = customer.Person.Id; // to retain id
             ViewModel.ModelSelected.Person.Customer = customer; //establish correct relationship
+            ViewModel.ModelSelected.Person.DateAdded = customer.Person.DateAdded;
             ViewModel.ModelSelected.Person.DeepCopyTo(customer.Person);
 
             return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
 
+        }
+
+        protected override void PreUpdate()
+        {
+            base.PreUpdate();
+            ViewModel.ModelSelected.Person.DateModified = DateTime.Now;
         }
     }
 }

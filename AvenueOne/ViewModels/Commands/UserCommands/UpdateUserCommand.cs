@@ -56,6 +56,7 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                     ViewModel.ModelSelected.PasswordConfirm = ViewModel.ModelSelected.Password;
                 }
 
+                PreUpdate();
                 int n = await Update();
 
                 if (n <= 0)
@@ -85,10 +86,17 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
             user.Password = ViewModel.ModelSelected.Password;
             user.PasswordConfirm = ViewModel.ModelSelected.PasswordConfirm;
             ViewModel.ModelSelected.Person.Id = user.Person.Id;
+            ViewModel.ModelSelected.Person.DateAdded = user.Person.DateAdded;
             ViewModel.ModelSelected.Person.User = user;
             ViewModel.ModelSelected.Person.DeepCopyTo(user.Person);
 
             return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
+        }
+
+        protected override void PreUpdate()
+        {
+            base.PreUpdate();
+            ViewModel.ModelSelected.Person.DateModified = DateTime.Now;
         }
     }
 }

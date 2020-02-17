@@ -23,6 +23,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
             try
             {
                 base.Validate();
+                PreUpdate();
                 int n = await Update();
                 if (n == 0)
                     throw new InvalidOperationException("Could not update model.");
@@ -56,9 +57,15 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
             if (model == null)
                 throw new InvalidOperationException("Invalid, model does not exist.");
             ViewModel.ModelSelected.Id = model.Id;
+            ViewModel.ModelSelected.DateAdded = model.DateAdded;
             ViewModel.ModelSelected.DeepCopyTo(model);
 
             return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
+        }
+
+        protected virtual void PreUpdate()
+        {
+            ViewModel.ModelSelected.DateModified = DateTime.Now;
         }
     }
 }
