@@ -54,9 +54,24 @@ namespace AvenueOne.Views.Pages
                                                                                                                 clearBookingCommand,
                                                                                                                 getAvailableRooms);
 
-            this.DataContext = bookingTab;
-
             #endregion
+
+
+            #region TransactionTab
+
+            IGenericUnitOfWork<Transaction> genericUnitOfWorkTransaction = new GenericUnitOfWork<Transaction>(context);
+            BaseClassCommand<Transaction> createTransactionCommand = new CreateClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
+            BaseClassCommand<Transaction> updateTransactionCommand = new UpdateClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
+            BaseClassCommand<Transaction> deleteTransactionCommand = new DeleteClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
+            ClearClassCommand<Transaction> clearTransactionCommand = new ClearClassCommand<Transaction>();
+            ITransactionViewModel transactionTab = new TransactionViewModel(new Transaction(), _context.Transactions.Local,
+                                                                                                                            createTransactionCommand,
+                                                                                                                            updateTransactionCommand,
+                                                                                                                            deleteTransactionCommand,
+                                                                                                                            clearTransactionCommand,
+                                                                                                                            bookingTab);
+            #endregion
+            this.DataContext = transactionTab;
         }
     }
 }

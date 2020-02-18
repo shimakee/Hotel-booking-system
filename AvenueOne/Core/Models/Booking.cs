@@ -23,9 +23,17 @@ namespace AvenueOne.Core.Models
             set { _dateCheckin = value;
                 //if (value != null) //next time make it a checkin or checkout time vlaue.
                 //    _dateCheckin = new DateTime(value.Year, value.Month, value.Day);
+                if(value != null && Room != null)
+                {
+                    this.AmountTotal = Booking.ComputeAmountTotal(this.DateCheckin, this.DateCheckout, Room.RoomType.Rate, Room.RoomType.RateType);
+                    OnPropertyChanged(nameof(AmountTotal));
+                }
+
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(DateCheckout));
                 OnPropertyChanged(nameof(LengthOfStay));
+
+
             }
         }
 
@@ -38,6 +46,12 @@ namespace AvenueOne.Core.Models
             set { _dateCheckout = value;
                 //if (value != null) //next time make it a checkin or checkout time vlaue.
                 //    _dateCheckout = new DateTime(value.Year, value.Month, value.Day);
+                if (value != null && Room != null)
+                {
+                    this.AmountTotal = Booking.ComputeAmountTotal(this.DateCheckin, this.DateCheckout, Room.RoomType.Rate, Room.RoomType.RateType);
+                    OnPropertyChanged(nameof(AmountTotal));
+                }
+
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(DateCheckin));
                 OnPropertyChanged(nameof(LengthOfStay));

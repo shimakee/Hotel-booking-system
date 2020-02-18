@@ -47,7 +47,9 @@ namespace AvenueOne.Core.Models
         public List<Booking> Bookings
         {
             get { return _bookings; }
-            set { _bookings = value; }
+            set { _bookings = value;
+                OnPropertyChanged();
+            }
         }
 
 
