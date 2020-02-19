@@ -9,6 +9,7 @@ using System.Linq;
 using AvenueOne.Core.Models;
 using AvenueOne.Core.Models.Interfaces;
 using System.Data.Entity.Validation;
+using System.Collections.ObjectModel;
 
 namespace AvenueOne.Migrations
 {
@@ -135,10 +136,10 @@ namespace AvenueOne.Migrations
             #region Seed Transactions
 
 
-            Transaction transaction = new Transaction(user, customer, new List<Booking>() { booking, booking2 });
-            Transaction transaction2 = new Transaction(user2, customer2, new List<Booking>() {booking3});
-            Transaction transaction3 = new Transaction(user, customer2, new List<Booking>() {booking4});
-            Transaction transaction4 = new Transaction(user2, customer, new List<Booking>() {booking5 });
+            Transaction transaction = new Transaction(user, customer, new ObservableCollection<Booking>() { booking, booking2 });
+            Transaction transaction2 = new Transaction(user2, customer2, new ObservableCollection<Booking>() {booking3});
+            Transaction transaction3 = new Transaction(user, customer2, new ObservableCollection<Booking>() {booking4});
+            Transaction transaction4 = new Transaction(user2, customer, new ObservableCollection<Booking>() {booking5 });
 
             context.Transactions.AddRange(new List<Transaction>() { transaction, transaction2, transaction3, transaction4});
             #endregion

@@ -2,6 +2,8 @@
 using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace AvenueOne.Core.Models
             public Transaction()
                 :base()
             {
-                this.Bookings = new List<Booking>();
+                this.Bookings = new ObservableCollection<Booking>();
                 this.Status = TransactionStatus.open;
             }
 
@@ -26,7 +28,7 @@ namespace AvenueOne.Core.Models
             this.Customer = customer;
         }
 
-        public Transaction(User employee, Customer customer, List<Booking> bookings)
+        public Transaction(User employee, Customer customer, ObservableCollection<Booking> bookings)
             :this(employee, customer)
         {
             this.Bookings = bookings;
@@ -43,8 +45,8 @@ namespace AvenueOne.Core.Models
             }
         }
 
-        private List<Booking> _bookings;
-        public List<Booking> Bookings
+        private ObservableCollection<Booking> _bookings;
+        public ObservableCollection<Booking> Bookings
         {
             get { return _bookings; }
             set { _bookings = value;
@@ -54,6 +56,7 @@ namespace AvenueOne.Core.Models
 
 
         private Customer _customer;
+        [Required(ErrorMessage = "A customer must be selected.")]
         public Customer Customer
         {
             get { return _customer; }

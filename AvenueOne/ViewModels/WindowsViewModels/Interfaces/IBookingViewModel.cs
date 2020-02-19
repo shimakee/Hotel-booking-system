@@ -22,6 +22,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
         ObservableCollection<RoomType> RoomTypeList { get; set; }
 
         List<Room> GetAvailableRooms();
+        List<Room> GetAvailableRooms(List<Booking> bookingList);
         List<Room> GetAvailableRooms(List<Booking> bookingList, Booking currentBooking, List<Room> roomList, RoomType roomTypeSelected);
     }
 }

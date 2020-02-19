@@ -122,6 +122,10 @@ namespace AvenueOne.ViewModels.TabViewModels
         {
             return GetAvailableRooms(this.ModelList.ToList(), this.ModelSelected, this.RoomList.ToList(), this.RoomTypeSelected);
         }
+        public List<Room> GetAvailableRooms(List<Booking> bookingList)
+        {
+            return GetAvailableRooms(bookingList, this.ModelSelected, this.RoomList.ToList(), this.RoomTypeSelected);
+        }
         public List<Room> GetAvailableRooms(List<Booking> bookingList, Booking currentBooking, List<Room> roomList, RoomType roomTypeSelected)
         {
             if (roomList == null)

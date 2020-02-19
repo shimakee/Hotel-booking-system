@@ -205,6 +205,10 @@
     <Compile Include="Migrations\202002170825572_AddedTransactionStatus.Designer.cs">
       <DependentUpon>202002170825572_AddedTransactionStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002190845380_MadeRequiredProperties.cs" />
+    <Compile Include="Migrations\202002190845380_MadeRequiredProperties.Designer.cs">
+      <DependentUpon>202002190845380_MadeRequiredProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\GenericUnitOfWork.cs" />
     <Compile Include="Persistence\Repositories\AmenitiesRepository.cs" />
@@ -220,8 +224,11 @@
     <Compile Include="Core\IRepositories\IRepository.cs" />
     <Compile Include="Services\Interfaces\IWindowGenerator.cs" />
     <Compile Include="ViewModels\BaseObservableViewModel.cs" />
+    <Compile Include="ViewModels\Commands\BookingCommands\AddBookingCommand.cs" />
     <Compile Include="ViewModels\Commands\BookingCommands\CreateBookingCommand.cs" />
     <Compile Include="ViewModels\Commands\BookingCommands\GetAvailableRoomsCommand.cs" />
+    <Compile Include="ViewModels\Commands\BookingCommands\GetAvailableRoomsInTransactionCommand.cs" />
+    <Compile Include="ViewModels\Commands\BookingCommands\RemoveBookingCommand.cs" />
     <Compile Include="ViewModels\Commands\ClassCommands\BaseClassCommand.cs" />
     <Compile Include="ViewModels\Commands\ClassCommands\ClearClassCommand.cs" />
     <Compile Include="ViewModels\Commands\ClassCommands\CreateClassCommand.cs" />
@@ -389,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002170825572_AddedTransactionStatus.resx">
       <DependentUpon>202002170825572_AddedTransactionStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002190845380_MadeRequiredProperties.resx">
+      <DependentUpon>202002190845380_MadeRequiredProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

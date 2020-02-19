@@ -75,11 +75,8 @@
                                             Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
 
                         <!--row 2-->
-                        <TextBlock Grid.Row="2" Grid.Column="0"
-                                   Text="Room Selected:"/>
-                        <TextBox Grid.Row="2" Grid.Column="1"
-                            IsEnabled="False" Text="{Binding BookingViewModel.ModelSelected.Room.Name}"/>
-                        <TextBlock Grid.Row="2" Grid.Column="2"
+                        
+                        <!--<TextBlock Grid.Row="3" Grid.Column="2"
                                    Text="Room type:"/>
                         <ComboBox Grid.Row="2" Grid.Column="3"
                                   ItemsSource="{Binding BookingViewModel.RoomTypeList}"
@@ -89,14 +86,16 @@
                                     <TextBlock Text="{Binding Name}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
-                        </ComboBox>
+                        </ComboBox>-->
 
                         <!--<TextBlock Grid.Row="2" Grid.Column="0"
                                    Text="Rooms :"/>-->
 
                         <!-- row 3-->
-                        <Button Content="Show available rooms" Grid.Row="3"  Grid.Column="1" 
-                                            Command="{Binding BookingViewModel.GetAvailableRoomsCommand}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0"
+                                   Text="Room Selected:"/>
+                        <TextBox Grid.Row="3" Grid.Column="1"
+                            IsEnabled="False" Text="{Binding BookingViewModel.ModelSelected.Room.Name}"/>
 
                         <TextBlock Grid.Row="3" Grid.Column="2"
                                        Text="Occupants :"/>
@@ -118,6 +117,8 @@
                         </Grid>
                             
                             <!-- row 4-->
+                        <Button Content="Show available rooms" Grid.Row="4"  Grid.Column="1" 
+                                            Command="{Binding GetAvailableRoomsInTransactionCommand}"/>
                         <TextBlock Grid.Row="4" Grid.Column="2"
                                    Text="Total amount :"/>
                         <TextBox Grid.Row="4" Grid.Column="3"
@@ -158,9 +159,10 @@
                             <Button Grid.Row="0"
                                 Content="New customer"/>
                             <!--Row 1 -->
-                            <TextBox  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
-                            <Button Grid.Row="1" Grid.Column="3"
-                                Content="Search"/>
+                            <TextBox  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                      Text="{Binding CustomerSelected.Person.FullName}"/>
+                            <!--<Button Grid.Row="1" Grid.Column="3"
+                                Content="Search"/>-->
                             <!--Row 2-->
                             <DataGrid  Grid.Row="2" Grid.ColumnSpan="5"
                                        Margin="0 10"
@@ -177,9 +179,9 @@
 
                         <!--Row 6-->
                         <Button Grid.Row="6" Grid.Column="0"
-                                Content="Add booking"/>
+                                Content="Add booking" Command="{Binding AddBookingCommand}"/>
                         <Button Grid.Row="6" Grid.Column="1"
-                                Content="Remove booking"/>
+                                Content="Remove booking" Command="{Binding RemoveBookingCommand}"/>
 
                         <!--Row 7-->
                         <DataGrid  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5"

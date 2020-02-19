@@ -64,11 +64,19 @@ namespace AvenueOne.Views.Pages
             BaseClassCommand<Transaction> updateTransactionCommand = new UpdateClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
             BaseClassCommand<Transaction> deleteTransactionCommand = new DeleteClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
             ClearClassCommand<Transaction> clearTransactionCommand = new ClearClassCommand<Transaction>();
+            AddBookingCommand addBookingCommand = new AddBookingCommand(displayService);
+            RemoveBookingCommand removeBookingCommand = new RemoveBookingCommand(displayService);
+            GetAvailableRoomsInTransactionCommand getAvailableRoomsCommand = new GetAvailableRoomsInTransactionCommand(displayService);
             ITransactionViewModel transactionTab = new TransactionViewModel(new Transaction(), _context.Transactions.Local,
+                                                                                                                            _context.Customers.Local,
+                                                                                                                            _context.Users.Local,
                                                                                                                             createTransactionCommand,
                                                                                                                             updateTransactionCommand,
                                                                                                                             deleteTransactionCommand,
                                                                                                                             clearTransactionCommand,
+                                                                                                                            addBookingCommand,
+                                                                                                                            removeBookingCommand,
+                                                                                                                            getAvailableRoomsCommand,
                                                                                                                             bookingTab);
             #endregion
             this.DataContext = transactionTab;

@@ -98,6 +98,7 @@ namespace AvenueOne.Core.Models
         }
 
         private Room _room;
+
         [Required(ErrorMessage ="Room is required")]
         public Room Room
         {

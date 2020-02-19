@@ -2,6 +2,7 @@
 using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace AvenueOne.Core.Models.Interfaces
     public interface ITransaction : IBaseObservableModel<Transaction>
     {
         //List<Room> Rooms { get; set; } // rooms being occupied
-        List<Booking> Bookings { get; set; } // or put it in booking as well
+        ObservableCollection<Booking> Bookings { get; set; } // or put it in booking as well
         Customer Customer { get; set; }
         User Employee { get; set; }
         TransactionStatus Status { get; set; }

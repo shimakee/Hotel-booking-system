@@ -38,8 +38,10 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
                 Booking model = ViewModel.ModelSelected;
 
                 Booking booking = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(Booking)]
-                                                                                    .Find(b => model.DateCheckin >= b.DateCheckin && model.DateCheckin <= b.DateCheckout && model.Room.Id == b.Room.Id ||
-                                                                                                b.DateCheckin >= model.DateCheckout && b.DateCheckout <= model.DateCheckout && model.Room.Id == b.Room.Id)
+                                                                                    .Find(b => (b.DateCheckin.Date >= model.DateCheckin.Date && b.DateCheckin.Date <= model.DateCheckout.Date && b.Room.Id == model.Room.Id) ||
+                                                                                                    (b.DateCheckout.Date >= model.DateCheckin.Date && b.DateCheckout.Date <= model.DateCheckout.Date && b.Room.Id == model.Room.Id) ||
+                                                                                                    (model.DateCheckin.Date >= b.DateCheckin.Date && model.DateCheckin.Date <= b.DateCheckout.Date && b.Room.Id == model.Room.Id) ||
+                                                                                                    (model.DateCheckout.Date >= b.DateCheckin.Date && model.DateCheckout.Date <= b.DateCheckout.Date && b.Room.Id == model.Room.Id))
                                                                                     .FirstOrDefault());
                 if (booking != null)
                     throw new InvalidOperationException("There is a booking conflict.");
