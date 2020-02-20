@@ -37,6 +37,13 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
 
                 ViewModel.Bookings.Remove(ViewModel.BookingViewModel.ModelSelected);
 
+                //Delete Booking, 
+                //no need to Check if booking belongs to other transaction - since booking should only belong to one transaction
+                //only check when transfering booking. to maintain consistency of relationship
+                if (ViewModel.BookingViewModel.ModelSelected != null && ViewModel.BookingViewModel.Model != null)
+                    ViewModel.BookingViewModel.DeleteClassCommand.Execute(null);
+
+
                 ViewModel.BookingViewModel.ClearClassCommand.Execute(null);
             }
             catch (ValidationException valEx)

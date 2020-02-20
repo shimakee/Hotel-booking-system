@@ -16,7 +16,7 @@ namespace AvenueOne.ViewModels
     public class ObservableWindowViewModel<T> : BaseObservableViewModel<T>, IObservableWindowViewModel<T> where T : class, IBaseObservableModel<T>, new()
     {
         public Window Window { get; }
-        public BaseWindowCommand CloseWindowCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         public ObservableWindowViewModel(Window window, 
                                                                     T model,
@@ -29,9 +29,11 @@ namespace AvenueOne.ViewModels
             :base(model, modelList, createClassCommand, updateClassCommand, deleteClassCommand, clearClassCommand)
         {
             this.Window = window;
+            closeWindowCommand.ViewModel = this;
+            closeWindowCommand.Window = window;
             this.CloseWindowCommand = closeWindowCommand;
-            this.CloseWindowCommand.ViewModel = this;
-            this.CloseWindowCommand.Window = window;
+            //this.CloseWindowCommand.ViewModel = this;
+            //this.CloseWindowCommand.Window = window;
         }
     }
 }

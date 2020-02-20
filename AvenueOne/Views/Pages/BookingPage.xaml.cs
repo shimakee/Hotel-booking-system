@@ -7,8 +7,10 @@ using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.BookingCommands;
 using AvenueOne.ViewModels.Commands.ClassCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.TabViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
+using AvenueOne.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +69,8 @@ namespace AvenueOne.Views.Pages
             AddBookingCommand addBookingCommand = new AddBookingCommand(displayService);
             RemoveBookingCommand removeBookingCommand = new RemoveBookingCommand(displayService);
             GetAvailableRoomsInTransactionCommand getAvailableRoomsCommand = new GetAvailableRoomsInTransactionCommand(displayService);
+            ShowDialogWindowCommand showDialogWindowCommand = new ShowDialogWindowCommand();
+            CustomerWindow customerWindow = new CustomerWindow(context);
             ITransactionViewModel transactionTab = new TransactionViewModel(new Transaction(), _context.Transactions.Local,
                                                                                                                             _context.Customers.Local,
                                                                                                                             _context.Users.Local,
@@ -77,7 +81,9 @@ namespace AvenueOne.Views.Pages
                                                                                                                             addBookingCommand,
                                                                                                                             removeBookingCommand,
                                                                                                                             getAvailableRoomsCommand,
-                                                                                                                            bookingTab);
+                                                                                                                            showDialogWindowCommand,
+                                                                                                                            bookingTab,
+                                                                                                                            customerWindow);
             #endregion
             this.DataContext = transactionTab;
         }

@@ -1,0 +1,143 @@
+﻿<Window x:Class="AvenueOne.Views.Windows.CustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AvenueOne.Views.Windows"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:converters="clr-namespace:AvenueOne.Converters"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        WindowStyle="None"
+        Title="CustomerWindow" Height="330" Width="300">
+
+    <Window.Resources>
+        <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+    </Window.Resources>
+    
+    <Border CornerRadius="10" Margin="5 10">
+        <Grid IsEnabled="{Binding UserAccount.IsAdmin}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--User Info - left box-->
+            <StackPanel Grid.Column="0" Margin="10">
+                <Grid Margin="0 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Content="Clear content" Grid.Column="1" 
+                                        Command="{Binding CustomerTab.ClearClassCommand}"
+                                    />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Customer Id:" Grid.Column="0"/>
+                    <TextBox IsEnabled="False"
+                                    x:Name="Usernames" Text="{Binding CustomerTab.Model.Id}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                </Grid>
+
+                <Grid Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Firstname:" Grid.Column="0"/>
+                    <TextBox x:Name="CustomerFirstname" Grid.Column="1" HorizontalAlignment="Stretch"
+                                         Text="{Binding CustomerTab.Profile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="93*"/>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="21*"/>
+                        <ColumnDefinition Width="124*"/>
+                        <ColumnDefinition Width="45*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Middlename:" Grid.Column="0"/>
+                    <TextBox x:Name="CustomerMiddlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="5"
+                                         Text="{Binding CustomerTab.Profile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Lastname:" Grid.Column="0"/>
+                    <TextBox x:Name="CustomerLastname"  Grid.Column="1" HorizontalAlignment="Stretch"
+                                         Text="{Binding CustomerTab.Profile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Suffix:" Grid.Column="0"/>
+                    <TextBox x:Name="CustomerSuffix" Grid.Column="1" HorizontalAlignment="Stretch"
+                             Text="{Binding CustomerTab.Profile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                </Grid>
+
+                <ComboBox x:Name="CustomerGender" SelectedIndex="0"  ItemsSource="{Binding CustomerTab.Profile.GenderValues}" 
+                                                  SelectedValue="{Binding CustomerTab.Profile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+
+                <ComboBox x:Name="CustomerCivilStatus" SelectedIndex="0" ItemsSource="{Binding CustomerTab.Profile.CivilStatusValues}"
+                                                  SelectedValue="{Binding CustomerTab.Profile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+
+                <Grid IsEnabled="{Binding CustomerTab.Profile.WasMaiden}" Visibility="{Binding CustomerTab.Profile.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}">
+                    <!--<Grid>-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="94*"/>
+                        <ColumnDefinition Width="173*"/>
+                        <ColumnDefinition Width="110*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Maiden name:" Grid.Column="0"/>
+                    <TextBox x:Name="CustomerMaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
+                             Text="{Binding CustomerTab.Profile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Brithdate:" Grid.Column="0"/>
+                    <DatePicker x:Name="CustomerBirthdate" Grid.Column="1"
+                                            SelectedDate="{Binding CustomerTab.Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                            Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
+                </Grid>
+
+                <Button Content="Add new Customer"
+                                        Command="{Binding CustomerTab.CreateClassCommand}"/>
+                <Button Content="Cancel"
+                                    Command="{Binding CloseWindowCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

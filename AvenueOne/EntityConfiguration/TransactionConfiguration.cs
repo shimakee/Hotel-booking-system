@@ -25,7 +25,8 @@ namespace AvenueOne.EntityConfiguration
 
             HasRequired(t => t.Employee);
 
-            HasMany(t => t.Bookings);
+            HasMany(t => t.Bookings)
+                .WithRequired(b=> b.Transaction);
         }
     }
 }

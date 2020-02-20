@@ -13,6 +13,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
     public interface ITransactionViewModel : IBaseObservableViewModel<Transaction>
     {
         ICommand GetAvailableRoomsInTransactionCommand { get; set; }
+        ICommand OpenCustomerWindowCommand { get; set; }
+        ICommand AddBookingCommand { get; set; }
+        ICommand RemoveBookingCommand { get; set; }
         IBookingViewModel BookingViewModel { get; set; }
         ObservableCollection<Booking> Bookings { get; set; }
         Customer CustomerSelected { get; set; }

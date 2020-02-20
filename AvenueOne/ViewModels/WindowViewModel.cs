@@ -17,7 +17,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
     public abstract class WindowViewModel : AccountViewModel, IWindowViewModel
     {
         public Window Window { get; }
-        public BaseWindowCommand CloseWindowCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         //public WindowViewModel(Window window, 
         //                                        ShowWindowCommand showWindowCommand, 
@@ -29,11 +29,13 @@ namespace AvenueOne.ViewModels.WindowsViewModels
             this.Window = window;
             //this.ShowWindowCommand = showWindowCommand;
             //this.ShowDialogWindowCommand = showDialogWindowCommand;
+            closeWindowCommand.ViewModel = this;
+            closeWindowCommand.Window = window;
             this.CloseWindowCommand = closeWindowCommand;
             //this.ShowWindowCommand.ViewModel = this;
             //this.ShowDialogWindowCommand.ViewModel = this;
-            this.CloseWindowCommand.ViewModel = this;
-            this.CloseWindowCommand.Window = window;
+            //this.CloseWindowCommand.ViewModel = this;
+            //this.CloseWindowCommand.Window = window;
         }
     }
 }

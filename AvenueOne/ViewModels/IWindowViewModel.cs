@@ -13,6 +13,6 @@ namespace AvenueOne.Interfaces
     public interface IWindowViewModel : IAccountViewModel
     {
         Window Window { get; }
-        BaseWindowCommand CloseWindowCommand { get; set; }
+        ICommand CloseWindowCommand { get; set; }
     }
 }

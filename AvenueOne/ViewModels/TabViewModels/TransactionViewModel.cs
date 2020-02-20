@@ -3,7 +3,9 @@ using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.BookingCommands;
 using AvenueOne.ViewModels.Commands.ClassCommands;
+using AvenueOne.ViewModels.Commands.WindowCommands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
+using AvenueOne.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,7 +30,9 @@ namespace AvenueOne.ViewModels.TabViewModels
                                                             AddBookingCommand addBookingCommand,
                                                             RemoveBookingCommand removeBookingCommand,
                                                             GetAvailableRoomsInTransactionCommand getAvailableRoomsCommand,
-                                                            IBookingViewModel bookingViewModel)
+                                                            ShowDialogWindowCommand showDialogWindowCommand,
+                                                            IBookingViewModel bookingViewModel,
+                                                            CustomerWindow customerWindow)
                 :base(transaction, transactionList, createClassCommand, updateClassCommand, deleteClassCommand, clearClassCommand)
             {
                 this.Bookings = new ObservableCollection<Booking>();
@@ -39,9 +43,13 @@ namespace AvenueOne.ViewModels.TabViewModels
                 addBookingCommand.ViewModel = this;
                 removeBookingCommand.ViewModel = this;
                 getAvailableRoomsCommand.ViewModel = this;
+                showDialogWindowCommand.ViewModel = this;
+                showDialogWindowCommand.Window = customerWindow;
                 this.AddBookingCommand = addBookingCommand;
                 this.RemoveBookingCommand = removeBookingCommand;
                 this.GetAvailableRoomsInTransactionCommand = getAvailableRoomsCommand;
+                this.OpenCustomerWindowCommand = showDialogWindowCommand;
+
             }
         #endregion
 
@@ -50,6 +58,7 @@ namespace AvenueOne.ViewModels.TabViewModels
             public ICommand GetAvailableRoomsInTransactionCommand { get; set; }
             public ICommand AddBookingCommand { get; set; }
             public ICommand RemoveBookingCommand { get; set; }
+            public ICommand OpenCustomerWindowCommand { get; set; }
 
             private IBookingViewModel _bookingViewModel;
 

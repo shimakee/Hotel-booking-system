@@ -260,6 +260,7 @@
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\TabViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\WindowsViewModels\CustomerWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IAdminPageViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IBookingViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModels\Interfaces\IRoomViewModel.cs" />
@@ -300,6 +301,9 @@
     <Compile Include="Views\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\CustomerWindow.xaml.cs">
+      <DependentUpon>CustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -312,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\CustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
