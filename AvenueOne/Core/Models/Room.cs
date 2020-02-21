@@ -2,6 +2,7 @@
 using AvenueOne.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -59,6 +60,15 @@ namespace AvenueOne.Core.Models
                     OnPropertyChanged();
                 }
             }
+
+        private ObservableCollection<Booking> _bookings;
+        public ObservableCollection<Booking> Bookings
+        {
+            get { return _bookings; }
+            set { _bookings = value;
+                OnPropertyChanged();
+            }
+        }
 
         //public IList<Booking> Bookings { get; set; }
         #endregion

@@ -39,6 +39,8 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
 
                 //reassign model - since it will be turned to null when removing it form booking.
                 ViewModel.BookingViewModel.Model = ViewModel.BookingViewModel.ModelList.Where(b => b.Id == id).FirstOrDefault();
+                //remove booking reference made to room.
+                ViewModel.BookingViewModel.Model.Room.Bookings.Remove(ViewModel.BookingViewModel.Model);
                 //Delete Booking, 
                 //no need to Check if booking belongs to other transaction - since booking should only belong to one transaction
                 //only check when transfering booking. to maintain consistency of relationship

@@ -331,5 +331,42 @@
                 </GroupBox>
             </Grid>
         </TabItem>
+
+        <TabItem Header="Occupancy list">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                
+                <!--Month Label-->
+                <StackPanel Grid.Row="0" Grid.Column="1"
+                            HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button  Margin="5"
+                        FontFamily="Marlett" FontSize="10" Content="3"/>
+                    <!--<TextBlock Text="{Binding ViewDate}"/>-->
+                    <TextBlock Margin="10 0" VerticalAlignment="Center"
+                        Text="Month"/>
+                    <Button  Margin="5"
+                        FontFamily="Marlett" FontSize="10" Content="4"/>
+                    <Button Margin="5"
+                         FontFamily="Marlett" FontSize="10" Content="3"/>
+                    <!--<TextBlock Text="{Binding ViewDate}"/>-->
+                    <TextBlock Margin="10 0" VerticalAlignment="Center"
+                        Text="Year"/>
+                    <Button Margin="5"
+                        FontFamily="Marlett" FontSize="10" Content="4" />
+                </StackPanel>
+                
+                
+            </Grid>
+            
+        </TabItem>
     </TabControl>
 </Page>
