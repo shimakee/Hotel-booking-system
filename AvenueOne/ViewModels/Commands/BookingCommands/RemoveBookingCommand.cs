@@ -32,11 +32,13 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
             {
                 if (ViewModel.BookingViewModel.ModelSelected == null || ViewModel.Bookings == null)
                     throw new InvalidOperationException("There must ba a booking entry.");
-                //if (!ViewModel.BookingViewModel.ModelSelected.IsValid)
-                //    throw new ValidationException("Booking must have a valid entry.");
+                if (!ViewModel.BookingViewModel.ModelSelected.IsValid)
+                    throw new ValidationException("Booking must have a valid entry.");
+                string id = ViewModel.BookingViewModel.Model.Id;
+                ViewModel.Bookings.Remove(ViewModel.BookingViewModel.Model);
 
-                ViewModel.Bookings.Remove(ViewModel.BookingViewModel.ModelSelected);
-
+                //reassign model - since it will be turned to null when removing it form booking.
+                ViewModel.BookingViewModel.Model = ViewModel.BookingViewModel.ModelList.Where(b => b.Id == id).FirstOrDefault();
                 //Delete Booking, 
                 //no need to Check if booking belongs to other transaction - since booking should only belong to one transaction
                 //only check when transfering booking. to maintain consistency of relationship
