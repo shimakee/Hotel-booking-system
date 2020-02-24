@@ -98,8 +98,97 @@ namespace AvenueOne.Core.Models
         }
         #endregion
 
+        #region Methods
+
+        public List<RoomStatus> GetAvailabilityForMonth(int year, int month)
+        {
+            List<RoomStatus> availabilityForMonth = new List<RoomStatus>();
+            int daysInMonth = DateTime.DaysInMonth(year, month);
+            DateTime date = new DateTime(year, month, 1);
+
+            //no bookings so all true;
+            if (Bookings == null || Bookings.Count <= 0)
+            {
+                for (int i = 0; i < daysInMonth; i++)
+                {
+                    availabilityForMonth.Add(RoomStatus.vacant);
+                }
+            }
+            else
+            {
+                List<Booking> bookings = Bookings.Where(b => b.IsBookingDateConflict(date, date.AddDays(daysInMonth-1))).ToList();
+                for (int i = 0; i < daysInMonth; i++)
+                {
+                    RoomStatus isAvailable = RoomStatus.vacant;
+                    if (i != 0)
+                        date.AddDays(1);
+
+                    foreach (var item in bookings)
+                    {
+                        if (item.IsDateBetweenBookingDate(date))
+                        {
+                            if (item.Status == BookingStatus.checkedin)
+                            {
+                                isAvailable = RoomStatus.occupied;
+                                break;
+                            }
+                            if (item.Status == BookingStatus.reserved)
+                            {
+                                isAvailable = RoomStatus.booked;
+                                break;
+                            }
+                        }
+                    }
+                    availabilityForMonth.Add(isAvailable);
+                }
+            }
+
+            return availabilityForMonth;
+        }
+
+        //public bool IsRoomAvailableOnDate(DateTime date)
+        //{
+        //    if (Bookings == null)
+        //        return true;
+
+        //    if (Bookings.Count <= 0)
+        //        return true;
+
+        //    foreach (var item in Bookings)
+        //    {
+        //        if (item.IsDateBetweenBookingDate(date))
+        //            return false;
+        //    }
+
+        //    return true;
+        //}
+
+        public RoomStatus GetRoomStatus(DateTime date)
+        {
+            if (Bookings == null)
+                return RoomStatus.vacant;
+
+            if (Bookings.Count <= 0)
+                return RoomStatus.vacant;
+
+            foreach (var item in Bookings)
+            {
+                if (item.IsDateBetweenBookingDate(date))
+                {
+                    if(item.Status == BookingStatus.checkedin)
+                        return RoomStatus.occupied;
+                    if (item.Status == BookingStatus.reserved)
+                        return RoomStatus.booked;
+                }
+            }
+
+            return RoomStatus.vacant;
+        }
+
+        #endregion
+
         #region Overrides
-            public override bool Equals(object obj)
+        public override bool Equals(object obj)
             {
                 if (obj == null)
                     return false;

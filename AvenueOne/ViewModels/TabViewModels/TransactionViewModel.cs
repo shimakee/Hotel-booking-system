@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Core.Models;
+using AvenueOne.Core.Models.Interfaces;
 using AvenueOne.Models;
 using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.Commands.BookingCommands;
@@ -9,6 +10,7 @@ using AvenueOne.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,12 +52,54 @@ namespace AvenueOne.ViewModels.TabViewModels
                 this.GetAvailableRoomsInTransactionCommand = getAvailableRoomsCommand;
                 this.OpenCustomerWindowCommand = showDialogWindowCommand;
 
-            }
+                CurrentDateViewed = DateTime.Today;
+                this.BookingViewModel.RoomList.CollectionChanged += OnCollectionChanged;
+
+                List<Room> rooms = this.BookingViewModel.RoomList.ToList();
+                OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
+
+
+        }
         #endregion
 
         #region Properties
 
-            public ICommand GetAvailableRoomsInTransactionCommand { get; set; }
+        private DateTime _currentDateViewed;
+
+        public DateTime CurrentDateViewed
+        {
+            get { return _currentDateViewed; }
+            set { _currentDateViewed = value;
+                if(value != null)
+                {
+                    if(value.Year != _currentDateViewed.Year || value.Month != _currentDateViewed.Month)
+                    {
+                        List<Room> rooms = this.BookingViewModel.RoomList.ToList();
+                        OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
+                    }
+
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
+        //public Tuple<List<Room>, Dictionary<string, List<bool>>> OccupancyList
+        private Dictionary<Room, List<Occupancy>> _occupancyList;
+        public Dictionary<Room, List<Occupancy>> OccupancyList
+        {
+            get
+            {
+                return _occupancyList;
+            }
+            set
+            {
+                _occupancyList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand GetAvailableRoomsInTransactionCommand { get; set; }
             public ICommand AddBookingCommand { get; set; }
             public ICommand RemoveBookingCommand { get; set; }
             public ICommand OpenCustomerWindowCommand { get; set; }
@@ -116,6 +160,64 @@ namespace AvenueOne.ViewModels.TabViewModels
 
         #region Methods
 
+        public Dictionary<Room, List<Occupancy>> GenerateOccupancyList(List<Room> rooms, DateTime currentDate)
+        {
+            Dictionary<Room, List<Occupancy>> occupancyList = new Dictionary<Room, List<Occupancy>>();
+            foreach (var room in rooms)
+            {
+                if (!occupancyList.ContainsKey(room))
+                {
+                    List<DateTime> getDatesInAMonth = GetDatesInAMonth(currentDate);
+                    List<Occupancy> availabilityList = new List<Occupancy>();
+
+                    foreach (var date in getDatesInAMonth)
+                    {
+                        var occupancy = new Occupancy(date, room.GetRoomStatus(date));
+                        availabilityList.Add(occupancy);
+                    }
+                    occupancyList.Add(room, availabilityList);
+                }
+            }
+
+            return occupancyList;
+        }
+
+        public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            List<Room> rooms = this.BookingViewModel.RoomList.ToList();
+            OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
+
+            //if (e.NewItems != null)
+            //{
+            //    foreach (var item in e.NewItems)
+            //    {
+            //        Debug.WriteLine(item);
+            //    }
+            //}
+
+            //if (e.OldItems != null)
+            //{
+            //    foreach (var item in e.OldItems)
+            //    {
+            //        Debug.WriteLine(item);
+            //    }
+            //}
+        }
+
+        private List<DateTime> GetDatesInAMonth(DateTime date)
+        {
+            List<DateTime> datesInAMonth = new List<DateTime>();
+            int year = date.Year;
+            int month = date.Month;
+            int daysInAMonth = DateTime.DaysInMonth(year, month);
+
+            for (int i = 1; i <= daysInAMonth; i++)
+            {
+                datesInAMonth.Add(new DateTime(year, month, i));
+            }
+
+            return datesInAMonth;
+        }
         public List<Room> GetAvailableRooms()
         {
             List<Booking> bookingList = BookingViewModel.ModelList.ToList();

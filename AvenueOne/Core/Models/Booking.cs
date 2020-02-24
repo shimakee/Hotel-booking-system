@@ -204,6 +204,29 @@ namespace AvenueOne.Core.Models
             return isConflict;
         }
 
+        public bool IsBookingDateConflict(DateTime startDate, DateTime endDate)
+        {
+            if (startDate == null || endDate == null)
+                throw new ArgumentNullException("Dates cannot be null.");
+            if (startDate >= endDate)
+                throw new InvalidOperationException("start date must be less than end date.");
+
+            bool isConflict = this.DateCheckin.Date >= startDate.Date && this.DateCheckin.Date <= endDate.Date ||
+                this.DateCheckout.Date >= startDate.Date && this.DateCheckout.Date <= endDate.Date ||
+                startDate.Date >= this.DateCheckin.Date && startDate.Date <= this.DateCheckout.Date ||
+                endDate.Date >= this.DateCheckin.Date && endDate.Date <= this.DateCheckout.Date;
+
+            return isConflict;
+        }
+
+        public bool IsDateBetweenBookingDate(DateTime date)
+        {
+            if (date == null)
+                return false;
+
+            return this.DateCheckin.Date <= date.Date && this.DateCheckout.Date >= date.Date;
+        }
+
         public static decimal ComputeAmountTotal(DateTime dateCheckin, DateTime dateCheckout, decimal rate, RateType rateType)
         {
             decimal lengthOfStay = 0;

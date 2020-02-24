@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Core.Models.Interfaces
 {
+    public enum RoomStatus
+    {
+        booked, //reserved
+        occupied, // checkedin
+        vacant //free
+    }
     public interface IRoom : IBaseObservableModel<Room>
     {
         string Name { get; set; }
@@ -14,5 +20,8 @@ namespace AvenueOne.Core.Models.Interfaces
         int MaxOccupants { get; set; }
         //string Details { get; set; }
         RoomType RoomType { get; set; }
+        RoomStatus GetRoomStatus(DateTime date);
+        //bool IsRoomAvailableOnDate(DateTime date);
+        List<RoomStatus> GetAvailabilityForMonth(int year, int month);
     }
 }

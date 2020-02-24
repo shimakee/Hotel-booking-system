@@ -363,8 +363,42 @@
                     <Button Margin="5"
                         FontFamily="Marlett" FontSize="10" Content="4" />
                 </StackPanel>
-                
-                
+
+                <!-- Room List data grid-->
+                <DataGrid  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                            ItemsSource="{Binding OccupancyList}" 
+                               IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Rooms" Binding="{Binding Key.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Room type" Binding="{Binding Key.RoomType}" Width=".5*"/>
+                        <DataGridTextColumn Header="Max Occupants" Binding="{Binding Key.MaxOccupants}" Width=".5*"/>
+                        <DataGridTextColumn Header="Rate" Binding="{Binding Key.RoomType.Rate}" Width=".5*"/>
+                        <DataGridTextColumn Header="Rate type" Binding="{Binding Key.RoomType.RateType}" Width=".5*"/>
+                        
+                         <!--bookings data grid-->
+                        <DataGridTemplateColumn Header="Bookings" Width="6*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding Value}">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Width="auto">
+                                                    <TextBlock Text="{Binding Date, StringFormat='{}{0: d ddd}'}"/>
+                                                    <TextBlock Text="{Binding RoomStatus}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
             
         </TabItem>
