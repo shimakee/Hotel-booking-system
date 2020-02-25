@@ -98,6 +98,12 @@ namespace AvenueOne.Core.Models
         }
         #endregion
 
+        #region Utilities
+
+            public int[] StatusValues { get { return (int[])Enum.GetValues(typeof(RoomStatus)); } }
+
+        #endregion
+
         #region Methods
 
         public List<RoomStatus> GetAvailabilityForMonth(int year, int month)

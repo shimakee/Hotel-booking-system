@@ -67,6 +67,20 @@ namespace AvenueOne.ViewModels.TabViewModels
 
         #region Properties
 
+        private Transaction _modelSelected;
+        public override Transaction ModelSelected
+        {
+            get { return _modelSelected; }
+            set
+            {
+                Model = value;
+                if (value != null)
+                    _modelSelected = value.Copy();
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CustomerSelected));
+            }
+        }
+
         private DateTime _currentDateViewed;
 
         public DateTime CurrentDateViewed

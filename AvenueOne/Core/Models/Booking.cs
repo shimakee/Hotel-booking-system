@@ -166,6 +166,10 @@ namespace AvenueOne.Core.Models
         }
         #endregion
 
+        #region Utilities
+            public byte[] StatusValues { get { return (byte[])Enum.GetValues(typeof(BookingStatus)); } }
+        #endregion
+
         #region Methods
         public bool IsBookingConflict(Booking booking)
         {

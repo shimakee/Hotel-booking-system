@@ -75,7 +75,13 @@
                                             Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
 
                         <!--row 2-->
-                        
+                        <TextBlock  Grid.Row="2" Grid.Column="0"
+                            Text="Booking status : "/>
+                        <ComboBox Grid.Row="2" Grid.Column="1"
+                            x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding BookingViewModel.ModelSelected.StatusValues}" 
+                            SelectedValue="{Binding BookingViewModel.ModelSelected.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+
                         <!--<TextBlock Grid.Row="3" Grid.Column="2"
                                    Text="Room type:"/>
                         <ComboBox Grid.Row="2" Grid.Column="3"
