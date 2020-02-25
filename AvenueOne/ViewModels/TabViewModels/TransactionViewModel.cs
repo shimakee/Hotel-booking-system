@@ -59,7 +59,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                 this.BookingViewModel.ModelList.CollectionChanged += OnCollectionChanged;
 
                 List<Room> rooms = this.BookingViewModel.RoomList.ToList();
-                OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
+                OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
 
 
         }
@@ -78,7 +78,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                     if(value.Year != _currentDateViewed.Year || value.Month != _currentDateViewed.Month)
                     {
                         List<Room> rooms = this.BookingViewModel.RoomList.ToList();
-                        OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
+                        OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
                     }
                 }
 
@@ -168,37 +168,38 @@ namespace AvenueOne.ViewModels.TabViewModels
             if(property == nameof(CurrentDateViewed))
             {
                 List<Room> rooms = this.BookingViewModel.RoomList.ToList();
-                OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
+                OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
             }
         }
 
-        public Dictionary<Room, List<Occupancy>> GenerateOccupancyList(List<Room> rooms, DateTime currentDate)
-        {
-            Dictionary<Room, List<Occupancy>> occupancyList = new Dictionary<Room, List<Occupancy>>();
-            foreach (var room in rooms)
-            {
-                if (!occupancyList.ContainsKey(room))
-                {
-                    List<DateTime> getDatesInAMonth = GetDatesInAMonth(currentDate);
-                    List<Occupancy> availabilityList = new List<Occupancy>();
+        //public Dictionary<Room, List<Occupancy>> GenerateOccupancyList(List<Room> rooms, DateTime currentDate)
+        //{
+        //    return Occupancy.GenerateOccupancyList(rooms, currentDate);
+            //Dictionary<Room, List<Occupancy>> occupancyList = new Dictionary<Room, List<Occupancy>>();
+            //foreach (var room in rooms)
+            //{
+            //    if (!occupancyList.ContainsKey(room))
+            //    {
+            //        List<DateTime> getDatesInAMonth = GetDatesInAMonth(currentDate);
+            //        List<Occupancy> availabilityList = new List<Occupancy>();
 
-                    foreach (var date in getDatesInAMonth)
-                    {
-                        var occupancy = new Occupancy(date, room);
-                        //var occupancy = new Occupancy(date, room.GetRoomStatus(date));
-                        availabilityList.Add(occupancy);
-                    }
-                    occupancyList.Add(room, availabilityList);
-                }
-            }
+            //        foreach (var date in getDatesInAMonth)
+            //        {
+            //            var occupancy = new Occupancy(date, room);
+            //            //var occupancy = new Occupancy(date, room.GetRoomStatus(date));
+            //            availabilityList.Add(occupancy);
+            //        }
+            //        occupancyList.Add(room, availabilityList);
+            //    }
+            //}
 
-            return occupancyList;
-        }
+            //return occupancyList;
+        //}
 
         public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             List<Room> rooms = this.BookingViewModel.RoomList.ToList();
-            OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
+            OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
 
             //if (e.NewItems != null)
             //{
@@ -217,20 +218,20 @@ namespace AvenueOne.ViewModels.TabViewModels
             //}
         }
 
-        private List<DateTime> GetDatesInAMonth(DateTime date)
-        {
-            List<DateTime> datesInAMonth = new List<DateTime>();
-            int year = date.Year;
-            int month = date.Month;
-            int daysInAMonth = DateTime.DaysInMonth(year, month);
+        //private List<DateTime> GetDatesInAMonth(DateTime date)
+        //{
+        //    List<DateTime> datesInAMonth = new List<DateTime>();
+        //    int year = date.Year;
+        //    int month = date.Month;
+        //    int daysInAMonth = DateTime.DaysInMonth(year, month);
 
-            for (int i = 1; i <= daysInAMonth; i++)
-            {
-                datesInAMonth.Add(new DateTime(year, month, i));
-            }
+        //    for (int i = 1; i <= daysInAMonth; i++)
+        //    {
+        //        datesInAMonth.Add(new DateTime(year, month, i));
+        //    }
 
-            return datesInAMonth;
-        }
+        //    return datesInAMonth;
+        //}
         public List<Room> GetAvailableRooms()
         {
             List<Booking> bookingList = BookingViewModel.ModelList.ToList();
