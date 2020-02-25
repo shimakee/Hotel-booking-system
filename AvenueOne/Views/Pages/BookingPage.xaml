@@ -349,19 +349,19 @@
                             HorizontalAlignment="Center"
                     Orientation="Horizontal">
                     <Button  Margin="5"
-                        FontFamily="Marlett" FontSize="10" Content="3"/>
+                        FontFamily="Marlett" FontSize="10" Content="3" Click="Button_LessMonth"/>
                     <!--<TextBlock Text="{Binding ViewDate}"/>-->
                     <TextBlock Margin="10 0" VerticalAlignment="Center"
                         Text="{Binding CurrentDateViewed, StringFormat='{}{0: MMMM}'}"/>
                     <Button  Margin="5"
-                        FontFamily="Marlett" FontSize="10" Content="4"/>
+                        FontFamily="Marlett" FontSize="10" Content="4" Click="Button_AddMonth"/>
                     <Button Margin="5"
-                         FontFamily="Marlett" FontSize="10" Content="3"/>
+                         FontFamily="Marlett" FontSize="10" Content="3" Click="Button_LessYear"/>
                     <!--<TextBlock Text="{Binding ViewDate}"/>-->
                     <TextBlock Margin="10 0" VerticalAlignment="Center"
                         Text="{Binding CurrentDateViewed, StringFormat='{}{0: yyyy}'}"/>
                     <Button Margin="5"
-                        FontFamily="Marlett" FontSize="10" Content="4" />
+                        FontFamily="Marlett" FontSize="10" Content="4" Click="Button_AddYear" />
                 </StackPanel>
 
                 <!-- Room List data grid-->

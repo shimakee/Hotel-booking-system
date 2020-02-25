@@ -11,7 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -78,7 +80,6 @@ namespace AvenueOne.ViewModels.TabViewModels
                         List<Room> rooms = this.BookingViewModel.RoomList.ToList();
                         OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
                     }
-
                 }
 
                 OnPropertyChanged();
@@ -160,6 +161,16 @@ namespace AvenueOne.ViewModels.TabViewModels
         #endregion
 
         #region Methods
+        public override void OnPropertyChanged([CallerMemberName] string property = "")
+        {
+            base.OnPropertyChanged(property);
+
+            if(property == nameof(CurrentDateViewed))
+            {
+                List<Room> rooms = this.BookingViewModel.RoomList.ToList();
+                OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);
+            }
+        }
 
         public Dictionary<Room, List<Occupancy>> GenerateOccupancyList(List<Room> rooms, DateTime currentDate)
         {

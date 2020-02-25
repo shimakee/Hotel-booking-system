@@ -76,7 +76,7 @@ namespace AvenueOne.Core.Models
 
         public void PropertyHasChanged(object sender, PropertyChangedEventArgs e)
         {
-            if( e.PropertyName == nameof(Room.Bookings))
+            if ( e.PropertyName == nameof(Room.Bookings))
             {
                 this.Room.Bookings.CollectionChanged += OnCollectionChanged;
             }

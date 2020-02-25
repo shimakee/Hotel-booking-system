@@ -35,6 +35,7 @@ namespace AvenueOne.Views.Pages
     public partial class BookingPage : Page
     {
         private PlutoContext _context;
+        private ITransactionViewModel _viewModel;
         public BookingPage(PlutoContext context)
         {
             InitializeComponent();
@@ -87,6 +88,24 @@ namespace AvenueOne.Views.Pages
                                                                                                                             customerWindow);
             #endregion
             this.DataContext = transactionTab;
+            this._viewModel = transactionTab;
+        }
+
+        private void Button_AddMonth(object sender, RoutedEventArgs e)
+        {
+            _viewModel.CurrentDateViewed = _viewModel.CurrentDateViewed.AddMonths(1);
+        }
+        private void Button_LessMonth(object sender, RoutedEventArgs e)
+        {
+            _viewModel.CurrentDateViewed = _viewModel.CurrentDateViewed.AddMonths(-1);
+        }
+        private void Button_AddYear(object sender, RoutedEventArgs e)
+        {
+            _viewModel.CurrentDateViewed = _viewModel.CurrentDateViewed.AddYears(1);
+        }
+        private void Button_LessYear(object sender, RoutedEventArgs e)
+        {
+            _viewModel.CurrentDateViewed = _viewModel.CurrentDateViewed.AddYears(-1);
         }
     }
 }
