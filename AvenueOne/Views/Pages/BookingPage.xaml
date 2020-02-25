@@ -352,14 +352,14 @@
                         FontFamily="Marlett" FontSize="10" Content="3"/>
                     <!--<TextBlock Text="{Binding ViewDate}"/>-->
                     <TextBlock Margin="10 0" VerticalAlignment="Center"
-                        Text="{Binding CurrentDateViewed.Month}"/>
+                        Text="{Binding CurrentDateViewed, StringFormat='{}{0: MMMM}'}"/>
                     <Button  Margin="5"
                         FontFamily="Marlett" FontSize="10" Content="4"/>
                     <Button Margin="5"
                          FontFamily="Marlett" FontSize="10" Content="3"/>
                     <!--<TextBlock Text="{Binding ViewDate}"/>-->
                     <TextBlock Margin="10 0" VerticalAlignment="Center"
-                        Text="{Binding CurrentDateViewed.Year}"/>
+                        Text="{Binding CurrentDateViewed, StringFormat='{}{0: yyyy}'}"/>
                     <Button Margin="5"
                         FontFamily="Marlett" FontSize="10" Content="4" />
                 </StackPanel>
@@ -369,17 +369,17 @@
                             ItemsSource="{Binding OccupancyList}" 
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Rooms" Binding="{Binding Key.Name}" Width="*"/>
-                        <DataGridTextColumn Header="Room type" Binding="{Binding Key.RoomType}" Width=".5*"/>
-                        <DataGridTextColumn Header="Max Occupants" Binding="{Binding Key.MaxOccupants}" Width=".5*"/>
-                        <DataGridTextColumn Header="Rate" Binding="{Binding Key.RoomType.Rate}" Width=".5*"/>
-                        <DataGridTextColumn Header="Rate type" Binding="{Binding Key.RoomType.RateType}" Width=".5*"/>
+                        <DataGridTextColumn Header="Room" Binding="{Binding Key.Name}" Width="auto"/>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Key.RoomType}" Width="auto"/>
+                        <DataGridTextColumn Header="Max Occupants" Binding="{Binding Key.MaxOccupants}" Width="auto"/>
+                        <DataGridTextColumn Header="Rate" Binding="{Binding Key.RoomType.Rate}" Width="auto"/>
+                        <DataGridTextColumn Header="Rate type" Binding="{Binding Key.RoomType.RateType}" Width="auto"/>
                         
                          <!--bookings data grid-->
                         <DataGridTemplateColumn Header="Bookings" Width="6*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ListBox ItemsSource="{Binding Value}">
+                                    <ListBox ItemsSource="{Binding Value}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <StackPanel Orientation="Horizontal"/>
@@ -387,12 +387,52 @@
                                         </ListBox.ItemsPanel>
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Width="auto">
-                                                    <TextBlock Text="{Binding Date, StringFormat='{}{0: d ddd}'}"/>
-                                                    <TextBlock Text="{Binding Room.Name}"/>
-                                                    <TextBlock Text="{Binding RoomStatus}"/>
-                                                    <TextBlock Text="{Binding Booking.Status}"/>
-                                                </StackPanel>
+                                                <Border BorderThickness="2" BorderBrush="BlanchedAlmond">
+                                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="auto"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <StackPanel>
+                                                            <TextBlock  Text="{Binding Date, StringFormat='{}{0: ddd d}'}"/>
+
+                                                                <!--Color status-->
+                                                                <Rectangle  HorizontalAlignment="Center"
+                                                                                        Height="15"
+                                                                                        Margin="0,0,0,0"
+                                                                                        Stroke="Black"
+                                                                                        VerticalAlignment="Center"
+                                                                                        Width="15" >
+                                                                    <Rectangle.Style>
+                                                                        <Style TargetType="Rectangle">
+                                                                            <Setter Property="Fill" Value="LawnGreen"/>
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger Binding="{Binding RoomStatus, UpdateSourceTrigger=PropertyChanged}"
+                                                                                                Value="booked">
+                                                                                    <Setter Property="Fill"
+                                                                                                Value="Red" />
+                                                                                </DataTrigger>
+                                                                                <DataTrigger Binding="{Binding RoomStatus, UpdateSourceTrigger=PropertyChanged}"
+                                                                                                Value="occupied">
+                                                                                    <Setter Property="Fill"
+                                                                                                Value="CadetBlue" />
+                                                                                </DataTrigger>
+                                                                                <DataTrigger Binding="{Binding RoomStatus, UpdateSourceTrigger=PropertyChanged}"
+                                                                                                Value="vacant">
+                                                                                    <Setter Property="Fill"
+                                                                                                Value="LightGreen" />
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Rectangle.Style>
+                                                                </Rectangle>
+
+                                                                <TextBlock Text="{Binding RoomStatus}"/>
+                                                                <!--<TextBlock Text="{Binding Booking.Status}"/>-->
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                                
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
