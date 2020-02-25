@@ -201,7 +201,15 @@ namespace AvenueOne.Core.Models
                 booking.DateCheckin.Date >= this.DateCheckin.Date && booking.DateCheckin.Date <= this.DateCheckout.Date ||
                 booking.DateCheckout.Date >= this.DateCheckin.Date && booking.DateCheckout.Date <= this.DateCheckout.Date;
 
-            return isConflict;
+            if (isConflict && (booking.Status == BookingStatus.checkedin || booking.Status == BookingStatus.reserved))
+            {
+                return true;
+            }
+            else
+            {
+                //booking is voided, cancelled, or checkedout so it does not count.
+                return false;
+            }
         }
 
         public bool IsBookingDateConflict(DateTime startDate, DateTime endDate)

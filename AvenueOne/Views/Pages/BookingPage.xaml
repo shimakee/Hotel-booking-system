@@ -389,7 +389,9 @@
                                             <DataTemplate>
                                                 <StackPanel Width="auto">
                                                     <TextBlock Text="{Binding Date, StringFormat='{}{0: d ddd}'}"/>
+                                                    <TextBlock Text="{Binding Room.Name}"/>
                                                     <TextBlock Text="{Binding RoomStatus}"/>
+                                                    <TextBlock Text="{Binding Booking.Status}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>

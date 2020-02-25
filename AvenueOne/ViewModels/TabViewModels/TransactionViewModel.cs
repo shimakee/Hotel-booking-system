@@ -173,7 +173,8 @@ namespace AvenueOne.ViewModels.TabViewModels
 
                     foreach (var date in getDatesInAMonth)
                     {
-                        var occupancy = new Occupancy(date, room.GetRoomStatus(date));
+                        var occupancy = new Occupancy(date, room);
+                        //var occupancy = new Occupancy(date, room.GetRoomStatus(date));
                         availabilityList.Add(occupancy);
                     }
                     occupancyList.Add(room, availabilityList);
