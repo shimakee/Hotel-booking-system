@@ -165,13 +165,18 @@ namespace AvenueOne.Core.Models
 
         public RoomStatus GetRoomStatus(DateTime date)
         {
-            if (Bookings == null)
+            return GetRoomStatus(date, this.Bookings);
+        }
+
+        private RoomStatus GetRoomStatus(DateTime date, ICollection<Booking> bookings)
+        {
+            if (bookings == null)
                 return RoomStatus.vacant;
 
-            if (Bookings.Count <= 0)
+            if (bookings.Count <= 0)
                 return RoomStatus.vacant;
 
-            foreach (var item in Bookings)
+            foreach (var item in bookings)
             {
                 if (item.IsDateBetweenBookingDate(date))
                 {

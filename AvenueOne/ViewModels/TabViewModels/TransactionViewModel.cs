@@ -54,6 +54,7 @@ namespace AvenueOne.ViewModels.TabViewModels
 
                 CurrentDateViewed = DateTime.Today;
                 this.BookingViewModel.RoomList.CollectionChanged += OnCollectionChanged;
+                this.BookingViewModel.ModelList.CollectionChanged += OnCollectionChanged;
 
                 List<Room> rooms = this.BookingViewModel.RoomList.ToList();
                 OccupancyList = GenerateOccupancyList(rooms, CurrentDateViewed);

@@ -21,6 +21,7 @@ namespace AvenueOne.Core.Models.Interfaces
         //string Details { get; set; }
         RoomType RoomType { get; set; }
         RoomStatus GetRoomStatus(DateTime date);
+        //RoomStatus GetRoomStatus(DateTime date, ICollection<Booking> bookings);
         //bool IsRoomAvailableOnDate(DateTime date);
         List<RoomStatus> GetAvailabilityForMonth(int year, int month);
     }

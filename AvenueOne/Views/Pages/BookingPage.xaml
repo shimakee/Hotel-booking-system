@@ -352,14 +352,14 @@
                         FontFamily="Marlett" FontSize="10" Content="3"/>
                     <!--<TextBlock Text="{Binding ViewDate}"/>-->
                     <TextBlock Margin="10 0" VerticalAlignment="Center"
-                        Text="Month"/>
+                        Text="{Binding CurrentDateViewed.Month}"/>
                     <Button  Margin="5"
                         FontFamily="Marlett" FontSize="10" Content="4"/>
                     <Button Margin="5"
                          FontFamily="Marlett" FontSize="10" Content="3"/>
                     <!--<TextBlock Text="{Binding ViewDate}"/>-->
                     <TextBlock Margin="10 0" VerticalAlignment="Center"
-                        Text="Year"/>
+                        Text="{Binding CurrentDateViewed.Year}"/>
                     <Button Margin="5"
                         FontFamily="Marlett" FontSize="10" Content="4" />
                 </StackPanel>
