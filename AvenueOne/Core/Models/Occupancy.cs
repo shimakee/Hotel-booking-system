@@ -23,8 +23,9 @@ namespace AvenueOne.Core.Models
                     OnPropertyChanged();
                     if(value != null && Room != null)
                         this.Booking = GetBookingForDate(Date);
-                }
+                    OnPropertyChanged(nameof(RoomStatus));
             }
+        }
 
             private Room _room;
             public Room Room
@@ -36,8 +37,8 @@ namespace AvenueOne.Core.Models
                     {
                         if(value.Bookings != null)
                         {
-                            this.Booking = GetBookingForDate(Date);
                             this.Room.Bookings.CollectionChanged += OnCollectionChanged;
+                            this.Booking = GetBookingForDate(Date);
                         }
                         else
                         {
@@ -54,8 +55,11 @@ namespace AvenueOne.Core.Models
             {
                 get { return _booking; }
                 set { _booking = value;
-                    OnPropertyChanged();
-                }
+                    if (value != null)
+                        Booking.PropertyChanged += PropertyHasChanged;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(RoomStatus));
+            }
             }
             public RoomStatus RoomStatus
             {
@@ -66,13 +70,14 @@ namespace AvenueOne.Core.Models
         #region Constructors
 
             public Occupancy(DateTime date, Room room)
-        {
-            if (date == null || room == null)
-                    throw new ArgumentNullException("to determine occupancy date or room cannot be null.");
+            {
+                if (date == null || room == null)
+                        throw new ArgumentNullException("to determine occupancy date or room cannot be null.");
 
-            this.Date = date;
-            this.Room = room;
-        }
+                this.Date = date;
+                this.Room = room;
+                //this.Room.Bookings.CollectionChanged += OnCollectionChanged;
+            }
 
 
         #endregion
@@ -88,11 +93,14 @@ namespace AvenueOne.Core.Models
 
             public void PropertyHasChanged(object sender, PropertyChangedEventArgs e)
             {
-                if ( e.PropertyName == nameof(Room.Bookings))
+                if (e.PropertyName == nameof(Room.Bookings))
                 {
                     this.Room.Bookings.CollectionChanged += OnCollectionChanged;
                 }
-            }
+            if (e.PropertyName == nameof(Booking.Status))
+                OnPropertyChanged(nameof(RoomStatus));
+                //this.Booking = GetBookingForDate(Date);
+        }
 
         public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

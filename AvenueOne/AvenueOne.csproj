@@ -242,6 +242,7 @@
     <Compile Include="ViewModels\Commands\RoomCommands\CreateRoomTypeCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\DetachAmenityCommand.cs" />
     <Compile Include="ViewModels\Commands\RoomCommands\LinkAmenityCommand.cs" />
+    <Compile Include="ViewModels\Commands\TransactionCommands\UpdateTransactionCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\ClearUserCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\CreateUserCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\UpdateUserCommand.cs" />

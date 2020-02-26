@@ -26,6 +26,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Entity;
+using AvenueOne.ViewModels.Commands.TransactionCommands;
 
 namespace AvenueOne.Views.Pages
 {
@@ -65,7 +66,7 @@ namespace AvenueOne.Views.Pages
 
             IGenericUnitOfWork<Transaction> genericUnitOfWorkTransaction = new GenericUnitOfWork<Transaction>(context);
             BaseClassCommand<Transaction> createTransactionCommand = new CreateClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
-            BaseClassCommand<Transaction> updateTransactionCommand = new UpdateClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
+            BaseClassCommand<Transaction> updateTransactionCommand = new UpdateTransactionCommand(genericUnitOfWorkTransaction, genericUnitOfWorkBooking, displayService);
             BaseClassCommand<Transaction> deleteTransactionCommand = new DeleteClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
             ClearClassCommand<Transaction> clearTransactionCommand = new ClearClassCommand<Transaction>();
             AddBookingCommand addBookingCommand = new AddBookingCommand(displayService);

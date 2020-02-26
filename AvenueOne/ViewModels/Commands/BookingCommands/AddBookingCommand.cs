@@ -49,7 +49,6 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
                         throw new InvalidOperationException("There is a conflict in booking");
                 }
 
-
                 ViewModel.Bookings.Add(ViewModel.BookingViewModel.ModelSelected);
 
                 ViewModel.BookingViewModel.ClearClassCommand.Execute(null);

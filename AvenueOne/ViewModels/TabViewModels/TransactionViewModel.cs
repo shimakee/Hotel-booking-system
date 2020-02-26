@@ -60,8 +60,6 @@ namespace AvenueOne.ViewModels.TabViewModels
 
                 List<Room> rooms = this.BookingViewModel.RoomList.ToList();
                 OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
-
-
         }
         #endregion
 
@@ -91,8 +89,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                 {
                     if(value.Year != _currentDateViewed.Year || value.Month != _currentDateViewed.Month)
                     {
-                        List<Room> rooms = this.BookingViewModel.RoomList.ToList();
-                        OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
+                        GenerateOccupancyList();
                     }
                 }
 
@@ -175,14 +172,18 @@ namespace AvenueOne.ViewModels.TabViewModels
         #endregion
 
         #region Methods
+        private void GenerateOccupancyList()
+        {
+            var rooms = this.BookingViewModel.RoomList;
+            OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
+        }
         public override void OnPropertyChanged([CallerMemberName] string property = "")
         {
             base.OnPropertyChanged(property);
 
             if(property == nameof(CurrentDateViewed))
             {
-                List<Room> rooms = this.BookingViewModel.RoomList.ToList();
-                OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
+                GenerateOccupancyList();
             }
         }
 
@@ -212,8 +213,7 @@ namespace AvenueOne.ViewModels.TabViewModels
 
         public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            List<Room> rooms = this.BookingViewModel.RoomList.ToList();
-            OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
+            GenerateOccupancyList();
 
             //if (e.NewItems != null)
             //{

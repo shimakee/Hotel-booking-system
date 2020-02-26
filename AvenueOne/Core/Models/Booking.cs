@@ -290,6 +290,8 @@ namespace AvenueOne.Core.Models
             bool isSameRoom = false;
             if(booking.Room != null && this.Room != null)
                 isSameRoom = this.Room.Equals(booking.Room);
+            if (booking.Room == null && this.Room == null)
+                isSameRoom = true;
 
             return this.DateCheckin.Year == booking.DateCheckin.Year &&
                 this.DateCheckin.Month == booking.DateCheckin.Month &&

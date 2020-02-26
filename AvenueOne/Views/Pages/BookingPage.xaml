@@ -78,8 +78,8 @@
                         <TextBlock  Grid.Row="2" Grid.Column="0"
                             Text="Booking status : "/>
                         <ComboBox Grid.Row="2" Grid.Column="1"
-                            x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding BookingViewModel.ModelSelected.StatusValues}" 
-                            SelectedValue="{Binding BookingViewModel.ModelSelected.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding BookingViewModel.Model.StatusValues}" 
+                            SelectedValue="{Binding BookingViewModel.Model.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
                         <!--<TextBlock Grid.Row="3" Grid.Column="2"

@@ -11,10 +11,18 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Persistence
 {
-    public class GenericUnitOfWork<T> : IGenericUnitOfWork<T> where T: class
+    public class GenericUnitOfWork<T> : IGenericUnitOfWork<T> where T : class, IBaseObservableModel<T>, new()
     {
         private PlutoContext _context;
 
+        //public IRepository<T> GetRepository(Type type)
+        //{
+        //    var repository = Repositories[type as Type];
+        //    var y = typeof(Repository<>).MakeGenericType(type);
+        //    var z = Activator.CreateInstance(y);
+        //    if (repository == null)
+        //        Repositories.Add(type as Type, new Repository<>(_context) as IRepository<T>);
+        //}
         public Dictionary<Type, IRepository<T>> Repositories { get; private set; } = new Dictionary<Type, IRepository<T>>();
         public GenericUnitOfWork(PlutoContext context)
         {
