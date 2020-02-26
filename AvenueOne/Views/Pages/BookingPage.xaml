@@ -56,7 +56,7 @@
                             <Button Content="Add new Transaction" Grid.Column="0" 
                                             Command="{Binding CreateClassCommand}"/>
                             <Button Content="Clear content"  Grid.Column="1" 
-                                            Command="{Binding BookingViewModel.ClearClassCommand}"/>
+                                            Command="{Binding ClearClassCommand}"/>
                         </Grid>
 
 
@@ -64,13 +64,13 @@
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Reservation date :"/>
                         <DatePicker Grid.Row="1" Grid.Column="1"
                                             x:Name="DateCheckin"
-                                            SelectedDate="{Binding BookingViewModel.ModelSelected.DateCheckin, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            SelectedDate="{Binding BookingViewModel.Model.DateCheckin, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                             ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                             Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
                         <TextBlock Grid.Row="1" Grid.Column="2" Text="to" HorizontalAlignment="Center" />
                         <DatePicker Grid.Row="1" Grid.Column="3"
                                             x:Name="DateCheckout"
-                                            SelectedDate="{Binding BookingViewModel.ModelSelected.DateCheckout, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            SelectedDate="{Binding BookingViewModel.Model.DateCheckout, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                             ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                             Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
 
@@ -101,7 +101,7 @@
                         <TextBlock Grid.Row="3" Grid.Column="0"
                                    Text="Room Selected:"/>
                         <TextBox Grid.Row="3" Grid.Column="1"
-                            IsEnabled="False" Text="{Binding BookingViewModel.ModelSelected.Room.Name}"/>
+                            IsEnabled="False" Text="{Binding BookingViewModel.Model.Room.Name}"/>
 
                         <TextBlock Grid.Row="3" Grid.Column="2"
                                        Text="Occupants :"/>
@@ -112,14 +112,14 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBox Grid.Column="0" Text="{Binding BookingViewModel.ModelSelected.Occupants,
+                            <TextBox Grid.Column="0" Text="{Binding BookingViewModel.Model.Occupants,
                                      ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                      Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                             <TextBlock Grid.Column="1"
                                        HorizontalAlignment="Center"
                                        Text="/"/>
                             <TextBox Grid.Column="2"
-                                IsEnabled="False" Text="{Binding BookingViewModel.ModelSelected.Room.MaxOccupants}"/>
+                                IsEnabled="False" Text="{Binding BookingViewModel.Model.Room.MaxOccupants}"/>
                         </Grid>
                             
                             <!-- row 4-->
@@ -128,14 +128,14 @@
                         <TextBlock Grid.Row="4" Grid.Column="2"
                                    Text="Total amount :"/>
                         <TextBox Grid.Row="4" Grid.Column="3"
-                            IsEnabled="False" Text="{Binding BookingViewModel.ModelSelected.AmountTotal}"/>
+                            IsEnabled="False" Text="{Binding BookingViewModel.Model.AmountTotal}"/>
                         
                         
                         
                         <!--Row 5-->
                         <DataGrid  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1"
                                    Margin="0 10"
-                            ItemsSource="{Binding BookingViewModel.RoomsAvailable}" SelectedItem="{Binding BookingViewModel.RoomSelected}" 
+                            ItemsSource="{Binding BookingViewModel.RoomsAvailable}" SelectedItem="{Binding BookingViewModel.Model.Room}" 
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
