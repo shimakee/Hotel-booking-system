@@ -11,6 +11,8 @@
 
 
     <TabControl>
+        
+        <!--New Booking -->
         <TabItem Header="new Booking">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -78,7 +80,7 @@
                         <TextBlock  Grid.Row="2" Grid.Column="0"
                             Text="Booking status : "/>
                         <ComboBox Grid.Row="2" Grid.Column="1"
-                            x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding BookingViewModel.Model.StatusValues}" 
+                            SelectedIndex="0"  ItemsSource="{Binding BookingViewModel.Model.StatusValues}" 
                             SelectedValue="{Binding BookingViewModel.Model.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
@@ -338,6 +340,8 @@
             </Grid>
         </TabItem>
 
+        
+        <!--Occupancy list-->
         <TabItem Header="Occupancy list">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -450,5 +454,188 @@
             </Grid>
             
         </TabItem>
+        
+        <!--Booking List/Transaction List -->
+        <TabItem Header="Bookings">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--booking info-->
+                <GroupBox Header="Booking Info" Grid.Column="0"
+                          Margin="10" Padding="10">
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Row="0" Grid.Column="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Content="Clear content"  Grid.Column="0" 
+                                            Command="{Binding BookingViewModel.ClearClassCommand}"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Reservation date :"/>
+                            <DatePicker Grid.Row="1" Grid.Column="1"
+                                            SelectedDate="{Binding BookingViewModel.ModelSelected.DateCheckin, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                            Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
+                            
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--<TextBlock Grid.Column="0" Text="Checkout" />-->
+                            <DatePicker Grid.Column="1"
+                                            SelectedDate="{Binding BookingViewModel.ModelSelected.DateCheckout, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                            Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock  Grid.Column="0"
+                            Text="Booking status : "/>
+                                <ComboBox Grid.Column="1" SelectedIndex="0"  ItemsSource="{Binding BookingViewModel.ModelSelected.StatusValues}" 
+                            SelectedValue="{Binding BookingViewModel.ModelSelected.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                   Text="Room Selected:"/>
+                            <TextBox Grid.Column="1"
+                            IsEnabled="False" Text="{Binding BookingViewModel.RoomSelected}"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                       Text="Occupants :"/>
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox Grid.Column="0" Text="{Binding BookingViewModel.ModelSelected.Occupants,
+                                     ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                     Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                                <TextBlock Grid.Column="1"
+                                       HorizontalAlignment="Center"
+                                       Text="/"/>
+                                <TextBox Grid.Column="2"
+                                IsEnabled="False" Text="{Binding BookingViewModel.RoomSelected.MaxOccupants}"/>
+                            </Grid>
+
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                   Text="Total amount :"/>
+                            <TextBox Grid.Column="1"
+                            IsEnabled="False" Text="{Binding BookingViewModel.ModelSelected.AmountTotal}"/>
+                        </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Content="Update"  Grid.Column="0" 
+                                            Command="{Binding BookingViewModel.UpdateClassCommand}"/>
+                                <Button Content="Delete"  Grid.Column="1" 
+                                            Command="{Binding BookingViewModel.DeleteClassCommand}"/>
+                            </Grid>
+
+                            <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" 
+                                    Content="Show available rooms"  
+                                    Command="{Binding GetAvailableRoomsInTransactionCommand}"/>
+                        </Grid>
+                    </StackPanel>
+
+                        <DataGrid  Grid.Row="1" Grid.Column="0"
+                                    Margin="0 10"
+                                    ItemsSource="{Binding BookingViewModel.RoomsAvailable}" SelectedItem="{Binding BookingViewModel.RoomSelected}" 
+                                    IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="auto"/>
+                                <DataGridTextColumn Header="Room type" Binding="{Binding RoomType}" Width="auto"/>
+                                <DataGridTextColumn Header="Rate" Binding="{Binding RoomType.Rate}" Width="auto"/>
+                                <DataGridTextColumn Header="Rate type" Binding="{Binding RoomType.RateType}" Width="auto"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    
+                </GroupBox>
+
+                <!--Booking List-->
+                <DataGrid Grid.Column="1"
+                            ItemsSource="{Binding BookingViewModel.ModelList}" SelectedItem="{Binding BookingViewModel.ModelSelected}"
+                               IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Customer" Binding="{Binding Transaction.Customer.Person.FullName}" Width="3*"/>
+                        <DataGridTextColumn Header="Checkin" Binding="{Binding DateCheckin, StringFormat=d}" Width="2*"/>
+                        <DataGridTextColumn Header="Checkout" Binding="{Binding DateCheckout, StringFormat=d}" Width="2*"/>
+                        <DataGridTextColumn Header="Room" Binding="{Binding Room.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Room type" Binding="{Binding Room.RoomType}" Width="*"/>
+                        <DataGridTextColumn Header="Max Occupants" Binding="{Binding Room.MaxOccupants}" Width="*"/>
+                        <DataGridTextColumn Header="Rate" Binding="{Binding Room.RoomType.Rate}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+        </TabItem>
+        
     </TabControl>
 </Page>

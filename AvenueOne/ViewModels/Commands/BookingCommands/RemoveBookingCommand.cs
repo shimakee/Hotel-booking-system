@@ -47,6 +47,8 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
                 if (ViewModel.BookingViewModel.ModelSelected != null && ViewModel.BookingViewModel.Model != null)
                     ViewModel.BookingViewModel.DeleteClassCommand.Execute(null);
 
+                //Check if Transaction bookings count is <= 0 if true then delete. TODO
+
 
                 ViewModel.BookingViewModel.ClearClassCommand.Execute(null);
             }
