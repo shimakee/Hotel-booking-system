@@ -66,9 +66,9 @@ namespace AvenueOne.Views.Pages
 
             IGenericUnitOfWork<Transaction> genericUnitOfWorkTransaction = new GenericUnitOfWork<Transaction>(context);
             BaseClassCommand<Transaction> createTransactionCommand = new CreateClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
-            BaseClassCommand<Transaction> updateTransactionCommand = new UpdateTransactionCommand(genericUnitOfWorkTransaction, genericUnitOfWorkBooking, displayService);
+            BaseClassCommand<Transaction> updateTransactionCommand = new UpdateClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
             BaseClassCommand<Transaction> deleteTransactionCommand = new DeleteClassCommand<Transaction>(genericUnitOfWorkTransaction, displayService);
-            ClearClassCommand<Transaction> clearTransactionCommand = new ClearClassCommand<Transaction>();
+            ClearClassCommand<Transaction> clearTransactionCommand = new ClearTransactionCommand();
             AddBookingCommand addBookingCommand = new AddBookingCommand(displayService);
             RemoveBookingCommand removeBookingCommand = new RemoveBookingCommand(displayService);
             GetAvailableRoomsInTransactionCommand getAvailableRoomsCommand = new GetAvailableRoomsInTransactionCommand(displayService);

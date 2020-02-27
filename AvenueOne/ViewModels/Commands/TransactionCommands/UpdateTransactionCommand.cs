@@ -13,13 +13,10 @@ namespace AvenueOne.ViewModels.Commands.TransactionCommands
 {
     public class UpdateTransactionCommand :  UpdateClassCommand<Transaction>, IBaseClassCommand<Transaction>
     {
-        private IGenericUnitOfWork<Booking> _genericUnitOfWorkBooking;
         public UpdateTransactionCommand(IGenericUnitOfWork<Transaction> genericUnitOfWork, 
-                                                                    IGenericUnitOfWork<Booking> genericUnitOfWorkBooking, 
                                                                     IDisplayService displayService)
             :base(genericUnitOfWork, displayService)
         {
-            this._genericUnitOfWorkBooking = genericUnitOfWorkBooking;
         }
 
         protected override async Task<int> Update()

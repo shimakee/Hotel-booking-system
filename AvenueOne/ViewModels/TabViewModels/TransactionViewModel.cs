@@ -39,7 +39,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                                                             CustomerWindow customerWindow)
                 :base(transaction, transactionList, createClassCommand, updateClassCommand, deleteClassCommand, clearClassCommand)
             {
-                this.Bookings = new ObservableCollection<Booking>();
+                this.Bookings = new ObservableCollection<Booking>(); //  not necessary?
                 this.CustomerList = customerList;
                 this.EmployeeList = userList;
                 this.EmployeeSelected = EmployeeList.Where(e => e.Id == UserAccount.Id).FirstOrDefault();
