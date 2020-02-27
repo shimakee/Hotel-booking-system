@@ -59,7 +59,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                 this.BookingViewModel.ModelList.CollectionChanged += OnCollectionChanged;
 
                 List<Room> rooms = this.BookingViewModel.RoomList.ToList();
-                OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
+                OccupancyList = Occupancy.GenerateOccupancyDictionaryMonth(rooms, CurrentDateViewed);
         }
         #endregion
 
@@ -175,7 +175,7 @@ namespace AvenueOne.ViewModels.TabViewModels
         private void GenerateOccupancyList()
         {
             var rooms = this.BookingViewModel.RoomList;
-            OccupancyList = Occupancy.GenerateOccupancyList(rooms, CurrentDateViewed);
+            OccupancyList = Occupancy.GenerateOccupancyDictionaryMonth(rooms, CurrentDateViewed);
         }
         public override void OnPropertyChanged([CallerMemberName] string property = "")
         {

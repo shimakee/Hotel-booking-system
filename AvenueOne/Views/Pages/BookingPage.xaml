@@ -458,7 +458,8 @@
         </TabItem>
         
         <!--Booking List/Transaction List -->
-        <TabItem Header="Bookings">
+
+        <!--<TabItem Header="Bookings">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -466,7 +467,7 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
 
-                <!--booking info-->
+                --><!--booking info--><!--
                 <GroupBox Header="Booking Info" Grid.Column="0"
                           Margin="10" Padding="10">
 
@@ -510,7 +511,7 @@
                                     <ColumnDefinition Width="3*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <!--<TextBlock Grid.Column="0" Text="Checkout" />-->
+                                --><!--<TextBlock Grid.Column="0" Text="Checkout" />--><!--
                                 <DatePicker Grid.Column="1"
                                             SelectedDate="{Binding BookingViewModel.ModelSelected.DateCheckout, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                             ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
@@ -621,7 +622,7 @@
 
                 </GroupBox>
 
-                <!--Booking List-->
+                --><!--Booking List--><!--
                 <DataGrid Grid.Column="1"
                             ItemsSource="{Binding BookingViewModel.ModelList}" SelectedItem="{Binding BookingViewModel.ModelSelected}"
                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
@@ -637,7 +638,7 @@
                 </DataGrid>
 
             </Grid>
-        </TabItem>
+        </TabItem>-->
 
     </TabControl>
 </Page>

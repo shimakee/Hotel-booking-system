@@ -13,6 +13,9 @@ namespace AvenueOne.ViewModels.WindowsViewModels.Interfaces
 {
     public interface IRoomViewModel : IBaseObservableViewModel<Room>
     {
+
+        DateTime CurrentDateViewed { get; set; }
         ObservableCollection<RoomType> RoomTypeList { get; set; }
+        List<Occupancy> OccupancyList { get; }
     }
 }

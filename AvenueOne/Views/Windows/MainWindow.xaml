@@ -35,7 +35,7 @@
                 <StackPanel Margin="0 5">
                     <Button Content="Bookings" Command="{Binding ChangePageCommand}" CommandParameter="BookingPage"/>
                     <Button Content="Customers"/>
-                    <Button Content="Rooms"/>
+                    <Button Content="Rooms" Command="{Binding ChangePageCommand}" CommandParameter="RoomPage"/>
                     <Button Content="Billings"/>
                     <Button Content="Cashflow"/>
                     <Button Content="Admin" Command="{Binding ChangePageCommand}" CommandParameter="AdminPage"/>

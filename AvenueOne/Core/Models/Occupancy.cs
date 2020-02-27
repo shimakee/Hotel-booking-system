@@ -124,8 +124,19 @@ namespace AvenueOne.Core.Models
         #endregion
 
         #region Static Methods
+        public static List<Occupancy> GenerateOccupancyList(ICollection<Room> rooms, DateTime dateTime)
+        {
+            List<Occupancy> occupancyList = new List<Occupancy>();
+            foreach (var room in rooms)
+            {
+                        var occupancy = new Occupancy(dateTime, room);
+                        //var occupancy = new Occupancy(date, room.GetRoomStatus(date));
+                    occupancyList.Add(occupancy);
+            }
+            return occupancyList;
+        }
 
-        public static Dictionary<Room, List<Occupancy>> GenerateOccupancyList(ICollection<Room> rooms, DateTime currentDate)
+        public static Dictionary<Room, List<Occupancy>> GenerateOccupancyDictionaryMonth(ICollection<Room> rooms, DateTime currentDate)
         {
             Dictionary<Room, List<Occupancy>> occupancyList = new Dictionary<Room, List<Occupancy>>();
             foreach (var room in rooms)

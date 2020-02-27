@@ -43,6 +43,7 @@ namespace AvenueOne.ViewModels.WindowsViewModels
            this.Pages.Add("AdminPage", new AdminPage(_context));
             this.Pages.Add("SettingsPage", new SettingsPage(_context));
             this.Pages.Add("BookingPage", new BookingPage(_context));
+            this.Pages.Add("RoomPage", new RoomPage(_context));
             //current page
             this.CurrentPage = Pages["AdminPage"];
         }
