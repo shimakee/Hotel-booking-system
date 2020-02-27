@@ -30,6 +30,8 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
         {
             try
             {
+                if (ViewModel.Model == null || ViewModel.ModelSelected == null)
+                    throw new InvalidOperationException("Transaction must be selected.");
                 if (ViewModel.BookingViewModel.ModelSelected == null || ViewModel.Bookings == null)
                     throw new InvalidOperationException("There must ba a booking entry.");
                 if (!ViewModel.BookingViewModel.ModelSelected.IsValid)
@@ -38,7 +40,7 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
                 ViewModel.Bookings.Remove(ViewModel.BookingViewModel.Model);
 
                 //reassign model - since it will be turned to null when removing it form booking.
-                ViewModel.BookingViewModel.Model = ViewModel.BookingViewModel.ModelList.Where(b => b.Id == id).FirstOrDefault();
+                ViewModel.BookingViewModel.ModelSelected = ViewModel.BookingViewModel.ModelList.Where(b => b.Id == id).FirstOrDefault();
                 //remove booking reference made to room.
                 ViewModel.BookingViewModel.Model.Room.Bookings.Remove(ViewModel.BookingViewModel.Model);
                 //Delete Booking, 

@@ -30,6 +30,8 @@ namespace AvenueOne.ViewModels.Commands.BookingCommands
         {
             try
             {
+                if (ViewModel.Model == null || ViewModel.ModelSelected == null)
+                    throw new InvalidOperationException("Transaction must be selected.");
                 if (ViewModel.BookingViewModel.ModelSelected == null || ViewModel.Bookings == null)
                     throw new InvalidOperationException("There must ba a booking entry.");
                 if (!ViewModel.BookingViewModel.ModelSelected.IsValid)
