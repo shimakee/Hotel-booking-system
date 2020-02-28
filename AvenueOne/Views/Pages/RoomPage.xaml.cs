@@ -53,5 +53,10 @@ namespace AvenueOne.Views.Pages
 
             this.DataContext = roomViewModel;
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

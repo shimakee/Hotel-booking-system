@@ -37,6 +37,7 @@ namespace AvenueOne.Interfaces
         DateTime? BirthDate { get; set; }
 
         string FullName { get; set; }
+        int Age { get; }
         User User { get; set; }
         Customer Customer { get; set; }
     }

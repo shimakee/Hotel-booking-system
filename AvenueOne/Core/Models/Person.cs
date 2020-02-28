@@ -170,6 +170,16 @@ namespace AvenueOne.Models
                 OnPropertyChanged();
             }
         }
+
+        public int Age
+        {
+            get
+            {
+                if(BirthDate != null)
+                    return (int)(DateTime.Now - BirthDate).GetValueOrDefault().TotalDays / 365;
+                return 0;
+            }
+        }
         #endregion
 
         #region Tools
