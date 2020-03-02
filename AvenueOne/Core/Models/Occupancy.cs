@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AvenueOne.Core.Models
 {
-    public class Occupancy : INotifyPropertyChanged
+    public class Occupancy : IOccupancy
     {
 
         #region Properties

@@ -49,7 +49,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
             }
             catch (InvalidOperationException ex)
             {
-                _displayService.ErrorDisplay(ex.Message, "Error on model insertion.");
+                _displayService.ErrorDisplay(ex.Message, "Error on model deletion.");
             }
             catch (Exception ex)
             {

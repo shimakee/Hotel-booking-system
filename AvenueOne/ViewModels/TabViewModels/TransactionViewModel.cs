@@ -254,10 +254,7 @@ namespace AvenueOne.ViewModels.TabViewModels
             {
                if(this.Bookings.Count > 0)
                 {
-                    foreach (var item in Bookings)
-                    {
-                        bookingList.Add(item);
-                    }
+                        bookingList = bookingList.Union(Bookings.ToList()).ToList();
                 }
             }
 

@@ -122,6 +122,7 @@
     <Compile Include="Core\Models\Interfaces\IBaseObservableModel.cs" />
     <Compile Include="Core\Models\Interfaces\IBooking.cs" />
     <Compile Include="Core\Models\Interfaces\ICustomer.cs" />
+    <Compile Include="Core\Models\Interfaces\IOccupancy.cs" />
     <Compile Include="Core\Models\Interfaces\IRoom.cs" />
     <Compile Include="Core\Models\Interfaces\IRoomType.cs" />
     <Compile Include="Core\Models\Interfaces\ITransaction.cs" />

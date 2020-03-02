@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,9 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
 
                 ViewModel.ClearClassCommand.Execute(null);
                 _displayService.MessageDisplay($"Added {typeof(T)} model.\nId:{ViewModel.ModelSelected.Id}\nAffected rows:{n}", "Model added");
+            }catch(DbEntityValidationException entityEx)
+            {
+                _displayService.ErrorDisplay(entityEx.Message, "Entity validation error!");
             }
             catch (ValidationException validationException)
             {
