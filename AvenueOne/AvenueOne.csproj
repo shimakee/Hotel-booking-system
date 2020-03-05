@@ -445,7 +445,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Domain\" />
-    <Folder Include="Db\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
     <Folder Include="Views\Pages\Interfaces\" />
   </ItemGroup>
@@ -470,6 +469,15 @@
     <Resource Include="Assets\defaultAvatar.JPG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Db\AvenueOneDb.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Db\AvenueOneDb_log.ldf">
+      <DependentUpon>AvenueOneDb.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
