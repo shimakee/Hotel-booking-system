@@ -252,6 +252,7 @@
     <Compile Include="ViewModels\Commands\TransactionCommands\UpdateTransactionCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\ClearUserCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\CreateUserCommand.cs" />
+    <Compile Include="ViewModels\Commands\UserCommands\DeleteUserCommand.cs" />
     <Compile Include="ViewModels\Commands\UserCommands\UpdateUserCommand.cs" />
     <Compile Include="ViewModels\Commands\WindowCommands\BaseWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\WindowCommands\CloseWindowCommand.cs" />

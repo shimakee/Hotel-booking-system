@@ -6,6 +6,7 @@ using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.Commands.ClassCommands;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +64,11 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                     throw new InvalidOperationException("Could not edit accout.");
                 _displayService.MessageDisplay($"Edited account: {ViewModel.Model.Username}.\nAffected rows: {n}.");
             }
-            catch(NullReferenceException nullEx)
+            catch (DbEntityValidationException dbEx)
+            {
+                _displayService.ErrorDisplay(dbEx.Message, "Validation exception.");
+            }
+            catch (NullReferenceException nullEx)
             {
                 _displayService.ErrorDisplay(nullEx.Message, "Null reference exception.");
             }
@@ -80,9 +85,15 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
 
         protected override async Task<int> Update()
         {
+            //to retain atleast 1 admin user when updating.
+            List<User> adminUsers = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(User)].Find(u => u.IsAdmin == true).ToList());
+            if (adminUsers.Count <= 1 && ViewModel.ModelSelected.IsAdmin == false)
+                ViewModel.ModelSelected.IsAdmin = true;
+
             User user = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(User)].GetAsync(ViewModel.Model.Id)) ?? throw new NullReferenceException("Account does not exist.");
 
             user.Username = ViewModel.ModelSelected.Username;
+            user.IsAdmin = ViewModel.ModelSelected.IsAdmin;
             user.Password = ViewModel.ModelSelected.Password;
             user.PasswordConfirm = ViewModel.ModelSelected.PasswordConfirm;
             ViewModel.ModelSelected.Person.Id = user.Person.Id;

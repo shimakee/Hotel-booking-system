@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Core;
-using AvenueOne.Interfaces;
+using AvenueOne.Models;
 using AvenueOne.Services.Interfaces;
+using AvenueOne.ViewModels.Commands.ClassCommands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,15 +10,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvenueOne.ViewModels.Commands.ClassCommands
+namespace AvenueOne.ViewModels.Commands.UserCommands
 {
-    public class DeleteClassCommand<T> : BaseClassCommand<T> where T : class, IBaseObservableModel<T>, new()
+    public class DeleteUserCommand : DeleteClassCommand<User>, IBaseClassCommand<User>
     {
-        public DeleteClassCommand(IGenericUnitOfWork<T> genericUnitOfWork, IDisplayService displayService)
-            :base(genericUnitOfWork, displayService)
+
+        public DeleteUserCommand(IGenericUnitOfWork<User> genericUnitOfWork, IDisplayService displayService)
+            : base(genericUnitOfWork, displayService)
         {
 
         }
+
         public override async void Execute(object parameter)
         {
             try
@@ -26,6 +29,10 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 string id = ViewModel.Model.Id;
 
                 bool ConfirmDelete = _displayService.MessagePrompt($"Are you sure you want to delete? delete action will also cascade to all reference objects.", "Delete object");
+
+                List<User> adminUsers = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(User)].Find(u => u.IsAdmin == true).ToList());
+                if (adminUsers.Count <= 1 && ViewModel.Model.IsAdmin == true)
+                    throw new InvalidOperationException("Could not delete user, there must be atleast 1 admin account.");
 
                 if (ConfirmDelete)
                 {
@@ -36,7 +43,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                     //modelselected not be null after delete
                     ViewModel.ClearClassCommand.Execute(null);
 
-                    _displayService.MessageDisplay($"Deleted {typeof(T)} model.\nId:{id}\nAffected rows:{n}", "Model deleted");
+                    _displayService.MessageDisplay($"Deleted {typeof(User)} model.\nId:{id}\nAffected rows:{n}", "Model deleted");
                 }
             }
             catch (ValidationException validationException)
@@ -59,16 +66,6 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
             }
 
         }
-
-        protected virtual async Task<int> Delete()
-        {
-            T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.Model.Id));
-            if (model == null)
-                throw new InvalidOperationException("Invalid, model does not exist.");
-
-            _genericUnitOfWork.Repositories[typeof(T)].Remove(model);
-
-            return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
-        }
+        
     }
 }

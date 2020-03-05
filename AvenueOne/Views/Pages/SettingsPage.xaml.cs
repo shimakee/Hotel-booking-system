@@ -57,7 +57,7 @@ namespace AvenueOne.Views.Pages
             IGenericUnitOfWork<User> genericUnitOfWorkUser = new GenericUnitOfWork<User>(_context);
             BaseClassCommand<User> createUserCommand = new CreateUserCommand(genericUnitOfWorkUser, displayService);
             BaseClassCommand<User> updateUserCommand = new UpdateUserCommand(genericUnitOfWorkUser, displayService);
-            BaseClassCommand<User> deleteUserCommand = new DeleteClassCommand<User>(genericUnitOfWorkUser, displayService);
+            BaseClassCommand<User> deleteUserCommand = new DeleteUserCommand(genericUnitOfWorkUser, displayService);
             ClearClassCommand<User> clearUserCommand = new ClearUserCommand();
             IUserViewModel userTab = new UserViewModel(User.Person, User, _context.Users.Local,
                                                                                                         createUserCommand,

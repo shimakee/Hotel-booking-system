@@ -30,6 +30,9 @@ namespace AvenueOne.ViewModels.TabViewModels
                 Model = value;
                 if(value != null)
                 {
+                    Model.PasswordConfirm = value.Password;
+                    value.PasswordConfirm = value.Password;
+
                     _modelSelected = value.Copy();
                     if (value.Person != null)
                         Profile = value.Person.Copy();

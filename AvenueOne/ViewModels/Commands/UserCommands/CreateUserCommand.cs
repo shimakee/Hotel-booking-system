@@ -97,6 +97,11 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
             user.Password = HashService.Hash(user.Password, salt);
             user.PasswordConfirm = user.Password;
 
+            //to make sure that first account created will always be admin.
+            List<User> adminUsers = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(User)].Find(u => u.IsAdmin == true).ToList());
+            if (adminUsers.Count <= 0 && user.IsAdmin == false)
+                user.IsAdmin = true;
+
             User user2 = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(User)].Find(u => u.Username == user.Username).FirstOrDefault());
             if (user2 != null)
                 throw new InvalidOperationException("Username already exist.");
