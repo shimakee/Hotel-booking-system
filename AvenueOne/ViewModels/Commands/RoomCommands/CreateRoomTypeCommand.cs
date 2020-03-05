@@ -18,6 +18,11 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
 
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
         //public override async void Execute(object parameter)
         //{
         //    try
@@ -30,7 +35,7 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
         //            if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
         //                throw new InvalidOperationException("Invalid entry on room type.");
 
-                
+
 
         //        if (n <= 0)
         //            throw new InvalidOperationException("Could not add room type.");

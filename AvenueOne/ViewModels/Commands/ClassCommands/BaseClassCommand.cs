@@ -41,9 +41,10 @@ namespace AvenueOne.ViewModels.Commands
             try
             {
                 if (this.ViewModel == null)
-                    throw new NullReferenceException("Viewmodel cannot be null.");
+                throw new NullReferenceException("Viewmodel cannot be null.");
                 if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
-                    throw new NullReferenceException("Model or Selection cannot be null.");
+                    ViewModel.ClearClassCommand.Execute(null);
+                    //throw new NullReferenceException("Model or Selection cannot be null.");
                 if (!ViewModel.Model.IsValid || !ViewModel.ModelSelected.IsValid)
                     throw new ValidationException("Invalid input on Model or ModelSelected.");
 

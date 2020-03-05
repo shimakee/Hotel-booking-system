@@ -43,8 +43,8 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
         {
                 if (this.ViewModel == null)
                     throw new NullReferenceException("Viewmodel cannot be null.");
-                if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
-                    throw new NullReferenceException("Model or Selection cannot be null.");
+                //if (this.ViewModel.Model == null || this.ViewModel.ModelSelected == null)
+                //    throw new NullReferenceException("Model or Selection cannot be null.");
 
         }
 

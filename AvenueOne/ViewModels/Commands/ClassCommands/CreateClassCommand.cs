@@ -22,6 +22,11 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
         {
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
         public override async void Execute(object parameter)
         {
             try

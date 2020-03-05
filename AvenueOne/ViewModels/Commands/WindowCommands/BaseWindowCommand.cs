@@ -24,9 +24,7 @@ namespace AvenueOne.ViewModels.Commands.WindowCommands
 
         public virtual bool CanExecute(object parameter)
         {
-            if (ViewModel != null)
-                return ViewModel.UserAccount.IsAdmin;
-            return false;
+            return true;
         }
 
         public abstract void Execute(object parameter);
