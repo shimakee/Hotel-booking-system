@@ -13,14 +13,29 @@ namespace AvenueOne.ViewModels.Commands.TransactionCommands
 {
     public class UpdateTransactionCommand :  UpdateClassCommand<Transaction>, IBaseClassCommand<Transaction>
     {
+        private IGenericUnitOfWork<Booking> _genericUnitOfWorkBooking { get; set; }
         public UpdateTransactionCommand(IGenericUnitOfWork<Transaction> genericUnitOfWork, 
+                                                                    IGenericUnitOfWork<Booking> genericUnitOfWorkBooking,
                                                                     IDisplayService displayService)
             :base(genericUnitOfWork, displayService)
         {
+            this._genericUnitOfWorkBooking = genericUnitOfWorkBooking;
         }
 
         protected override async Task<int> Update()
         {
+            ITransactionViewModel viewModel = ViewModel as ITransactionViewModel;
+            //if (viewModel.BookingViewModel.Model != null && viewModel.BookingViewModel.ModelSelected != null)
+            //    viewModel.BookingViewModel.UpdateClassCommand.Execute(null);
+            Booking modelBooking = await Task.Run(() => _genericUnitOfWorkBooking.Repository.GetAsync(viewModel.BookingViewModel.Model.Id));
+            if (modelBooking == null)
+                throw new InvalidOperationException("Invalid, model does not exist.");
+            viewModel.BookingViewModel.ModelSelected.Id = modelBooking.Id;
+            viewModel.BookingViewModel.ModelSelected.DateModified = DateTime.Now;
+            viewModel.BookingViewModel.ModelSelected.DateAdded = modelBooking.DateAdded;
+            viewModel.BookingViewModel.ModelSelected.DeepCopyTo(modelBooking);
+            int n = await Task.Run(()=> _genericUnitOfWorkBooking.CompleteAsync());
+
             Transaction model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(Transaction)].Get(ViewModel.Model.Id));
             if (model == null)
                 throw new InvalidOperationException("Invalid, model does not exist.");
@@ -34,28 +49,8 @@ namespace AvenueOne.ViewModels.Commands.TransactionCommands
             }
             else
             {
-                //foreach (var booking in ViewModel.ModelSelected.Bookings)=
-                //{
-                    //foreach (var item in model.Bookings)
-                    //{
-                        //if (booking.Id == item.Id && !booking.Equals(item)){
-                        //    booking.DateModified = DateTime.Now;
-                        //    booking.DateAdded = item.DateAdded;
-                        //    booking.DeepCopyTo(item);
-                        //}
-                    //}
-
-                        //Booking book = await Task.Run(()=> _genericUnitOfWorkBooking.Repositories[typeof(Booking)].GetAsync(booking.Id));
-                        //booking.DateModified = DateTime.Now;
-                        //booking.DateAdded = book.DateAdded;
-                        //booking.DeepCopyTo(book);
-                //}
                 ViewModel.ModelSelected.DeepCopyTo(model);
             }
-
-            //int n = await Task.Run(() => _genericUnitOfWorkBooking.CompleteAsync());
-            //if (n <= 0)
-            //    throw new InvalidOperationException("Could not update model.");
 
             return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
         }

@@ -23,6 +23,16 @@ namespace AvenueOne.Persistence
         //    if (repository == null)
         //        Repositories.Add(type as Type, new Repository<>(_context) as IRepository<T>);
         //}
+
+        public Repository<T> Repository
+        {
+            get { 
+                if(this.Repositories[typeof(T)] == null)
+                    this.Repositories.Add(typeof(T), new Repository<T>(_context));
+
+                return this.Repositories[typeof(T)] as Repository<T>;  }
+        }
+
         public Dictionary<Type, IRepository<T>> Repositories { get; private set; } = new Dictionary<Type, IRepository<T>>();
         public GenericUnitOfWork(PlutoContext context)
         {

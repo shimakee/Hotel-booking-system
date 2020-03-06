@@ -1,4 +1,6 @@
-﻿using AvenueOne.Services.Interfaces;
+﻿using AvenueOne.Core;
+using AvenueOne.Core.Models;
+using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,49 +12,57 @@ using System.Windows.Input;
 
 namespace AvenueOne.ViewModels.Commands.BookingCommands
 {
-    public class RemoveBookingCommand : ICommand
+    public class RemoveBookingCommand : BaseClassCommand<Transaction>
     {
-        public ITransactionViewModel ViewModel { get; set; }
-        private IDisplayService _displayService { get; set; }
-        public RemoveBookingCommand(IDisplayService displayService)
+        public RemoveBookingCommand(IGenericUnitOfWork<Transaction> genericUnitOfWork, IDisplayService displayService)
+            :base(genericUnitOfWork, displayService)
         {
-            this._displayService = displayService;
         }
 
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
+        public override bool CanExecute(object parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
             try
             {
+                ITransactionViewModel viewModel = ViewModel as ITransactionViewModel;
+
                 if (ViewModel.Model == null || ViewModel.ModelSelected == null)
                     throw new InvalidOperationException("Transaction must be selected.");
-                if (ViewModel.BookingViewModel.ModelSelected == null || ViewModel.Bookings == null)
+                if (viewModel.BookingViewModel.ModelSelected == null || viewModel.Bookings == null)
                     throw new InvalidOperationException("There must ba a booking entry.");
-                if (!ViewModel.BookingViewModel.ModelSelected.IsValid)
+                if (!viewModel.BookingViewModel.ModelSelected.IsValid)
                     throw new ValidationException("Booking must have a valid entry.");
-                string id = ViewModel.BookingViewModel.Model.Id;
-                ViewModel.Bookings.Remove(ViewModel.BookingViewModel.Model);
+                string bookingModelId = viewModel.BookingViewModel.Model.Id;
+                //viewModel.Bookings.Remove(viewModel.BookingViewModel.Model);
+                if(viewModel.Model.Bookings.Count <= 1)
+                {
+                    _genericUnitOfWork.Repository.Remove(viewModel.Model);
+                }
+                else
+                {
+                    Transaction transaction = _genericUnitOfWork.Repository.Get(ViewModel.Model.Id);
+                    //check if it contains the booking
+                    if (!transaction.Bookings.Contains(viewModel.BookingViewModel.Model))
+                        throw new InvalidOperationException("Could not remove booking, it did not exist in the selected transaction.");
+                    transaction.Bookings.Remove(viewModel.BookingViewModel.Model);
+                }
+
+                int n = await Task.Run(() => _genericUnitOfWork.CompleteAsync());
 
                 //reassign model - since it will be turned to null when removing it form booking.
-                ViewModel.BookingViewModel.ModelSelected = ViewModel.BookingViewModel.ModelList.Where(b => b.Id == id).FirstOrDefault();
+                viewModel.BookingViewModel.ModelSelected = viewModel.BookingViewModel.ModelList.Where(b => b.Id == bookingModelId).FirstOrDefault();
                 //remove booking reference made to room.
-                ViewModel.BookingViewModel.Model.Room.Bookings.Remove(ViewModel.BookingViewModel.Model);
-                //Delete Booking, 
-                //no need to Check if booking belongs to other transaction - since booking should only belong to one transaction
-                //only check when transfering booking. to maintain consistency of relationship
-                if (ViewModel.BookingViewModel.ModelSelected != null && ViewModel.BookingViewModel.Model != null)
-                    ViewModel.BookingViewModel.DeleteClassCommand.Execute(null);
+                viewModel.BookingViewModel.Model.Room.Bookings.Remove(viewModel.BookingViewModel.Model);
+                //delete booking
+                if (viewModel.BookingViewModel.ModelSelected != null && viewModel.BookingViewModel.Model != null)
+                    viewModel.BookingViewModel.DeleteClassCommand.Execute(null);
 
-                //Check if Transaction bookings count is <= 0 if true then delete. TODO
-
-
-                ViewModel.BookingViewModel.ClearClassCommand.Execute(null);
+                viewModel.ClearClassCommand.Execute(null);
+                viewModel.BookingViewModel.RoomsAvailable = viewModel.GetAvailableRooms();
             }
             catch (ValidationException valEx)
             {

@@ -30,7 +30,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 base.Validate();
                 PreUpdate();
                 int n = await Update();
-                if (n == 0)
+                if (n <= 0)
                     throw new InvalidOperationException("Could not update model.");
 
                 ViewModel.ClearClassCommand.Execute(null);
@@ -46,7 +46,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
             }
             catch (InvalidOperationException ex)
             {
-                _displayService.ErrorDisplay(ex.Message, "Error on model insertion.");
+                _displayService.ErrorDisplay(ex.Message, "Error on model update.");
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
 
         protected virtual async Task<int> Update()
         {
-            T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].Get(ViewModel.Model.Id));
+            T model = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(T)].GetAsync(ViewModel.Model.Id));
             if (model == null)
                 throw new InvalidOperationException("Invalid, model does not exist.");
             ViewModel.ModelSelected.Id = model.Id;

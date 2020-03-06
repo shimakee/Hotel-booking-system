@@ -270,7 +270,8 @@ namespace AvenueOne.Core.Models
             }
 
             if (lengthOfStay < 0)
-                throw new InvalidOperationException("Length of stay must be greater than 0.");
+                lengthOfStay = 0;
+                //throw new InvalidOperationException("Length of stay must be greater than 0.");
 
             return rate * lengthOfStay;
         }
