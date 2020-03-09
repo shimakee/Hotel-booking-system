@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AvenueOne.Views.Pages"
+      xmlns:control="clr-namespace:AvenueOne.Views.UserControls"
       xmlns:converters="clr-namespace:AvenueOne.Converters"
       xmlns:system="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
@@ -160,10 +161,12 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
+                            <control:CustomerDisplayControl/>
 
-                            <StackPanel HorizontalAlignment="Center">
 
-                                <!--Color status-->
+                            <!--<StackPanel HorizontalAlignment="Center">
+
+                                --><!--Color status--><!--
                                 <Rectangle HorizontalAlignment="Center"
                                                                                         Height="25"
                                                                                         Width="25"
@@ -194,7 +197,9 @@
                                             Text="{Binding Person.Gender}"/>
                                 <TextBlock HorizontalAlignment="Center"
                                             Text="{Binding Person.FullName}"/>
-                            </StackPanel>
+                            </StackPanel>-->
+                            
+                            
 
                         </DataTemplate>
                     </ListBox.ItemTemplate>
