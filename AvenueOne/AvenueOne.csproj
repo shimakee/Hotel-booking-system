@@ -346,6 +346,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Resources\ButtonDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\ColorDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\ErrorControlTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\IconDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\CustomerDisplayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -456,6 +472,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\icons\light\" />
     <Folder Include="Core\Domain\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
     <Folder Include="Views\Pages\Interfaces\" />
@@ -483,6 +500,24 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\icons\dark\add.png" />
+    <Resource Include="Assets\icons\dark\book.png" />
+    <Resource Include="Assets\icons\dark\delete.png" />
+    <Resource Include="Assets\icons\dark\door.png" />
+    <Resource Include="Assets\icons\dark\edit.png" />
+    <Resource Include="Assets\icons\dark\femalebust.png" />
+    <Resource Include="Assets\icons\dark\femalehead.png" />
+    <Resource Include="Assets\icons\dark\frontdesk.png" />
+    <Resource Include="Assets\icons\dark\gears.png" />
+    <Resource Include="Assets\icons\dark\logbook.png" />
+    <Resource Include="Assets\icons\dark\malebust.png" />
+    <Resource Include="Assets\icons\dark\malehead.png" />
+    <Resource Include="Assets\icons\dark\pen.png" />
+    <Resource Include="Assets\icons\dark\people.png" />
+    <Resource Include="Assets\icons\dark\save.png" />
+    <Resource Include="Assets\icons\dark\save2.png" />
+    <Resource Include="Assets\icons\dark\tools.png" />
+    <Resource Include="Assets\icons\dark\x.png" />
     <Content Include="Db\AvenueOneDb.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

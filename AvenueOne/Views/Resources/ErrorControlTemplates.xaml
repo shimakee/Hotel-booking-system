@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AvenueOne.Views.Resources">
+
+    <ControlTemplate x:Key="errorTemplate" TargetType="Control">
+        <Grid>
+            <Border BorderBrush="Red" BorderThickness="1">
+                <AdornedElementPlaceholder />
+            </Border>
+            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
+                                           VerticalAlignment="Center" HorizontalAlignment="Right"
+                                           Margin="0, 0, 4,0"/>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="errorTemplateStack" TargetType="Control">
+        <StackPanel>
+            <Border BorderBrush="Red" BorderThickness="1">
+                <AdornedElementPlaceholder />
+            </Border>
+            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
+                                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                                               Margin="0, 0, 4,0"/>
+        </StackPanel>
+    </ControlTemplate>
+
+</ResourceDictionary>

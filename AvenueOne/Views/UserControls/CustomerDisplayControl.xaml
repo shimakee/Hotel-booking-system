@@ -6,47 +6,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AvenueOne.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel HorizontalAlignment="Center">
+             d:DesignHeight="450" d:DesignWidth="800" Margin="5">
 
-        <!--Color status-->
-        <Rectangle HorizontalAlignment="Center"
-                                                                                        Height="25"
-                                                                                        Width="25"
-                                                                                        Margin="0,0,0,0"
-                                                                                        Stroke="Black" >
-            <Rectangle.Style>
-                <Style TargetType="Rectangle">
-                    <Setter Property="Fill" Value="LawnGreen"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Person.Gender, UpdateSourceTrigger=PropertyChanged}"
-                                                                                                Value="1">
-                            <Setter Property="Fill"
-                                                                                                Value="HotPink" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Person.Gender, UpdateSourceTrigger=PropertyChanged}"
-                                                                                                Value="0">
-                            <Setter Property="Fill"
-                                                                                                Value="CadetBlue" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Rectangle.Style>
-        </Rectangle>
-        <!--<TextBlock HorizontalAlignment="Center"
-                   Name="Id"
-                                            Text="{Binding Id}"/>
-        <TextBlock HorizontalAlignment="Center"
-                   Name="PersonId"
-                                            Text="{Binding Person.Id}"/>-->
-        <TextBlock HorizontalAlignment="Center"
-                   Name="Age"
-                                            Text="{Binding Person.Age}"/>
-        <TextBlock HorizontalAlignment="Center"
-                   Name="Gender"
-                                            Text="{Binding Person.Gender}"/>
-        <TextBlock HorizontalAlignment="Center"
-                   Name="Fullname"
-                                            Text="{Binding Person.FullName}"/>
+    <StackPanel HorizontalAlignment="Center">
+        <Viewbox MaxHeight="80" MaxWidth="80">
+            <Grid Height="80" Width="80">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Background" Value="Black"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Person.Gender}" Value="0">
+                                <Setter Property="Background" Value="CornflowerBlue"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Person.Gender}" Value="1">
+                                <Setter Property="Background" Value="LightPink"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" >
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="{StaticResource maleGenderIcon}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Person.Gender}" Value="0">
+                                    <Setter Property="Source" Value="{StaticResource maleGenderIcon}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Person.Gender}" Value="1">
+                                    <Setter Property="Source" Value="{StaticResource femaleGenderIcon}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <TextBlock HorizontalAlignment="Center" Foreground="WhiteSmoke" FontSize="20" Margin="0 18"
+                                Name="Age"
+                                Text="{Binding Person.Age}"/>
+            </Grid> 
+        </Viewbox>
+
+            <TextBlock HorizontalAlignment="Center" FontSize="18" Margin="0"
+                    Name="Fullname"
+                    Text="{Binding Person.FullName}"/>
     </StackPanel>
 </UserControl>

@@ -5,25 +5,13 @@
              StartupUri="Views/Windows/LoginWindow.xaml"
              Startup="OnStartup">
     <Application.Resources>
-        <ControlTemplate x:Key="errorTemplate">
-            <Grid>
-                <Border BorderBrush="Red" BorderThickness="1">
-                        <AdornedElementPlaceholder />
-                    </Border>
-                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
-                                       VerticalAlignment="Center" HorizontalAlignment="Right"
-                                       Margin="0, 0, 4,0"/>
-            </Grid>
-        </ControlTemplate>
-        <ControlTemplate x:Key="errorTemplateStack">
-            <StackPanel>
-                <Border BorderBrush="Red" BorderThickness="1">
-                    <AdornedElementPlaceholder />
-                </Border>
-                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
-                                       VerticalAlignment="Center" HorizontalAlignment="Right"
-                                       Margin="0, 0, 4,0"/>
-            </StackPanel>
-        </ControlTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="ColorDictionary" Source="Views/Resources/ColorDictionary.xaml" />
+                <ResourceDictionary x:Name="IconsDictionary" Source="Views/Resources/IconDictionary.xaml" />
+                <ResourceDictionary x:Name="ErrorControlTemplates" Source="Views/Resources/ErrorControlTemplates.xaml" />
+                <ResourceDictionary x:Name="ButtonDictionary" Source="Views/Resources/ButtonDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

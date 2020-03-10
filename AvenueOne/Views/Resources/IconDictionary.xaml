@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AvenueOne.Views.Resources">
+
+
+    <BitmapImage x:Key="maleGenderIcon"  UriSource="../../Assets/icons/dark/malehead.png" />
+    <BitmapImage x:Key="femaleGenderIcon" UriSource="../../Assets/icons/dark/femalehead.png" />
+    <BitmapImage x:Key="deleteIcon" UriSource="../../Assets/icons/dark/delete.png" />
+
+
+</ResourceDictionary>

@@ -37,10 +37,16 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Content="Add new Customer" Grid.Column="0" 
+                                <Button Content="Add new Customer" Grid.Column="0" MaxHeight="50"
+                                        Tag="{StaticResource femaleGenderIcon}"
+                                        Style="{StaticResource defaultButtonStyle}"
                                         Command="{Binding CreateClassCommand}"
                                     />
-                                <Button Content="Clear content" Grid.Column="1" 
+
+                                <Button Grid.Column="1" MaxHeight="50"
+                                        Content="Clear content"
+                                        Tag="{StaticResource femaleGenderIcon}"
+                                        Style="{StaticResource failButtonStyle2}"
                                         Command="{Binding ClearClassCommand}"
                                     />
                             </Grid>

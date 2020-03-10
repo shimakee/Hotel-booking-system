@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AvenueOne.Views.Resources">
+
+    <SolidColorBrush x:Key="success" Color="#3a9679"/>
+    <SolidColorBrush x:Key="fail" Color="#e16262"/>
+    <SolidColorBrush x:Key="caution" Color="#fabc60"/>
+    <SolidColorBrush x:Key="info" Color="#11144c"/>
+    <SolidColorBrush x:Key="light" Color="#f8eeb4"/>
+    <SolidColorBrush x:Key="dark" Color="#1b1919"/>
+
+</ResourceDictionary>
