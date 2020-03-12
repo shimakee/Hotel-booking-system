@@ -320,6 +320,9 @@
     <Compile Include="Views\UserControls\CustomerDisplayControl.xaml.cs">
       <DependentUpon>CustomerDisplayControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\TextBoxControl.xaml.cs">
+      <DependentUpon>TextBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -363,6 +366,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CustomerDisplayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\TextBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -518,6 +525,8 @@
     <Resource Include="Assets\icons\dark\save2.png" />
     <Resource Include="Assets\icons\dark\tools.png" />
     <Resource Include="Assets\icons\dark\x.png" />
+    <Resource Include="Assets\avenue.png" />
+    <Resource Include="Assets\avenueOneBanner.png" />
     <Content Include="Db\AvenueOneDb.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

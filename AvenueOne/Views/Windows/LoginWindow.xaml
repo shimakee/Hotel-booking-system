@@ -5,66 +5,123 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AvenueOne.Views"
+        xmlns:control="clr-namespace:AvenueOne.Views.UserControls"
         xmlns:converters="clr-namespace:AvenueOne.Converters"
         mc:Ignorable="d"
-        Title="Login" Height="150" Width="800"
+        Title="Login" Height="350" Width="350"
         Loaded="On_Loaded"
-        FocusManager.FocusedElement="{x:Reference Username}">
+        FocusManager.FocusedElement="{x:Reference Username}"
+        Icon="{StaticResource logoIcon}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <converters:PasswordConverter x:Key="PasswordConverter"/>
     </Window.Resources>
 
-    <StackPanel Margin="10">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
+    <DockPanel Margin="0">
 
-            <TextBlock Text="Username" Grid.Column="0"/>
-            <TextBox x:Name="Username" Grid.Column="1"
-                             Text="{Binding User.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                             ToolTip="{Binding Person.ErrorCollection[Username]}"
-                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+        <!-- Top title bar-->
+        <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+              MouseLeftButtonDown="Grid_MouseLeftButtonDown"
+              Background="Transparent">
+            
+            <!--<StackPanel Orientation="Horizontal" MaxHeight="35">
+                <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
+                   Source="{StaticResource logoSource}" />
+                <TextBlock Text="Avenue one hotel"  VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+            </StackPanel>-->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" MaxHeight="35">
+
+                <Button Padding="5 5 5 5"
+                        KeyboardNavigation.IsTabStop="False"
+                        Click="MinimizeWindow"
+                    Style="{StaticResource transaparentButtonStyle}">
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5"
+                                Source="{StaticResource penIcon}" />
+                </Button>
+                <Button Padding="5 5 5 5"
+                        KeyboardNavigation.IsTabStop="False"
+                        Click="MaximizeWindow"
+                    Style="{StaticResource transaparentButtonStyle}">
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
+                                Source="{StaticResource gearIcon}" />
+                </Button>
+                <Button Padding="5 5 5 5"
+                        KeyboardNavigation.IsTabStop="False"
+                        Click="CloseWindow"
+                    Style="{StaticResource transaparentButtonStyle}">
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
+                            Source="{StaticResource xIcon}" />
+                </Button>
+
+            </StackPanel>
         </Grid>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="193*"/>
-                <ColumnDefinition Width="14*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="76*"/>
-                <ColumnDefinition Width="59*"/>
-                <ColumnDefinition Width="420*"/>
-            </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Password" Grid.Column="0"/>
-            <PasswordBox x:Name="Password" Grid.Column="1" Grid.ColumnSpan="7">
-                <PasswordBox.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding LoginCommand, Mode=OneWay}">
-                        <KeyBinding.CommandParameter>
-                            <MultiBinding Converter="{StaticResource PasswordConverter}">
-                                <Binding ElementName="Username"/>
-                                <Binding ElementName="Password"/>
-                            </MultiBinding>
-                        </KeyBinding.CommandParameter>
-                    </KeyBinding>
-                </PasswordBox.InputBindings>
-            </PasswordBox>
-        </Grid>
+        <StackPanel MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
 
-        <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
-            <Button.CommandParameter>
-                <MultiBinding Converter="{StaticResource PasswordConverter}">
-                    <Binding ElementName="Username"/>
-                    <Binding ElementName="Password"/>
-                </MultiBinding>
-            </Button.CommandParameter>
-        </Button>
+            <StackPanel Margin="10">
 
-        <Button Content="Cancel" Click="Button_Close"/>
+
+                <Image Source="{StaticResource logoBanner}" Stretch="Uniform" MaxHeight="100" Margin="5 5 5 20"/>
+                <control:TextBoxControl ImageSource="{StaticResource femaleGenderIcon}" Label="Username" Text="{Binding User.Username, Mode=TwoWay}"/>
+                <TextBlock Text="{Binding User.Username, Mode=TwoWay}" FontSize="20"/>
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Username" Grid.Column="0"/>
+                    <TextBox x:Name="Username" Grid.Column="1"
+                                     Text="{Binding User.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                     ToolTip="{Binding Person.ErrorCollection[Username]}"
+                                     Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="193*"/>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="76*"/>
+                        <ColumnDefinition Width="59*"/>
+                        <ColumnDefinition Width="420*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Password" Grid.Column="0"/>
+                    <PasswordBox x:Name="Password" Grid.Column="1" Grid.ColumnSpan="7">
+                        <PasswordBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding LoginCommand, Mode=OneWay}">
+                                <KeyBinding.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                        <Binding ElementName="Username"/>
+                                        <Binding ElementName="Password"/>
+                                    </MultiBinding>
+                                </KeyBinding.CommandParameter>
+                            </KeyBinding>
+                        </PasswordBox.InputBindings>
+                    </PasswordBox>
+                </Grid>
+
+                <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource PasswordConverter}">
+                            <Binding ElementName="Username"/>
+                            <Binding ElementName="Password"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+
+                <Button Content="Cancel" Click="CloseWindow"/>
+            </StackPanel>
     </StackPanel>
+    </DockPanel>
+
 </Window>

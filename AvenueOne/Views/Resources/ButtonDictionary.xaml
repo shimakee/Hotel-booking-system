@@ -8,9 +8,9 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="8*"/>
             </Grid.ColumnDefinitions>
-            <Viewbox Grid.Column="0" Margin="{TemplateBinding Padding}">
+            <!--Viewbox Grid.Column="0" Margin="{TemplateBinding Padding}">
                 <Image Source="{TemplateBinding Tag}" Stretch="Uniform"/>
-            </Viewbox>
+            </Viewbox>-->
          
             <!--<TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{TemplateBinding Content}"  FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>-->
             <ContentPresenter Grid.Column="1" VerticalAlignment="Center" />
@@ -21,33 +21,50 @@
         <Setter Property="Background" Value="{StaticResource lightBg}"/>
         <Setter Property="Foreground" Value="{StaticResource darkBg}" />
         <Setter Property="FontSize" Value="15"/>
-        <Setter Property="Padding" Value="10 5"/>
+        <!--<Setter Property="Padding" Value="10 5"/>-->
         <Setter Property="MaxHeight" Value="70"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <!--<ColumnDefinition Width="2*"/>-->
                         </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="0" Stretch="Uniform" Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!--<Viewbox Grid.Column="0" Stretch="Uniform" Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="{TemplateBinding Tag}" Stretch="Uniform"/>
-                        </Viewbox>
-                        <ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Viewbox>-->
+                        <ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="DimGray"/>
+                <Setter Property="Opacity" Value=".7"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="LightSlateGray"/>
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="transaparentButtonStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource base}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource base1}"/>
+                
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource base2}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 
     <Style x:Key="successButtonStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
         <Setter Property="Background" Value="{StaticResource success}" />

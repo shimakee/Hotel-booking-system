@@ -2,10 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AvenueOne.Views.Resources">
 
+    <BitmapImage x:Key="logoIcon" UriSource="../../Assets/A1_icon.ico"/>
+    <BitmapImage x:Key="logoSource" UriSource="../../Assets/avenue.png"/>
+    <BitmapImage x:Key="logoBanner" UriSource="../../Assets/avenueOneBanner.png"/>
 
     <BitmapImage x:Key="maleGenderIcon"  UriSource="../../Assets/icons/dark/malehead.png" />
     <BitmapImage x:Key="femaleGenderIcon" UriSource="../../Assets/icons/dark/femalehead.png" />
     <BitmapImage x:Key="deleteIcon" UriSource="../../Assets/icons/dark/delete.png" />
+    <BitmapImage x:Key="xIcon" UriSource="../../Assets/icons/dark/x.png" />
+    <BitmapImage x:Key="gearIcon" UriSource="../../Assets/icons/dark/gears.png" />
+    <BitmapImage x:Key="penIcon" UriSource="../../Assets/icons/dark/pen.png" />
 
 
 </ResourceDictionary>
