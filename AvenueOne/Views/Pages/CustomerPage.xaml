@@ -44,9 +44,10 @@
                                     />
 
                                 <Button Grid.Column="1" MaxHeight="50"
+                                        IsEnabled="False"
                                         Content="Clear content"
                                         Tag="{StaticResource femaleGenderIcon}"
-                                        Style="{StaticResource failButtonStyle2}"
+                                        Style="{StaticResource defaultButtonStyle}"
                                         Command="{Binding ClearClassCommand}"
                                     />
                             </Grid>
@@ -149,8 +150,11 @@
                             </Grid>
 
                             <Button Content="Save Edit" Margin="0 10 0 0" 
+                                    Style="{StaticResource successButtonStyle}"
                                     Command="{Binding UpdateClassCommand}"/>
                             <Button Content="Delete Customer"
+                                    MaxHeight="40"
+                                    Style="{StaticResource failButtonStyle2}"
                                     Command="{Binding DeleteClassCommand}"/>
                         </StackPanel>
                     </Grid>

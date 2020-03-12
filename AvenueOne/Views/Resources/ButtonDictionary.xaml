@@ -2,9 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AvenueOne.Views.Resources">
 
+    <ControlTemplate x:Key="defaultButtonTemplate" TargetType="Button">
+        <Grid Background="{TemplateBinding Background}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="0" Margin="{TemplateBinding Padding}">
+                <Image Source="{TemplateBinding Tag}" Stretch="Uniform"/>
+            </Viewbox>
+         
+            <!--<TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{TemplateBinding Content}"  FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>-->
+            <ContentPresenter Grid.Column="1" VerticalAlignment="Center" />
+        </Grid>
+    </ControlTemplate>
+    
     <Style x:Key="defaultButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource light}"/>
-        <Setter Property="Foreground" Value="{StaticResource dark}" />
+        <Setter Property="Background" Value="{StaticResource lightBg}"/>
+        <Setter Property="Foreground" Value="{StaticResource darkBg}" />
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Padding" Value="10 5"/>
         <Setter Property="MaxHeight" Value="70"/>
@@ -36,7 +51,7 @@
 
     <Style x:Key="successButtonStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
         <Setter Property="Background" Value="{StaticResource success}" />
-        <Setter Property="Foreground" Value="{StaticResource light}" />
+        <Setter Property="Foreground" Value="{StaticResource lightBg}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="DarkOliveGreen"/>
@@ -62,7 +77,7 @@
 
     <Style x:Key="failButtonStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
         <Setter Property="Background" Value="{StaticResource fail}"/>
-        <Setter Property="Foreground" Value="{StaticResource light}" />
+        <Setter Property="Foreground" Value="{StaticResource lightBg}" />
         <Setter Property="Tag" Value="{StaticResource deleteIcon}" />
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Padding" Value="10 5"/>
@@ -83,18 +98,4 @@
     </Style>
 
 
-    <ControlTemplate x:Key="defaultButtonTemplate" TargetType="Button">
-        <Grid Background="{TemplateBinding Background}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="8*"/>
-            </Grid.ColumnDefinitions>
-            <Viewbox Grid.Column="0" Margin="{TemplateBinding Padding}">
-                <Image Source="{TemplateBinding Tag}" Stretch="Uniform"/>
-            </Viewbox>
-         
-            <!--<TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{TemplateBinding Content}"  FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>-->
-            <ContentPresenter Grid.Column="1" VerticalAlignment="Center" />
-        </Grid>
-    </ControlTemplate>
 </ResourceDictionary>

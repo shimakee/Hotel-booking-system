@@ -2,11 +2,27 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AvenueOne.Views.Resources">
 
+
+    <SolidColorBrush x:Key="lightBg" Color="#f8eeb4"/>
+    <SolidColorBrush x:Key="darkBg" Color="#1b1919"/>
+
+    <SolidColorBrush x:Key="primary" Color="#c88536"/>
+    <SolidColorBrush x:Key="base" Color="#1b1919"/>
+    <SolidColorBrush x:Key="base1" Color="#c5c5c5"/>
+    <SolidColorBrush x:Key="base2" Color="#6d6d6dff"/>
+    <SolidColorBrush x:Key="container" Color="#d5c987"/>
+    <SolidColorBrush x:Key="formfield" Color="#fff7cb"/>
     <SolidColorBrush x:Key="success" Color="#3a9679"/>
+    <SolidColorBrush x:Key="success1" Color="#3a9679"/>
+    <SolidColorBrush x:Key="success2" Color="#3a9679"/>
     <SolidColorBrush x:Key="fail" Color="#e16262"/>
+    <SolidColorBrush x:Key="fail1" Color="#e16262"/>
+    <SolidColorBrush x:Key="fail2" Color="#e16262"/>
     <SolidColorBrush x:Key="caution" Color="#fabc60"/>
+    <SolidColorBrush x:Key="caution1" Color="#fabc60"/>
+    <SolidColorBrush x:Key="caution2" Color="#fabc60"/>
     <SolidColorBrush x:Key="info" Color="#11144c"/>
-    <SolidColorBrush x:Key="light" Color="#f8eeb4"/>
-    <SolidColorBrush x:Key="dark" Color="#1b1919"/>
+    <SolidColorBrush x:Key="info1" Color="#11144c"/>
+    <SolidColorBrush x:Key="info2" Color="#11144c"/>
 
 </ResourceDictionary>
