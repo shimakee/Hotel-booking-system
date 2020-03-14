@@ -14,18 +14,20 @@
         Icon="{StaticResource logoIcon}"
         ResizeMode="NoResize"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True">
 
     <Window.Resources>
         <converters:PasswordConverter x:Key="PasswordConverter"/>
     </Window.Resources>
 
-    <DockPanel Margin="0">
+    <DockPanel Margin="0" >
 
         <!-- Top title bar-->
         <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center"
               MouseLeftButtonDown="Grid_MouseLeftButtonDown"
-              Background="Transparent">
+              Background="{StaticResource formfield}">
             
             <!--<StackPanel Orientation="Horizontal" MaxHeight="35">
                 <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
@@ -60,15 +62,23 @@
         </Grid>
 
 
-        <StackPanel MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
+        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Margin="10">
+            <!--<StackPanel>-->
+
+            <Rectangle Grid.Row="0" Stretch="Fill" Fill="{StaticResource darkBg}" Opacity=".5"/>
+            <Image Grid.Row="0"
+                    Source="{StaticResource logoBanner}" Stretch="Uniform" MaxHeight="100" Margin="5 5 5 20"/>
 
 
-                <Image Source="{StaticResource logoBanner}" Stretch="Uniform" MaxHeight="100" Margin="5 5 5 20"/>
-                <control:TextBoxControl ImageSource="{StaticResource femaleGenderIcon}" Label="Username" Text="{Binding User.Username, Mode=TwoWay}"/>
-                <TextBlock Text="{Binding User.Username, Mode=TwoWay}" FontSize="20"/>
+            <StackPanel Grid.Row="1" Background="{StaticResource formfield}">
 
+                <control:TextBoxControl Margin="10 10 10 0"
+                        ImageSource="{StaticResource femaleGenderIcon}" Label="Username" Text="{Binding User.Username, Mode=TwoWay}"/>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -77,51 +87,55 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Username" Grid.Column="0"/>
-                    <TextBox x:Name="Username" Grid.Column="1"
+                    <TextBox Grid.Column="1" x:Name="Username"
                                      Text="{Binding User.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                      ToolTip="{Binding Person.ErrorCollection[Username]}"
                                      Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="193*"/>
+                            <ColumnDefinition Width="14*"/>
+                            <ColumnDefinition Width="0*"/>
+                            <ColumnDefinition Width="0*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="76*"/>
+                            <ColumnDefinition Width="59*"/>
+                            <ColumnDefinition Width="420*"/>
+                        </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="193*"/>
-                        <ColumnDefinition Width="14*"/>
-                        <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="76*"/>
-                        <ColumnDefinition Width="59*"/>
-                        <ColumnDefinition Width="420*"/>
-                    </Grid.ColumnDefinitions>
+                        <TextBlock Text="Password" Grid.Column="0"/>
+                        <PasswordBox x:Name="Password" Grid.Column="1" Grid.ColumnSpan="7">
+                            <PasswordBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding LoginCommand, Mode=OneWay}">
+                                    <KeyBinding.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                            <Binding ElementName="Username"/>
+                                            <Binding ElementName="Password"/>
+                                        </MultiBinding>
+                                    </KeyBinding.CommandParameter>
+                                </KeyBinding>
+                            </PasswordBox.InputBindings>
+                        </PasswordBox>
+                    </Grid>
 
-                    <TextBlock Text="Password" Grid.Column="0"/>
-                    <PasswordBox x:Name="Password" Grid.Column="1" Grid.ColumnSpan="7">
-                        <PasswordBox.InputBindings>
-                            <KeyBinding Key="Return" Command="{Binding LoginCommand, Mode=OneWay}">
-                                <KeyBinding.CommandParameter>
-                                    <MultiBinding Converter="{StaticResource PasswordConverter}">
-                                        <Binding ElementName="Username"/>
-                                        <Binding ElementName="Password"/>
-                                    </MultiBinding>
-                                </KeyBinding.CommandParameter>
-                            </KeyBinding>
-                        </PasswordBox.InputBindings>
-                    </PasswordBox>
-                </Grid>
+                    <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                <Binding ElementName="Username"/>
+                                <Binding ElementName="Password"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
 
-                <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource PasswordConverter}">
-                            <Binding ElementName="Username"/>
-                            <Binding ElementName="Password"/>
-                        </MultiBinding>
-                    </Button.CommandParameter>
-                </Button>
+                    <Button Content="Cancel" Click="CloseWindow"/>
+                </StackPanel>
 
-                <Button Content="Cancel" Click="CloseWindow"/>
-            </StackPanel>
-    </StackPanel>
+
+
+            <!--</StackPanel>-->
+            
+    </Grid>
     </DockPanel>
 
 </Window>
