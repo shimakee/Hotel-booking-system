@@ -79,7 +79,10 @@
 
                 <control:TextBoxControl Margin="10 10 10 0"
                         ImageSource="{StaticResource femaleGenderIcon}" Label="Username" Text="{Binding User.Username, Mode=TwoWay}"/>
+                <control:TextBoxControl Margin="10 10 10 0"
+                        ImageSource="{StaticResource femaleGenderIcon}" Label="Password" Text="{Binding User.Username, Mode=TwoWay}"/>
 
+                <TextBox Template="{StaticResource roundedTextbox}" x:Name="User" Tag="{StaticResource femaleGenderIcon}" Text="{Binding User.Username}"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

@@ -41,7 +41,5 @@
                         UpdateSourceTrigger=PropertyChanged,
                         Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"/>
             <!--</Viewbox>-->
-
-        
     </Grid>
 </UserControl>
