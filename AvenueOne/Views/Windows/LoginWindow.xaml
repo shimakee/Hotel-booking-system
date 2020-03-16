@@ -28,7 +28,7 @@
         <!-- Top title bar-->
         <Border CornerRadius="20 0 0 0"
                 DockPanel.Dock="Top"
-                Background="{StaticResource formfield}"
+                Background="{StaticResource primary}"
                 MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Center">
 
@@ -39,21 +39,21 @@
             </StackPanel>-->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" MaxHeight="35">
 
-                <Button Padding="5 5 5 5"
+                <Button Padding="5"
                         KeyboardNavigation.IsTabStop="False"
                         Click="MinimizeWindow"
                     Style="{StaticResource transaparentButtonStyle}">
                     <Image VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5"
                                 Source="{StaticResource penIcon}" />
                 </Button>
-                <Button Padding="5 5 5 5"
+                <Button Padding="5"
                         KeyboardNavigation.IsTabStop="False"
                         Click="MaximizeWindow"
                     Style="{StaticResource transaparentButtonStyle}">
                     <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
                                 Source="{StaticResource gearIcon}" />
                 </Button>
-                <Button Padding="5 5 5 5"
+                <Button Padding="5"
                         KeyboardNavigation.IsTabStop="False"
                         Click="CloseWindow"
                     Style="{StaticResource transaparentButtonStyle}">

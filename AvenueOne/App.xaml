@@ -11,7 +11,7 @@
                 <ResourceDictionary x:Name="IconsDictionary" Source="Views/Resources/IconDictionary.xaml" />
                 <ResourceDictionary x:Name="ErrorControlTemplates" Source="Views/Resources/ErrorControlTemplates.xaml" />
                 <ResourceDictionary x:Name="ButtonDictionary" Source="Views/Resources/ButtonDictionary.xaml" />
-                <ResourceDictionary x:Name="ButtonDictionary" Source="Views/Resources/StylesDictionary.xaml" />
+                <ResourceDictionary x:Name="StyleDictionary" Source="Views/Resources/StylesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

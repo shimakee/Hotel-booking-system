@@ -82,5 +82,49 @@ namespace AvenueOne
 
             _plutoContext.Dispose();
         }
+
+
+        private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ClickCount >= 1)
+            {
+                //    if (this.WindowState == WindowState.Maximized)
+                //    {
+                //        this.WindowState = WindowState.Normal;
+                //    }
+                //    else
+                //    {
+                //        this.WindowState = WindowState.Maximized;
+                //    }
+                //}
+                //else
+                //{
+
+                this.DragMove();
+
+            }
+        }
+        private void MinimizeWindow(object sender, RoutedEventArgs e) //no need to complicate and implement an ICommand?
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void MaximizeWindow(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
+
     }
 }

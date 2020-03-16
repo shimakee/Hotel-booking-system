@@ -7,40 +7,97 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         Loaded="Window_Loaded"
+        Icon="{StaticResource logoIcon}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
         Title="MainWindow" Height="450" Width="800">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
+    <DockPanel>
 
-        <Viewbox>
+        <!--Top title bar-->
+        <Border CornerRadius="20 0 0 0"
+                DockPanel.Dock="Top"
+                Background="{StaticResource primary}"
+                MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+
+                <!--<StackPanel Orientation="Horizontal" MaxHeight="35">
+                <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
+                   Source="{StaticResource logoSource}" />
+                <TextBlock Text="Avenue one hotel"  VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+            </StackPanel>-->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" MaxHeight="35">
+
+                    <Button Padding="10"
+                        KeyboardNavigation.IsTabStop="False"
+                        Click="MinimizeWindow"
+                        Style="{StaticResource transaparentButtonStyle}">
+                        <Image VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform"
+                                Source="{StaticResource penIcon}" />
+                    </Button>
+                    <Button Padding="5"
+                        KeyboardNavigation.IsTabStop="False"
+                        Click="MaximizeWindow"
+                    Style="{StaticResource transaparentButtonStyle}">
+                        <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
+                                Source="{StaticResource gearIcon}" />
+                    </Button>
+                    <Button Padding="5"
+                        KeyboardNavigation.IsTabStop="False"
+                        Click="CloseWindow"
+                    Style="{StaticResource transaparentButtonStyle}">
+                        <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
+                            Source="{StaticResource xIcon}" />
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Background="{StaticResource formfield}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            
+            <Viewbox Grid.Column="0">
             <StackPanel Margin="10 5" Grid.Column="0" HorizontalAlignment="Center">
                 <StackPanel Margin="5">
-                    <Ellipse Height="50" Width="50">
+                    <Ellipse Height="50" Width="50" Stretch="Uniform" MaxHeight="70" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="/AvenueOne;component/Assets/defaultAvatar.JPG"/>
-                        </Ellipse.Fill>
+                    </Ellipse.Fill>
                     </Ellipse>
 
-                    <TextBlock Text="{Binding User.Username}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding User.Username}" HorizontalAlignment="Center" FontWeight="Bold"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="{Binding User.Person.LastName}"/>
-                        <TextBlock Text="{Binding User.Person.FirstName}"/>
+                            <TextBlock Text="{Binding User.Person.LastName}"/>
+                            <TextBlock Text=", "/>
+                            <TextBlock Text="{Binding User.Person.FirstName}"/>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Margin="0 5">
-                    <Button Content="Bookings" Command="{Binding ChangePageCommand}" CommandParameter="BookingPage"/>
-                    <Button Content="Customers"  Command="{Binding ChangePageCommand}" CommandParameter="CustomerPage"/>
-                    <Button Content="Rooms" Command="{Binding ChangePageCommand}" CommandParameter="RoomPage"/>
-                    <Button Content="Billings"/>
-                    <Button Content="Cashflow"/>
-                    <Button Content="Admin" Command="{Binding ChangePageCommand}" CommandParameter="AdminPage"/>
-                    <Button Content="Settings" Command="{Binding ChangePageCommand}" CommandParameter="SettingsPage"/>
-                    <Button Content="Logout" Click="Button_Logout"/>
+                    <Button Content="Bookings" Command="{Binding ChangePageCommand}" CommandParameter="BookingPage"
+                            Style="{StaticResource buttonRoundedTop}"/>
+                    <Button Content="Customers"  Command="{Binding ChangePageCommand}" CommandParameter="CustomerPage"
+                        Style="{StaticResource defaultButtonStyle}"/>
+                    <Button Content="Rooms" Command="{Binding ChangePageCommand}" CommandParameter="RoomPage"
+                        Style="{StaticResource defaultButtonStyle}"/>
+                    <Button Content="Billings"
+                        Style="{StaticResource defaultButtonStyle}"/>
+                    <Button Content="Cashflow"
+                        Style="{StaticResource defaultButtonStyle}"/>
+                    <Button Content="Admin" Command="{Binding ChangePageCommand}" CommandParameter="AdminPage"
+                        Style="{StaticResource defaultButtonStyle}"/>
+                    <Button Content="Settings" Command="{Binding ChangePageCommand}" CommandParameter="SettingsPage"
+                        Style="{StaticResource defaultButtonStyle}"/>
+                    <Button Content="Logout" Click="Button_Logout" Style="{StaticResource buttonRoundedBottom}"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 5">
@@ -52,12 +109,12 @@
                 </StackPanel>
             </StackPanel>
         </Viewbox>
+            <Frame x:Name="MainContent" Grid.Column="1" NavigationUIVisibility="Hidden"
+                   DockPanel.Dock="Right"
+                   Content="{Binding CurrentPage, Mode=TwoWay}"/>
+        </Grid>
 
+    </DockPanel>
 
-
-        <Frame x:Name="MainContent" Grid.Column="1" NavigationUIVisibility="Hidden"
-               
-               Content="{Binding CurrentPage, Mode=TwoWay}"/>
-    </Grid>
     
 </Window>

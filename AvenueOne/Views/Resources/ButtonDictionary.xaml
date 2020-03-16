@@ -18,35 +18,27 @@
     </ControlTemplate>
     
     <Style x:Key="defaultButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource lightBg}"/>
-        <Setter Property="Foreground" Value="{StaticResource darkBg}" />
+        <Setter Property="Foreground" Value="{StaticResource formfield}" />
+        <Setter Property="Background" Value="{StaticResource primary}"/>
         <Setter Property="FontSize" Value="15"/>
-        <!--<Setter Property="Padding" Value="10 5"/>-->
         <Setter Property="MaxHeight" Value="70"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid Background="{TemplateBinding Background}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <!--<ColumnDefinition Width="2*"/>-->
-                        </Grid.ColumnDefinitions>
-                        <!--<Viewbox Grid.Column="0" Stretch="Uniform" Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Image Source="{TemplateBinding Tag}" Stretch="Uniform"/>
-                        </Viewbox>-->
-                        <ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    </Grid>
+
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="LightSlateGray"/>
+                <Setter Property="Background" Value="{StaticResource formfield}"/>
+                <Setter Property="Foreground" Value="{StaticResource primary}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="DarkGray"/>
+                <Setter Property="Background" Value="{StaticResource container}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -65,6 +57,53 @@
         </Style.Triggers>
     </Style>
 
+
+    <Style x:Key="buttonLeafRightStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10 0 10 0" Padding="5">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="buttonLeafLeftStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0 10 0 10" Padding="5">
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="buttonRoundedTop" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10 10 0 0" Padding="5">
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="buttonRoundedBottom" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0 0 10 10" Padding="5">
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style x:Key="successButtonStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
         <Setter Property="Opacity" Value="1" />
         <Setter Property="Background" Value="{StaticResource success}" />
@@ -79,31 +118,34 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <Style x:Key="successLeafRightStyle" TargetType="Button" BasedOn="{StaticResource successButtonStyle}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="10 0 10 0" Padding="5">
-                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="successLeafRightStyle" TargetType="Button" BasedOn="{StaticResource buttonLeafRightStyle}">
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="Background" Value="{StaticResource success}" />
+        <Setter Property="Foreground" Value="{StaticResource lightBg}" />
+        <Setter Property="Padding" Value="5" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource success1}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource success2}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
-    
-    <Style x:Key="successLeafLeftStyle" TargetType="Button" BasedOn="{StaticResource successButtonStyle}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="0 10 0 10" Padding="5">
-                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="successLeafLeftStyle" TargetType="Button" BasedOn="{StaticResource buttonLeafLeftStyle}">
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="Background" Value="{StaticResource success}" />
+        <Setter Property="Foreground" Value="{StaticResource lightBg}" />
+        <Setter Property="Padding" Value="5" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource success1}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource success2}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
-
 
 
 
