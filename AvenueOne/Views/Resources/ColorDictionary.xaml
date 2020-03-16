@@ -13,8 +13,8 @@
     <SolidColorBrush x:Key="container" Color="#d5c987"/>
     <SolidColorBrush x:Key="formfield" Color="#fff7cb"/>
     <SolidColorBrush x:Key="success" Color="#3a9679"/>
-    <SolidColorBrush x:Key="success1" Color="#3a9679"/>
-    <SolidColorBrush x:Key="success2" Color="#3a9679"/>
+    <SolidColorBrush x:Key="success1" Color="#52c09d"/>
+    <SolidColorBrush x:Key="success2" Color="#268064"/>
     <SolidColorBrush x:Key="fail" Color="#e16262"/>
     <SolidColorBrush x:Key="fail1" Color="#e16262"/>
     <SolidColorBrush x:Key="fail2" Color="#e16262"/>

@@ -8,7 +8,7 @@
         xmlns:control="clr-namespace:AvenueOne.Views.UserControls"
         xmlns:converters="clr-namespace:AvenueOne.Converters"
         mc:Ignorable="d"
-        Title="Login" Height="350" Width="350"
+        Title="Login" Height="350" Width="300"
         Loaded="On_Loaded"
         FocusManager.FocusedElement="{x:Reference Username}"
         Icon="{StaticResource logoIcon}"
@@ -22,13 +22,16 @@
         <converters:PasswordConverter x:Key="PasswordConverter"/>
     </Window.Resources>
 
-    <DockPanel Margin="0" >
+
+    <DockPanel Margin="0">
 
         <!-- Top title bar-->
-        <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-              MouseLeftButtonDown="Grid_MouseLeftButtonDown"
-              Background="{StaticResource formfield}">
-            
+        <Border CornerRadius="20 0 0 0"
+                DockPanel.Dock="Top"
+                Background="{StaticResource formfield}"
+                MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+
             <!--<StackPanel Orientation="Horizontal" MaxHeight="35">
                 <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
                    Source="{StaticResource logoSource}" />
@@ -60,9 +63,11 @@
 
             </StackPanel>
         </Grid>
+        </Border>
 
 
-        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid 
+                MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -70,20 +75,34 @@
 
             <!--<StackPanel>-->
 
-            <Rectangle Grid.Row="0" Stretch="Fill" Fill="{StaticResource darkBg}" Opacity=".5"/>
+            <Rectangle Grid.Row="0" Stretch="Fill" Fill="{StaticResource darkBg}" Opacity=".7"/>
             <Image Grid.Row="0"
                     Source="{StaticResource logoBanner}" Stretch="Uniform" MaxHeight="100" Margin="5 5 5 20"/>
 
+            <Border CornerRadius="0 0 20 0"
+                    Grid.Row="1"
+                Background="{StaticResource formfield}">
+                <Grid >
+                    <StackPanel
+                            Margin="10">
 
-            <StackPanel Grid.Row="1" Background="{StaticResource formfield}">
+                        <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                         x:Name="Username" Tag="{StaticResource femaleGenderIcon}" Text="{Binding User.Username}"/>
+                        <PasswordBox Template="{StaticResource roundedPasswordbox}" Margin="5" FontSize="18"
+                             x:Name="Password" Tag="{StaticResource femaleGenderIcon}">
+                            <PasswordBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding LoginCommand, Mode=OneWay}">
+                                    <KeyBinding.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                            <Binding ElementName="Username"/>
+                                            <Binding ElementName="Password"/>
+                                        </MultiBinding>
+                                    </KeyBinding.CommandParameter>
+                                </KeyBinding>
+                            </PasswordBox.InputBindings>
+                        </PasswordBox>
 
-                <control:TextBoxControl Margin="10 10 10 0"
-                        ImageSource="{StaticResource femaleGenderIcon}" Label="Username" Text="{Binding User.Username, Mode=TwoWay}"/>
-                <control:TextBoxControl Margin="10 10 10 0"
-                        ImageSource="{StaticResource femaleGenderIcon}" Label="Password" Text="{Binding User.Username, Mode=TwoWay}"/>
-
-                <TextBox Template="{StaticResource roundedTextbox}" x:Name="User" Tag="{StaticResource femaleGenderIcon}" Text="{Binding User.Username}"/>
-                <Grid>
+                        <!--<Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="3*"/>
@@ -95,7 +114,7 @@
                                      ToolTip="{Binding Person.ErrorCollection[Username]}"
                                      Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
                 </Grid>
-                    <Grid>
+                <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="193*"/>
                             <ColumnDefinition Width="14*"/>
@@ -120,25 +139,27 @@
                                 </KeyBinding>
                             </PasswordBox.InputBindings>
                         </PasswordBox>
-                    </Grid>
+                    </Grid>-->
 
-                    <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}">
-                        <Button.CommandParameter>
-                            <MultiBinding Converter="{StaticResource PasswordConverter}">
-                                <Binding ElementName="Username"/>
-                                <Binding ElementName="Password"/>
-                            </MultiBinding>
-                        </Button.CommandParameter>
-                    </Button>
+                        <Button Content="Login" Command="{Binding LoginCommand, Mode=OneWay}"
+                            Margin="20" Style="{StaticResource successLeafLeftStyle}">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                    <Binding ElementName="Username"/>
+                                    <Binding ElementName="Password"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
 
-                    <Button Content="Cancel" Click="CloseWindow"/>
-                </StackPanel>
-
+                        <!--<Button Content="Cancel" Click="CloseWindow"/>-->
+                    </StackPanel>
+                </Grid>
+            </Border>
 
 
             <!--</StackPanel>-->
-            
-    </Grid>
+
+        </Grid>
     </DockPanel>
 
 </Window>

@@ -3,10 +3,10 @@
                     xmlns:local="clr-namespace:AvenueOne.Views.Resources">
 
 
-    <Style x:Key="roundedTextBox" TargetType="TextBox">
+    <Style x:Key="roundedTextboxStyle" TargetType="TextBox">
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
-                <Setter Property="CornerRadius" Value="0 15 15 0"/>
+                <Setter Property="CornerRadius" Value="0 8 8 0"/>
             </Style>
         </Style.Resources>
     </Style>
@@ -21,29 +21,56 @@
 
             <!--<Viewbox >-->
 
-            <Border Grid.Column="0" CornerRadius="15 0 0 15" BorderBrush="{StaticResource container}" Background="{StaticResource container}" Padding="0">
-                <Grid  Grid.Column="0" VerticalAlignment="Center" >
+            <Border Grid.Column="0" CornerRadius="8 0 0 8" BorderBrush="{StaticResource container}" Background="{StaticResource container}" Padding="0">
+                <Grid  Grid.Column="0" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Margin="15 3 3 3" Stretch="Uniform" VerticalAlignment="Center"
-                   MaxHeight="25" 
+                    <Image Grid.Column="0"  Stretch="Uniform" VerticalAlignment="Center"  Margin="15 0 3 0" 
+                   MaxHeight="35" Height="{TemplateBinding FontSize}"
                        Source="{TemplateBinding Tag}"/>
                     <!--<Viewbox Grid.Column="1" Margin="5 0 5 0">-->
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" 
-                       FontSize="20" Margin="3 3 15 3"
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="3 0 15 0" 
+                       FontSize="{TemplateBinding FontSize}" 
                        Text="{TemplateBinding Name}"/>
                     <!--</Viewbox>-->
                 </Grid>
             </Border>
             <!--</Viewbox>-->
             <!--<Viewbox  Grid.Column="1">-->
-            <TextBox Grid.Column="1" VerticalAlignment="Center" Padding="5" 
-                     FontSize="20" Background="{StaticResource formfield}" Style="{StaticResource roundedTextBox}"
+            <TextBox Grid.Column="1" VerticalAlignment="Center" 
+                     FontSize="{TemplateBinding FontSize}" Background="GhostWhite" Style="{StaticResource roundedTextboxStyle}"
                         Text="{TemplateBinding Text}"/>
             <!--</Viewbox>-->
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="roundedPasswordbox" TargetType="PasswordBox">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border Grid.Column="0"  BorderBrush="{StaticResource container}" Background="{StaticResource container}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8 0 0 8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Margin="15 0 3 0" Stretch="Uniform" VerticalAlignment="Center"
+                       MaxHeight="35" Height="{TemplateBinding FontSize}" 
+                           Source="{TemplateBinding Tag}"/>
+                    <TextBlock Grid.Column="1" Text="{TemplateBinding Name}"  Margin="3 0 15 0" 
+                               FontSize="{TemplateBinding FontSize}" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" Background="GhostWhite" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0 8 8 0">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
         </Grid>
     </ControlTemplate>
 

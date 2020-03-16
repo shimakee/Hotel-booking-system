@@ -43,10 +43,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Opacity" Value=".7"/>
+                <Setter Property="Background" Value="LightSlateGray"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="LightSlateGray"/>
+                <Setter Property="Background" Value="DarkGray"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -56,8 +56,8 @@
         <Setter Property="Foreground" Value="{StaticResource base}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource base1}"/>
-                
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Opacity" Value=".7"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Foreground" Value="{StaticResource base2}"/>
@@ -65,19 +65,47 @@
         </Style.Triggers>
     </Style>
 
-
     <Style x:Key="successButtonStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
+        <Setter Property="Opacity" Value="1" />
         <Setter Property="Background" Value="{StaticResource success}" />
         <Setter Property="Foreground" Value="{StaticResource lightBg}" />
+        <Setter Property="Padding" Value="5" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="DarkOliveGreen"/>
+                <Setter Property="Background" Value="{StaticResource success1}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="LawnGreen"/>
+                <Setter Property="Background" Value="{StaticResource success2}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="successLeafRightStyle" TargetType="Button" BasedOn="{StaticResource successButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10 0 10 0" Padding="5">
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="successLeafLeftStyle" TargetType="Button" BasedOn="{StaticResource successButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0 10 0 10" Padding="5">
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
 
     <Style x:Key="cautionButtonStyle" TargetType="Button" BasedOn="{StaticResource defaultButtonStyle}">
         <Setter Property="Background" Value="{StaticResource caution}" />

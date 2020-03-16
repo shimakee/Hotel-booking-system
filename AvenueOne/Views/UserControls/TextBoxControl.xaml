@@ -36,7 +36,7 @@
         <!--</Viewbox>-->
         <!--<Viewbox  Grid.Column="1">-->
             <TextBox Grid.Column="1" VerticalAlignment="Center" Padding="5" 
-                     FontSize="20" Background="{StaticResource formfield}" Style="{StaticResource roundedTextBox}"
+                     FontSize="20" Background="{StaticResource formfield}" Style="{StaticResource roundedTextboxStyle}"
                         Text="{Binding Text, 
                         UpdateSourceTrigger=PropertyChanged,
                         Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"/>
