@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AvenueOne.Services.Interfaces
 {
@@ -13,6 +14,5 @@ namespace AvenueOne.Services.Interfaces
         void ErrorDisplay(string message, string caption);
         bool MessagePrompt(string message, string caption);
         bool? MessagePromptNullable(string message, string caption);
-
     }
 }

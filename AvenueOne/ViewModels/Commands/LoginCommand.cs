@@ -17,8 +17,6 @@ namespace AvenueOne.ViewModels.Commands
         //public LoginCommand(ILoginViewModel loginWindowViewModel)
         public LoginCommand(ILoginService loginService, IDisplayService displayService)
         {
-
-
             _loginService = loginService ?? throw new ArgumentNullException("Login service cannot be null.");
             _displayService = displayService ?? throw new ArgumentNullException("Display service cannot be null.");
         }
@@ -69,9 +67,7 @@ namespace AvenueOne.ViewModels.Commands
                     }
                     else
                     {
-                        _displayService.MessageDisplay($"Welcome {userLogin.Person.FullName} using account {userLogin.Username}.");
-                        WpfMessageBoxWindow wpfMessageBoxWindow = new WpfMessageBoxWindow();
-                        wpfMessageBoxWindow.Message("something something");
+                        _displayService.MessageDisplay($"Account {userLogin.Username} logged in.\nWelcome {userLogin.Person.FullName}!");
 
                         Window mainWindow = _displayService.CreateMainWindow();
                         mainWindow.Show();

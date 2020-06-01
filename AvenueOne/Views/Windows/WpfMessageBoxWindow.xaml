@@ -23,6 +23,10 @@
                 MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Center">
 
+                <TextBlock x:Name="TextCaption" 
+                           Style="{StaticResource defaultTextBlockStyle}"
+                           HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
                 <!--<StackPanel Orientation="Horizontal" MaxHeight="35">
                 <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
                    Source="{StaticResource logoSource}" />

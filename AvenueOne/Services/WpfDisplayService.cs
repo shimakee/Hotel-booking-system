@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Services.Interfaces;
+using AvenueOne.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +11,35 @@ namespace AvenueOne.Services
 {
     public class WpfDisplayService : IDisplayService
     {
-        public Window CreateMainWindow()
+        private WpfMessageBoxWindow _wpfMessageWindow { get; }
+        public WpfDisplayService()
+        {
+            this._wpfMessageWindow = new WpfMessageBoxWindow();
+        }
+
+        public Window CreateMainWindow() // this should not be here. - where to put it?
         {
             return new MainWindow();
         }
 
         public void MessageDisplay(string message)
         {
-            MessageBox.Show(message);
+            //MessageBox.Show(message);
+            this._wpfMessageWindow.MessageDialog(message);
         }
 
         public void MessageDisplay(string message, string caption)
         {
-            MessageBox.Show(message, caption);
+            //MessageBox.Show(message, caption);
+            this._wpfMessageWindow.MessageDialog(message, caption);
+
         }
-        
+
         public void ErrorDisplay(string message, string caption)
         {
-            MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
+            //MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
+            this._wpfMessageWindow.Message(message, caption);
+
         }
 
         public bool MessagePrompt(string message, string caption)
@@ -49,5 +61,6 @@ namespace AvenueOne.Services
                 return false;
             return null;
         }
+
     }
 }

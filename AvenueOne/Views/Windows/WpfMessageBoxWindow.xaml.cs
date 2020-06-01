@@ -71,14 +71,34 @@ namespace AvenueOne.Views.Windows
         }
 
         #region Override
-
-        public void Message(string message)
+        private void ReplaceTextblocks(string message, string caption)
         {
             if (message == null)
                 message = "";
 
             TextblockContent.Text = message;
+            TextCaption.Text = caption;
+        }
+
+        public void MessageDialog(string message)
+        {
+            this.MessageDialog(message, "");
+        }
+
+        public void MessageDialog(string message, string caption)
+        {
+            this.ReplaceTextblocks(message, caption);
             this.ShowDialog();
+        }
+
+        public void Message(string message)
+        {
+            this.Message(message, "");
+        }
+        public void Message(string message, string caption)
+        {
+            this.ReplaceTextblocks(message, caption);
+            this.Show();
         }
         #endregion
     }
