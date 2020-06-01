@@ -82,7 +82,12 @@ namespace AvenueOne
 
             _plutoContext.Dispose();
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
 
+            _plutoContext.Dispose();
+        }
 
         private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

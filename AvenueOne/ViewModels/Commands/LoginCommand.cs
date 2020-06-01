@@ -1,5 +1,6 @@
 ﻿using AvenueOne.Interfaces;
 using AvenueOne.Services.Interfaces;
+using AvenueOne.Views.Windows;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -69,6 +70,8 @@ namespace AvenueOne.ViewModels.Commands
                     else
                     {
                         _displayService.MessageDisplay($"Welcome {userLogin.Person.FullName} using account {userLogin.Username}.");
+                        WpfMessageBoxWindow wpfMessageBoxWindow = new WpfMessageBoxWindow();
+                        wpfMessageBoxWindow.Message("something something");
 
                         Window mainWindow = _displayService.CreateMainWindow();
                         mainWindow.Show();

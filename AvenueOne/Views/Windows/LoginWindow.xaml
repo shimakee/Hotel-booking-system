@@ -25,45 +25,45 @@
 
     <DockPanel Margin="0">
 
-        <!-- Top title bar-->
-        <Border CornerRadius="20 0 0 0"
-                DockPanel.Dock="Top"
-                Background="{StaticResource primary}"
-                MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-            <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+    <!-- Top title bar-->
+    <Border CornerRadius="20 0 0 0"
+            DockPanel.Dock="Top"
+            Background="{StaticResource primary}"
+            MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Center">
 
-            <!--<StackPanel Orientation="Horizontal" MaxHeight="35">
+        <!--<StackPanel Orientation="Horizontal" MaxHeight="35">
+            <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
+                Source="{StaticResource logoSource}" />
+            <TextBlock Text="Avenue one hotel"  VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+        </StackPanel>-->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" MaxHeight="35">
+
+            <Button Padding="5"
+                    KeyboardNavigation.IsTabStop="False"
+                    Click="MinimizeWindow"
+                Style="{StaticResource transaparentButtonStyle}">
+                <Image VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5"
+                            Source="{StaticResource penIcon}" />
+            </Button>
+            <Button Padding="5"
+                    KeyboardNavigation.IsTabStop="False"
+                    Click="MaximizeWindow"
+                Style="{StaticResource transaparentButtonStyle}">
                 <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
-                   Source="{StaticResource logoSource}" />
-                <TextBlock Text="Avenue one hotel"  VerticalAlignment="Center" Foreground="White" FontSize="20"/>
-            </StackPanel>-->
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" MaxHeight="35">
+                            Source="{StaticResource gearIcon}" />
+            </Button>
+            <Button Padding="5"
+                    KeyboardNavigation.IsTabStop="False"
+                    Click="CloseWindow"
+                Style="{StaticResource transaparentButtonStyle}">
+                <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
+                        Source="{StaticResource xIcon}" />
+            </Button>
 
-                <Button Padding="5"
-                        KeyboardNavigation.IsTabStop="False"
-                        Click="MinimizeWindow"
-                    Style="{StaticResource transaparentButtonStyle}">
-                    <Image VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5"
-                                Source="{StaticResource penIcon}" />
-                </Button>
-                <Button Padding="5"
-                        KeyboardNavigation.IsTabStop="False"
-                        Click="MaximizeWindow"
-                    Style="{StaticResource transaparentButtonStyle}">
-                    <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
-                                Source="{StaticResource gearIcon}" />
-                </Button>
-                <Button Padding="5"
-                        KeyboardNavigation.IsTabStop="False"
-                        Click="CloseWindow"
-                    Style="{StaticResource transaparentButtonStyle}">
-                    <Image VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"
-                            Source="{StaticResource xIcon}" />
-                </Button>
-
-            </StackPanel>
-        </Grid>
-        </Border>
+        </StackPanel>
+    </Grid>
+    </Border>
 
 
         <Grid 

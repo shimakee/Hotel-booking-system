@@ -67,18 +67,18 @@
             <Viewbox Grid.Column="0">
             <StackPanel Margin="10 5" Grid.Column="0" HorizontalAlignment="Center">
                 <StackPanel Margin="5">
-                    <Ellipse Height="50" Width="50" Stretch="Uniform" MaxHeight="70" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/AvenueOne;component/Assets/defaultAvatar.JPG"/>
-                    </Ellipse.Fill>
-                    </Ellipse>
+                        <Ellipse Height="50" Width="50" Stretch="Uniform" MaxHeight="70" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{StaticResource maleGenderIcon}" Stretch="Uniform"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
 
-                    <TextBlock Text="{Binding User.Username}" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding User.Username}" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{StaticResource base}"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding User.Person.LastName}"/>
+                            <TextBlock Text="{Binding User.Person.LastName}" Foreground="{StaticResource base}"/>
                             <TextBlock Text=", "/>
-                            <TextBlock Text="{Binding User.Person.FirstName}"/>
+                            <TextBlock Text="{Binding User.Person.FirstName}"  Foreground="{StaticResource base}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -101,11 +101,11 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 5">
-                    <TextBlock Text="Month 1, 2019" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Beg. balance:" HorizontalAlignment="Left"/>
-                    <TextBlock Text="Total add:" HorizontalAlignment="Left"/>
-                    <TextBlock Text="Total less:" HorizontalAlignment="Left"/>
-                    <TextBlock Text="Curr. balance:" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Month 1, 2019" HorizontalAlignment="Center" Foreground="{StaticResource base}" FontWeight="Bold"/>
+                    <TextBlock Text="Beg. balance:" HorizontalAlignment="Left" Foreground="{StaticResource base}"/>
+                    <TextBlock Text="Total add:" HorizontalAlignment="Left" Foreground="{StaticResource base}"/>
+                    <TextBlock Text="Total less:" HorizontalAlignment="Left" Foreground="{StaticResource base}"/>
+                    <TextBlock Text="Curr. balance:" HorizontalAlignment="Left" Foreground="{StaticResource base}"/>
                 </StackPanel>
             </StackPanel>
         </Viewbox>

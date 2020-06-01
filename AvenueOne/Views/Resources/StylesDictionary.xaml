@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AvenueOne.Views.Resources">
 
+    
 
     <Style x:Key="roundedTextboxStyle" TargetType="TextBox">
         <Style.Resources>
@@ -73,5 +74,17 @@
             </Border>
         </Grid>
     </ControlTemplate>
+
+
+    <Style x:Key="defaultTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource formfield}" />
+        <!--<Setter Property="Background" Value="{StaticResource primary}"/>-->
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="MaxHeight" Value="70"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="15"/>
+    </Style>
+
 
 </ResourceDictionary>
