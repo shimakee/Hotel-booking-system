@@ -5,10 +5,104 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AvenueOne.Views.UserControls"
+              xmlns:converters="clr-namespace:AvenueOne.Converters"
+              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Margin="5">
 
-    <StackPanel HorizontalAlignment="Center">
+    <UserControl.Resources>
+            <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Form-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Background" Value="Black"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Person.Gender}" Value="0">
+                                <Setter Property="Background" Value="CornflowerBlue"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Person.Gender}" Value="1">
+                                <Setter Property="Background" Value="LightPink"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0"
+                    HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
+                   MaxHeight="80" MaxWidth="80">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="{StaticResource maleGenderIcon}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Person.Gender}" Value="0">
+                                    <Setter Property="Source" Value="{StaticResource maleGenderIcon}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Person.Gender}" Value="1">
+                                    <Setter Property="Source" Value="{StaticResource femaleGenderIcon}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                </Image.Style>
+            </Image>
+                <Button Grid.Row="1"
+                    Style="{StaticResource defaultButtonStyle}" Content="Upload"/>
+            </Grid>
+
+            <StackPanel Grid.Column="1">
+                <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                         x:Name="First" Tag="{StaticResource femaleGenderIcon}" Text="{Binding Person.FirstName}"/>
+                <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                         x:Name="Middle" Text="{Binding Person.MiddleName}"/>
+                <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                         x:Name="Last" Text="{Binding Person.LastName}"/>
+                <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                         x:Name="Suffix" Text="{Binding Person.Suffix}"/>
+                <TextBox  IsEnabled="{Binding Person.WasMaiden}" Visibility="{Binding Person.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}"
+                        Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                         x:Name="Maiden" Text="{Binding Person.MaidenName}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+
+                <ComboBox x:Name="CustomerGender" SelectedIndex="0"  ItemsSource="{Binding Person.GenderValues}" 
+                                                  SelectedValue="{Binding Person.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                <ComboBox x:Name="CustomerCivilStatus" SelectedIndex="0" ItemsSource="{Binding Person.CivilStatusValues}"
+                                                  SelectedValue="{Binding Person.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                <DatePicker x:Name="CustomerBirthdate" Grid.Column="1"
+                                            SelectedDate="{Binding Person.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                            ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                            Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
+            </StackPanel>
+
+
+        </Grid>
+        
+        <!--Card-->
+        <StackPanel Grid.Row="1"  HorizontalAlignment="Center">
         <Viewbox MaxHeight="80" MaxWidth="80">
             <Grid Height="80" Width="80">
                 <Grid.RowDefinitions>
@@ -49,8 +143,52 @@
             </Grid> 
         </Viewbox>
 
-            <TextBlock HorizontalAlignment="Center" FontSize="18" Margin="0"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" MaxHeight="20" MaxWidth="20" Margin="5 0">
+                    <Grid Height="20" Width="20">
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Background" Value="Black"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Person.Gender}" Value="0">
+                                        <Setter Property="Background" Value="CornflowerBlue"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Person.Gender}" Value="1">
+                                        <Setter Property="Background" Value="LightPink"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource maleGenderIcon}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Person.Gender}" Value="0">
+                                            <Setter Property="Source" Value="{StaticResource maleGenderIcon}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Person.Gender}" Value="1">
+                                            <Setter Property="Source" Value="{StaticResource femaleGenderIcon}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Grid>
+                </Viewbox>
+
+                <TextBlock Grid.Column="1"
+                    HorizontalAlignment="Center" FontSize="18" Margin="0"
                     Name="Fullname"
                     Text="{Binding Person.FullName}"/>
-    </StackPanel>
+            </Grid>
+        </StackPanel>
+        
+    </Grid>
 </UserControl>

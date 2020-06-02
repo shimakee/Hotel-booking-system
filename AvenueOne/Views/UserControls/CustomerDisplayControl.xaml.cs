@@ -29,6 +29,7 @@ namespace AvenueOne.Views.UserControls
             set { SetValue(PersonProperty, value); }
         }
 
+       
         public CustomerDisplayControl()
         {
             InitializeComponent();
