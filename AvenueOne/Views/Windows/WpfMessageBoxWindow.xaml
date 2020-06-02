@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="WpfMessageBoxWindow" Height="450" Width="800"
         Icon="{StaticResource logoIcon}"
+        FocusManager.FocusedElement="{x:Reference ConfirmButton}"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -73,6 +74,7 @@
 
                 <Button Grid.Column="1"
                     Margin="15"
+                        x:Name="ConfirmButton"
                     Style="{StaticResource successButtonStyle}" Content="Ok" Click="CloseWindow"/>
 
                 <!--<Button Grid.Column="2"

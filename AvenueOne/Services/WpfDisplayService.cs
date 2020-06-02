@@ -11,10 +11,10 @@ namespace AvenueOne.Services
 {
     public class WpfDisplayService : IDisplayService
     {
-        private WpfMessageBoxWindow _wpfMessageWindow { get; }
+        private WpfMessageBoxWindow _wpfMessageWindow { get; set; }
+
         public WpfDisplayService()
         {
-            this._wpfMessageWindow = new WpfMessageBoxWindow();
         }
 
         public Window CreateMainWindow() // this should not be here. - where to put it?
@@ -25,12 +25,13 @@ namespace AvenueOne.Services
         public void MessageDisplay(string message)
         {
             //MessageBox.Show(message);
-            this._wpfMessageWindow.MessageDialog(message);
+            this.MessageDisplay(message, "");
         }
 
         public void MessageDisplay(string message, string caption)
         {
             //MessageBox.Show(message, caption);
+            GenerateMessageBox();
             this._wpfMessageWindow.MessageDialog(message, caption);
 
         }
@@ -38,7 +39,8 @@ namespace AvenueOne.Services
         public void ErrorDisplay(string message, string caption)
         {
             //MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
-            this._wpfMessageWindow.Message(message, caption);
+            GenerateMessageBox();
+            this._wpfMessageWindow.MessageDialog(message, caption);
 
         }
 
@@ -60,6 +62,11 @@ namespace AvenueOne.Services
             if (result == MessageBoxResult.No)
                 return false;
             return null;
+        }
+
+        private void GenerateMessageBox()
+        {
+                this._wpfMessageWindow = new WpfMessageBoxWindow();
         }
 
     }
