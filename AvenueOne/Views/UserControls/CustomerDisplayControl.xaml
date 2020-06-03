@@ -192,7 +192,7 @@
                     Name="Fullname"
                     Text="{Binding Person.FullName}"/>
             </Grid>
-            <Button IsEnabled="{Binding Other, ElementName=Cdc}" Visibility="{Binding Other, ElementName=Cdc, Converter={StaticResource BooleanVisibilityConverter}}"  
+            <Button IsEnabled="{Binding IsEditable, ElementName=Cdc}" Visibility="{Binding IsEditable, ElementName=Cdc, Converter={StaticResource BooleanVisibilityConverter}}"  
                     Style="{StaticResource defaultButtonStyle}" Content="Edit" Click="ChangeVisibility"/>
         </StackPanel>
         
