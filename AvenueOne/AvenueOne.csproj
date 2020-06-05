@@ -317,8 +317,11 @@
     <Compile Include="Views\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\CustomerDisplayControl.xaml.cs">
-      <DependentUpon>CustomerDisplayControl.xaml</DependentUpon>
+    <Compile Include="Views\UserControls\Customer\CustomerCardControl.xaml.cs">
+      <DependentUpon>CustomerCardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Customer\CustomerFormControl.xaml.cs">
+      <DependentUpon>CustomerFormControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\TextBoxControl.xaml.cs">
       <DependentUpon>TextBoxControl.xaml</DependentUpon>
@@ -372,7 +375,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\CustomerDisplayControl.xaml">
+    <Page Include="Views\UserControls\Customer\CustomerCardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Customer\CustomerFormControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

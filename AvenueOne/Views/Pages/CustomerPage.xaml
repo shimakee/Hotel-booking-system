@@ -157,6 +157,12 @@
                                     MaxHeight="40"
                                     Style="{StaticResource failButtonStyle2}"
                                     Command="{Binding DeleteClassCommand}"/>
+
+
+                            <control:CustomerCardControl Customer="{Binding Model}"/>
+                            <control:CustomerFormControl Customer="{Binding Model}"/>
+
+
                         </StackPanel>
                     </Grid>
                 </GroupBox>
@@ -172,7 +178,7 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <control:CustomerDisplayControl/>
+                            <control:CustomerCardControl Customer="{Binding}"/>
 
 
                             <!--<StackPanel HorizontalAlignment="Center">
