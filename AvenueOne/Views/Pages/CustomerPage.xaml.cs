@@ -32,6 +32,7 @@ namespace AvenueOne.Views.Pages
     public partial class CustomerPage : Page
     {
         private PlutoContext _context;
+        private ICustomerViewModel _viewModel;
         public CustomerPage(PlutoContext context)
         {
             InitializeComponent();
@@ -51,8 +52,29 @@ namespace AvenueOne.Views.Pages
                                                                                                                         updateCustomerCommand,
                                                                                                                         deleteCustomerCommand,
                                                                                                                         clearCustomerCommand);
-
+            this._viewModel = customerTab;
             this.DataContext = customerTab;
+        }
+
+        private void Button_ChangeVisibility(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.UserAccount.IsAdmin)
+            {
+                if(Card.Visibility == Visibility.Visible)
+                {
+                    SaveEditButton.Visibility = Visibility.Visible;
+                    Form.Visibility = Visibility.Visible;
+                    Card.Visibility = Visibility.Collapsed;
+                    EditButton.Content = "Close";
+                }
+                else
+                {
+                    SaveEditButton.Visibility = Visibility.Collapsed;
+                    Form.Visibility = Visibility.Collapsed;
+                    Card.Visibility = Visibility.Visible;
+                    EditButton.Content = "Edit";
+                }
+            }
         }
     }
 }

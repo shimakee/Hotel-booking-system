@@ -26,12 +26,13 @@ namespace AvenueOne.Persistence.Repositories
         public DbSet<Transaction> Transactions { get; set; }
 
         public PlutoContext()
-            :base("name=DefaultConnection")
+            :base("name=LocalConnection")
         {
 
         }
 
         public PlutoContext(string connectionName)
+
             :base($"name={connectionName}")
         {
 

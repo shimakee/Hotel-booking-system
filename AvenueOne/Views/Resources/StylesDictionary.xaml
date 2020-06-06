@@ -43,7 +43,7 @@
             <!--<Viewbox  Grid.Column="1">-->
             <TextBox Grid.Column="1" VerticalAlignment="Center" 
                      FontSize="{TemplateBinding FontSize}" Background="GhostWhite" Style="{StaticResource roundedTextboxStyle}"
-                        Text="{TemplateBinding Text}"/>
+                        Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay}"/>
             <!--</Viewbox>-->
         </Grid>
     </ControlTemplate>

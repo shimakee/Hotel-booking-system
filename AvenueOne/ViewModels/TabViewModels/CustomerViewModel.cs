@@ -33,6 +33,7 @@ namespace AvenueOne.ViewModels.TabViewModels
                     _modelSelected = value.Copy();
                     if(value.Person != null)
                         Profile = value.Person.Copy();
+                    OnPropertyChanged();
                 }
                     
             }
