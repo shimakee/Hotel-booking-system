@@ -317,13 +317,10 @@
     <Compile Include="Views\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\Customer\CustomerCardControl.xaml.cs">
+    <Compile Include="Views\UserControls\CustomerCardControl.xaml.cs">
       <DependentUpon>CustomerCardControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\Customer\CustomerDisplayControl.xaml.cs">
-      <DependentUpon>CustomerDisplayControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\Customer\CustomerFormControl.xaml.cs">
+    <Compile Include="Views\UserControls\CustomerFormControl.xaml.cs">
       <DependentUpon>CustomerFormControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\CustomerWindow.xaml.cs">
@@ -375,15 +372,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\Customer\CustomerCardControl.xaml">
+    <Page Include="Views\UserControls\CustomerCardControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\Customer\CustomerDisplayControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserControls\Customer\CustomerFormControl.xaml">
+    <Page Include="Views\UserControls\CustomerFormControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -501,6 +494,7 @@
     <Folder Include="Core\Domain\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
     <Folder Include="Views\Pages\Interfaces\" />
+    <Folder Include="Views\UserControls\CustomerControls\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
@@ -546,6 +540,14 @@
     <Resource Include="Assets\avenue.png" />
     <Resource Include="Assets\avenueOneBanner.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Db\AvenueOneDb.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Db\AvenueOneDb_log.ldf">
+      <DependentUpon>AvenueOneDb.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

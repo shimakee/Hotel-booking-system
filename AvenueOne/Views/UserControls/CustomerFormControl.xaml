@@ -8,19 +8,19 @@
              xmlns:converters="clr-namespace:AvenueOne.Converters"
              mc:Ignorable="d" 
              x:Name="Cfc"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="390" d:DesignWidth="380">
 
     <UserControl.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
     </UserControl.Resources>
 
-    <Grid>
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <!--Form-->
+        --><!--Form--><!--
         <Grid Grid.Row="0"
               x:Name="Form">
             <Grid.ColumnDefinitions>
@@ -30,6 +30,10 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
                 <Grid.Style>
                     <Style TargetType="Grid">
                         <Setter Property="Background" Value="Black"/>
@@ -44,10 +48,6 @@
                     </Style>
                 </Grid.Style>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
 
                 <Image Grid.Row="0"
                     HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
@@ -97,8 +97,77 @@
                                             ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                             Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
 
-                <!--<Button Style="{StaticResource defaultButtonStyle}" Content="Close" Click="ChangeVisibility"/>-->
+                --><!--<Button Style="{StaticResource defaultButtonStyle}" Content="Close" Click="ChangeVisibility"/>--><!--
             </StackPanel>
         </Grid>
-    </Grid>
+    </Grid>-->
+
+    <WrapPanel ItemWidth="400">
+
+        <Grid Grid.Column="0" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Background" Value="Black"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Customer.Person.Gender, ElementName=Cfc}" Value="0">
+                                <Setter Property="Background" Value="CornflowerBlue"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Customer.Person.Gender, ElementName=Cfc}" Value="1">
+                                <Setter Property="Background" Value="LightPink"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+
+                <Image Grid.Row="0"
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
+                       MaxHeight="80" MaxWidth="80">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="{StaticResource maleGenderIcon}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Customer.Person.Gender, ElementName=Cfc}" Value="0">
+                                    <Setter Property="Source" Value="{StaticResource maleGenderIcon}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Customer.Person.Gender, ElementName=Cfc}" Value="1">
+                                    <Setter Property="Source" Value="{StaticResource femaleGenderIcon}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <Button Grid.Row="1"
+                        Style="{StaticResource defaultButtonStyle}" Content="Upload"/>
+            </Grid>
+        <WrapPanel ItemWidth="350">
+            <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                             x:Name="First" Tag="{StaticResource femaleGenderIcon}" Text="{Binding Customer.Person.FirstName, ElementName=Cfc}"/>
+            <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                             x:Name="Middle" Text="{Binding Customer.Person.MiddleName, ElementName=Cfc}"/>
+            <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                             x:Name="Last" Text="{Binding Customer.Person.LastName, ElementName=Cfc}"/>
+            <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                             x:Name="Suffix" Text="{Binding Customer.Person.Suffix, ElementName=Cfc}"/>
+            <TextBox  IsEnabled="{Binding Customer.Person.WasMaiden, ElementName=Cfc}" Visibility="{Binding Customer.Person.WasMaiden, ElementName=Cfc, Converter={StaticResource BooleanVisibilityConverter}}"
+                        Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
+                         x:Name="Maiden" Text="{Binding Customer.Person.MaidenName, ElementName=Cfc}"/>
+        </WrapPanel>
+        <WrapPanel ItemWidth="350">
+            <ComboBox x:Name="CustomerGender" SelectedIndex="0"  ItemsSource="{Binding Customer.Person.GenderValues, ElementName=Cfc}" 
+                                                      SelectedValue="{Binding Customer.Person.Gender, ElementName=Cfc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                      Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+            <ComboBox x:Name="CustomerCivilStatus" SelectedIndex="0" ItemsSource="{Binding Customer.Person.CivilStatusValues, ElementName=Cfc}"
+                                                      SelectedValue="{Binding Customer.Person.CivilStatus, ElementName=Cfc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                      Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+            <DatePicker x:Name="CustomerBirthdate" Grid.Column="1"
+                                                SelectedDate="{Binding Customer.Person.BirthDate, ElementName=Cfc, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                                ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                                Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
+        </WrapPanel>
+    </WrapPanel>
 </UserControl>

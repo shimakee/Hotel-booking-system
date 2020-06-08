@@ -23,6 +23,7 @@ using AvenueOne.ViewModels.Commands;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using AvenueOne.ViewModels.TabViewModels;
 using AvenueOne.Services;
+using AvenueOne.Views.Windows;
 
 namespace AvenueOne.Views.Pages
 {
@@ -75,6 +76,12 @@ namespace AvenueOne.Views.Pages
                     EditButton.Content = "Edit";
                 }
             }
+        }
+
+        private void Button_OpenCustomerWindow(object sender, RoutedEventArgs e)
+        {
+            CustomerWindow customerWindow = new CustomerWindow(_context);
+            customerWindow.ShowDialog();
         }
     }
 }

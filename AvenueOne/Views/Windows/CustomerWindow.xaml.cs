@@ -58,5 +58,10 @@ namespace AvenueOne.Views.Windows
 
             DataContext = customerWindowViewModel;
         }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+        }
     }
 }
