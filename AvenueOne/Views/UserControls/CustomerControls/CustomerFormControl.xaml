@@ -8,7 +8,7 @@
              xmlns:converters="clr-namespace:AvenueOne.Converters"
              mc:Ignorable="d" 
              x:Name="Cfc"
-             d:DesignHeight="390" d:DesignWidth="380">
+             d:DesignHeight="400" d:DesignWidth="400">
 
     <UserControl.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
@@ -102,9 +102,9 @@
         </Grid>
     </Grid>-->
 
-    <WrapPanel ItemWidth="400">
+    <WrapPanel ItemWidth="400" MaxWidth="1200" MinWidth="400">
 
-        <Grid Grid.Column="0" HorizontalAlignment="Center">
+        <Grid Grid.Column="0" HorizontalAlignment="Center" Width="400">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -125,7 +125,7 @@
 
 
                 <Image Grid.Row="0"
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"
                        MaxHeight="80" MaxWidth="80">
                     <Image.Style>
                         <Style TargetType="Image">
@@ -144,7 +144,7 @@
                 <Button Grid.Row="1"
                         Style="{StaticResource defaultButtonStyle}" Content="Upload"/>
             </Grid>
-        <WrapPanel ItemWidth="350">
+        <WrapPanel ItemWidth="400">
             <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
                              x:Name="First" Tag="{StaticResource femaleGenderIcon}" Text="{Binding Customer.Person.FirstName, ElementName=Cfc}"/>
             <TextBox Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
@@ -157,7 +157,7 @@
                         Template="{StaticResource roundedTextbox}" Margin="5" FontSize="18"
                          x:Name="Maiden" Text="{Binding Customer.Person.MaidenName, ElementName=Cfc}"/>
         </WrapPanel>
-        <WrapPanel ItemWidth="350">
+        <WrapPanel ItemWidth="400">
             <ComboBox x:Name="CustomerGender" SelectedIndex="0"  ItemsSource="{Binding Customer.Person.GenderValues, ElementName=Cfc}" 
                                                       SelectedValue="{Binding Customer.Person.Gender, ElementName=Cfc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                       Validation.ErrorTemplate="{StaticResource errorTemplate}"/>

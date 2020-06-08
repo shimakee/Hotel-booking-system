@@ -81,6 +81,7 @@ namespace AvenueOne.Views.Pages
         private void Button_OpenCustomerWindow(object sender, RoutedEventArgs e)
         {
             CustomerWindow customerWindow = new CustomerWindow(_context);
+            customerWindow.Owner = Window.GetWindow(this);
             customerWindow.ShowDialog();
         }
     }

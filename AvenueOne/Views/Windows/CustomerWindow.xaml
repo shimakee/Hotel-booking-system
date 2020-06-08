@@ -11,6 +11,7 @@
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip"
         WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
         Title="CustomerWindow" Height="530" Width="400">
 
     <Window.Resources>

@@ -323,6 +323,12 @@
     <Compile Include="Views\UserControls\CustomerControls\CustomerFormControl.xaml.cs">
       <DependentUpon>CustomerFormControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\UserControls\UserCardControl.xaml.cs">
+      <DependentUpon>UserCardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UserControls\UserFormControl.xaml.cs">
+      <DependentUpon>UserFormControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -377,6 +383,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CustomerControls\CustomerFormControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UserControls\UserCardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UserControls\UserFormControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
