@@ -14,21 +14,26 @@
         <StackPanel Margin="10">
             <CheckBox Content="isAdmin" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding UserTab.ModelSelected.IsAdmin}"/>
             <TextBox x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"
+                     Template="{StaticResource roundedTextbox}"
                                          Text="{Binding UserTab.ModelSelected.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <CheckBox x:Name="IsPasswordIncluded" Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding UserTab.IsPasswordIncluded}"/>
             <PasswordBox IsEnabled="{Binding UserTab.IsPasswordIncluded}" x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
             <PasswordBox IsEnabled="{Binding UserTab.IsPasswordIncluded}" x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
             <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
+                     Template="{StaticResource roundedTextbox}"
                                          Text="{Binding UserTab.Profile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="Middlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"
+                     Template="{StaticResource roundedTextbox}"
                                          Text="{Binding UserTab.Profile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="Lastname"  Grid.Column="1" HorizontalAlignment="Stretch"
+                     Template="{StaticResource roundedTextbox}"
                                          Text="{Binding UserTab.Profile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="Suffix" Grid.Column="1" HorizontalAlignment="Stretch"
+                     Template="{StaticResource roundedTextbox}"
                              Text="{Binding UserTab.Profile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
@@ -40,6 +45,7 @@
                                                   SelectedValue="{Binding UserTab.Profile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="MaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
+                     Template="{StaticResource roundedTextbox}"
                              Text="{Binding UserTab.Profile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <DatePicker x:Name="Birthdate" Grid.Column="1"
