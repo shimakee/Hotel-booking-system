@@ -317,10 +317,10 @@
     <Compile Include="Views\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\CustomerCardControl.xaml.cs">
+    <Compile Include="Views\UserControls\CustomerControls\CustomerCardControl.xaml.cs">
       <DependentUpon>CustomerCardControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\CustomerFormControl.xaml.cs">
+    <Compile Include="Views\UserControls\CustomerControls\CustomerFormControl.xaml.cs">
       <DependentUpon>CustomerFormControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\CustomerWindow.xaml.cs">
@@ -372,11 +372,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\CustomerCardControl.xaml">
+    <Page Include="Views\UserControls\CustomerControls\CustomerCardControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\CustomerFormControl.xaml">
+    <Page Include="Views\UserControls\CustomerControls\CustomerFormControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -494,7 +494,6 @@
     <Folder Include="Core\Domain\" />
     <Folder Include="ViewModels\PagesViewModels\Interfaces\" />
     <Folder Include="Views\Pages\Interfaces\" />
-    <Folder Include="Views\UserControls\CustomerControls\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
