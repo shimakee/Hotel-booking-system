@@ -1,6 +1,9 @@
-﻿using System;
+﻿using AvenueOne.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,11 +21,42 @@ namespace AvenueOne.Views.UserControls.UserControls
     /// <summary>
     /// Interaction logic for UserFormControl.xaml
     /// </summary>
-    public partial class UserFormControl : UserControl
+    public partial class UserFormControl : UserControl, INotifyPropertyChanged
     {
         public UserFormControl()
         {
             InitializeComponent();
+        }
+
+        public static readonly DependencyProperty UserProperty =
+           DependencyProperty.Register("User", typeof(User), typeof(UserFormControl), new PropertyMetadata(null));
+        public User User
+        {
+            get { return (User)GetValue(UserProperty); }
+            set
+            {
+                SetValue(UserProperty, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public static readonly DependencyProperty IsPasswordIncludedProperty =
+           DependencyProperty.Register("IsPasswordIncluded", typeof(bool), typeof(UserFormControl), new PropertyMetadata(null));
+        public bool IsPasswordIncluded
+        {
+            get { return (bool)GetValue(IsPasswordIncludedProperty); }
+            set
+            {
+                SetValue(IsPasswordIncludedProperty, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual void OnPropertyChanged([CallerMemberName] string property = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

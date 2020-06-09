@@ -7,49 +7,54 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:AvenueOne.Converters"
              mc:Ignorable="d" 
+             x:Name="Ufc"
              d:DesignHeight="450" d:DesignWidth="400">
     <WrapPanel ItemWidth="400">
 
         <!--User Info - left box-->
         <StackPanel Margin="10">
-            <CheckBox Content="isAdmin" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding UserTab.ModelSelected.IsAdmin}"/>
+            <CheckBox Content="isAdmin" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding User.IsAdmin}"/>
             <TextBox x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"
                      Template="{StaticResource roundedTextbox}"
-                                         Text="{Binding UserTab.ModelSelected.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding User.Username, ValidatesOnDataErrors=True, ElementName=Ufc, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <CheckBox x:Name="IsPasswordIncluded" Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding UserTab.IsPasswordIncluded}"/>
-            <PasswordBox IsEnabled="{Binding UserTab.IsPasswordIncluded}" x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
-            <PasswordBox IsEnabled="{Binding UserTab.IsPasswordIncluded}" x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
+            <CheckBox x:Name="IsPasswordIncluded" Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsPasswordIncluded}"/>
+            <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" 
+                         Template="{StaticResource roundedPasswordbox}"
+                         x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
+            <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" 
+                         Template="{StaticResource roundedPasswordbox}"
+                         x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
             <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
                      Template="{StaticResource roundedTextbox}"
-                                         Text="{Binding UserTab.Profile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding User.Person.FirstName, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="Middlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"
                      Template="{StaticResource roundedTextbox}"
-                                         Text="{Binding UserTab.Profile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                         Text="{Binding User.Person.MiddleName, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="Lastname"  Grid.Column="1" HorizontalAlignment="Stretch"
                      Template="{StaticResource roundedTextbox}"
-                                         Text="{Binding UserTab.Profile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                         Text="{Binding User.Person.LastName, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="Suffix" Grid.Column="1" HorizontalAlignment="Stretch"
                      Template="{StaticResource roundedTextbox}"
-                             Text="{Binding UserTab.Profile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding User.Person.Suffix, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-            <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding UserTab.Profile.GenderValues}" 
-                                                  SelectedValue="{Binding UserTab.Profile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+            <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding User.Person.GenderValues}" 
+                                                  SelectedValue="{Binding User.Person.Gender, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
 
-            <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding UserTab.Profile.CivilStatusValues}"
-                                                  SelectedValue="{Binding UserTab.Profile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+            <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding User.Person.CivilStatusValues}"
+                                                  SelectedValue="{Binding User.Person.CivilStatus, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="MaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
                      Template="{StaticResource roundedTextbox}"
-                             Text="{Binding UserTab.Profile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                             Text="{Binding User.Person.MaidenName, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <DatePicker x:Name="Birthdate" Grid.Column="1"
-                                        SelectedDate="{Binding UserTab.Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
+                                        SelectedDate="{Binding User.Person.BirthDate, ElementName=Ufc, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                         ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                         Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
         </StackPanel>
