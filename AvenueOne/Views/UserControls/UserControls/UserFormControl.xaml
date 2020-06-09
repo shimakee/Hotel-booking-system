@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="AvenueOne.Views.UserControls.UserControls.UserFormControl"
+﻿<UserControl x:Class="AvenueOne.Views.UserControls.UserFormControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AvenueOne.Views.UserControls.UserControls"
+             xmlns:local="clr-namespace:AvenueOne.Views.UserControls"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:AvenueOne.Converters"
              mc:Ignorable="d" 
@@ -18,7 +18,7 @@
                      Template="{StaticResource roundedTextbox}"
                                          Text="{Binding User.Username, ValidatesOnDataErrors=True, ElementName=Ufc, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <CheckBox x:Name="IsPasswordIncluded" Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsPasswordIncluded}"/>
+            <CheckBox Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsPasswordIncluded}"/>
             <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" 
                          Template="{StaticResource roundedPasswordbox}"
                          x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AvenueOne.Views.UserControls.UserControls
+namespace AvenueOne.Views.UserControls
 {
     /// <summary>
     /// Interaction logic for UserCardControl.xaml
