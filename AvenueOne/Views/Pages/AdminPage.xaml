@@ -28,8 +28,34 @@
                 </Grid.RowDefinitions>
 
                 <GroupBox Header="User info" Grid.Row="0">
+                    <WrapPanel>
+                        <Button Content="Add new User" Grid.Column="0" 
+                                        Command="{Binding UserTab.CreateClassCommand}">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                    <Binding ElementName="IsPasswordIncluded"/>
+                                    <Binding ElementName="Password"/>
+                                    <Binding ElementName="PasswordConfirm"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
+                        <Button Content="Clear content" Grid.Column="1" 
+                                        Command="{Binding UserTab.ClearClassCommand}"/>
+                        <control:UserFormControl User="{Binding UserTab.ModelSelected}" IsPasswordIncluded="{Binding UserTab.IsPasswordIncluded}" UpdateClassCommand="{Binding UserTab.UpdateClassCommand}"/>
+                        <!--<Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding UserTab.UpdateClassCommand, Mode=OneWay}">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource PasswordConverter}">
+                                    <Binding ElementName="IsPasswordIncluded"/>
+                                    <Binding ElementName="Password"/>
+                                    <Binding ElementName="PasswordConfirm"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>-->
 
-                    <control:UserFormControl User="{Binding UserTab.ModelSelected}" IsPasswordIncluded="{Binding IsPasswordIncluded}"/>
+                        <Button Content="Delete User"
+                                    Command="{Binding UserTab.DeleteClassCommand}"/>
+                    </WrapPanel>
+        
 
                     <!--<Grid IsEnabled="{Binding UserAccount.IsAdmin}">
                         <Grid.ColumnDefinitions>

@@ -4,6 +4,7 @@ using AvenueOne.Models;
 using AvenueOne.Services;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.Commands.ClassCommands;
+using AvenueOne.ViewModels.TabViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -33,15 +34,18 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                     throw new InvalidOperationException("Invalid entry in user account.");
 
 
+                UserViewModel viewmodel = (UserViewModel)ViewModel;
+
                 //get parameters
                 object[] values = (object[])parameter ?? throw new NullReferenceException("parameter cannot be null, you need to pass password and password confirmbox");
 
-                CheckBox IsPasswordIncludedCheckBox = (CheckBox)values[0];
-                PasswordBox passwordBox = (PasswordBox)values[1];
-                PasswordBox passwordConfirmBox = (PasswordBox)values[2];
+                //CheckBox IsPasswordIncludedCheckBox = (CheckBox)values[0];
+                PasswordBox passwordBox = (PasswordBox)values[0];
+                PasswordBox passwordConfirmBox = (PasswordBox)values[1];
 
                 //is password included in update
-                bool IsPasswordIncluded = IsPasswordIncludedCheckBox.IsChecked.GetValueOrDefault();
+                //bool IsPasswordIncluded = IsPasswordIncludedCheckBox.IsChecked.GetValueOrDefault();
+                bool IsPasswordIncluded = viewmodel.IsPasswordIncluded;
                 //retain password
                 ViewModel.ModelSelected.Password = ViewModel.Model.Password;
                 ViewModel.ModelSelected.PasswordConfirm = ViewModel.Model.PasswordConfirm;

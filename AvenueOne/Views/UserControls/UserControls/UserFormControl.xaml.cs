@@ -52,6 +52,18 @@ namespace AvenueOne.Views.UserControls
             }
         }
 
+        public static readonly DependencyProperty UpdateClassCommandProperty =
+           DependencyProperty.Register("UpdateClassCommand", typeof(ICommand), typeof(UserFormControl), new PropertyMetadata(null));
+        public ICommand UpdateClassCommand
+        {
+            get { return (ICommand)GetValue(UpdateClassCommandProperty); }
+            set
+            {
+                SetValue(UpdateClassCommandProperty, value);
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public virtual void OnPropertyChanged([CallerMemberName] string property = "")
