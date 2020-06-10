@@ -52,14 +52,14 @@ namespace AvenueOne.Views.UserControls
             }
         }
 
-        public static readonly DependencyProperty UpdateClassCommandProperty =
-           DependencyProperty.Register("UpdateClassCommand", typeof(ICommand), typeof(UserFormControl), new PropertyMetadata(null));
-        public ICommand UpdateClassCommand
+        public static readonly DependencyProperty ClassCommandProperty =
+           DependencyProperty.Register("ClassCommand", typeof(ICommand), typeof(UserFormControl), new PropertyMetadata(null));
+        public ICommand ClassCommand
         {
-            get { return (ICommand)GetValue(UpdateClassCommandProperty); }
+            get { return (ICommand)GetValue(ClassCommandProperty); }
             set
             {
-                SetValue(UpdateClassCommandProperty, value);
+                SetValue(ClassCommandProperty, value);
                 OnPropertyChanged();
             }
         }

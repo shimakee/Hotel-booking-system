@@ -1,0 +1,67 @@
+﻿<Window x:Class="AvenueOne.Views.Windows.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AvenueOne.Views.Windows"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:converters="clr-namespace:AvenueOne.Converters"
+        xmlns:controls="clr-namespace:AvenueOne.Views.UserControls"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+        x:Name="Uw"
+        Title="UserWindow" Height="450" Width="400">
+
+    <Window.Resources>
+        <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+        <converters:PasswordConverter x:Key="PasswordConverter"/>
+    </Window.Resources>
+
+
+    <Border CornerRadius="10" Margin="5 10">
+        <Grid IsEnabled="{Binding UserAccount.IsAdmin}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--User Info - left box-->
+            <StackPanel Grid.Column="0" Margin="10">
+                <Grid Margin="0 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Content="Clear content" Grid.Column="1" 
+                            Style="{StaticResource failButtonStyle}"
+                                        Command="{Binding ClearClassCommand}"
+                                    />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="User Id:" Grid.Column="0"/>
+                    <TextBox IsEnabled="False"
+                                    x:Name="Usernames" Text="{Binding ModelSelected.Id}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                </Grid>
+
+
+                <controls:UserFormControl User="{Binding ModelSelected}" IsPasswordIncluded="True" ClassCommand="{Binding CreateClassCommand}"/>
+
+                <!--<Button Content="Add new Customer"
+                        Style="{StaticResource successButtonStyle}"
+                                        Command="{Binding CustomerTab.CreateClassCommand}"/>-->
+                <Button Content="Cancel"
+                        Style="{StaticResource failButtonStyle2}" Click="Button_Close" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

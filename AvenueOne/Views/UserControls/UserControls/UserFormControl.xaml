@@ -25,10 +25,10 @@
                                          Text="{Binding User.Username, ValidatesOnDataErrors=True, ElementName=Ufc, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                           Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <CheckBox Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsPasswordIncluded, ElementName=Ufc}"/>
-            <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" Visibility="{Binding IsPasswordIncluded, Converter={StaticResource BooleanVisibilityConverter}}"
+            <PasswordBox IsEnabled="{Binding IsPasswordIncluded, ElementName=Ufc}" Visibility="{Binding IsPasswordIncluded, ElementName=Ufc, Converter={StaticResource BooleanVisibilityConverter}}"
                          Template="{StaticResource roundedPasswordbox}"
                          x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
-            <PasswordBox IsEnabled="{Binding IsPasswordIncluded}" Visibility="{Binding IsPasswordIncluded, Converter={StaticResource BooleanVisibilityConverter}}"
+            <PasswordBox IsEnabled="{Binding IsPasswordIncluded, ElementName=Ufc}" Visibility="{Binding IsPasswordIncluded, ElementName=Ufc, Converter={StaticResource BooleanVisibilityConverter}}"
                          Template="{StaticResource roundedPasswordbox}"
                          x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
             <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
@@ -56,7 +56,7 @@
                                                   SelectedValue="{Binding User.Person.CivilStatus, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                   Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             <TextBox x:Name="MaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
-                     IsEnabled="{Binding User.Person.WasMaiden}" Visibility="{Binding User.Person.WasMaiden, Converter={StaticResource BooleanVisibilityConverter}}"
+                     IsEnabled="{Binding User.Person.WasMaiden}" Visibility="{Binding User.Person.WasMaiden, ElementName=Ufc, Converter={StaticResource BooleanVisibilityConverter}}"
                      Template="{StaticResource roundedTextbox}"
                              Text="{Binding User.Person.MaidenName, ElementName=Ufc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                              Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
@@ -64,7 +64,7 @@
                                         SelectedDate="{Binding User.Person.BirthDate, ElementName=Ufc, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                         ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                         Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
-            <Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding UpdateClassCommand, ElementName=Ufc}"
+            <Button Content="Save" Margin="0 10 0 0" Command="{Binding ClassCommand, ElementName=Ufc}"
                     Style="{StaticResource successButtonStyle}">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource PasswordConverter}">

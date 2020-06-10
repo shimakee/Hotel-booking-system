@@ -31,13 +31,13 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                 //get parameters
                 object[] values = (object[])parameter;
 
-                CheckBox IsPasswordIncludedCheckBox = (CheckBox)values[0];
-                bool IsPasswordIncluded = IsPasswordIncludedCheckBox.IsChecked.GetValueOrDefault();
+                //CheckBox IsPasswordIncludedCheckBox = (CheckBox)values[0];
+                //bool IsPasswordIncluded = IsPasswordIncludedCheckBox.IsChecked.GetValueOrDefault();
 
-                PasswordBox passwordPasswordBox = (PasswordBox)values[1];
+                PasswordBox passwordPasswordBox = (PasswordBox)values[0];
                 string password = passwordPasswordBox.Password;
 
-                PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[2];
+                PasswordBox passwordConfirmPasswordBox = (PasswordBox)values[1];
                 string passwordConfirm = passwordConfirmPasswordBox.Password;
 
 

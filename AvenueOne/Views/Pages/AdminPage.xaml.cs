@@ -20,6 +20,7 @@ using AvenueOne.ViewModels.PagesViewModels;
 using AvenueOne.ViewModels.TabViewModels;
 using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
+using AvenueOne.Views.Windows;
 using System;
 using System.Linq;
 using System.Windows;
@@ -144,5 +145,13 @@ namespace AvenueOne.Views.Pages
             DataContext = _adminViewModel;
         }
 
+        private void Button_OpenUserWindow(object sender, RoutedEventArgs e)
+        {
+            UserWindow userWindow = new UserWindow(_context);
+            Window owner = Window.GetWindow(this);
+            userWindow.Owner = owner;
+            userWindow.ShowDialog();
+
+        }
     }
 }
