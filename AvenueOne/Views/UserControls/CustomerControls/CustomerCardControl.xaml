@@ -102,6 +102,10 @@
                     HorizontalAlignment="Center" FontSize="18" Margin="0"
                     Name="Fullname"
                     Text="{Binding Customer.Person.FullName, ElementName=Ccc}"/>
+                <TextBlock Grid.Column="1"
+                    HorizontalAlignment="Center" FontSize="18" Margin="0"
+                    Name="CivilStatus"
+                    Text="{Binding Customer.Person.CivilStatus, ElementName=Ccc}"/>
             </Grid>
         </StackPanel>
     </Grid>

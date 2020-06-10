@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:AvenueOne.Views.UserControls"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:AvenueOne.Converters"
+             x:Name="Ucc"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="400">
     
@@ -14,40 +15,69 @@
 
         <!--User Info - left box-->
         <StackPanel Margin="10">
-            <CheckBox Content="isAdmin" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding UserTab.ModelSelected.IsAdmin}"/>
-            <TextBox x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding UserTab.ModelSelected.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <CheckBox x:Name="IsPasswordIncluded" Content="Include" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding UserTab.IsPasswordIncluded}"/>
-            <PasswordBox IsEnabled="{Binding UserTab.IsPasswordIncluded}" x:Name="Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
-            <PasswordBox IsEnabled="{Binding UserTab.IsPasswordIncluded}" x:Name="PasswordConfirm" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
-            <TextBox x:Name="Firstname" Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding UserTab.Profile.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <TextBox x:Name="Middlename" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"
-                                         Text="{Binding UserTab.Profile.MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
-                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <TextBox x:Name="Lastname"  Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding UserTab.Profile.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                         Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <TextBox x:Name="Suffix" Grid.Column="1" HorizontalAlignment="Stretch"
-                             Text="{Binding UserTab.Profile.Suffix, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+            <CheckBox Content="isAdmin" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding User.IsAdmin, ElementName=Ucc}"/>
+            <Image HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="30">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="{StaticResource maleGenderIcon}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding User.IsAdmin, ElementName=Ucc}" Value="True">
+                                <Setter Property="Source" Value="{StaticResource maleGenderIcon}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding User.IsAdmin, ElementName=Ucc}" Value="False">
+                                <Setter Property="Source" Value="{StaticResource femaleGenderIcon}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
 
-            <ComboBox x:Name="Gender" SelectedIndex="0"  ItemsSource="{Binding UserTab.Profile.GenderValues}" 
-                                                  SelectedValue="{Binding UserTab.Profile.Gender, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+            <Grid Height="80" Width="80">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Background" Value="Black"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding User.Person.Gender, ElementName=Ucc}" Value="0">
+                                <Setter Property="Background" Value="CornflowerBlue"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding User.Person.Gender, ElementName=Ucc}" Value="1">
+                                <Setter Property="Background" Value="LightPink"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
 
-            <ComboBox x:Name="CivilStatus" SelectedIndex="0" ItemsSource="{Binding UserTab.Profile.CivilStatusValues}"
-                                                  SelectedValue="{Binding UserTab.Profile.CivilStatus, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                                  Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <TextBox x:Name="MaidenName" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"
-                             Text="{Binding UserTab.Profile.MaidenName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <DatePicker x:Name="Birthdate" Grid.Column="1"
-                                        SelectedDate="{Binding UserTab.Profile.BirthDate, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
-                                        ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                        Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" >
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="{StaticResource maleGenderIcon}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding User.Person.Gender, ElementName=Ucc}" Value="0">
+                                    <Setter Property="Source" Value="{StaticResource maleGenderIcon}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding User.Person.Gender, ElementName=Ucc}" Value="1">
+                                    <Setter Property="Source" Value="{StaticResource femaleGenderIcon}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <TextBlock HorizontalAlignment="Center" Foreground="WhiteSmoke" FontSize="20" Margin="0 18"
+                                Name="Age"
+                                Text="{Binding User.Person.Age, ElementName=Ucc}"/>
+            </Grid>
+            <TextBlock x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"
+                                         Text="{Binding User.Username, ElementName=Ucc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+            <TextBlock x:Name="CivilStatus" Text="{Binding User.Person.CivilStatus, ElementName=Ucc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+            <TextBlock Grid.Column="1"
+                    HorizontalAlignment="Center" FontSize="18" Margin="0"
+                    Name="Fullname"
+                    Text="{Binding User.Person.FullName, ElementName=Ucc}"/>
         </StackPanel>
 
         <!--User info - right-->

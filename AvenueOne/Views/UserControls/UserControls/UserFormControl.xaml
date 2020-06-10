@@ -64,7 +64,8 @@
                                         SelectedDate="{Binding User.Person.BirthDate, ElementName=Ufc, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                         ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                         Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
-            <Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding UpdateClassCommand, ElementName=Ufc}">
+            <Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding UpdateClassCommand, ElementName=Ufc}"
+                    Style="{StaticResource successButtonStyle}">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource PasswordConverter}">
                         <!--<Binding ElementName="IsPasswordIncluded"/>-->
