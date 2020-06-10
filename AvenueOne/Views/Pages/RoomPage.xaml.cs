@@ -30,12 +30,19 @@ namespace AvenueOne.Views.Pages
     /// </summary>
     public partial class RoomPage : Page
     {
+        public Window Window { get; }
         private PlutoContext _context;
-        public RoomPage(PlutoContext context)
+        public RoomPage(PlutoContext context, Window window)
         {
-            InitializeComponent();
+            if (context == null)
+                throw new ArgumentNullException("Context cannot be null.");
+            if (window == null)
+                throw new ArgumentNullException("Window page caller must not be null.");
 
             this._context = context;
+            this.Window = window;
+
+            InitializeComponent();
 
             IGenericUnitOfWork<Room> genericUnitOfWorkRoom = new GenericUnitOfWork<Room>(context);
             IDisplayService displayService = new WpfDisplayService();

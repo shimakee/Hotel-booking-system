@@ -35,13 +35,21 @@ namespace AvenueOne.Views.Pages
     /// </summary>
     public partial class BookingPage : Page
     {
+
+        public Window Window { get; }
         private PlutoContext _context;
         private ITransactionViewModel _viewModel;
-        public BookingPage(PlutoContext context)
+        public BookingPage(PlutoContext context, Window window)
         {
-            InitializeComponent();
+            if (context == null)
+                throw new ArgumentNullException("Context cannot be null.");
+            if (window == null)
+                throw new ArgumentNullException("Window page caller must not be null.");
 
             this._context = context;
+            this.Window = window;
+
+            InitializeComponent();
 
             IDisplayService displayService = new WpfDisplayService();
             IGenericUnitOfWork<Booking> genericUnitOfWorkBooking = new GenericUnitOfWork<Booking>(context);

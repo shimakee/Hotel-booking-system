@@ -32,13 +32,21 @@ namespace AvenueOne.Views.Pages
     /// </summary>
     public partial class CustomerPage : Page
     {
+        public Window Window { get; }
         private PlutoContext _context;
         private ICustomerViewModel _viewModel;
-        public CustomerPage(PlutoContext context)
+        public CustomerPage(PlutoContext context, Window window)
         {
-            InitializeComponent();
+            if (context == null)
+                throw new ArgumentNullException("Context cannot be null.");
+            if (window == null)
+                throw new ArgumentNullException("Window page caller must not be null.");
 
             this._context = context;
+            this.Window = window;
+
+
+            InitializeComponent();
 
             Customer Customer = new Customer();
             Customer.Person = new Person();

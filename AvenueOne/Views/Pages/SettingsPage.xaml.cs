@@ -38,14 +38,18 @@ namespace AvenueOne.Views.Pages
     /// </summary>
     public partial class SettingsPage : Page
     {
+        public Window Window { get; }
         private PlutoContext _context;
         public SettingsPageViewModel ViewModel { get; private set; }
-        public SettingsPage(PlutoContext context)
+        public SettingsPage(PlutoContext context, Window window)
         {
             if (context == null)
-            {
-                throw new NullReferenceException("context cannot be null.");
-            }
+                throw new ArgumentNullException("Context cannot be null.");
+            if (window == null)
+                throw new ArgumentNullException("Window page caller must not be null.");
+
+            this._context = context;
+            this.Window = window;
 
             InitializeComponent();
 
