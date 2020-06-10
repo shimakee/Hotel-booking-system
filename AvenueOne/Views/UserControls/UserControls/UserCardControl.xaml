@@ -11,26 +11,31 @@
              d:DesignHeight="350" d:DesignWidth="400">
     
     
-    <WrapPanel ItemWidth="400" MaxWidth="1200" MinWidth="400">
+    <WrapPanel ItemWidth="400">
 
         <!--User Info - left box-->
         <StackPanel Margin="10">
-            <CheckBox Content="isAdmin" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding User.IsAdmin, ElementName=Ucc}"/>
-            <Image HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="30">
-                <Image.Style>
-                    <Style TargetType="Image">
-                        <Setter Property="Source" Value="{StaticResource maleGenderIcon}" />
+
+            <TextBlock HorizontalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value="Not Admin"/>
+                        <Setter Property="Foreground" Value="Red"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding User.IsAdmin, ElementName=Ucc}" Value="True">
-                                <Setter Property="Source" Value="{StaticResource maleGenderIcon}"/>
+                                <Setter Property="Text" Value="Admin"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding User.IsAdmin, ElementName=Ucc}" Value="False">
-                                <Setter Property="Source" Value="{StaticResource femaleGenderIcon}" />
+                                <Setter Property="Text" Value="Not admin"/>
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </Image.Style>
-            </Image>
+                </TextBlock.Style>
+            </TextBlock>
 
             <Grid Height="80" Width="80">
                 <Grid.RowDefinitions>
@@ -69,15 +74,17 @@
                                 Name="Age"
                                 Text="{Binding User.Person.Age, ElementName=Ucc}"/>
             </Grid>
-            <TextBlock x:Name="Username" Grid.Column="1" HorizontalAlignment="Stretch"
-                                         Text="{Binding User.Username, ElementName=Ucc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <TextBlock x:Name="CivilStatus" Text="{Binding User.Person.CivilStatus, ElementName=Ucc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                          Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+            <TextBlock x:Name="Username" Grid.Column="1" HorizontalAlignment="Center"
+                       FontSize="20" FontWeight="Bold" Margin="0"
+                        Text="{Binding User.Username, ElementName=Ucc, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Column="1"
                     HorizontalAlignment="Center" FontSize="18" Margin="0"
                     Name="Fullname"
                     Text="{Binding User.Person.FullName, ElementName=Ucc}"/>
+            <TextBlock x:Name="CivilStatus" HorizontalAlignment="Center" 
+                       FontSize="15" Margin="0"
+                       Text="{Binding User.Person.CivilStatus, ElementName=Ucc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                        Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
         </StackPanel>
 
         <!--User info - right-->
