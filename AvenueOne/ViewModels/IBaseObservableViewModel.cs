@@ -9,12 +9,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AvenueOne.ViewModels
 {
     public interface IBaseObservableViewModel<T> : IAccountViewModel, INotifyPropertyChanged where T : class, IBaseObservableModel<T>, new()
     {
+        Window Window { get; set; }
         BaseClassCommand<T> CreateClassCommand { get; set; }
         BaseClassCommand<T> UpdateClassCommand { get; set; }
         BaseClassCommand<T> DeleteClassCommand { get; set; }

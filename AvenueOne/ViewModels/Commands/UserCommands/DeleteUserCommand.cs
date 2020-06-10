@@ -2,6 +2,7 @@
 using AvenueOne.Models;
 using AvenueOne.Services.Interfaces;
 using AvenueOne.ViewModels.Commands.ClassCommands;
+using AvenueOne.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AvenueOne.ViewModels.Commands.UserCommands
 {
@@ -34,6 +36,14 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                 if (adminUsers.Count <= 1 && ViewModel.Model.IsAdmin == true)
                     throw new InvalidOperationException("Could not delete user, there must be atleast 1 admin account.");
 
+                bool confirmDeleteOwnAccount = false;
+                if (ViewModel.UserAccount.Id == ViewModel.Model.Id)
+                {
+                    confirmDeleteOwnAccount = _displayService.MessagePrompt($"You are deleting your own account, proceed?", "Delete own account.");
+                    if (!confirmDeleteOwnAccount)
+                        return;
+                }
+
                 if (ConfirmDelete)
                 {
                     int n = await Delete();
@@ -44,6 +54,13 @@ namespace AvenueOne.ViewModels.Commands.UserCommands
                     ViewModel.ClearClassCommand.Execute(null);
 
                     _displayService.MessageDisplay($"Deleted {typeof(User)} model.\nId:{id}\nAffected rows:{n}", "Model deleted");
+
+                    if (confirmDeleteOwnAccount) //logout when deleteing self account - by closing main window and opening loginwindow
+                    {
+                        LoginWindow loginWindow = new LoginWindow();
+                        loginWindow.Show();
+                        ViewModel.Window.Close();
+                    }
                 }
             }
             catch (ValidationException validationException)

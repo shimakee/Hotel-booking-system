@@ -34,15 +34,19 @@ namespace AvenueOne.Views.Pages
     public partial class AdminPage : Page
     {
         private PlutoContext _context;
+        public Window Window { get;}
         public AdminPageViewModel ViewModel { get; private set; }
-        public AdminPage(PlutoContext context)
+        public AdminPage(PlutoContext context, Window window)
         {
             if (context == null)
                 throw new ArgumentNullException("Context cannot be null.");
+            if (window == null)
+                throw new ArgumentNullException("Window page caller must not be null.");
 
             InitializeComponent();
 
             this._context = context;
+            this.Window = window;
             User User = new User();
             User.Person = new Person();
             
@@ -59,7 +63,7 @@ namespace AvenueOne.Views.Pages
                                                                                                         updateUserCommand,
                                                                                                         deleteUserCommand,
                                                                                                         clearUserCommand);
-
+            userTab.Window = this.Window;
             #endregion
 
             #region Customer tab
@@ -75,6 +79,7 @@ namespace AvenueOne.Views.Pages
                                                                                                                             updateCustomerCommand,
                                                                                                                             deleteCustomerCommand,
                                                                                                                             clearCustomerCommand);
+            customerTab.Window = this.Window;
             #endregion
 
             #region RoomTab
@@ -135,7 +140,7 @@ namespace AvenueOne.Views.Pages
             #endregion
 
             BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
-            AdminPageViewModel _adminViewModel = new AdminPageViewModel(Window.GetWindow(this), 
+            AdminPageViewModel _adminViewModel = new AdminPageViewModel(this.Window, 
                                                                                                                                 closeWindowCommand,
                                                                                                                                 userTab,
                                                                                                                                 customerTab,
@@ -148,8 +153,7 @@ namespace AvenueOne.Views.Pages
         private void Button_OpenUserWindow(object sender, RoutedEventArgs e)
         {
             UserWindow userWindow = new UserWindow(_context);
-            Window owner = Window.GetWindow(this);
-            userWindow.Owner = owner;
+            userWindow.Owner = this.Window;
             userWindow.ShowDialog();
 
         }

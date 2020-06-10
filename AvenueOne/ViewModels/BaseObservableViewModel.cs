@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using AvenueOne.Interfaces;
 using AvenueOne.ViewModels.Commands;
@@ -17,7 +18,7 @@ namespace AvenueOne.ViewModels
     public class BaseObservableViewModel<T> : AccountViewModel, IBaseObservableViewModel<T> where T : class, IBaseObservableModel<T>, new()
     {
         #region Properties
-
+        public Window Window { get; set; }
         public virtual BaseClassCommand<T> CreateClassCommand { get; set; }
         public virtual BaseClassCommand<T> UpdateClassCommand { get; set; }
         public virtual BaseClassCommand<T> DeleteClassCommand { get; set; }
