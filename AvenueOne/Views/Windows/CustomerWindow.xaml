@@ -136,11 +136,11 @@
                                             Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
                 </Grid>-->
 
-                <controls:CustomerFormControl Customer="{Binding CustomerTab.ModelSelected}"/>
+                <controls:CustomerFormControl Customer="{Binding CustomerTab.ModelSelected}" ClassCommand="{Binding CustomerTab.CreateClassCommand}"/>
 
-                <Button Content="Add new Customer"
+                <!--<Button Content="Add new Customer"
                         Style="{StaticResource successButtonStyle}"
-                                        Command="{Binding CustomerTab.CreateClassCommand}"/>
+                                        Command="{Binding CustomerTab.CreateClassCommand}"/>-->
                 <Button Content="Cancel"
                         Style="{StaticResource failButtonStyle2}"
                                     Command="{Binding CloseWindowCommand}"/>
