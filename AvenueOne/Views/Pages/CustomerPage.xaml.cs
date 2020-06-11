@@ -71,14 +71,14 @@ namespace AvenueOne.Views.Pages
             {
                 if(Card.Visibility == Visibility.Visible)
                 {
-                    SaveEditButton.Visibility = Visibility.Visible;
+                    //SaveEditButton.Visibility = Visibility.Visible;
                     Form.Visibility = Visibility.Visible;
                     Card.Visibility = Visibility.Collapsed;
                     EditButton.Content = "Close";
                 }
                 else
                 {
-                    SaveEditButton.Visibility = Visibility.Collapsed;
+                    //SaveEditButton.Visibility = Visibility.Collapsed;
                     Form.Visibility = Visibility.Collapsed;
                     Card.Visibility = Visibility.Visible;
                     EditButton.Content = "Edit";

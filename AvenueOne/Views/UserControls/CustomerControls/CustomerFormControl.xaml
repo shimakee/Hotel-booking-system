@@ -168,6 +168,8 @@
                                                 SelectedDate="{Binding Customer.Person.BirthDate, ElementName=Cfc, TargetNullValue={x:Static system:DateTime.Today}, FallbackValue={x:Static system:DateTime.Today},
                                                 ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                                 Validation.ErrorTemplate="{StaticResource errorTemplateStack}"/>
+            <Button Content="Save" Margin="0 10 0 0" Command="{Binding ClassCommand, ElementName=Cfc}"
+                    Style="{StaticResource successButtonStyle}"/>
         </WrapPanel>
     </WrapPanel>
 </UserControl>

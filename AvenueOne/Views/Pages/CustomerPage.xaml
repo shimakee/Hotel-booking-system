@@ -154,17 +154,19 @@
                             </Grid>-->
 
                             <control:CustomerCardControl x:Name="Card" Visibility="Visible" Customer="{Binding Model, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <control:CustomerFormControl x:Name="Form" Visibility="Collapsed" Customer="{Binding ModelSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <control:CustomerFormControl x:Name="Form" Visibility="Collapsed" 
+                                                         Customer="{Binding ModelSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         ClassCommand="{Binding UpdateClassCommand}"/>
 
                             <Button x:Name="EditButton" Visibility="{Binding UserAccount.IsAdmin, Converter={StaticResource BooleanVisibilityConverter}}" 
                                     Content="Edit" Click="Button_ChangeVisibility"
                                     Style="{StaticResource defaultButtonStyle}"/>
 
-                            <Button Content="Save Edit" Margin="0 10 0 0" 
+                            <!--<Button Content="Save Edit" Margin="0 10 0 0" 
                                     Visibility="Collapsed"
                                     x:Name="SaveEditButton"
                                     Style="{StaticResource successButtonStyle}"
-                                    Command="{Binding UpdateClassCommand}"/>
+                                    Command="{Binding UpdateClassCommand}"/>-->
                             <Button Content="Delete Customer"
                                     MaxHeight="40"
                                     Visibility="{Binding UserAccount.IsAdmin, Converter={StaticResource BooleanVisibilityConverter}}"
