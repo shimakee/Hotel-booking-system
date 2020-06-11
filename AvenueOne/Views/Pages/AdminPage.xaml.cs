@@ -157,5 +157,24 @@ namespace AvenueOne.Views.Pages
             userWindow.ShowDialog();
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ViewModel.UserAccount.IsAdmin)
+            {
+                if(UserCard.Visibility == Visibility.Visible)
+                {
+                    UserCard.Visibility = Visibility.Collapsed;
+                    UserForm.Visibility = Visibility.Visible;
+                    EditButton.Content = "Close";
+                }
+                else
+                {
+                    UserCard.Visibility = Visibility.Visible;
+                    UserForm.Visibility = Visibility.Collapsed;
+                    EditButton.Content = "Edit";
+                }
+            }
+        }
     }
 }

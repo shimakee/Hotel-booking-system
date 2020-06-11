@@ -32,31 +32,25 @@
                 </Grid.RowDefinitions>-->
 
                 <GroupBox Header="User info" Grid.Column="0">
-                    <WrapPanel>
-                        <Button Content="Add new User" Grid.Column="0" 
-                                Style="{StaticResource successButtonStyle}" Click="Button_OpenUserWindow" >
-                            <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource PasswordConverter}">
-                                    <Binding ElementName="IsPasswordIncluded"/>
-                                    <Binding ElementName="Password"/>
-                                    <Binding ElementName="PasswordConfirm"/>
-                                </MultiBinding>
-                            </Button.CommandParameter>
-                        </Button>
-                        <Button Content="Clear content" Grid.Column="1" 
-                                Style="{StaticResource failButtonStyle}"
-                                        Command="{Binding UserTab.ClearClassCommand}"/>
-                        <control:UserFormControl User="{Binding UserTab.ModelSelected}" IsPasswordIncluded="{Binding UserTab.IsPasswordIncluded}" ClassCommand="{Binding UserTab.UpdateClassCommand}"/>
-                        <control:UserCardControl User="{Binding UserTab.ModelSelected}"/>
-                        <!--<Button Content="Save Edit" Margin="0 10 0 0" Command="{Binding UserTab.UpdateClassCommand, Mode=OneWay}">
-                            <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource PasswordConverter}">
-                                    <Binding ElementName="IsPasswordIncluded"/>
-                                    <Binding ElementName="Password"/>
-                                    <Binding ElementName="PasswordConfirm"/>
-                                </MultiBinding>
-                            </Button.CommandParameter>
-                        </Button>-->
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                                
+                                
+                            <Button Content="Add new User" Grid.Column="0" 
+                                    Style="{StaticResource successButtonStyle}" Click="Button_OpenUserWindow" />
+                            <Button Content="Clear content" Grid.Column="1" 
+                                    Style="{StaticResource failButtonStyle}"
+                                            Command="{Binding UserTab.ClearClassCommand}"/>
+                        </Grid>
+                        
+                        <control:UserFormControl x:Name="UserForm" Visibility="Collapsed" User="{Binding UserTab.ModelSelected}" IsPasswordIncluded="{Binding UserTab.IsPasswordIncluded}" ClassCommand="{Binding UserTab.UpdateClassCommand}"/>
+                        <control:UserCardControl x:Name="UserCard" Visibility="Visible" User="{Binding UserTab.ModelSelected}"/>
+
+                        <Button x:Name="EditButton" Content="Edit" Style="{StaticResource defaultButtonStyle}" Click="Button_Click" />
 
                         <Button Content="Delete User"
                                     Command="{Binding UserTab.DeleteClassCommand}"/>
@@ -77,7 +71,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>-->
-                    </WrapPanel>
+                    </StackPanel>
                 </GroupBox>
 
                 <GroupBox Header="User list" Grid.Column="1">

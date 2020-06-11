@@ -13,7 +13,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterOwner"
         x:Name="Uw"
-        Title="UserWindow" Height="450" Width="400">
+        Title="UserWindow" Height="450" Width="420">
 
     <Window.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
