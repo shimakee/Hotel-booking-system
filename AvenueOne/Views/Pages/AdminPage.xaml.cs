@@ -158,11 +158,30 @@ namespace AvenueOne.Views.Pages
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_ChangeVisibilityCustomer(object sender, RoutedEventArgs e)
         {
             if (this.ViewModel.UserAccount.IsAdmin)
             {
-                if(UserCard.Visibility == Visibility.Visible)
+                if(CustomerCard.Visibility == Visibility.Visible)
+                {
+                    CustomerCard.Visibility = Visibility.Collapsed;
+                    CustomerForm.Visibility = Visibility.Visible;
+                    EditCustomer.Content = "Close";
+                }
+                else
+                {
+                    CustomerCard.Visibility = Visibility.Visible;
+                    CustomerForm.Visibility = Visibility.Collapsed;
+                    EditCustomer.Content = "Edit";
+                }
+            }
+        }
+
+        private void Button_ChangeVisibilityUser(object sender, RoutedEventArgs e)
+        {
+            if (this.ViewModel.UserAccount.IsAdmin)
+            {
+                if (UserCard.Visibility == Visibility.Visible)
                 {
                     UserCard.Visibility = Visibility.Collapsed;
                     UserForm.Visibility = Visibility.Visible;
@@ -175,6 +194,13 @@ namespace AvenueOne.Views.Pages
                     EditButton.Content = "Edit";
                 }
             }
+        }
+
+        private void Button_OpenCustomerWindow(object sender, RoutedEventArgs e)
+        {
+            CustomerWindow customerWindow = new CustomerWindow(_context);
+            customerWindow.Owner = this.Window;
+            customerWindow.ShowDialog();
         }
     }
 }

@@ -40,13 +40,13 @@
 
                                 <Button Content="Add new Customer" Grid.Column="0" MaxHeight="50"
                                         Tag="{StaticResource femaleGenderIcon}"
-                                        Style="{StaticResource defaultButtonStyle}" Click="Button_OpenCustomerWindow"
+                                        Style="{StaticResource successButtonStyle}" Click="Button_OpenCustomerWindow"
                                     />
 
                                 <Button Grid.Column="1" MaxHeight="50"
                                         Content="Clear content"
                                         Tag="{StaticResource femaleGenderIcon}"
-                                        Style="{StaticResource defaultButtonStyle}"
+                                        Style="{StaticResource failButtonStyle}"
                                         Command="{Binding ClearClassCommand}"
                                     />
                             </Grid>
