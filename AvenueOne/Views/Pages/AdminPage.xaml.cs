@@ -202,5 +202,24 @@ namespace AvenueOne.Views.Pages
             customerWindow.Owner = this.Window;
             customerWindow.ShowDialog();
         }
+
+        private void EditAmenitiesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ViewModel.UserAccount.IsAdmin)
+            {
+                if (AmenityCard.Visibility == Visibility.Visible)
+                {
+                    AmenityCard.Visibility = Visibility.Collapsed;
+                    AmenityForm.Visibility = Visibility.Visible;
+                    EditAmenitiesButton.Content = "Close";
+                }
+                else
+                {
+                    AmenityCard.Visibility = Visibility.Visible;
+                    AmenityForm.Visibility = Visibility.Collapsed;
+                    EditAmenitiesButton.Content = "Edit";
+                }
+            }
+        }
     }
 }
