@@ -50,11 +50,21 @@
                         <control:UserFormControl x:Name="UserForm" Visibility="Collapsed" User="{Binding UserTab.ModelSelected}" IsPasswordIncluded="{Binding UserTab.IsPasswordIncluded}" ClassCommand="{Binding UserTab.UpdateClassCommand}"/>
                         <control:UserCardControl x:Name="UserCard" Visibility="Visible" User="{Binding UserTab.ModelSelected}"/>
 
-                        <Button x:Name="EditButton" Content="Edit" Style="{StaticResource defaultButtonStyle}" Click="Button_ChangeVisibilityUser" />
 
-                        <Button Content="Delete User"
-                                Style="{StaticResource failButtonStyle2}"
-                                    Command="{Binding UserTab.DeleteClassCommand}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            
+                            <Button  Grid.Column="0"
+                                x:Name="EditButton" Content="Edit" Style="{StaticResource defaultButtonStyle}" Click="Button_ChangeVisibilityUser" />
+
+                            <Button Content="Delete User" Grid.Column="1"
+                                    Style="{StaticResource failButtonStyle2}"
+                                        Command="{Binding UserTab.DeleteClassCommand}"/>
+                        </Grid>
 
                         <!--<ListBox Grid.Column="1"
                          x:Name="UsersList2"
@@ -313,22 +323,37 @@
                            Padding="5">
 
                     <StackPanel>
-
-                        <Button Grid.Row="0" Grid.Column="0"
-                                Style="{StaticResource successButtonStyle}"
-                            Content="Add Amenities" Command="{Binding RoomTab.AmenitiesViewModel.CreateClassCommand}"/>
-                        <Button Grid.Row="0" Grid.Column="1"
-                                Style="{StaticResource failButtonStyle}"
-                            Content="Clear content" Command="{Binding RoomTab.AmenitiesViewModel.ClearClassCommand}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Button Grid.Row="0" Grid.Column="0"
+                                    Style="{StaticResource successButtonStyle}"
+                                Content="Add Amenities" Command="{Binding RoomTab.AmenitiesViewModel.CreateClassCommand}"/>
+                            <Button Grid.Row="0" Grid.Column="1"
+                                    Style="{StaticResource failButtonStyle}"
+                                Content="Clear content" Command="{Binding RoomTab.AmenitiesViewModel.ClearClassCommand}"/>
+                        </Grid>
                         <control:AmenitiesFormControl Visibility="Collapsed" x:Name="AmenityForm" Amenity="{Binding RoomTab.AmenitiesViewModel.ModelSelected}" ClassCommand="{Binding RoomTab.AmenitiesViewModel.UpdateClassCommand}"/>
-                        <TextBlock Visibility="Visible" Text="amenity card" x:Name="AmenityCard"/>
-                        <Button x:Name="EditAmenitiesButton"
-                                Content="Edit"
-                            Style="{StaticResource defaultButtonStyle}" Click="EditAmenitiesButton_Click"/>
+                        <control:AmenityCardControl Visibility="Visible" x:Name="AmenityCard" Amenity="{Binding RoomTab.AmenitiesViewModel.Model}"/>
 
-                        <Button Grid.Row="4" Grid.Column="4"
-                            Content="Delete " Style="{StaticResource failButtonStyle2}"
-                                Command="{Binding RoomTab.AmenitiesViewModel.DeleteClassCommand}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            
+
+                            <Button x:Name="EditAmenitiesButton"
+                                    Content="Edit"
+                                Style="{StaticResource defaultButtonStyle}" Click="EditAmenitiesButton_Click"/>
+                            <Button Grid.Row="4" Grid.Column="4"
+                                Content="Delete " Style="{StaticResource failButtonStyle2}"
+                                    Command="{Binding RoomTab.AmenitiesViewModel.DeleteClassCommand}"/>
+                        </Grid>
                         <Button Content="Link" Grid.Row="5" Grid.Column="0"
                                 Style="{StaticResource cautionButtonStyle}"
                                                     Command="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"/>
@@ -469,12 +494,20 @@
                                     Command="{Binding CustomerTab.UpdateClassCommand}"/>-->
 
 
-                            <Button x:Name="EditCustomer" Content="Edit" Click="Button_ChangeVisibilityCustomer"
-                                    Style="{StaticResource defaultButtonStyle}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <Button Content="Delete Customer"
-                                        Style="{StaticResource failButtonStyle2}"
-                                        Command="{Binding CustomerTab.DeleteClassCommand}"/>
+                                <Button Grid.Column="0"
+                                    x:Name="EditCustomer" Content="Edit" Click="Button_ChangeVisibilityCustomer"
+                                        Style="{StaticResource defaultButtonStyle}"/>
+
+                                <Button Content="Delete Customer"
+                                            Style="{StaticResource failButtonStyle2}" Grid.Column="1"
+                                            Command="{Binding CustomerTab.DeleteClassCommand}"/>
+                            </Grid>
 
 
                             <!--<Grid>

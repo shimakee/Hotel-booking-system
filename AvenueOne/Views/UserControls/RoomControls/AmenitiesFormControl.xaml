@@ -25,15 +25,10 @@
 
         </WrapPanel>
         <WrapPanel ItemWidth="200">
-            <StackPanel>
-                <TextBlock Text="Details:" />
-                <TextBox Margin="1" VerticalAlignment="Stretch" Height="100"
-                                                TextWrapping="Wrap" AcceptsReturn="True"
-                                                HorizontalScrollBarVisibility="Disabled"
-                                                VerticalScrollBarVisibility="Auto"
+            <TextBox Margin="1" VerticalAlignment="Stretch" 
+                                                TextWrapping="Wrap"
                                             Text="{Binding Amenity.Details, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                                     Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            </StackPanel>
             <DataGrid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                   ItemsSource="{Binding RoomTab.AmenitiesViewModel.ModelSelected.RoomTypes, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
@@ -42,7 +37,7 @@
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                         <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
                     </DataGrid.Columns>
-                </DataGrid>
+            </DataGrid>
         </WrapPanel>
 
         <WrapPanel ItemWidth="400">
