@@ -1,0 +1,32 @@
+﻿<Window x:Class="AvenueOne.Views.Windows.AmenityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AvenueOne.Views.Windows" 
+        xmlns:control="clr-namespace:AvenueOne.Views.UserControls"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+        FocusManager.FocusedElement="{x:Reference AmenityFormControl}"
+        x:Name="Aw"
+        mc:Ignorable="d"
+        Title="AmenityWindow" Height="450" Width="400">
+
+    <WrapPanel ItemWidth="400" Margin="10">
+        <Grid Margin="0 15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                                    Style="{StaticResource failButtonStyle}"
+                                Content="Clear content" Command="{Binding ClearClassCommand}"/>
+        </Grid>
+        <control:AmenitiesFormControl x:Name="AmenityFormControl" Amenity="{Binding ModelSelected}" ClassCommand="{Binding CreateClassCommand}"/>
+
+        <Button Style="{StaticResource failButtonStyle2}" Content="Cancel" Click="Button_Click"/>
+    </WrapPanel>
+</Window>

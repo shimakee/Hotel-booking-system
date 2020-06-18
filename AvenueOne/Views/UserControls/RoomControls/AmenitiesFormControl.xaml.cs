@@ -27,6 +27,7 @@ namespace AvenueOne.Views.UserControls
         public AmenitiesFormControl()
         {
             InitializeComponent();
+            Name.Focus();
         }
 
 

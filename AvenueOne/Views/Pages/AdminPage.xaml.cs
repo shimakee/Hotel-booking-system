@@ -221,5 +221,12 @@ namespace AvenueOne.Views.Pages
                 }
             }
         }
+
+        private void Button_OpenAmenityWindow(object sender, RoutedEventArgs e)
+        {
+            AmenityWindow amenityWindow = new AmenityWindow(_context);
+            amenityWindow.Owner = this.Window;
+            amenityWindow.ShowDialog();
+        }
     }
 }

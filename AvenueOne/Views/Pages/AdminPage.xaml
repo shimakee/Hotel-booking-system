@@ -331,13 +331,13 @@
                             
                             <Button Grid.Row="0" Grid.Column="0"
                                     Style="{StaticResource successButtonStyle}"
-                                Content="Add Amenities" Command="{Binding RoomTab.AmenitiesViewModel.CreateClassCommand}"/>
+                                Content="Add Amenities" Click="Button_OpenAmenityWindow"/>
                             <Button Grid.Row="0" Grid.Column="1"
                                     Style="{StaticResource failButtonStyle}"
                                 Content="Clear content" Command="{Binding RoomTab.AmenitiesViewModel.ClearClassCommand}"/>
                         </Grid>
                         <control:AmenitiesFormControl Visibility="Collapsed" x:Name="AmenityForm" Amenity="{Binding RoomTab.AmenitiesViewModel.ModelSelected}" ClassCommand="{Binding RoomTab.AmenitiesViewModel.UpdateClassCommand}"/>
-                        <control:AmenityCardControl Visibility="Visible" x:Name="AmenityCard" Amenity="{Binding RoomTab.AmenitiesViewModel.Model}"/>
+                        <control:AmenityCardControl Visibility="Visible" x:Name="AmenityCard" Amenity="{Binding RoomTab.AmenitiesViewModel.ModelSelected}"/>
 
                         <Grid>
                             <Grid.ColumnDefinitions>
