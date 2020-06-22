@@ -9,19 +9,11 @@
              d:DesignHeight="450" d:DesignWidth="400">
 
     <WrapPanel ItemWidth="400">
-        <TextBox Grid.Row="1" Grid.Column="0" IsEnabled="False" Width="400"
-                         Template="{StaticResource roundedTextbox}"
-                         x:Name="Name"
-                                     Text="{Binding Amenity.Name, ElementName=Acc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
-                                                 Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            <WrapPanel ItemWidth="200">
-            <TextBox Margin="1" VerticalAlignment="Stretch" Height="100" IsEnabled="False"
-                                                    TextWrapping="Wrap" AcceptsReturn="True"
-                                                    HorizontalScrollBarVisibility="Disabled"
-                                                    VerticalScrollBarVisibility="Auto"
-                                                Text="{Binding Amenity.Details, ElementName=Acc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
-                                                        Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-            
+        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20"
+                   Text="{Binding Amenity.Name, ElementName=Acc}"/>
+        <WrapPanel ItemWidth="200">
+            <TextBlock Height="100" Text="{Binding Amenity.Details, ElementName=Acc}"/>
+
             <DataGrid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" IsEnabled="False"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                   ItemsSource="{Binding Amenity.RoomTypes, ElementName=Acc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 

@@ -27,6 +27,11 @@
         <WrapPanel ItemWidth="200">
             <StackPanel>
                 <TextBlock Text="Details: "/>
+                <Button Content="Detach" Grid.Row="4" Grid.Column="4"
+                                                    Command="{Binding RoomTab.RoomTypeViewModel.DetachAmenityCommand}"/>
+                <Button Content="Link" Grid.Row="5" Grid.Column="0"
+                                Style="{StaticResource cautionButtonStyle}"
+                                                    Command="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"/>
                 <TextBox Margin="1" VerticalAlignment="Stretch" Height="50"
                                                     TextWrapping="Wrap"
                                                 Text="{Binding Amenity.Details, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 

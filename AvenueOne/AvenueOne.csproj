@@ -329,6 +329,12 @@
     <Compile Include="Views\UserControls\RoomControls\AmenityCardControl.xaml.cs">
       <DependentUpon>AmenityCardControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\RoomControls\RoomTypeCardControl.xaml.cs">
+      <DependentUpon>RoomTypeCardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\RoomControls\RoomTypeFormControl.xaml.cs">
+      <DependentUpon>RoomTypeFormControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\UserControls\UserCardControl.xaml.cs">
       <DependentUpon>UserCardControl.xaml</DependentUpon>
     </Compile>
@@ -403,6 +409,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\RoomControls\AmenityCardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\RoomControls\RoomTypeCardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\RoomControls\RoomTypeFormControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
