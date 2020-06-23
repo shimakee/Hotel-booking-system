@@ -233,16 +233,24 @@
                                     Command="{Binding  RoomTab.RoomTypeViewModel.ClearClassCommand}"/>
                         </Grid>
                         
-                        <control:RoomTypeCardControl RoomType="{Binding  RoomTab.RoomTypeViewModel.Model}" Height="200"/>
+                        <control:RoomTypeCardControl Visibility="Visible" x:Name="RoomTypeCard" RoomType="{Binding  RoomTab.RoomTypeViewModel.Model}" Height="200"/>
 
+                        <control:RoomTypeFormControl Visibility="Collapsed" x:Name="RoomTypeForm" 
+                                                     RoomType="{Binding RoomTab.RoomTypeViewModel.ModelSelected}" 
+                                                     AmenitySelected="{Binding RoomTab.AmenitiesSelected}" 
+                                                     AmenitiesCollection="{Binding RoomTab.AmenitiesViewModel.ModelList}"
+                                                     LinkCommand="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"
+                                                     DetachCommand="{Binding RoomTab.RoomTypeViewModel.DetachAmenityCommand}"
+                                                     ClassCommand="{Binding RoomTab.RoomTypeViewModel.UpdateClassCommand}"/>
+                        
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Content="Edit" 
-                                    Style="{StaticResource defaultButtonStyle}"/>
+                            <Button Grid.Column="0" Content="Edit"  x:Name="EditRoomTypeButton"
+                                    Style="{StaticResource defaultButtonStyle}" Click="EditRoomTypeButton_Click"/>
                             <Button Grid.Column="1" Content="Delete" 
                                     Style="{StaticResource failButtonStyle2}"
                                     Command="{Binding RoomTab.RoomTypeViewModel.DeleteClassCommand}"/>

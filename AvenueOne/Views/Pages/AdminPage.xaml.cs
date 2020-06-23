@@ -228,5 +228,24 @@ namespace AvenueOne.Views.Pages
             amenityWindow.Owner = this.Window;
             amenityWindow.ShowDialog();
         }
+
+        private void EditRoomTypeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ViewModel.UserAccount.IsAdmin)
+            {
+                if (RoomTypeCard.Visibility == Visibility.Visible)
+                {
+                    RoomTypeCard.Visibility = Visibility.Collapsed;
+                    RoomTypeForm.Visibility = Visibility.Visible;
+                    EditRoomTypeButton.Content = "Close";
+                }
+                else
+                {
+                    RoomTypeCard.Visibility = Visibility.Visible;
+                    RoomTypeForm.Visibility = Visibility.Collapsed;
+                    EditRoomTypeButton.Content = "Edit";
+                }
+            }
+        }
     }
 }

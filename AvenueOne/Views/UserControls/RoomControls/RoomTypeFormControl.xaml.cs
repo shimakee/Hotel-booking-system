@@ -1,6 +1,7 @@
 ﻿using AvenueOne.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,14 +29,74 @@ namespace AvenueOne.Views.UserControls
             InitializeComponent();
         }
 
+        public static readonly DependencyProperty AmenitiesCollectionProperty =
+          DependencyProperty.Register("AmenitiesCollection", typeof(ObservableCollection<Amenities>), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        public ObservableCollection<Amenities> AmenitiesCollection
+        {
+            get { return (ObservableCollection<Amenities>)GetValue(AmenitiesCollectionProperty); }
+            set
+            {
+                SetValue(AmenitiesCollectionProperty, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public static readonly DependencyProperty AmenitySelectedProperty =
+          DependencyProperty.Register("AmenitySelected", typeof(Amenities), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        public Amenities AmenitySelected
+        {
+            get { return (Amenities)GetValue(AmenitySelectedProperty); }
+            set
+            {
+                SetValue(AmenitySelectedProperty, value);
+                OnPropertyChanged();
+            }
+        }
+
         public static readonly DependencyProperty RoomTypeProperty =
-          DependencyProperty.Register("RoomType", typeof(RoomType), typeof(RoomTypeCardControl), new PropertyMetadata(null));
+          DependencyProperty.Register("RoomType", typeof(RoomType), typeof(RoomTypeFormControl), new PropertyMetadata(null));
         public RoomType RoomType
         {
             get { return (RoomType)GetValue(RoomTypeProperty); }
             set
             {
                 SetValue(RoomTypeProperty, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public static readonly DependencyProperty LinkCommandProperty =
+          DependencyProperty.Register("LinkCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        public ICommand LinkCommand
+        {
+            get { return (ICommand)GetValue(LinkCommandProperty); }
+            set
+            {
+                SetValue(LinkCommandProperty, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public static readonly DependencyProperty DetachCommandProperty =
+          DependencyProperty.Register("DetachCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        public ICommand DetachCommand
+        {
+            get { return (ICommand)GetValue(DetachCommandProperty); }
+            set
+            {
+                SetValue(DetachCommandProperty, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public static readonly DependencyProperty ClassCommandProperty =
+          DependencyProperty.Register("ClassCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        public ICommand ClassCommand
+        {
+            get { return (ICommand)GetValue(ClassCommandProperty); }
+            set
+            {
+                SetValue(ClassCommandProperty, value);
                 OnPropertyChanged();
             }
         }
