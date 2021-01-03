@@ -92,11 +92,11 @@ namespace AvenueOne.Views.Pages
             BaseClassCommand<Amenities> deleteAmenitiesCommand = new DeleteClassCommand<Amenities>(genericUnitOfWorkAmenities, displayService);
             ClearClassCommand<Amenities> clearAmenitiesCommand = new ClearClassCommand<Amenities>();
             IBaseObservableViewModel<Amenities> amenitiesViewModel = new BaseObservableViewModel<Amenities>(new Amenities(),
-                                                                                                                                                                                            context.Amenities.Local,
-                                                                                                                                                                                            createAmenitiesCommand,
-                                                                                                                                                                                            updateAmenitiesCommand,
-                                                                                                                                                                                            deleteAmenitiesCommand,
-                                                                                                                                                                                            clearAmenitiesCommand);
+                                                                                                            context.Amenities.Local,
+                                                                                                            createAmenitiesCommand,
+                                                                                                            updateAmenitiesCommand,
+                                                                                                            deleteAmenitiesCommand,
+                                                                                                            clearAmenitiesCommand);
                 #endregion
 
                 #region RoomType view model
@@ -109,13 +109,13 @@ namespace AvenueOne.Views.Pages
                 LinkAmenityCommand linkAmenityCommand = new LinkAmenityCommand(genericUnitOfWorkRoomType, displayService);
                 DetachAmenityCommand detachAmenityCommand = new DetachAmenityCommand(genericUnitOfWorkRoomType, displayService);
                 IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
-                                                                                                                                        _context.RoomType.Local,
-                                                                                                                                        createRoomTypeCommand,
-                                                                                                                                        updateRoomTypeCommand,
-                                                                                                                                        deleteRoomTypeCommand,
-                                                                                                                                        clearRoomTypeCommand,
-                                                                                                                                        linkAmenityCommand,
-                                                                                                                                        detachAmenityCommand);
+                                                                                _context.RoomType.Local,
+                                                                                createRoomTypeCommand,
+                                                                                updateRoomTypeCommand,
+                                                                                deleteRoomTypeCommand,
+                                                                                clearRoomTypeCommand,
+                                                                                linkAmenityCommand,
+                                                                                detachAmenityCommand);
                 #endregion
 
                 #region Room view model
@@ -135,16 +135,16 @@ namespace AvenueOne.Views.Pages
                 #endregion
 
                 RoomTabViewModel roomTab = new RoomTabViewModel(amenitiesViewModel,
-                                                                                                                roomTypeViewModel,
-                                                                                                                roomViewModel);
+                                                                    roomTypeViewModel,
+                                                                    roomViewModel);
             #endregion
 
             BaseWindowCommand closeWindowCommand = new CloseWindowCommand();
             AdminPageViewModel _adminViewModel = new AdminPageViewModel(this.Window, 
-                                                                                                                                closeWindowCommand,
-                                                                                                                                userTab,
-                                                                                                                                customerTab,
-                                                                                                                                roomTab);
+                                                                        closeWindowCommand,
+                                                                        userTab,
+                                                                        customerTab,
+                                                                        roomTab);
 
             this.ViewModel = _adminViewModel;
             DataContext = _adminViewModel;

@@ -1,4 +1,6 @@
 ﻿using AvenueOne.Core.Models;
+using AvenueOne.ViewModels;
+using AvenueOne.ViewModels.TabViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,29 +43,47 @@ namespace AvenueOne.Views.UserControls
             }
         }
 
-        public static readonly DependencyProperty AmenitySelectedProperty =
-          DependencyProperty.Register("AmenitySelected", typeof(Amenities), typeof(RoomTypeFormControl), new PropertyMetadata(null));
-        public Amenities AmenitySelected
+        //public static readonly DependencyProperty AmenitySelectedProperty =
+        //  DependencyProperty.Register("AmenitySelected", typeof(Amenities), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        //public Amenities AmenitySelected
+        //{
+        //    get { return (Amenities)GetValue(AmenitySelectedProperty); }
+        //    set
+        //    {
+        //        SetValue(AmenitySelectedProperty, value);
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        public static readonly DependencyProperty RoomTypeViewModelProperty =
+          DependencyProperty.Register("RoomTypeViewModel", typeof(RoomTypeViewModel), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        public RoomTypeViewModel RoomTypeViewModel
         {
-            get { return (Amenities)GetValue(AmenitySelectedProperty); }
+            get { return (RoomTypeViewModel) GetValue(RoomTypeViewModelProperty); }
             set
             {
-                SetValue(AmenitySelectedProperty, value);
+                SetValue(RoomTypeViewModelProperty, value);
                 OnPropertyChanged();
             }
         }
 
-        public static readonly DependencyProperty RoomTypeProperty =
-          DependencyProperty.Register("RoomType", typeof(RoomType), typeof(RoomTypeFormControl), new PropertyMetadata(null));
-        public RoomType RoomType
-        {
-            get { return (RoomType)GetValue(RoomTypeProperty); }
-            set
-            {
-                SetValue(RoomTypeProperty, value);
-                OnPropertyChanged();
-            }
-        }
+        //public RoomType RoomType
+        //{
+        //    get { return RoomTypeViewModel.ModelSelected; }
+        //    set { RoomTypeViewModel.ModelSelected = value; }
+        //}
+
+        //public static readonly DependencyProperty RoomTypeProperty =
+        //  DependencyProperty.Register("RoomType", typeof(RoomType), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        //public RoomType RoomType
+        //{
+        //    get { return (RoomType)GetValue(RoomTypeProperty); }
+        //    set
+        //    {
+        //        SetValue(RoomTypeProperty, value);
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         public static readonly DependencyProperty LinkCommandProperty =
           DependencyProperty.Register("LinkCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));

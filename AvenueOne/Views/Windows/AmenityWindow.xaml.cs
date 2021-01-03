@@ -38,25 +38,27 @@ namespace AvenueOne.Views.Windows
             InitializeComponent();
 
             this._context = context;
-            User User = new User();
-            User.Person = new Person();
+            //User User = new User
+            //{
+            //    Person = new Person()
+            //};
 
             IDisplayService displayService = new WpfDisplayService();
 
 
             InitializeComponent();
 
-            GenericUnitOfWork<Amenities> genericUnitOfWorkAmenities = new GenericUnitOfWork<Amenities>(context);
+            GenericUnitOfWork<Amenities> genericUnitOfWorkAmenities = new GenericUnitOfWork<Amenities>(_context);
             BaseClassCommand<Amenities> createAmenitiesCommand = new CreateClassCommand<Amenities>(genericUnitOfWorkAmenities, displayService);
             BaseClassCommand<Amenities> updateAmenitiesCommand = new UpdateClassCommand<Amenities>(genericUnitOfWorkAmenities, displayService);
             BaseClassCommand<Amenities> deleteAmenitiesCommand = new DeleteClassCommand<Amenities>(genericUnitOfWorkAmenities, displayService);
             ClearClassCommand<Amenities> clearAmenitiesCommand = new ClearClassCommand<Amenities>();
             IBaseObservableViewModel<Amenities> amenitiesViewModel = new BaseObservableViewModel<Amenities>(new Amenities(),
-                                                                                                                                                                                            context.Amenities.Local,
-                                                                                                                                                                                            createAmenitiesCommand,
-                                                                                                                                                                                            updateAmenitiesCommand,
-                                                                                                                                                                                            deleteAmenitiesCommand,
-                                                                                                                                                                                            clearAmenitiesCommand);
+                                                                                                            _context.Amenities.Local,
+                                                                                                            createAmenitiesCommand,
+                                                                                                            updateAmenitiesCommand,
+                                                                                                            deleteAmenitiesCommand,
+                                                                                                            clearAmenitiesCommand);
 
             DataContext = amenitiesViewModel;
 
@@ -65,6 +67,11 @@ namespace AvenueOne.Views.Windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void AmenitiesFormControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

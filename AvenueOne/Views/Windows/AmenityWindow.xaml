@@ -24,7 +24,7 @@
                                     Style="{StaticResource failButtonStyle}"
                                 Content="Clear content" Command="{Binding ClearClassCommand}"/>
         </Grid>
-        <control:AmenitiesFormControl Amenity="{Binding ModelSelected}" ClassCommand="{Binding CreateClassCommand}"/>
+        <control:AmenitiesFormControl Amenity="{Binding ModelSelected}" ClassCommand="{Binding CreateClassCommand}" Loaded="AmenitiesFormControl_Loaded"/>
 
         <Button Style="{StaticResource failButtonStyle2}" Content="Cancel" Click="Button_Click"/>
     </WrapPanel>

@@ -1,4 +1,5 @@
 ﻿using AvenueOne.Core.Models;
+using AvenueOne.ViewModels.TabViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,8 +31,6 @@ namespace AvenueOne.Views.UserControls
             Name.Focus();
         }
 
-
-
         public static readonly DependencyProperty AmenityProperty =
            DependencyProperty.Register("Amenity", typeof(Amenities), typeof(AmenitiesFormControl), new PropertyMetadata(null));
         public Amenities Amenity
@@ -44,17 +43,29 @@ namespace AvenueOne.Views.UserControls
             }
         }
 
-        //public static readonly DependencyProperty RoomTypesProperty =
-        //   DependencyProperty.Register("RoomTypes", typeof(ICollection<RoomType>), typeof(AmenitiesFormControl), new PropertyMetadata(null));
-        //public ICollection<RoomType> RoomTypes
+        //public static readonly DependencyProperty RoomTypeSelectedProperty =
+        //    DependencyProperty.Register("RoomTypeSelected", typeof(RoomType), typeof(AmenitiesFormControl), new PropertyMetadata(null));
+        //public RoomType RoomTypeSelected
         //{
-        //    get { return (ICollection<RoomType>)GetValue(RoomTypesProperty); }
+        //    get { return (RoomType)GetValue(RoomTypeSelectedProperty); }
         //    set
         //    {
-        //        SetValue(RoomTypesProperty, value);
+        //        SetValue(RoomTypeSelectedProperty, value);
         //        OnPropertyChanged();
         //    }
         //}
+
+        public static readonly DependencyProperty RoomTypeViewModelProperty =
+            DependencyProperty.Register("RoomTypeViewModel", typeof(RoomTypeViewModel), typeof(AmenitiesFormControl), new PropertyMetadata(null));
+        public RoomTypeViewModel RoomTypeViewModel
+        {
+            get { return (RoomTypeViewModel)GetValue(RoomTypeViewModelProperty); }
+            set
+            {
+                SetValue(RoomTypeViewModelProperty, value);
+                OnPropertyChanged();
+            }
+        }
 
         public static readonly DependencyProperty ClassCommandProperty =
            DependencyProperty.Register("ClassCommand", typeof(ICommand), typeof(AmenitiesFormControl), new PropertyMetadata(null));

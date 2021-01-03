@@ -9,16 +9,16 @@
              d:DesignHeight="450" d:DesignWidth="400">
     <WrapPanel ItemWidth="400">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding RoomType.Id, ElementName=Afc}"/>
+            <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.Id, ElementName=Afc}"/>
         </StackPanel>
         <WrapPanel ItemWidth="200">
-            <TextBlock Text="{Binding RoomType.Name, ElementName=Afc}" FontSize="20"/>
+            <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.Name, ElementName=Afc}" FontSize="20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="{Binding RoomType.Rate, ElementName=Afc}"/>
-                <TextBlock Text="{Binding RoomType.RateType, ElementName=Afc}"/>
+                <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.Rate, ElementName=Afc}"/>
+                <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.RateType, ElementName=Afc}"/>
             </StackPanel>
         </WrapPanel>
-        <TextBlock Height="60" Text="{Binding RoomType.Details, ElementName=Afc}"/>
+        <TextBlock Height="60" Text="{Binding RoomTypeViewModel.ModelSelected.Details, ElementName=Afc}"/>
 
         
         <WrapPanel ItemWidth="200">
@@ -29,8 +29,8 @@
                 Command="{Binding DetachCommand, ElementName=Afc}"/>
             <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                                  SelectionMode="Single" SelectedItem="{Binding AmenitySelected, ElementName=Afc}"
-                                  ItemsSource="{Binding RoomType.Amenities, ElementName=Afc}">
+                                  SelectionMode="Single" SelectedItem="{Binding RoomTypeViewModel.AmenitiesSelected, ElementName=Afc}"
+                                  ItemsSource="{Binding RoomTypeViewModel.ModelSelected.Amenities, ElementName=Afc}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
                 <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
@@ -44,7 +44,7 @@
                                                         Command="{Binding LinkCommand, ElementName=Afc}"/>
             <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                     IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                                      SelectionMode="Single" SelectedItem="{Binding AmenitySelected, ElementName=Afc}"
+                                      SelectionMode="Single" SelectedItem="{Binding RoomTypeViewModel.AmenitiesSelected, ElementName=Afc}"
                                       ItemsSource="{Binding AmenitiesCollection, ElementName=Afc}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>

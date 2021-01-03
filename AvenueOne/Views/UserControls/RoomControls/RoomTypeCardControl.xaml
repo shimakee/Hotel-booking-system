@@ -9,10 +9,10 @@
              d:DesignHeight="450" d:DesignWidth="400">
     <WrapPanel ItemWidth="400">
 
-        <StackPanel Orientation="Horizontal">
+        <!--<StackPanel Orientation="Horizontal">
             <TextBlock Text=" Id: " FontWeight="Bold"/>
             <TextBlock Text="{Binding RoomType.Id, ElementName=Rtcc}"/>
-        </StackPanel>
+        </StackPanel>-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

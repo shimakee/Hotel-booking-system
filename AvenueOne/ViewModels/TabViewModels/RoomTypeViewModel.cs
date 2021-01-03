@@ -34,6 +34,28 @@ namespace AvenueOne.ViewModels.TabViewModels
                 OnPropertyChanged();
             }
         }
+
+        //public IBaseObservableModel<Amenities> _amenitiesToLink;
+        //public IBaseObservableModel<Amenities> AmenitiesToLink
+        //{
+        //    get { return _amenitiesToLink; }
+        //    set
+        //    {
+        //        _amenitiesToLink = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        //public IBaseObservableModel<Amenities> _amenitiesToDetach;
+        //public IBaseObservableModel<Amenities> AmenitiesToDetach
+        //{
+        //    get { return _amenitiesToLink; }
+        //    set
+        //    {
+        //        _amenitiesToLink = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         public RoomTypeViewModel(RoomType model,
                                                     ObservableCollection<RoomType> modelList,
                                                     BaseClassCommand<RoomType> createClassCommand,

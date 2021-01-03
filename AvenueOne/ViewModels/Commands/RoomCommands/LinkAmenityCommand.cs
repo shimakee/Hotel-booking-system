@@ -41,7 +41,7 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
                 if (ViewModel.ModelSelected == null)
                     throw new ArgumentNullException("A room type must be selected and cannot be null.");
 
-                IRoomType roomType = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(RoomType)].GetAsync(ViewModel.Model.Id)) ?? throw new InvalidOperationException("Room type does not exist.");
+                RoomType roomType = await Task.Run(() => _genericUnitOfWork.Repositories[typeof(RoomType)].GetAsync(ViewModel.Model.Id)) ?? throw new InvalidOperationException("Room type does not exist.");
                 if (roomType.Amenities.Contains(ViewModel.AmenitiesSelected))
                     throw new InvalidOperationException("Amenities already exist in this room type.");
 
@@ -51,6 +51,8 @@ namespace AvenueOne.ViewModels.Commands.RoomCommands
                     throw new InvalidOperationException("Could not detach amenity from room type.");
                 _displayService.MessageDisplay($"Detached {ViewModel.AmenitiesSelected.Id} from {ViewModel.ModelSelected.Id}.\nAffected rows {n}");
 
+                ViewModel.ModelSelected = new RoomType();
+                ViewModel.ModelSelected = roomType;
             }
             catch (ArgumentNullException argEx)
             {

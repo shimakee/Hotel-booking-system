@@ -236,8 +236,7 @@
                         <control:RoomTypeCardControl Visibility="Visible" x:Name="RoomTypeCard" RoomType="{Binding  RoomTab.RoomTypeViewModel.Model}" Height="200"/>
 
                         <control:RoomTypeFormControl Visibility="Collapsed" x:Name="RoomTypeForm" 
-                                                     RoomType="{Binding RoomTab.RoomTypeViewModel.ModelSelected}" 
-                                                     AmenitySelected="{Binding RoomTab.AmenitiesSelected}" 
+                                                     RoomTypeViewModel="{Binding RoomTab.RoomTypeViewModel}"
                                                      AmenitiesCollection="{Binding RoomTab.AmenitiesViewModel.ModelList}"
                                                      LinkCommand="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"
                                                      DetachCommand="{Binding RoomTab.RoomTypeViewModel.DetachAmenityCommand}"
@@ -259,7 +258,6 @@
                         <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5"
                                 Margin="0 10 0 0"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                                  
                                   ItemsSource="{Binding RoomTab.RoomTypeViewModel.ModelList}" SelectedItem="{Binding RoomTab.RoomTypeViewModel.ModelSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
@@ -388,7 +386,9 @@
                                     Style="{StaticResource failButtonStyle}"
                                 Content="Clear" Command="{Binding RoomTab.AmenitiesViewModel.ClearClassCommand}"/>
                         </Grid>
-                        <control:AmenitiesFormControl Visibility="Collapsed" x:Name="AmenityForm" Amenity="{Binding RoomTab.AmenitiesViewModel.ModelSelected}" ClassCommand="{Binding RoomTab.AmenitiesViewModel.UpdateClassCommand}"/>
+                        <control:AmenitiesFormControl Visibility="Collapsed" x:Name="AmenityForm" Amenity="{Binding RoomTab.AmenitiesViewModel.Model}"
+                                                                                                    RoomTypeViewModel="{Binding RoomTab.RoomTypeViewModel}"
+                                                                                                    ClassCommand="{Binding RoomTab.AmenitiesViewModel.UpdateClassCommand}"/>
                         <control:AmenityCardControl Visibility="Visible" x:Name="AmenityCard" Amenity="{Binding RoomTab.AmenitiesViewModel.ModelSelected}"/>
 
                         <Grid>
@@ -406,9 +406,9 @@
                                 Content="Delete " Style="{StaticResource failButtonStyle2}"
                                     Command="{Binding RoomTab.AmenitiesViewModel.DeleteClassCommand}"/>
                         </Grid>
-                        <Button Content="Link" Grid.Row="5" Grid.Column="0"
+                        <!--<Button Content="Link" Grid.Row="5" Grid.Column="0"
                                 Style="{StaticResource cautionButtonStyle}"
-                                                    Command="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"/>
+                                                    Command="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"/>-->
 
                         <DataGrid  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5"
                                 Margin="0 10 0 0"
