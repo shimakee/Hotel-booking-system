@@ -227,7 +227,7 @@
 
                             <Button Grid.Column="0" Content="Add RoomType" 
                                     Style="{StaticResource successButtonStyle}"
-                                    Command="{Binding }"/>
+                                    Click="Button_OpenRoomTypeWindow"/>
                             <Button Grid.Column="1" Content="Clear" 
                                     Style="{StaticResource failButtonStyle}"
                                     Command="{Binding  RoomTab.RoomTypeViewModel.ClearClassCommand}"/>
@@ -237,6 +237,7 @@
 
                         <control:RoomTypeFormControl Visibility="Collapsed" x:Name="RoomTypeForm" 
                                                      RoomTypeViewModel="{Binding RoomTab.RoomTypeViewModel}"
+                                                     ClassCommand="{Binding RoomTab.RoomTypeViewModel.UpdateClassCommand}"
                                                      AmenitiesCollection="{Binding RoomTab.AmenitiesViewModel.ModelList}"/>
                         
                         <Grid>

@@ -109,17 +109,17 @@ namespace AvenueOne.Views.UserControls
         //    }
         //}
 
-        //public static readonly DependencyProperty ClassCommandProperty =
-        //  DependencyProperty.Register("ClassCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
-        //public ICommand ClassCommand
-        //{
-        //    get { return (ICommand)GetValue(ClassCommandProperty); }
-        //    set
-        //    {
-        //        SetValue(ClassCommandProperty, value);
-        //        OnPropertyChanged();
-        //    }
-        //}
+        public static readonly DependencyProperty ClassCommandProperty =
+          DependencyProperty.Register("ClassCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        public ICommand ClassCommand
+        {
+            get { return (ICommand)GetValue(ClassCommandProperty); }
+            set
+            {
+                SetValue(ClassCommandProperty, value);
+                OnPropertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

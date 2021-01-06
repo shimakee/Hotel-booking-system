@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              x:Name="Afc"
              d:DesignHeight="450" d:DesignWidth="400">
-    <WrapPanel ItemWidth="500">
+    <WrapPanel ItemWidth="400">
         <!--<StackPanel Orientation="Horizontal">
             <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.Id, ElementName=Afc}"/>
         </StackPanel>-->
@@ -22,7 +22,7 @@
                         x:Name="Name"
                                     Text="{Binding RoomTypeViewModel.ModelSelected.Name, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
-        <WrapPanel ItemWidth="210" Margin="5">
+        <WrapPanel ItemWidth="190" Margin="5">
             <StackPanel>
                 <TextBlock Text="Description" FontSize="18"/>
                 <TextBox Margin="1" VerticalAlignment="Stretch" Height="50" TextWrapping="Wrap"
@@ -39,42 +39,42 @@
                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             </StackPanel>
         </WrapPanel>
-        <WrapPanel ItemWidth="200">
-            
+        <WrapPanel ItemWidth="200" x:Name="AttachDetach">
             <StackPanel>
             
-            <Button Style="{StaticResource defaultButtonStyle}" Content="Detach"
-                Command="{Binding RoomTypeViewModel.DetachAmenityCommand, ElementName=Afc}"/>
-            <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
-                                IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                                  SelectionMode="Single" SelectedItem="{Binding RoomTypeViewModel.AmenitiesSelected, ElementName=Afc}"
-                                  ItemsSource="{Binding RoomTypeViewModel.ModelSelected.Amenities, ElementName=Afc}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
-                <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
-            </DataGrid.Columns>
-
-        </DataGrid>
-        </StackPanel>
-            <StackPanel>
-            <Button Content="Link"
-                                    Style="{StaticResource cautionButtonStyle}"
-                                                        Command="{Binding RoomTypeViewModel.LinkAmenityCommand, ElementName=Afc}"/>
-            <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
+                <Button Style="{StaticResource defaultButtonStyle}" Content="Detach"
+                    Command="{Binding RoomTypeViewModel.DetachAmenityCommand, ElementName=Afc}"/>
+                <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                     IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                       SelectionMode="Single" SelectedItem="{Binding RoomTypeViewModel.AmenitiesSelected, ElementName=Afc}"
-                                      ItemsSource="{Binding AmenitiesCollection, ElementName=Afc}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
-                    <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
-                </DataGrid.Columns>
+                                      ItemsSource="{Binding RoomTypeViewModel.ModelSelected.Amenities, ElementName=Afc}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
+                        <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
+                    </DataGrid.Columns>
 
-            </DataGrid>
-        </StackPanel>   
+                </DataGrid>
+            </StackPanel>
+            <StackPanel>
+                <Button Content="Link"
+                                        Style="{StaticResource cautionButtonStyle}"
+                                                            Command="{Binding RoomTypeViewModel.LinkAmenityCommand, ElementName=Afc}"/>
+                <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
+                                        IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                                          SelectionMode="Single" SelectedItem="{Binding RoomTypeViewModel.AmenitiesSelected, ElementName=Afc}"
+                                          ItemsSource="{Binding AmenitiesCollection, ElementName=Afc}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
+                        <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="4*"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </StackPanel>   
         </WrapPanel>
         
         <Button Style="{StaticResource successButtonStyle}"
+                VerticalAlignment="Center"
                             Content="Save" 
-                                Command="{Binding RoomTypeViewModel.UpdateClassCommand, ElementName=Afc}"/>
+                                Command="{Binding ClassCommand, ElementName=Afc}"/>
     </WrapPanel>
 </UserControl>

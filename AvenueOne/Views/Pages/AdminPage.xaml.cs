@@ -22,6 +22,7 @@ using AvenueOne.ViewModels.WindowsViewModels;
 using AvenueOne.ViewModels.WindowsViewModels.Interfaces;
 using AvenueOne.Views.Windows;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,6 +37,8 @@ namespace AvenueOne.Views.Pages
         private PlutoContext _context;
         public Window Window { get;}
         public AdminPageViewModel ViewModel { get; private set; }
+        private RoomTypeViewModel _roomTypeViewModel;
+        private ObservableCollection<Amenities> _amenitiesCollection;
         public AdminPage(PlutoContext context, Window window)
         {
             if (context == null)
@@ -108,7 +111,7 @@ namespace AvenueOne.Views.Pages
                 ClearClassCommand<RoomType> clearRoomTypeCommand = new ClearClassCommand<RoomType>();
                 LinkAmenityCommand linkAmenityCommand = new LinkAmenityCommand(genericUnitOfWorkRoomType, displayService);
                 DetachAmenityCommand detachAmenityCommand = new DetachAmenityCommand(genericUnitOfWorkRoomType, displayService);
-                IRoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
+                RoomTypeViewModel roomTypeViewModel = new RoomTypeViewModel(new RoomType(),
                                                                                 _context.RoomType.Local,
                                                                                 createRoomTypeCommand,
                                                                                 updateRoomTypeCommand,
@@ -148,6 +151,8 @@ namespace AvenueOne.Views.Pages
 
             this.ViewModel = _adminViewModel;
             DataContext = _adminViewModel;
+            _roomTypeViewModel = roomTypeViewModel;
+            _amenitiesCollection = amenitiesViewModel.ModelList;
         }
 
         private void Button_OpenUserWindow(object sender, RoutedEventArgs e)
@@ -227,6 +232,13 @@ namespace AvenueOne.Views.Pages
             AmenityWindow amenityWindow = new AmenityWindow(_context);
             amenityWindow.Owner = this.Window;
             amenityWindow.ShowDialog();
+        }
+
+        private void Button_OpenRoomTypeWindow(object sender, RoutedEventArgs e)
+        {
+            RoomTypeWindow roomTypeWindow = new RoomTypeWindow(_roomTypeViewModel, _amenitiesCollection);
+            roomTypeWindow.Owner = this.Window;
+            roomTypeWindow.ShowDialog();
         }
 
         private void EditRoomTypeButton_Click(object sender, RoutedEventArgs e)
