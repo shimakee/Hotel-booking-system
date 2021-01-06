@@ -27,9 +27,9 @@
         <WrapPanel ItemWidth="200">
             <StackPanel>
                 <TextBlock Text="Details: "/>
-                <Button Content="Detach" Grid.Row="4" Grid.Column="4"
+                <!--<Button Content="Detach" Grid.Row="4" Grid.Column="4"
                         Style="{StaticResource failButtonStyle}"
-                                                    Command="{Binding RoomTypeViewModel.DetachAmenityCommand, ElementName=Afc}"/>
+                                                    Command="{Binding RoomTypeViewModel.DetachAmenityCommand, ElementName=Afc}"/>-->
                 <!--<Button Content="Link" Grid.Row="5" Grid.Column="0"
                                 Style="{StaticResource cautionButtonStyle}"
                                                     Command="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"/>-->
