@@ -15,7 +15,7 @@ namespace AvenueOne.ViewModels
 {
     public class ObservableWindowViewModel<T> : BaseObservableViewModel<T>, IObservableWindowViewModel<T> where T : class, IBaseObservableModel<T>, new()
     {
-        public Window Window { get; }
+        //public Window Window { get; }
         public ICommand CloseWindowCommand { get; set; }
 
         public ObservableWindowViewModel(Window window, 

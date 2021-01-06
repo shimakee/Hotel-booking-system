@@ -19,9 +19,8 @@
                                             Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
         <TextBox Grid.Row="1" Grid.Column="0" FontSize="20"
                         Template="{StaticResource roundedTextbox}"
-                        x:Name="Name"
-                                    Text="{Binding RoomTypeViewModel.ModelSelected.Name, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
-                                            Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                        Text="{Binding RoomTypeViewModel.ModelSelected.Name, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                        Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
         <WrapPanel ItemWidth="190" Margin="5">
             <StackPanel>
                 <TextBlock Text="Description" FontSize="18"/>
