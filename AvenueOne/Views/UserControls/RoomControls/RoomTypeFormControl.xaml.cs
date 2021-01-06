@@ -85,41 +85,41 @@ namespace AvenueOne.Views.UserControls
         //    }
         //}
 
-        public static readonly DependencyProperty LinkCommandProperty =
-          DependencyProperty.Register("LinkCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
-        public ICommand LinkCommand
-        {
-            get { return (ICommand)GetValue(LinkCommandProperty); }
-            set
-            {
-                SetValue(LinkCommandProperty, value);
-                OnPropertyChanged();
-            }
-        }
+        //public static readonly DependencyProperty LinkCommandProperty =
+        //  DependencyProperty.Register("LinkCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        //public ICommand LinkCommand
+        //{
+        //    get { return (ICommand)GetValue(LinkCommandProperty); }
+        //    set
+        //    {
+        //        SetValue(LinkCommandProperty, value);
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        public static readonly DependencyProperty DetachCommandProperty =
-          DependencyProperty.Register("DetachCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
-        public ICommand DetachCommand
-        {
-            get { return (ICommand)GetValue(DetachCommandProperty); }
-            set
-            {
-                SetValue(DetachCommandProperty, value);
-                OnPropertyChanged();
-            }
-        }
+        //public static readonly DependencyProperty DetachCommandProperty =
+        //  DependencyProperty.Register("DetachCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        //public ICommand DetachCommand
+        //{
+        //    get { return (ICommand)GetValue(DetachCommandProperty); }
+        //    set
+        //    {
+        //        SetValue(DetachCommandProperty, value);
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        public static readonly DependencyProperty ClassCommandProperty =
-          DependencyProperty.Register("ClassCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
-        public ICommand ClassCommand
-        {
-            get { return (ICommand)GetValue(ClassCommandProperty); }
-            set
-            {
-                SetValue(ClassCommandProperty, value);
-                OnPropertyChanged();
-            }
-        }
+        //public static readonly DependencyProperty ClassCommandProperty =
+        //  DependencyProperty.Register("ClassCommand", typeof(ICommand), typeof(RoomTypeFormControl), new PropertyMetadata(null));
+        //public ICommand ClassCommand
+        //{
+        //    get { return (ICommand)GetValue(ClassCommandProperty); }
+        //    set
+        //    {
+        //        SetValue(ClassCommandProperty, value);
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 

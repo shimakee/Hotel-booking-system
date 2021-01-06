@@ -7,26 +7,44 @@
              mc:Ignorable="d" 
              x:Name="Afc"
              d:DesignHeight="450" d:DesignWidth="400">
-    <WrapPanel ItemWidth="400">
-        <StackPanel Orientation="Horizontal">
+    <WrapPanel ItemWidth="500">
+        <!--<StackPanel Orientation="Horizontal">
             <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.Id, ElementName=Afc}"/>
-        </StackPanel>
-        <WrapPanel ItemWidth="200">
-            <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.Name, ElementName=Afc}" FontSize="20"/>
+        </StackPanel>-->
+        <TextBox IsEnabled="False" Grid.Row="0" Grid.Column="0"
+                    Template="{StaticResource roundedTextbox}"
+                    FontSize="20"
+                    x:Name="Id"
+                                Text="{Binding RoomTypeViewModel.ModelSelected.Id, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                            Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+        <TextBox Grid.Row="1" Grid.Column="0" FontSize="20"
+                        Template="{StaticResource roundedTextbox}"
+                        x:Name="Name"
+                                    Text="{Binding RoomTypeViewModel.ModelSelected.Name, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                            Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+        <WrapPanel ItemWidth="210" Margin="5">
+            <StackPanel>
+                <TextBlock Text="Description" FontSize="18"/>
+                <TextBox Margin="1" VerticalAlignment="Stretch" Height="50" TextWrapping="Wrap"
+                        Text="{Binding RoomTypeViewModel.ModelSelected.Details, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                        Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.Rate, ElementName=Afc}"/>
-                <TextBlock Text="{Binding RoomTypeViewModel.ModelSelected.RateType, ElementName=Afc}"/>
+                <TextBox Margin="1" TextWrapping="Wrap" Width="50" 
+                        Text="{Binding RoomTypeViewModel.ModelSelected.Rate, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                        Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+                <ComboBox ItemsSource="{Binding RoomTypeViewModel.ModelSelected.RateTypeValues, ElementName=Afc}" 
+                            SelectedValue="{Binding RoomTypeViewModel.ModelSelected.RateType, ElementName=Afc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
             </StackPanel>
         </WrapPanel>
-        <TextBlock Height="60" Text="{Binding RoomTypeViewModel.ModelSelected.Details, ElementName=Afc}"/>
-
-        
         <WrapPanel ItemWidth="200">
             
             <StackPanel>
             
             <Button Style="{StaticResource defaultButtonStyle}" Content="Detach"
-                Command="{Binding DetachCommand, ElementName=Afc}"/>
+                Command="{Binding RoomTypeViewModel.DetachAmenityCommand, ElementName=Afc}"/>
             <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                   SelectionMode="Single" SelectedItem="{Binding RoomTypeViewModel.AmenitiesSelected, ElementName=Afc}"
@@ -41,7 +59,7 @@
             <StackPanel>
             <Button Content="Link"
                                     Style="{StaticResource cautionButtonStyle}"
-                                                        Command="{Binding LinkCommand, ElementName=Afc}"/>
+                                                        Command="{Binding RoomTypeViewModel.LinkAmenityCommand, ElementName=Afc}"/>
             <DataGrid Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
                                     IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                       SelectionMode="Single" SelectedItem="{Binding RoomTypeViewModel.AmenitiesSelected, ElementName=Afc}"
@@ -55,12 +73,8 @@
         </StackPanel>   
         </WrapPanel>
         
-
-
-
-
         <Button Style="{StaticResource successButtonStyle}"
                             Content="Save" 
-                                Command="{Binding ClassCommand, ElementName=Afc}"/>
+                                Command="{Binding RoomTypeViewModel.UpdateClassCommand, ElementName=Afc}"/>
     </WrapPanel>
 </UserControl>

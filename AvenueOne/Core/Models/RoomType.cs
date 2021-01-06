@@ -34,6 +34,7 @@ namespace AvenueOne.Core.Models
 
             private decimal _rate;
             [Required(ErrorMessage ="Rate is required.")]
+            //[RegularExpression(@"^([0-9,.])*$", ErrorMessage = "invalid format.")]
             public decimal Rate
             {
                 get { return _rate; }
@@ -52,10 +53,13 @@ namespace AvenueOne.Core.Models
                 {
                     _rateType = value;
                     OnPropertyChanged();
-                }
+                    OnPropertyChanged(nameof(RateType));
+                OnPropertyChanged("RateTypeAsInt");
+            }
             }
 
-            public int[] RateTypeValues { get { return (int[])Enum.GetValues(typeof(RateType)); } }
+        public int RateTypeAsInt { get { return (int)RateType; } }
+        public int[] RateTypeValues { get { return (int[])Enum.GetValues(typeof(RateType)); } }
         #endregion
 
         #region  Reference

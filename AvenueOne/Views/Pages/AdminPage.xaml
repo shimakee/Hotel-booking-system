@@ -237,10 +237,7 @@
 
                         <control:RoomTypeFormControl Visibility="Collapsed" x:Name="RoomTypeForm" 
                                                      RoomTypeViewModel="{Binding RoomTab.RoomTypeViewModel}"
-                                                     AmenitiesCollection="{Binding RoomTab.AmenitiesViewModel.ModelList}"
-                                                     LinkCommand="{Binding RoomTab.RoomTypeViewModel.LinkAmenityCommand}"
-                                                     DetachCommand="{Binding RoomTab.RoomTypeViewModel.DetachAmenityCommand}"
-                                                     ClassCommand="{Binding RoomTab.RoomTypeViewModel.UpdateClassCommand}"/>
+                                                     AmenitiesCollection="{Binding RoomTab.AmenitiesViewModel.ModelList}"/>
                         
                         <Grid>
                             <Grid.ColumnDefinitions>

@@ -4,19 +4,19 @@
 
     <ControlTemplate x:Key="errorTemplate" TargetType="Control">
         <Grid>
-            <Border BorderBrush="Red" BorderThickness="1">
-                <AdornedElementPlaceholder />
-            </Border>
             <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
                                            VerticalAlignment="Center" HorizontalAlignment="Right"
                                            Margin="0, 0, 4,0"/>
+            <Border BorderBrush="Red" BorderThickness="1">
+                <AdornedElementPlaceholder />
+            </Border>
         </Grid>
     </ControlTemplate>
     <ControlTemplate x:Key="errorTemplateStack" TargetType="Control">
         <StackPanel>
-            <Border BorderBrush="Red" BorderThickness="1">
-                <AdornedElementPlaceholder />
-            </Border>
+            <!--<Border BorderBrush="Red" BorderThickness="1">
+            </Border>-->
+            <AdornedElementPlaceholder />
             <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
                                                VerticalAlignment="Center" HorizontalAlignment="Right"
                                                Margin="0, 0, 4,0"/>

@@ -33,7 +33,8 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
                 if (n <= 0)
                     throw new InvalidOperationException("Could not update model.");
 
-                ViewModel.ClearClassCommand.Execute(null);
+                //ViewModel.ClearClassCommand.Execute(null);
+                ViewModel.ModelSelected = ViewModel.Model;
                 _displayService.MessageDisplay($"Updated {typeof(T)} model.\nId:{ViewModel.Model.Id}\nAffected rows:{n}", "Model updated");
             }
             catch (ValidationException validationException)
@@ -64,7 +65,7 @@ namespace AvenueOne.ViewModels.Commands.ClassCommands
             ViewModel.ModelSelected.Id = model.Id;
             ViewModel.ModelSelected.DateAdded = model.DateAdded;
             ViewModel.ModelSelected.DeepCopyTo(model);
-
+            ViewModel.Model = model;
             return await Task.Run(() => _genericUnitOfWork.CompleteAsync());
         }
 
