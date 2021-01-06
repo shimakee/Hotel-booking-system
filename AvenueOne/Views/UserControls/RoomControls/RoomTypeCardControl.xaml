@@ -6,23 +6,20 @@
              xmlns:local="clr-namespace:AvenueOne.Views.UserControls"
              mc:Ignorable="d" 
              Name="Rtcc"
-             d:DesignHeight="450" d:DesignWidth="400">
+             d:DesignHeight="250" d:DesignWidth="400">
     <WrapPanel ItemWidth="400">
-
-        <!--<StackPanel Orientation="Horizontal">
-            <TextBlock Text=" Id: " FontWeight="Bold"/>
-            <TextBlock Text="{Binding RoomType.Id, ElementName=Rtcc}"/>
-        </StackPanel>-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding RoomType.Name, ElementName=Rtcc}" FontSize="20"/>
+            
+                <TextBlock Text="{Binding RoomType.Name, ElementName=Rtcc}" FontSize="25"/>
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding RoomType.Rate, ElementName=Rtcc}"/>
-                    <TextBlock Text=" / "/>
-                    <TextBlock Text="{Binding RoomType.RateType, ElementName=Rtcc}"/>
+                    <TextBlock FontSize="15" Text="{Binding RoomType.Rate, ElementName=Rtcc}"/>
+                    <TextBlock FontSize="15" Text=" / " />
+                    <TextBlock Foreground="CadetBlue" FontWeight="Bold" FontSize="15"
+                        Text="{Binding RoomType.RateType, ElementName=Rtcc}"/>
                 </StackPanel>
             </Grid>
         <Grid>
@@ -31,7 +28,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0">
+            <StackPanel Grid.Column="1">
                 <TextBlock Text="Details: "/>
                 <TextBlock Text="{Binding RoomType.Details, ElementName=Rtcc}" Height="50"/>
             </StackPanel>
@@ -44,7 +41,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>-->
 
-            <DataGrid IsEnabled="False"
+            <DataGrid IsEnabled="True"  Margin="10"
                                 IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"
                                   ItemsSource="{Binding RoomType.Amenities, ElementName=Rtcc, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                                          Validation.ErrorTemplate="{StaticResource errorTemplate}">
